@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<TITLE>CS 5010 Problem Set 9</TITLE>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+</head>
+
+
+<body>
+<body>
+<h1>CS 5010: Problem Set 9</h1>
+
+<p><strong>Out:</strong> Monday, November 7, 2016
+</p>
+
+<p><strong>Due:</strong> Monday, November 14, 2016
+at 600pm local time.</p>
+
+
+<hr>
+
+<p>Wed Nov 30 11:49:01 2016: for 2017, get rid of the politician-- the
+requirement of colinearity gets us out of integers.</p>
+
+<p>
+The goal of this problem set is to help you design simple class
+systems and methods on them.
+</p>
+
+<ul>
+  
+  <li>As always, you must follow the design recipe, in this case the OO
+Design Recipe and deliverables as spelled out in Lesson 9.5 and in <a
+href="../Info/deliverables.html#oo-deliverables"
+  >deliverables.html</a></li>
+
+  <li>Be sure to sync your
+  work and fill out a Work Session Report at the end of every work
+  session.  Use the
+<a href="https://goo.gl/forms/c0zQZmGAN632iFO13" >Work Session Report for
+  PS09</a>.
+  </li>
+
+
+
+
+  <li> As part of the data analysis step, you must create a class
+  diagram that can be displayed during the codewalk. For each
+  interface, list the method names (contracts are optional).  For each
+  class, indicate the init-fields and their types; if the value of the
+  init-field is an object or list of objects, draw arrows to the type
+  of the field. You may draw this diagram by hand, create it as an
+  ASCII test file, or use your favorite diagramming tool.  If you use
+  a tool, you must deliver it in pdf format.  The diagram need not be
+  elaborate.  For each interface, it must show the method names.
+  Contracts are optional. For each class, it should show the class
+  name, the interface the class implements and the fields and their
+  types.  You should be prepared to explain your diagram at codewalk.</li>
+  
+<p><strong>FOR 2017: REPLACE THIS WITH A GENERIC CLASS DIAGRAM SO
+  STUDENTS WON'T JUST COPY IT.</strong></p>
+
+  <p><strong>Also check for "correct" UML arrows.</strong></p>
+
+  
+  <p>Here's an example: <center><img height="300" src="Images/09-2A-space-invaders-2.jpg" ></center></p>
+
+  <li> You should have no structs in your solution: every struct should
+  be replaced by a class.
+  You may, however, use ordinary Racket lists.</li>
+
+  <!-- <li>You can treat key events and mouse events as scalar data, as you -->
+  <!-- have done in the past. -->
+
+  <!-- ordinary data -->
+  <!-- definitions, and define alternate enumerations (like -->
+  <!-- AnimationKeyEvent) as you have in the past. -->
+
+
+
+<li>Please restrict yourself to the language features discussed in
+class.  In particular, you may NOT use state (<kbd>set!</kbd>)
+or inheritance <span class="new">of classes. You may, however, use
+  interface inheritance (see the examples below).</span></li> 
+
+<li>You must use <kbd>#lang racket</kbd>, <kbd>rackunit</kbd>,
+<kbd>"extras.rkt"</kbd>, <kbd>2htdp/universe</kbd>, and
+<kbd>2htdp/image</kbd>.  So your file should begin something like
+
+<pre>
+#lang racket
+(require rackunit)
+(require "extras.rkt")
+(require 2htdp/universe)   
+(require 2htdp/image)      
+</pre>
+
+You may require "sets.rkt" if you need it.  You may not
+<kbd>require</kbd> any other libraries.</li>
+
+
+</ul>
+
+<hr>
+
+<p>Problem:</p>
+
+<p>Your boss at NextPython, Inc. spent the weekend at a wild party in
+the Valley, where he spent too much time taking drugs and listening to
+American folk music from the 1960's.  He has come out of his hangover
+just long enough to pull you off your GarterSnake project and tell you
+to to build a
+ <a href="https://www.youtube.com/watch?v=ahWcocGtEyA"
+>marvelous toy</a>, called the MetaToy.  The MetaToy will consist of a
+canvas on which the child will paint and interact with a variety of toys.
+</p> 
+
+<ul><p></p>
+
+  <li>The MetaToy consists of a canvas that is 500
+  pixels wide  and 600 pixels high.</li>
+
+  <li>The child interacts with the MetaToy by using the mouse and by
+  typing characters into the system. 
+  Each of the characters listed below causes a new mini-toy to be created
+  with its center located at the center of the canvas.  Most of the
+  mini-toys are also moveable using smooth drag. </li>
+
+  <!-- <li>When the child types "s", a new square-shaped toy pops up.  It -->
+  <!-- is represented as a 40x40 pixel outline square.  When a -->
+  <!-- square-shaped toy appears, it begins travelling rightward  -->
+  <!-- at a constant rate.  When its edge reaches the edge of the canvas, -->
+  <!-- it executes a Perfect Bounce. -->
+  <!-- </li> -->
+
+  <li>When the child types "t", a new mini-toy called a throbber
+  appears.  A throbber starts as a solid green circle of radius 5.  At
+  every tick, it expands gradually until it reaches a radius of 20.
+  Once it reaches a radius of 20, it contracts gradually until it
+  reaches a radius of 5, and then resumes its cycle. It can be
+  selected and moved using smooth drag. When it is selected, it
+  appears in outline mode.</li>
+
+  <li>When the child types "c", a clock mini-toy appears.  This clock displays
+  the number of ticks since it was created.  Otherwise the appearance
+  of the clock is unspecified.  Like the throbber, the clock can be
+  selected and moved using smooth drag.</li>
+
+  <li>When the child types "p", a Politician mini-toy appears.  A
+  politician has some interesting behaviors:</li>
+
+  <ul>
+    <li>The politician appears as an image that is approximately a
+    square 60 pixels on a side.  (It doesn't have to be exactly
+    square, or exactly 60 pixels.  Choose something that is visually
+    satisfying.) </li>
+    
+    <li>The politician always moves in a straight line either towards
+    the mouse position or away from it.  However, he never reaches or
+    passes the mouse position.</li>
+
+    <li>The politician always pays close attention to the polls.  In
+    this context, this means that the politician takes notice of every
+    mouse event (button-down, button-up, drag, and move). </li>
+
+    <li>A politician will always follow you, at a distance.  When the
+    center of the politician is at least 75 pixels away from the mouse
+    position, the politician moves towards the mouse.</li>
+
+    <li>However, when the politician gets within 75 pixels of the
+    mouse, he gets frightened and moves away rapidly from the mouse.
+    (So the child can repel the politician by following him
+    around.)</li>
+
+    <li>The speed with which the politician moves either towards or
+    away from the mouse is up to you.  Choose something that is
+    visually satisfying.</li>
+
+    <li>As is well-known, politicians are two-faced.  When the
+    politician jumps away from the mouse, he will come back with a
+    different face.  Go out on the internet and find pictures of
+    Hillary and Trump to depict the politician.  Or you can use
+    pictures of your favorite politicians from your home country, so
+    long as the TA will be able to tell them apart easily.</li>
+
+  </ul>
+
+  <li>As usual, you are not responsible for anything that happens after
+  the mouse leaves the canvas.</li>
+
+</ul>
+
+<p>There are many unspecified parameters in the description above.
+Choose parameters (like speed, the exact way in which items grow and
+shrink, etc.) so that the result is visually satisfying.</p>
+
+<p>I believe this problem is easier than the last one, so have some
+fun with it. </p>
+
+<p>It is acceptable (and even encouraged) to reuse code from the
+Example files.</p>
+
+    <p>Here's a demo.   </p>
+
+<p><center>
+<video width="300" src="ps09-demo.mp4" controls/>
+</center></p>
+
+<p>Your solution should be a file named <kbd>q1.rkt</kbd> and
+should provide the following interfaces and functions:</p>
+
+<pre>
+make-metatoy : ListOfToys -> Metatoy
+RETURNS: a Metatoy with the given list of toys.
+NOTE: The Metatoy<%> interface extends the World<%> interface, so the
+result of make-metatoy is something that big-bang can use as a world.
+
+run : PosNum -> Metatoy
+GIVEN: a frame rate (in seconds/tick)
+EFFECT: creates a MetaToy with no toys in it, and runs it using big-bang
+at the given frame rate.  Returns the final state of the Metatoy.
+
+make-throbber: PosInt PosInt -> Toy
+GIVEN: an x and a y position
+RETURNS: an object representing a throbber at the given position.
+
+make-clock : PosInt PosInt -> Toy
+GIVEN: an x and a y position
+RETURNS: an object representing a clock at the given position.
+
+make-politician : PosInt PosInt -> Toy
+GIVEN: an x and a y position
+RETURNS: an object representing a politician at the given position.
+
+Interfaces:
+
+;; A Metatoy is an object of any class that implements Metatoy<%>.
+;; (You will only need one such class)
+
+(define Metatoy<%>
+  (interface 
+  <span class="new">
+   ;; the (World<%>) says that Metatoy<%> <em>inherits</em> from World<%>
+   ;; This means that any class that implements Metatoy<%> must
+   ;; implement all the methods from World<%> plus all the methods
+   ;; defined here. In this case, there is just one additional method,
+   ;; called get-toys.
+   </span>(World<%>)
+
+    ;; -> ListOfToy
+    get-toys
+
+))
+
+;; A Toy is an object of any class that implements Toy<%>
+;; You will probably have three such classes, one for each kind of toy. 
+
+(define Toy<%> 
+  (interface
+  <span class="new">
+   ;; The interface Toy<%> inherits from the interface Widget<%>.
+   ;; This means that any class that implements Toy<%> must implement
+   ;; all the methods from Widget<%> plus all the methods defined here.
+   </span>(Widget<%>)
+
+
+    ;; Note: the Widgets of the space-invader-examples don't respond
+    ;; to mouse "move" events, but some of our toys do.  So we add an
+    ;; after-move method to the interface.
+
+    ;;  Int Int -> Toy
+    ;;  RETURNS: the state of this toy that should follow a mouse-move
+    ;;  at the given coordinates
+    after-move
+
+ 
+    ;; -> Int
+    ;; RETURNS: the x or y position of the center of the toy
+    toy-x
+    toy-y
+
+    ;; -> Int
+    ;; RETURNS: some data related to the toy.  The interpretation of
+    ;; this data depends on the class of the toy.
+    ;; for a throbber, it is the current radius of the throbber
+    ;; for the clock, it is the current value of the clock
+    ;; for a politician, it is the current distance to the mouse
+    toy-data
+
+
+    ))
+</pre>
+
+
+<p>When you do this problem, remember the principle of Iterative
+Development: get something simple working, and then add features as
+necessary. </p>
+
+<p>Effective with this problem, you may turn in your solution as a set
+of files; our scripts will collect all of the files in your set09
+directory.  Just make sure that your q1.rkt provides all the required
+functions.  If you do split your solution across several files, we
+recommend that you have a file named <kbd>interfaces.rkt</kbd> that
+provides all of your interfaces and then one file for each class you define.
+</p>
+
+
+</ol>
+ 
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Nov 30 11:49:27 Eastern Standard Time 2016 <!-- hhmts end -->
+</body> </html>  
+ 

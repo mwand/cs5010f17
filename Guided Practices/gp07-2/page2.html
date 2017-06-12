@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 7.2</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 7.2</h1>
+
+<p>Consider the computation of</p>
+
+<pre>
+(program-all-defined?
+    (list
+     (make-def 'f1 (list 'x) (make-appexp 'f2 (list (make-varexp 'x))))
+     (make-def 'f2 (list 'x 'y) (make-appexp 'f2
+                                             (list (make-varexp 'z)
+                                                   (make-varexp 'y))))
+     (make-def 'f3 (list 'x 'y 'z)
+               (make-appexp 'f1 (list (make-appexp 'f2
+                                                   (list (make-varexp 'z)
+                                                         (make-varexp 'y)))
+                                   (make-varexp 'x))))))
+</pre>
+
+<p>Which of the following will appear as calls during
+this computation?
+</p>
+
+<ol>
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f1 'x))</kbd></li>
+  
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f3 'x 'y 'z 'f2 'f1))</kbd></li>
+
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f2 'x 'y 'z 'f1))</kbd></li>
+
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f3 'x 'y 'f1 'f2 'z))</kbd></li>
+
+</ol>
+
+<h2>ANSWER</h2>
+
+<p>Answer:  There are two occurrences of <kbd>(make-varexp 'z)</kbd> in
+this program-- one in the definition of <kbd>f2</kbd> and one in the
+definition of definition of <kbd>f3</kbd>.
+</p>
+
+<p>According to the definition of <kbd>defs-all-defined?</kbd>, the variables appear in <kbd>vars</kbd>
+in the following order:
+<ol>
+  <li>the name of the function being defined</li>
+  <li>the arguments of the function being defined</li>
+  <li>the functions defined above the current one, in reverse order.</li>
+</ol>
+However, the invariant does not require that the variables appear in this order.
+</p>
+
+<p>Answer (1) does not occur and does not satisfy the invariant,
+because <kbd>z</kbd> does not occur in the definition of
+<kbd>f1</kbd>.</p>
+
+<p>Answer (2) occurs for the use of <kbd>z</kbd> in <kbd>f3</kbd>.  It
+satisfies the invariant.
+</p>
+
+<p>Answer (3) does not occur and does not satisfy the invariant.
+There is no occurrence of <kbd>z</kbd> for which these are the available
+variables. </p>
+
+<p>Answer (4) does not occur, but it does satisfy the invariant.
+These are exactly the variables that are available for the occurrence
+of <kbd>z</kbd> in <kbd>f3</kbd>, but this is not the order in which
+the variables are listed in the algorithm (compare with answer (2)).</p>
+
+
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Oct 17 16:38:34 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

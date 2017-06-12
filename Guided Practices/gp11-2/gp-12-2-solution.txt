@@ -1,0 +1,51 @@
+In flashing-balls.rkt, the code for add-to-scene in FlashingBall%
+duplicates some of the code for add-to-scene in Ball%.
+
+Eliminate this by using 'super.'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Solution:
+
+There are a number of ways to do this.  Here's how I did it:
+
+1. In Ball%, make add-to-scene look at a field called 'color' instead
+of referring to the constant "red".
+
+    (field [color "red"])
+
+    (define/public (add-to-scene s)
+      (place-image
+       (circle radius 
+               (if selected? "solid" "outline")
+               color)      ;;; <---- changed line
+       x y s))
+    
+2. In FlashingBall%, inherit the field 'color.'  Then have
+change-colors update the color field, and have add-to-scene call super
+instead of duplicating the code from the superclass:
+
+    ;; -> Void
+    ;; EFFECT: rotate the list of colors, and reset time-left
+    (define (change-colors)
+      (set! colors (append (rest colors) (list (first colors))))
+      ;; put desired color into 'color' field
+      (set! color (first colors))    ;;; <--- new line
+      (set! time-left color-change-interval))
+    
+    ;; Scene -> Scene
+    ;; RETURNS: a scene like the given one, but with the flashing ball
+    ;; painted on it.
+    ;; EFFECT: decrements time-left and changes colors if necessary
+    (define/override (add-to-scene s)
+      (begin
+        (if (zero? time-left)
+          (change-colors)
+          (set! time-left (- time-left 1)))
+        ;; (place-image
+        ;;   (circle radius
+        ;;     (if selected? "solid" "outline")
+        ;;     (first colors))
+        ;;   x y s)
+        (super add-to-scene s)
+        ))

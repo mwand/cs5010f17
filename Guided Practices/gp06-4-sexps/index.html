@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice
+6.4
+</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 6.4: S-expressions</h1>
+
+
+<p>Design the following functions:</p>
+
+
+<pre>
+;; characters-in : Sos -> Number
+;; characters-in-loss : LoSS -> Number
+;; RETURNS: the total number of characters in the strings
+;; EXAMPLE/TEST:
+(begin-for-test
+  (check-equal?
+   (characters-in
+    (list "alice" 
+          (list (list "alice" "bob") "carole")
+          "dave"))
+   23)
+
+;; subst : SoS String String -> SoS
+;; GIVEN: a SoS and two strings, old and new
+;; RETURNS: a sos just like the given one, except that
+;; all instances of old are changed to new.
+;; EXAMPLE/TEST:
+(begin-for-test
+  (check-equal? 
+    (subst
+      (list "alice" 
+        (list (list "alice" "bob") "dave") 
+        "eve"
+        "bob")
+      "bob"
+      "ted")
+    (list "alice" 
+      (list (list "alice" "ted") "dave") 
+      "eve"
+      "ted")))
+</pre>
+
+<p><a href="solution.rkt" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Sep 26 13:45:59 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

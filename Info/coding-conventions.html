@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Coding Conventions</title>
+<link type="text/css" rel="stylesheet" href="course.css">
+</head>
+
+<body>
+<div id="menu">
+
+<table>
+  <tr><td><a href="cheating.html" >Plagiarism, Theft, and Other Unpleasant
+   Topics</a></td></tr>
+   <tr><td><a href="homework.html">How to Turn In Your Homework</a></td></tr>
+   <tr><td><a href="deliverables.html">Homework Deliverables</a></td></tr>
+   <tr><td><a href="coding-conventions.html">Coding Conventions</a></td></tr>
+  <tr><td><a href="../index.html">Home</a></td></tr>
+
+</table>
+</div>
+
+
+<div id="content">
+
+<h1>Coding Conventions</h1>
+
+<p>In addition to following the design recipe, we would like you to
+observe basic style guidelines for your programs.  Not observing these
+very basic guidelines leads to unreadable code.
+</p>
+
+<h2>Layout Conventions</h2>
+
+<ul>
+
+  <li>Start the file with the a purpose statement for the file, the
+  requires, and a comment describing how to run the program.  </li>
+
+  <li>Then put constant definitions and data definitions.</li>
+
+  <li>Then put your functions and tests.  Organize your functions into
+  meaningful groups.  Put help functions near the functions that they
+  help.   If your tests are short, put them near the function they
+  test.  Long test suites can be put at the end of the file.</li>
+
+  <li>Use function names and variable names that make sense with
+  respect to the problem and the purpose statement.  See the section
+  on <a href="#naming-conventions" >Naming Conventions</a> below.
+  </li>
+
+  <li>Use consistent indenting.  The Racket indenter does a very good
+  job.  A carriage return will, by default, start the next line at the
+  right indentation.  As you edit code, lines may wind up improperly
+  indented.  TAB correctly re-indents the current line.  If a portion
+  of your file is selected (shown in blue), TAB reindents everything
+  in the current region.  Type ctl-A TAB to select the entire file and
+  reindent the whole thing.</li>
+
+  <li>No line should span more than 80-90 characters.  The position of
+  the cursor, including its position on the line, is shown in the
+  bottom right of the Racket definitions window. (A few long lines are
+  OK, but don't make a habit of it.)
+  </li>
+
+  <li>Use visually distinctive separators to divide distinct sections
+  of your program.  I tend to use lines consisting of many
+  semicolons, but you may use asterisks, dashes, or whatever pleases
+  you.  If you have sections and subsections, you can use 2 lines of
+  separators between major sections and one line of separators between
+  minor sections.  </li>
+
+</ul>
+
+<a name="naming-conventions">
+<h2>Naming Conventions</h2>
+
+<p>In general, we use the following conventions:</p>
+
+<h3>Function Names</h3>
+
+<ul>
+
+  <li>Choose function names carefully. When a function is used in some
+  other piece of code, the reader (that is, someone other than you!)
+  should be able to tell roughly what a function computes just by
+  looking at its name.  If further detail is needed, then the reader
+  can refer to the purpose statement of the function.  If the function
+  name is chosen well and the purpose statement is written well, the
+  reader should rarely, if ever, need to refer to the function
+  definition.  </li>
+
+  <li>Function names should be in lower case.   Use a minus sign
+  ("<kbd>-</kbd>") to separate words in function names, e.g.
+  <kbd>cat-speed</kbd>, <kbd>world-after-tick</kbd>.</li>
+  
+  <li>Function names should almost always be nouns.  The function name
+  should usually describe the <em>result</em> of the function, not
+  what the function does. (e.g. <kbd>area</kbd>, not
+  <kbd>compute-area</kbd>)  Use the first component of the name to
+  distinguish similar functions with different arguments, e.g.:
+
+  <p/>
+  <ul class="condensed">
+    <li> circle-area, ring-area </li>
+    <li> book-price, total-order-price</li>
+    <li> rectangle-after-tick, selected-rectangle-after-tick, unselected-rectangle-after-tick</li>
+  </ul>
+
+  <p>Write a WHERE clause in your purpose statement to document the
+  meaning of names like this, eg.</p>
+
+  <pre>
+rectangle-after-tick : Rectangle -> Rectangle
+GIVEN: A rectangle r
+RETURNS: The rectangle that should follow the given one after a tick
+
+selected-rectangle-after-tick : Rectangle -> Rectangle
+GIVEN: A rectangle r
+WHERE: r is selected
+RETURNS: The rectangle that should follow the given one after a tick
+</pre>
+  
+  </li>
+
+  <li>Predicates should end in ? : e.g., <kbd>square?</kbd>
+  (pronounced "square-huh?") </li>
+
+</ul>
+
+<h3>Variable Names</h3>
+
+<ul>
+  <li>We generally use short names for variables (arguments) e.g.,<p/>
+
+  <ul class="condensed">
+
+    <li><kbd>b</kbd>  for a <kbd>Ball</kbd></li>
+    <li><kbd>lob</kbd> for a <kbd>ListOfBall</kbd></li>
+
+  </ul></li>
+
+  <li> It is preferable to use mnemonic names, like <kbd>cost</kbd> or
+  <kbd>price</kbd>, or qualified names, like <kbd>mouse-x</kbd> or
+  <kbd>bomb-x</kbd>, rather than names that merely identify the data
+  type of the variable.
+
+  <li>Sometimes I'll use plural names or abbreviations for lists, such as
+    <kbd>balls</kbd> or <kbd>bs</kbd> for a <kbd>ListOfBall</kbd></li>
+
+</ul>
+
+
+<h3>Other Names</h3>
+
+<ul>
+
+  <li>  Global constants are in upper-case:  eg. <kbd>HEIGHT</kbd>, <kbd>WIDTH</kbd>, <kbd>BALL-SPEED</kbd>
+  </li>
+  
+  <li>Names of data definitions are in <a
+  href="http://en.wikipedia.org/wiki/CamelCase" >CamelCase</a>:
+  e.g. <kbd>ListOfNumber</kbd>, <kbd>World</kbd>,
+  <kbd>FallingCatKeyEvent</kbd> .</li>
+
+
+  <li> Everything else is in lower case, including names of structs
+  and functions. Use a minus sign ("<kbd>-</kbd>") to separate words
+  in procedure names, e.g.  <kbd>cat-speed</kbd>,
+  <kbd>world-after-tick</kbd>.</li>
+
+  <li> Names of interfaces are Capitalized, like data definitions, and
+  end in &lt;%&gt;</li>
+
+  <li> Names of clases of Capitalized, like data definitions, and end
+  in %.</li>
+
+</ul>
+
+
+<a name="help-functions">
+
+<h2>Use Help Functions to Simplify Your Code</h2>
+
+<p>Use help functions to clarify your intentions in a piece of code.
+That messy junk you just wrote in your function must have had some
+purpose.  Turn it into a help function so you can document its
+purpose, and give it independent tests.</p>
+
+<p><strong>Short is good.  Long is bad. Period.</strong></p>
+
+
+<p>Here are two radically different versions of the same function.</p>
+
+<table border=1>
+  <tr>
+    <th>bad</th>
+    <th>good</th>
+  </tr>
+
+  <tr>
+    <td>
+      <pre>
+; ball-after-tick : Ball -> Ball
+(define (ball-after-tick b)
+  (cond
+    [(and (<= YUP (where b) YLO)
+       (or (<= (ball-x b) XWALL
+             (+ (ball-x b)
+               (ball-dx b)))
+         (>= (ball-x b) XWALL
+           (+ (ball-x b)
+             (ball-dx b)))))
+     (make-ball
+       (- (* 2 XWALL)
+         (ball-x (straight b 1.)))
+       (ball-y (straight b 1.))
+       (- (ball-dx (straight b 1.)))
+       (ball-dy (straight b 1.)))]
+    [else (straight b 1.)])) 
+      </pre>
+    </td>
+
+    <td valign="top" style="background-color: #eeeed0">
+      <pre>
+; ball-after-tick : Ball -> Ball
+(define (ball-after-tick b)
+  (cond
+   [(would-hit-wall? b) (ball-at-wall-reversed b)]
+   [else (ball-after-straight-move b 1.)]))
+      </pre>
+    </td>
+  </tr>
+</table>
+
+
+<p>Both always return the same answer.  But which one do you understand
+immediately? Which programming style makes sense? Which will drive the
+TA crazy? </p>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sun Sep 18 08:03:53 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 6.5</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 6.5: Descendant Trees</h1>
+
+<p><strong>Question 1:</strong> Design a function person-double-name
+that takes a Person and returns a Person just like the given one,
+except that the Person and all of his descendants have their names
+doubled.  For example, </p>
+
+<pre>
+(person-double-name
+  (make-person "chuck" 
+               (list (make-person "alice" empty) 
+                     (make-person "bob" empty))))
+=
+(make-person "chuckchuck" 
+             (list (make-person "alicealice" empty) 
+                   (make-person "bobbob" empty)))
+</pre>
+
+<p>Try doing it by straightforward structural decomposition, and then
+try it again using HOFs for the portion of the data that is
+represented as a list.  Remember that you will only learn something if
+you actually do it yourself.</p>
+
+<p><a href="double-names.rkt" >[Solution to Question 1]</a></p>
+
+<strong>Question 2:</strong> Design the following function:
+
+<pre>
+;; person-descendant? : Person String -> Boolean
+;; GIVEN: a person and a name
+;; RETURNS: true iff that person or any of his/her descendants has
+;; that name.
+</pre>
+
+<pre>
+;; EXAMPLES:
+;; Given the persons in the lesson:
+(begin-for-test
+  (check-true (person-descendant? fred "bob"))
+  (check-true (person-descendant? chuck "bob"))
+  (check-false (person-descendant? chuck "eddie"))
+  (check-false (person-descendant? fred "eve")))
+</pre>
+
+<p>Try doing it by straightforward structural decomposition, and then
+try it again using HOFs.</p>
+
+<p><a href="find-descendant.rkt" >[Solution to Question 2]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Sep 26 14:07:32 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 4.4</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 4.4 - Solution</h1>
+
+<p>The question was:</p>
+
+<p>Which of the following are sensible data definitions, according to
+Lesson 4.4?  Why or why not?  Write a template for those that are sensible.</p>
+
+<pre>
+A Foo is one of
+-- empty
+-- (list Number Foo)
+
+{how is this different from a a ListOfNumber}?
+
+Answer: this is sensible-- here is the template
+
+(define (foo-fn x)
+  (cond
+    [(empty? x) ...]
+    [else (.. (first x)
+              (foo1fn (second x)))]))
+
+We distinguish the two cases with empty?, and we get the fields of x
+with (first x) and (second x).
+
+Note that we recur on (second x) instead of (rest x).
+
+A Blaster is one of
+-- empty
+-- (cons Nat (cons Nat Blaster))
+
+Answer: this is sensible-- we distinguish the two cases with empty?,
+and we get the fields with (first x), (second x), and (rest (rest x)).
+
+The template is
+
+(define (blaster-fn x)
+  (cond
+    [(empty? x) ...]
+    [else (... (first x)
+               (second x)
+               (blaster-fn (rest (rest x))))]))
+
+Note that a Blaster always has an even number of elements.
+
+While this is data definition is sensible, it is not a very good data
+design.  Almost certainly it is preferable to write
+
+A BetterBlaster is a ListOfBlasterData
+
+where BlasterData is a struct containing the two Nats, which you
+define elsewhere.
+
+A Gargle is one of
+-- (list Nat)
+-- (cons Nat (cons Nat Gargle))
+
+Answer: this is also sensible.  We distinguish the two cases with
+(empty? (rest x)), and we get the fields  (first x), (second x), and
+(rest (rest x)).
+
+The template is
+
+(define (gargle-fn x)
+  (cond
+    [(empty? (rest x)) (... (first x))]
+    [else (... (first x)
+               (second x)
+               (gargle-fn (rest (rest x))))]))
+
+Note that a Gargle always has an odd number of elements.  Like a
+Blaster, this is sensible, but it is not a good design.  If you ever
+write something like this, go back and think about your problem harder.
+
+A GargleBlaster is one of
+-- a Gargle
+-- a Blaster
+
+This data definition is sensible, but it is not very good.  To
+distinguish the two cases, you'd have to ask (even? (length x)), which
+isn't really a "simple" predicate.  Worse yet, your partner might change
+the definition of either Gargle to something like
+
+A Gargle is one of
+-- (list Nat)
+-- (cons Boolean Gargle)
+-- (cons Nat (cons Nat Gargle))
+
+Now a Gargle might have either an even or odd number of elements, and
+(even? (length x)) won't distinguish the two cases.
+
+If you ever write something like this, you probably wrap your Gargle
+or your Blaster in a struct, maybe something like this:
+A GarbleBlaster is one of
+-- (make-gargle-gb Gargle)
+-- (make-blaster-gb Blaster)
+
+(define-struct gargle-gb (data))
+(define-struct blaster-gb (data))
+
+The template for this data definition is
+
+(define (garbleblaster-fn gb)
+  (cond
+    [(gargle-gb? gb) (gargle-fn (gargle-gb-data gb))]
+    [(blaster-gb? gb) (baster-fn (blaster-gb-data gb))]))
+</pre>
+
+And this is guaranteed to work now no matter how your partner changes
+the definition of a Gargle. 
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Aug 29 18:22:28 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

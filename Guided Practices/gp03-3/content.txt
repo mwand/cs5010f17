@@ -1,0 +1,36 @@
+Q1: It is OK to share data definitions with a friend T/F
+
+Q2: It is OK to share tests with a friend  T/F
+
+Question 3. It is OK to help a friend with his or her problems with his computer.
+A: This is OK, because it is not directly part of your friend's deliverables for the problem set.
+
+Question 4: It is OK to help a friend with his or her git problems.
+A: This is OK, because it is not directly part of your friend's deliverables for the problem set.
+
+Question 5: It is OK to let your roommate look at your solution if he
+or she is having trouble with the problem set. True or False?
+
+ True     False
+
+Which of the following are possible outcomes if you are found guilty of an academic honesty violation?
+
+	1.	
+You may bring shame on your family.
+
+	2.	
+You may be expelled from the University.
+
+	3.	
+You may receive a grade penalty in the course.
+
+	4.	
+You may go on to other courses and find that you are unprepared for them.
+
+	5.	
+You may have to walk around the quad wearing a sign that says "I am a cheater."
+
+	6.	
+You may be suspended from the University.
+
+A: All of these are possible outcomes, except for walking around the quad wearing a sign.

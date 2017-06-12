@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 11.1</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 11.1</h1>
+
+<p>Consider the following set of class definitions and object definitions:
+</p>
+
+<pre>
+(define Class1%
+  (class* object% ()
+    (init-field a)
+    (field [c (+ a 5)])
+
+    (super-new)
+    
+    ;; Number -> Number
+    (define/public (m1 x)
+      (if (>= x 106) x
+        (send this m2 (- x a))))
+    
+    ;; Number -> Number
+    (define/public (m2 x) (+ x c))
+
+    ))
+
+(define Class2%
+  (class* Class1% ()
+    (inherit-field a c)
+    (init-field b)
+
+    (super-new [a (+ b 1)])
+
+    ;; Number -> Number
+    (define/override (m1 x) (- x c))
+    
+    ))
+
+(define Class3%
+  (class* Class1% ()
+    (inherit-field a c)
+    
+    (super-new)
+
+    ;; Number -> Number
+    (define/override (m2 x) (send this m1 (+ x c)))
+
+    ))
+
+(define Class4%
+  (class* Class2% ()
+    (inherit-field a c)
+    (super-new)
+    (define/override (m2 x) (+ x c)) ))
+
+(define obj1 (new Class1% [a 10]))
+(define obj2 (new Class2% [b 20]))
+(define obj3 (new Class3% [a 30]))
+(define obj4 (new Class4% [b 40]))
+</pre>
+
+<p>Without running the program, determine the value of each pair of
+method calls below. 
+</p>
+
+
+<pre>1. (send obj1 m1 100) and (send obj1 m2 100)
+
+Answer:
+a)	105 and 115
+b)	105 and 130
+c)	110 and 115
+
+2. (send obj2 m1 100) and (send obj2 m2 100)
+
+Answer:
+a)	54 and 74
+b)	74 and 126
+c)	126 and 146
+
+3. (send obj3 m1 100) and (send obj3 m2 100)
+
+Answer
+a)	110 and 126
+b)	105 and 130
+c)	110 and 135
+
+
+4. (send obj4 m1 100) and (send obj4 m2 100)
+
+Answer:
+a)	105 and 146
+b)	54 and 146
+c)	115 and 146
+</pre>
+
+
+
+
+<p><a href="solution.html" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Nov 29 08:00:51 Eastern Standard Time 2016 <!-- hhmts end -->
+</body> </html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<title>Guided Practice 4.3</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 4.3 Computing On Lists of Structures</h1>
+
+<p>Here is one solution.
+</p>
+
+<pre>
+;; inventory-total-value : LOB -> Number
+;; GIVEN: a LOB
+;; RETURNS: the value of all the copies on hand of all the books in the
+;; given LOB
+;; (inventory-total-value lob1) = 390
+;; EXAMPLES/TESTS:
+
+(begin-for-test
+  (check-equal? 
+    (inventory-total-value empty)
+    0
+    "value of the empty inventory should have been 0")
+  (check-equal?
+    (inventory-total-value lob1)
+    390
+    "simple test"))
+
+;; STRATEGY: Use template for LOB on books
+(define (inventory-total-value books)
+  (cond
+    [(empty? books) 0]
+    [else (+
+            (book-inventory-value (first books))
+            (inventory-total-value (rest books)))]))
+</pre>
+
+<p/>
+
+<pre>
+;; books-out-of-stock : LOB -> LOB
+;; returns a list of the books that are out of stock in the given LOB
+;; Example:
+;; (books-out-of-stock lob1) =
+;;  (list
+;;    (make-book "Shakespeare" "Hamlet" 0 2)
+;;    (make-book "Shakespeare" "Macbeth" 0 10))
+;; STRATEGY: Use template for LOB on books
+
+(define (books-out-of-stock books)
+  (cond
+    [(empty? books) empty]
+    [else (if (book-out-of-stock? (first books))
+            (cons (first books) (books-out-of-stock (rest books)))
+            (books-out-of-stock (rest books)))]))
+
+(check-equal?
+  (books-out-of-stock lob1)
+  (list
+    (make-book "Shakespeare" "Hamlet" 0 2)
+    (make-book "Shakespeare" "Macbeth" 0 10)))
+
+;; book-out-of-stock? : Book -> Boolean
+;; returns true iff the given book is out of stock
+;; EXAMPLE: 
+;; (book-out-of-stock? (make-book "Felleisen" "HtDP/1" 20 7)) = false
+;; (book-out-of-stock? (make-book "Felleisen" "HtDP/1"  0 7)) = true
+;; STRATEGY: Use template for Book on b
+(define (book-out-of-stock? b)
+  (<= (book-on-hand b) 0))
+
+(begin-for-test
+  (check-false
+    (book-out-of-stock? (make-book "Felleisen" "HtDP/1" 20 7)))
+  (check-true
+    (book-out-of-stock? (make-book "Felleisen" "HtDP/1"  0 7))))
+
+;; (check-equal? ... true) would have been fine, too.  Look at the
+;; Help Desk page for check-equal? to see some other useful checks.
+</pre>
+
+<p>Note that the design of the help function book-out-of-stock?, with
+its deliverables, is required for a perfect solution.  Writing
+<pre>
+(if (<= (book-on-hand (first lob)) 0) ... ...)
+</pre>
+
+matches the template, but it is undesirable because it violates the
+principle of one-function-one-task.  It violates this principle
+because this version of the function requires books-out-of-stock to
+know both about the representation of an inventory AND the
+how being out of stock is represented for a book.
+</p>
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Aug 24 22:19:19 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

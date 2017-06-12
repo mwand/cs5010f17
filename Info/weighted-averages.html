@@ -1,0 +1,79 @@
+<html>
+<HEAD>
+<TITLE>Computing Weighted Averages</TITLE>
+<link type="text/css" rel="stylesheet" href="course.css">
+</HEAD>
+
+<BODY>
+
+<div id="menu">
+
+<table>
+  <tr><td><a href="cheating.html" >Plagiarism, Theft, and Other Unpleasant
+   Topics</a></td></tr>
+   <tr><td><a href="homework.html">How to Turn In Your Homework</a></td></tr>
+   <tr><td><a href="deliverables.html">Homework Deliverables</a></td></tr>
+   <tr><td><a href="coding-conventions.html">Coding Conventions</a></td></tr>
+  <tr><td><a href="../index.html">Home</a></td></tr>
+
+</table>
+</div>
+
+<div id="content">
+
+<h1>Computing Weighted Averages</h1>
+
+It's easy to compute a weighted average incorrectly if you're not
+careful.  A weighted average should have the property that if an
+assignment has a weight of, say 10% of the final grade, it should have
+that weight whether the assignment is graded on a scale of 100 or a
+scale of 20.
+
+<p> The following bit of code does the weighted-average algorithm
+correctly: 
+
+<pre>
+;; weighted-average : ListOfNumber ListOfNumber
+ListOfNumber -> Number
+;; GIVEN: a list of actual scores, a list of maximum possible
+;; scores, and a list of relative weights
+;; RETURNS: the weighted average
+;; EXAMPLES:
+;; (weighted-average (list 5 10) (list 10 10) (list 1 1)) = .75
+;; (weighted-average (list 5 10) (list 10 10) (list 0 1)) = 1.0
+;; strategy: transcribe formula, using HOF map to compute summands
+(define (weighted-average scores maxes weights)
+  (let ((weighted-sum
+          (sum
+            (map
+              (lambda (score max weight) (* (/ score max) weight))
+              scores maxes weights)))
+        (total-weight (sum weights)))
+    (/ weighted-sum total-weight)))
+
+;; sum : ListOfNumber -> Number
+;; GIVEN a list of numbers,
+;; RETURNS: their sum
+;; Example:
+;; (sum (list 3 4 1)) = 8
+;; (sum empty) = 0
+;; strategy: use HOF fold on the list l
+(define sum
+  (lambda (l)
+    (foldr + 0 l)))
+</pre>
+
+<!-- The actual average is computed in Excel using this algorithm. -->
+
+
+
+
+
+<hr>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sun Sep 18 08:05:23 Eastern Daylight Time 2016 <!-- hhmts end -->
+</div>
+</body> </html>
+

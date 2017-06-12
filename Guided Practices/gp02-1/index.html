@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice N.M</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 2.1</h1>
+
+<p>In Lesson 2.2 we wrote the following example:</p>
+
+<pre>
+;; ball-after-tick : Ball -> Ball
+;; GIVEN: The state of a ball b
+;; RETURNS: the state of given ball at the next tick
+;; STRATEGY: cases on whether ball would hit the wall on ;; the next tick
+
+(define (ball-after-tick b)
+  (if (ball-would-hit-wall? b)
+      (ball-after-bounce b)
+      (ball-after-straight-travel b)))
+</pre>
+
+What should be the contract and purpose statement for
+<kbd>ball-after-bounce</kbd> and
+<kbd>ball-after-straight-travel</kbd>?
+
+
+<p><a href="solution.html" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Jul 26 23:28:07 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

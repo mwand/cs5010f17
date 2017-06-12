@@ -1,0 +1,211 @@
+GRADE SHEET FALL 2016
+
+(* Last modified: Thu Sep  1 11:24:44 2016 *)
+
+Problem Set #: ____
+
+Pair number: _______ 
+
+Student1 Name: ________________ 
+
+Student1:  Correctness:   ___/15   [30% of grade]
+           Design:        ___      [50% of grade]
+           Presentation   ___      [20% of grade]
+
+Student2 Name: ________________ 
+
+Student2:  Correctness:   ___/15   [30% of grade]
+           Design:        ___      [50% of grade]
+           Presentation   ___      [20% of grade]
+
+================================================================
+Each student will receive 3 grades for each problem set:
+a correctness grade (numeric), a design grade (letter grade), 
+and a presentation grade (letter grade)
+================================================================
+
+KEY TO GRADES:
+
+Design Grades:
+
+A: Excellent work. The submission is well-organized and
+well-documented.  There are at most a few minor errors.  Everything is
+clear and understandable without asking the student.
+
+AB: Good, but not excellent.  The submission is mostly clear and
+understandable but it may lack organization or have gaps in detail
+that hinder the reader's understanding.
+
+B: Adequate: The student understands most of the relevant course
+materials, but the submission shows serious flaws in organization or
+detail.
+
+C: Deficient.  The submission indicates lack of understanding of the
+relevant course materials.  Significant portions of the submission are
+not obvious to the reader, even with the supplied documentation.
+
+D: Incomplete.  Many required deliverables missing, incomplete, or
+wrong.
+
+F: Missing.  Not turned in.
+
+================================================================
+
+Presentation Grades:
+
+A: Excellent.  The student understands his/her submission and can explain
+it clearly.  The student speaks clearly and with adequate volume to be
+understood by the audience (not just the grader).  The student
+understands questions as they are asked, and answers them precisely
+and promptly, with little need for followup questions.
+
+AB: Good, but not excellent. The student has a good understanding of
+the submission, and can explain it, though followup questions may be
+necessary in order to get to a precise answer.  The student speaks
+clearly and with adequate volume to be understood by the audience (not
+just the grader).
+
+B: Adequate.  The student has a general understanding of the submission,
+but may be confused or is unable to explain some of the details.  The
+student may not speak sufficiently clearly or with adequate volume to
+be understood by the audience (not just the grader).
+
+C: Deficient.  The student's answers may indicate lack of
+understanding of the submission and of the relevant course materials.
+The student may require multiple rephrasings or followup questions in
+order to answer the question; some answers may remain unsatisfactory
+even after multiple interactions with the grader.  The student may
+need to be asked repeatedly to speak more clearly or loudly.
+
+F: Missing: The student did not appear for the codewalk, and did not
+give notice.
+
+================================================================
+
+Specific Items Noted.  (Grader: fill an X in front of applicable item,
+and insert location or specifics whenver possible). 
+
+================
+
+Data Design:
+
+-- bad design choices (eg: doesn't use mixed/recursive data where
+   appropriate, bad/misleading field names)
+
+-- missing/incomplete interpretation.  (Criterion: does the
+   interpretation give you sufficient information to read and
+   understand the submission?  Does the interpretation account for every
+   value assigned to this field by the program? eg: (set! mx 0) for a
+   mouse position)
+
+-- missing/incomplete/wrong invariants. (Criterion: there are combinations
+   of data values that are unaccounted for, regardless of whether they
+   come up in execution)
+
+-- missing/incorrect templates.  When evaluating, try to distinguish
+   between harmless errors and those that will hinder the programmer
+   in correctly using the template.
+
+================
+
+Contract/Purpose Statement/Design Strategy:
+
+-- missing/incorrect contracts.
+
+-- missing/incomplete/misleading purpose statements. Purpose must be
+   clear, correct, and add at least some information beyond the
+   contract.  Ideally, the reader should be able to figure out what
+   the function returns by reading the purpose statement and the
+   examples, WITHOUT LOOKING AT THE FUNCTION DEFINITION.
+
+-- purpose statement does not mention one of the arguments.
+
+-- missing/incomplete invariant:  The function should fulfill its
+   purpose for EVERY combination of inputs that is permissible
+   according to the contract.  If not, the permissible combinations of
+   inputs must be documented by an invariant (WHERE clause).  The
+   WHERE clause may also be used to document assumptions about the
+   arguments, e.g. "WHERE: the ball would hit the wall on the next tick"
+
+-- missing/wrong design strategy.  If the strategy is "use template",
+   then the definition must match the template.
+
+-- function definition not "obviously correct".  Ideally, you should
+   be able to tell whether a function fulfills its purpose just by
+   reading the function definition and the purpose statements of the
+   functions it calls (NOT the code of its helpers).
+
+-- poor choice of function/constant names.  Names should be nouns
+   whenever possible. The name should give a good indication of what
+   the function does or what the constant denotes.  It should NOT
+   mislead the reader.
+
+-- poor choice of argument names.  Arguments should refer to the
+   information, not to the data type. eg: 'ships' not 'los' or 'loship'.
+
+-- Spaghetti code.  Code that is hard to understand because it has
+   long call chains or many functions with similar names and purpose
+   statements.
+
+-- Student does not use appropriate programming techniques
+   (e.g. doesn't use map/filter, doesn't eliminate annoying code
+   duplication)
+
+-- missing/incomplete/incorrect termination argument
+
+-- uses concepts/terms from previous semesters (Note: this may be the
+   result of cutting & pasting from the example files, or it may be the
+   result of the student using a solution submitted by a student in a
+   previous semester.  If the student insists that it is the former,
+   ask him/her to email you later showing you the source.)
+
+================
+
+Examples and Tests:
+
+-- should have 100% test coverage except for big-bang and friends.
+
+================
+
+Interfaces, Objects, and Classes
+
+-- Interface name not ending in <%>
+-- Interface has no purpose statement
+-- Method in interface has no contract
+-- Contract for method talks about classes, not interfaces
+-- Method in interface has no purpose statement/inadequate purpose
+   statement 
+
+-- Class name not ending in %
+-- Class has no purpose statement
+-- Class has no constructor template
+-- field has no interpretation/inadequate 
+-- field interpretations/invariants inadequate to explain all values
+   assigned by program.
+-- public method not in interface (for-test:* methods are OK)
+
+-- method has no contract
+-- method has contract different from the contract in the interface
+-- method has inadequate purpose statement
+-- method missing examples if you think they are necessary to explain
+   purpose statement
+-- method missing design strategy if you think it is necessry to
+   explain the code.
+
+================
+
+Presentation:
+
+-- student shows lack of understanding of his/her submission
+
+-- student has difficulty understanding questions that are asked
+
+-- student has difficulty answering questions
+
+-- student talks around answer rather than answering precisely
+
+-- student's English is hard to understand (pronounciation)
+
+-- student speaks too softly to be heard
+
+

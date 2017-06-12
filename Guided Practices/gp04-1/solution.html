@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 4.1</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 4.1 - Solution</h1>
+
+<p>The question was:</p>
+
+<p>Consider the following data definition:</p>
+
+<pre>
+;; A ListOfStrings (LOS) is one of
+;; -- empty
+;; -- (cons String LOS)
+</pre>
+
+<p>Which of the following expressions have values that are LOS's?</p>
+
+
+<p>Here are the answers:</p>
+
+<ol>
+  <li><kbd>(cons "abc" empty)</kbd> Answer: Yes. <kbd>empty</kbd> is a
+  LOS and <kbd>"abc"</kbd> is a string, so <kbd>(cons "a" empty)</kbd>
+  is a LOS </li>
+  
+  <li><kbd>(cons "bcd") </kbd>  Answer: No. This expression has no
+  value, because <kbd>cons</kbd> has the wrong number of
+  arguments.</li>
+  
+  <li><kbd>(cons "cde" (cons "ef" empty)) </kbd> Answer: Yes.  This is a LOS. </li>
+  
+  <li><kbd>(cons "3" (cons "4" empty)) </kbd> Answer: Yes.  This is also a LOS. </li>
+  
+  <li><kbd>(cons 3 (cons 4 empty)) </kbd> Answer: No. 3 and 4 are numbers, not strings. </li>
+  
+</ol>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Aug 24 21:34:01 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

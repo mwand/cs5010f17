@@ -1,0 +1,11 @@
+Read these files in the following order:
+
+Interfaces.rkt
+Model.rkt
+PositionController.rkt
+VelocityController.rkt
+ControllerFactory.rkt
+top.rkt
+
+{should we just use WidgetWorks.rkt??}
+{rename filenames to lower case}

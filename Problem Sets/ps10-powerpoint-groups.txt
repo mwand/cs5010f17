@@ -1,0 +1,62 @@
+Here is a problem inspired by the behavior of groups in PowerPoint.
+
+Metavariables:
+n  ranges over nodes
+g  ranges over groups
+
+We have nodes.
+
+A group is a either a node or a set of disjoint groups.
+
+n belongs to g iff either n = g or g = {g1,..,gk} and n belongs to
+some g_i.
+
+Note that these definitions are mutually recursive :(
+
+The state of the system consists of two sets of groups, U and S,
+satisfying the following invariants:
+
+Invariant 1:
+
+The set U ("the set of top-level groups") consists of groups that are
+disjoint, ie, no node belongs to more than one group in U.
+
+Invariant 2:
+
+The set S ("the selection") is a set of groups, each of which is
+either a single node or an element of U.
+
+We say a node is selected if it is belongs to some group in S.
+
+With these definitions, we can describe the actions taken by the
+different events:
+
+1. button-down in a node n that is not selected  ("select"):
+   Find the group in U that n belongs to, and add that group to S.
+
+2. button-down in a node n that is already selected ("focus")
+   Set S = {n}.
+
+3. button-down at a location that is not a node:
+   ("unselect").  Release all selections, ie, set S to empty.
+
+4. drag:
+   translate all selected nodes by smooth drag.
+
+5. key event "g":
+   ("group") If S = {g1,..,gn}, where all the g_i are members of U,
+   then remove g1,..,gn from U, form a new group g' = {g1,..,gn} and
+   add it to U. Set S = {g'}.  If S contains an element that is not a
+   member of U, do nothing (or flash an error)
+
+6. key event "u" (ungroup):
+   If S contains more than one element, do nothing (or flash an error)
+   If S = {n}, do nothing (or flash an error)
+   If S = {g}, and g = {g1,..gn}, remove g from U and add each g_i to
+   U.  Set S = {g1,..,gn}.
+
+I believe these operations preserve
+   
+
+   
+

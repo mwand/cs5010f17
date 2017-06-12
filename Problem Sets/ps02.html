@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<TITLE>CS 5010: Problem Set 02: Finite Data</TITLE>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+</head>
+
+<body>
+<h1>CS 5010: Problem Set 02</h1>
+
+<p>
+<strong>Out:</strong> Monday, September 19, 2016
+
+<p><strong>Due:</strong> Monday, September 26, 2016
+at 600pm
+local time
+</p>
+
+<!-- See Google spreadsheet for collected problem sets and TOTs -->
+
+
+<p>
+The goal of this problem set is to help you design data
+representations for finite data and to write functions that deal with them.</p>
+
+<p>You must use the HtDP Beginning Student Language to solve the
+  problems.  </p>
+
+<p>For these problems, download a copy of <a href="extras.rkt"
+>extras.rkt</a> and put it in the folder with your solutions.  Then
+import this library by including the line
+
+<pre>
+(require "extras.rkt")
+</pre>
+
+at the top of your file with the other requires.  Then, for each
+problem, put in lines that say
+
+<pre>
+(provide <em>function</em>)
+</pre>
+
+for each deliverable function.  Thus, for problem 1, the top of your
+file should say
+
+<pre>
+(require rackunit)
+(require "extras.rkt")
+
+(provide
+  initial-state
+  next-state
+  accepting-state?
+  error-state?
+  ) 
+</pre>
+</p>
+
+<p>This will allow our testing framework to import your file and do
+automated testing on it.</p>
+
+
+<p>Remember that you must follow the design recipe.  Your <a
+  href="../Info/homework.html" >deliverables</a> include the data
+  definitions (including interpretation and templates), contract and
+  purpose header, code, and tests.  Be sure to follow our <a
+  href="Info/coding-conventions.html" >coding conventions</a>.  This
+  will make the TA's job much easier.</p>
+
+<p>Be sure to sync your work and fill
+  out a Work Session Report at the end of every work session.  Use the
+  <a href="https://goo.gl/forms/j1c5C8lFCCULB7lB3" >Work Session Report for
+  PS02</a>.  Remember to include "extras.rkt" and any other local
+  files you need in your repository folder.</p> 
+
+
+<hr>
+
+<ol>
+
+<li>  You are to design a set of functions that illustrate the
+workings of a finite-state machine for accepting strings that <span
+class="new">exactly</span> match
+the regular expression <pre>(q | x)* u* (a | b)* d (e | f)*</pre> .
+  So all of the following should be accepted:
+  <pre>
+d
+de
+df
+def
+dfe
+ad
+adf
+abbde
+uabdef
+uuabdef
+qd
+quaade
+qxuuadeff
+qxuuabbadeff
+  </pre>
+  but
+<pre>
+que
+qaud
+quaudefd
+qxuuaqdef
+</pre>
+should not.
+
+<p>The legal inputs to the machine are precisely the strings "q", "x",
+  "u", "a", "b", "d", "e", and "f".  Any other inputs violate the machine's
+contract, and its behavior on those inputs is unspecified.</p>
+
+<p>  First, perform an information analysis and design the data
+  representation for the states of your machine.  You may wish to
+  write down a state-transition diagram (like the ones <a
+  href="https://www.google.com/search?num=10&hl=en&site=imghp&tbm=isch&source=hp&biw=1109&bih=698&q=state+transition+diagrams&oq=state-transiti&gs_l=img.1.0.0i33l10.1619.3742.0.6264.14.14.0.0.0.0.108.1368.9j5.14.0...0.0...1ac.Ynu6MrP4nAA"
+  >here</a>) to illustrate the meaning of
+  your state.  Keep your diagram as simple as possible.  You should
+  submit your state-transition diagram either as ascii art in your
+  solution file, or as a jpg or pdf (called "fsm.jpg" or "fsm.pdf"),
+  created in your favorite graphics 
+  program. 
+</p>
+
+<p> Then design the following functions and <kbd>provide</kbd> them in
+a file named <kbd>fsm.rkt</kbd>
+
+  <pre>
+initial-state : Number -> State
+GIVEN: a number
+RETURNS: a representation of the initial state
+of your machine.  The given number is ignored.
+
+next-state : State MachineInput -> State
+GIVEN: a state of the machine and a machine input
+RETURNS: the state that should follow the given input.
+
+accepting-state? : State -> Boolean
+GIVEN: a state of the machine
+RETURNS: true iff the given state is a final (accepting) state
+
+error-state? : State -> Boolean
+GIVEN: a state of the machine
+RETURNS: true iff there is no path (empty or non-empty) from the given
+state to an accepting state
+</pre>
+
+<p>You will need to provide data definitions for State and for
+MachineInput.  Be sure to write an interpretation for each state.
+There is no need to write an interpretation for MachineInput, since
+the problem is already phrased in terms of strings.
+
+  <p>As before, remember that we will be doing automated testing of your
+  solution.  So be sure that your solution is in the right place
+  (<kbd>set02/fsm.rkt</kbd> in your private
+  <kbd>cs5010f16/pdp-<em>YOURUSERNAME</em></kbd> repository), and that
+  it provides all the functions listed above.  To see if your file is
+  in the right place, insert the following line somewhere near the top
+  of your file:</p>
+
+  <pre>
+(check-location "02" "fsm.rkt")
+</pre>
+
+</li>
+
+
+
+<li> The University has gone on a health campaign and has replaced the
+candy machine in the basement with a health-food machine.   The
+machine dispenses two kinds of snacks:  kale chips and carrot sticks.
+A bag of kale chips is $0.75, and a bag of carrot sticks is $0.50.
+The machine accepts only quarters.   A customer can put any number of
+quarters in the machine, and then select an item.  If the customer
+has deposited enough money into the machine, and the machine is not
+out of the selected item, then the machine will dispense the requested
+item.  If the machine is out of the selected item, the machine will
+flash "Out of Item".  The customer may also press "change", in which
+case the machine will return any unspent money that the customer has
+put in during the current transaction.  If none of these apply, the
+machine does nothing.
+
+<p>For example, the customer may put two 25-cent pieces into the
+machine.  If he then selects the carrots, the machine will
+dispense a bag of carrots.  If he tries to select the kale
+instead, nothing will happen.  If the customer then presses "change",
+the machine will return any unspent money that he has deposited.  The
+customer may request "change" at any time, whether or not he has
+ordered anything.
+<!-- and we assume that the machine can always make the -->
+<!-- required amount of change. -->
+</p>
+
+<p>The machine has a container, called the bank, that contains all the
+money it has kept from customers' purchases.  The customer's money is
+added to the bank only after he or she has successfully made a purchase.</p>
+
+<p>The possible inputs from the customer are given by the following
+data definition:</p>
+
+<pre>
+A CustomerInput is one of
+-- a PosInt        interp: insert the specified number of quarters
+-- "kale"          interp: request a bag of kale chips
+-- "carrots"       interp: request a bag of carrots
+-- "change"        interp: return all the unspent money that the
+                             customer has inserted
+
+A MachineOutput is one of
+-- "kale"           interp: machine dispenses a bag of kale chips
+-- "carrots"        interp: machine dispenses a bag of carrot sticks
+-- "Out of Item"    interp: machine displays "Out of Item"
+-- a PosInt         interp: machine releases the specified number of quarters
+-- "Nothing"        interp: the machine does nothing
+</pre>
+
+  <p>You are to write a file called <kbd>snack-machine.rkt</kbd> that provides
+  the following functions:</p>
+
+<pre>
+initial-machine : NonNegInt NonNegInt -> MachineState
+GIVEN: a number of bags of kale chips and carrot sticks
+RETURNS: the state of a machine loaded with the given numbers of bags
+of kale chips and carrot sticks, with an empty bank.
+
+machine-next-state : MachineState CustomerInput -> MachineState
+GIVEN: a machine state and a customer input
+RETURNS: the state of the machine that should follow the customer's
+input
+
+machine-output : MachineState CustomerInput -> MachineOutput
+GIVEN: a machine state and a customer input
+RETURNS: a MachineOutput that describes the machine's response to the
+customer input
+
+machine-remaining-kale : MachineState -> NonNegInt
+GIVEN: a machine state
+RETURNS: the number of bags of kale chips left in the machine
+
+machine-remaining-carrots : MachineState -> NonNegInt
+GIVEN: a machine state
+RETURNS: the number of bags of carrots left in the machine
+
+machine-bank : MachineState -> NonNegInt
+GIVEN: a machine state
+RETURNS: the amount of money in the machine's bank, in cents
+</pre>
+
+  <p>As before, remember that we will be doing automated testing of your
+  solution.  So be sure that your solution is in the right place, and that
+  it provides all the functions listed above.  You can use
+  <kbd>check-location</kbd> to check whether your file is in the right
+  place. </p>
+
+</li>
+
+
+
+    <li>Your space probe to Pluto has just landed.  Here's the situation:
+<p></p>
+  <ol>
+
+    <li>At every step, the probe can move forward some number of
+    steps, or it can rotate 90 degrees either right or left.  The
+    probe moves by taking steps of exactly 1 cm.</li>
+    
+    <li>The probe has landed facing north (up).</li>
+
+    <li>We will use graphics-style coordinates instead of standard
+    mathematical coordinates. That is, when the probe moves north, its
+    y-coordinate DECREASES.  So if it takes one step north from the
+    origin, it is at (0, -1).</li>
+    
+    <li>The probe's mechanism is a little unreliable.  If you send it
+    forward by some number of steps, it may take an extra step, or it
+    may take one step too few.  However, it will never move backwards,
+    nor will it ever turn by mistake.</li>
+
+  </ol>
+  
+  <p>You are to write a file called <kbd>probe.rkt</kbd> that provides
+  the following functions:</p>
+
+  <pre>
+probe-at: Integer Integer -> Probe
+GIVEN: an x-coordinate and a y-coordinate
+RETURNS: a probe with its center at those coordinates, facing north.
+
+probe-turned-left : Probe -> Probe
+probe-turned-right : Probe -> Probe
+GIVEN: a probe
+RETURNS: a probe like the original, but turned 90 degrees either left
+or right.
+
+probe-direction-equal? : Probe Probe -> Boolean
+GIVEN: two probes
+RETURNS: true iff the two probes are facing in the same direction,
+else false
+
+probe-location-equal? : Probe Probe -> Boolean
+GIVEN: two probles
+RETURNS: true iff the two probes are at the same location
+
+probe-forward-possible-outcome? : Probe PosInt Probe -> Boolean
+GIVEN: two probes and a distance
+RETURNS: true iff the first probe, given a move-forward command with
+the specified number of steps, could wind up in the state described by
+the second probe.
+  </pre>
+
+  <!-- s/wind up/end/ -->
+  
+
+<!-- <p>Note: When the specification groups functions as we have done here, -->
+<!--   you need only write down the purpose statement once (as we have done -->
+<!--   here). If your design strategy is the same for all the functions, -->
+<!--   then you only have to write that down once. Of course your -->
+<!--   examples must cover all the functions.</p> -->
+
+ <!-- <p>We will be doing automated testing of your solution.  In order to -->
+ <!-- see whether you have correctly provided the indicated functions, load -->
+ <!-- a copy of <a href="ps02-probe-tests.rkt" -->
+ <!-- ><kbd>ps02-probe-tests.rkt</kbd></a> into your -->
+ <!-- directory and run it.  This file tests only that you have provided -->
+ <!-- all the functions you are supposed to.  Make sure your solution -->
+ <!-- passes those tests before you turn in your problem set.</p> -->
+
+    <p>As before, remember that we will be doing automated testing of your
+  solution. Same story as for the preceding problems.</p>
+
+
+</li>
+
+
+
+
+</ul>
+</li>
+
+</ol>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Sep 26 14:52:33 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>
+ 

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+
+<title>Guided Practice 4.3</title>
+
+</head>
+
+<body>
+<h1>Guided Practice 4.3 Computing On Lists of Structures</h1>
+
+<p>Starting with 04-2-books.rkt (from this week's examples), design
+the following functions:</p>
+
+<pre>
+;; inventory-total-value : LOB -> Number
+;; GIVEN: a LOB
+;; RETURNS: the value of all the copies on hand of all the books in the
+;; given LOB
+;; (inventory-total-value lob1) = 390
+
+(begin-for-test
+  (check-equal? 
+    (inventory-total-value empty)
+    0
+    "value of the empty inventory should have been 0")
+  (check-equal?
+    (inventory-total-value lob1)
+    390
+    "simple test"))
+
+;; books-out-of-stock : LOB -> LOB
+;; GIVEN: a list of books
+;; RETURNS: a list of the books that are out of stock in the given LOB
+;; Example:
+;; (books-out-of-stock lob1) =
+;;  (list
+;;    (make-book "Shakespeare" "Hamlet" 0 2)
+;;    (make-book "Shakespeare" "Macbeth" 0 10))
+</pre>
+
+<p><a href="page2.html" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Aug 24 22:19:02 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

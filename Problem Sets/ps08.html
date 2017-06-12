@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>CS 5010: Problem Set 8</title>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+
+</head>
+
+<body>
+<h1>CS 5010: Problem Set 8</h1>
+
+<!-- Be sure to change the problem set number both in the title and -->
+<!-- the h1! -->
+
+<p>
+<strong>Out:</strong> Monday, October 31, 2016
+
+<p><strong>Due:</strong> Monday, November 7, 2016
+at 600pm local time.
+</p>
+
+
+<p>
+The goal of this problem set is to give you practice using everything
+that you've learned this semester.
+</p>
+
+<p><strong>NOTE:</strong> Both of the problems on this problem set are
+brand-new for Fall 2016.  We do our best to make sure they are
+bug-free when we release them, but please keep an eye out for updates.
+We will announce all updates on Piazza.</p>
+
+<p>You must use DrScheme's HtDP Intermediate Student Language with
+  Lambda. Use list abstractions like filter, fold, and map whenever
+  they are helpful. As before, you will be penalized for failing to
+  use these when they are "obviously" applicable. </p>
+
+<p>Remember that you must turn in all the usual design-recipe
+deliverables, including the following:
+
+<ul>
+
+<li>If your function
+does not fulfill its purpose for all combinations of arguments that
+satisfy the contract, then you must write an invariant that documents
+what additional assumptions your function makes about its
+arguments</li>
+
+<li>You must include a halting measure for every function that
+calls itself either directly or indirectly.  You should be prepared to give a
+termination explanation at your codewalk.</li>
+
+<li>For functions that use general recursion, you should not put down
+"General Recursion" as a strategy.  Instead, write a tweet-sized
+description of how your function works.  Be sure your tweet includes a
+descripton of what you are recurring on.</li>
+
+<li>We expect that your data definitions, interpretations, and invariants will
+be sufficient to explain the meaning of every quantity in your
+program.  You will be judged on the adequacy of these deliverables.</li>
+
+</ul>
+
+<p>You also must turn in a call graph for your solution, as in the
+last few problem sets.  Call this file <kbd>call-graph-1</kbd> or
+<kbd>call-graph-2</kbd> with an appropriate suffix, and bring a paper
+copy of each of these to your codewalk.</p>
+
+<p>If you really need to do so, it is ok to write two
+mutually-recursive functions using general recursion. If you do this, you need
+make sure that your halting measure decreases on EVERY recursive call
+to the function, even if that call comes via the other function.</p>
+
+<span class="new"><p>In addition to <kbd>rackunit</kbd> and <kbd>"extras.rkt"</kbd>, you
+may also require <kbd>sets.rkt</kbd> (but be careful-- make sure that
+the functions of <kbd>sets.rkt</kbd> apply correctly to your data!)
+</p></span>
+
+<p>Note: not everything on this problem set requires the use of
+invariants or  the use of general recursion.  Part of your task
+is to figure out when you need these things and when you do not.
+Remember, it is the purpose statement that determines whether or not
+you need to state an invariant.</p>
+
+<p>Remember that you must follow the design recipe.  Your <a
+  href="../Info/deliverables.html" >deliverables</a> include the data
+  definitions (including interpretation and templates), contract and
+  purpose header, strategies, code, and tests.  Be sure to sync your
+  work and fill out a Work Session Report at the end of every work
+  session.  Use the
+
+<a href="https://goo.gl/forms/WFznGB52uwZ9Hmww2" >Work Session Report for
+  PS08 </a>.</p> 
+
+
+<p>As usual, the rubric for grading is <a
+href="../Info/master-rubric-public.txt" >here</a>. 
+</p>
+
+
+<hr>
+<p/>
+
+<ol>
+
+  <li>Your employers at NextPython, Inc., the makers of GarterSnake,
+  have introduced a new product, which they call Simplified Garter
+  Snake (SGS). Simplified GarterSnake is just like GarterSnake, except
+  for the following:</p>
+
+  <ul>
+    <li>Function names may only be defined once,</li>
+    <li>Function names are global: a function may be called in an
+    expression occurring before, after, or within its
+    definition. </li>
+    <li>Functions may neither be passed as arguments nor returned as
+    values. </li>
+</ul>
+
+<p>Your task is to check SGS programs for potential infinite
+recursion. Consider the following SGS program:
+</p>
+
+<pre>
+(define some-loops
+  (list
+     (make-def 'f1 (list 'x) (make-appexp 'no-loop (list (make-varexp 'x))))
+     (make-def 'f2 (list 'u 'y) (make-appexp 'f1 (list (make-varexp 'y))))
+     (make-def 'f3 (list 'x 'u)
+               (make-appexp 'f1 (list (make-appexp 'f4
+                                             (list (make-varexp 'u)
+                                                   (make-varexp 'w)))
+                                      (make-varexp 'z))))
+     (make-def 'f4 (list 'x 'y)
+               (make-appexp 'f5
+                            (list (make-varexp 'y)
+                                  (make-varexp 'u))))
+     (make-def 'f5 (list 'u)
+               (make-appexp 'f2
+                            (list (make-appexp 'f3 empty))))
+     (make-def 'no-loop (list 'x) (make-varexp 'x))))
+</pre>
+
+<p>In this program, neither f1 nor f2 can lead to an infinite
+loop. However, f3 calls f4, which calls f5, which calls f3 again.  So
+any call to f3, f4, or f5 may lead to an infinite recursion. </p>
+
+<p>Note that
+this program takes advantage of the global scope of function
+names. For example, f1 calls no-loop, even though the definition of
+no-loop comes after the definition of f1. </p>
+
+
+  <p>Recall that the syntax-tree representation of GarterSnake is
+  defined as follows:</p>
+
+  <pre>
+;; A Program is a ListOfDefinition.
+
+(define-struct def (name args body))
+;; A Definition is a (make-def Variable ListOfVariable Exp)
+;; INTERPRETATION:
+;; name is the name of the function being defined
+;; args is the list of arguments of the function
+;; body is the body of the function.
+
+(define-struct varexp (name))
+(define-struct appexp (fn args))
+
+;; An Exp is one of
+;; -- (make-varexp Variable)
+;; -- (make-appexp Variable ListOfExp)
+;; INTERPRETATION;
+;; (make-varexp v)                   represents a use of the variable v
+;; (make-appexp f (list e1 ... en))  represents a call to the function
+;;                                   named f, with arguments e1,..,en
+
+;; A Variable is a Symbol.
+</pre>
+
+<p>You are to turn in a file named <kbd>q1.rkt</kbd> that provides the
+following functions:
+</p>
+
+<pre>
+make-def
+make-varexp
+make-appexp
+
+any-loops? : Program -> Boolean
+GIVEN: a valid SGS program p (that is, a GS program that obeys the
+restrictions listed above).
+RETURNS: true iff there is some function f in p that calls itself
+either directly or indirectly, as in the example above.
+</pre>
+
+</li>
+
+<li> (Resolution Theorem-Proving) The motivation for this problem is
+something called the <em>satisfiability problem</em> and
+<em>resolution theorem-proving</em>.
+
+<p>Here's the set-up:</p>
+
+<p>
+Imagine that we have a number of
+boolean variables a, b, c, d, etc., which can either be true or false.
+You probably know that any boolean formula can be expressed in
+<em>conjunctive normal form</em>, that is, as a formula that looks
+like</p>
+
+(a &or; &not;b &or; c) &amp;
+(d &or; b) &amp;
+(&not;a &or; c)
+
+
+<p>We will use conventional terminology for formulas in conjunctive normal
+form, in which a disjunction like (a &or; &not;b &or; c) is called a
+<em>clause</em>, and each of its disjuncts, which are either variables
+or their negations, are called <em>literals.</em>  For example, the
+clause (a &or; &not;b &or; c) contains the literals a, &not;b, and c.</p>
+
+<p>Given a choice of truth values for each variable, a clause is true
+if and only if at least one of its literals is true.  Thus, the empty
+clause, which contains no literals, is always false.  Similarly, a a
+choice of truth values for each variable, a formula is true if and
+only if all of its clauses are true. So the empty formula, which
+contains no clauses, is always true.</p>
+
+<p>The question we want to answer is: given a formula in conjunctive
+normal form, is there a choice of truth values for its variables that
+makes the formula true?  For any choice of truth values for the
+variables, 
+
+This is called the<em>satisfiability</em> 
+problem. For our example, the assignment</p>
+
+
+<p>a = T, b = F, c = T, d = T</p>
+
+<p>makes the formula true, and we say that the formula is
+<em>satisfiable</em>.  </p> 
+
+<p>We say that a formula F <em>implies</em> a formula G iff every
+choice of truth values that makes F true also makes G true.  (If you
+know about truth tables, this is saying that G is true on every line
+of the truth table that makes F true.)</p>
+
+<p>  So, if a formula F implies a contradiction, which is never true,
+then the original formula F must also never be true.  In this case, we
+say that F is <em>unsatisfiable</em>.
+</p>
+
+<p>As it turns out, there is a simple method for deriving a
+contradiction from a formula, if one exists.  This is called the rule
+of <em>resolution</em>.  It says: </p>
+
+<pre>
+(a1 &or; a2 &or; ... b)         (&not;b &or; c1 &or; c2 &or; ...)
+-----------------------------------------------
+      (a1 &or; a2 &or; ... &or; c1 &or; c2 &or; ...)
+</pre>
+
+
+<p>This rule says that if we have the two formulas above the line,
+then we can derive the formula below the line.  Both the b and the
+&not;b are deleted in the conclusion.
+
+<p>In our example clauses above, (a &or; &not;b &or; c) &amp; (d &or; b) &amp;
+(&not;a &or; c) , the first two clauses resolve on the b to get (a
+&or; c &or; d), and the first and third clauses resolve on a to get
+(&not;b &or; c). 
+
+<p>We call b and &not;b <em>complementary</em> literals,  Disjunctions like (a1
+&or; a2 &or; ... b) are treated as sets, so the b and the &not;b may
+appear anywhere in their clauses.  It is possible for a pair of
+clauses to have more than one pair of complementary literals, in which
+case the rule applies in two ways, yielding more than one conclusion.
+</p>
+
+<p>Observe that the conclusion of the rule of resolution, as written
+in the box above, is implied by its hypotheses: if both of the
+original clauses are true and b is true, then one of the c's must be
+true in order to make the second clause true.  Similarly, if b is
+false, then one of the a's must be true in order to make the first
+clause true.  So if both clauses are true, then either one of the a's
+is true or one of the c's is true and this is what the conclusion
+says. </p>
+
+<p>So, if you can derive the empty clause (which is always false) from
+some set of clauses F, then you've shown that your set of clauses F
+implies the empty clause, and therefore that it's unsatisfiable.
+
+<p>Further, there is a theorem that says that this is an "if and only
+if": a formula form is unsatisfiable if and only if the empty clause
+is derivable from the formula. </p>
+
+<p>So to solve the satisfiability problem, we start with a set of clauses,
+and repeatedly apply the resolution rule until we either derive the
+empty clause or run out of new clauses to generate.  (This always
+halts.  Why?  One of your deliverables is a halting measure for this
+algorithm.)  If we derive the empty clause, we know our original set
+of clauses was unsatisfiable.  If we derive all the clauses it is
+possible to derive, then we know (by the theorem above)
+that it is <span class="new">satisfiable</span>. </p>
+
+<p>For example, consider the following set of clauses:
+</p>
+
+(a &or; &not;b &or; c) <br>
+(d &or; b)  <br>
+(&not;a &or; c) <br>
+b <br>
+&not;c <br>
+
+<p>From these clauses we can derive the empty clause, as follows:</p>
+
+<pre>
+(a \/ ~b \/ c)    (~a \/ c)
+---------------------------
+       (~b \/ c)                (b)
+       ----------------------------
+                    (c)                    (~c)
+                    --------------------------
+                               ()
+</pre>
+
+<p>In general, you will have to consider all generated clauses at
+every step, not just ones from the original set.</p>
+
+<p>Most of the preceding discussion is the motivation for this
+problem.  We've presented the problem in terms of for propositional
+(boolean) logic, but the technique extends to first-order logic.  This
+is all standard material dating back to at least 1965; if you want to
+understand it better, go look it up on the internet. However, if you
+rely on anything you found on the internet, or elsewhere, you must
+cite it in a footnote, just as you would for any other term paper.</p>
+
+
+
+<p>Now we can get to specifics:</p>
+
+
+
+<p>Here are the specified pieces of the data definitions.  You may not
+need all of these.  </p>
+
+<pre>
+A Variable is a Racket Symbol.
+
+A Literal is one of
+-- (make-pos Variable)  Interp: a literal containing the variable
+-- (make-neg Variable)  Interp: a literal containing the negation of
+                                the variable
+
+A Clause is a SetOfLiteral
+</pre>
+
+<p>(Note that <kbd>make-pos</kbd> is analogous to
+<kbd>make-varexp</kbd> in GarterSnake: it provides a way of injecting
+a variable into a boolean expression. <kbd>make-neg</kbd> injects the
+variable and puts a negation on it at the same time.)</p>
+
+
+<p>You are to turn in a file named <kbd>q2.rkt</kbd> that provides the
+following function:
+</p>
+
+<pre>
+is-null-derivable? : ListOfClause -> Boolean
+GIVEN: a list of clauses
+RETURNS: true iff the empty clause is derivable from the given
+clauses using the rule of resolution as given above.
+</pre>
+
+<p>In addition, you must provide the following functions that we need
+in order to test <kbd>is-null-derivable?</kbd> :</p>
+
+<pre>
+make-pos : Symbol -> Literal
+make-neg : Symbol -> Literal
+GIVEN: A Variable v
+RETURNS: The literal v or &not;v
+
+make-clause : ListOfLiteral -> Clause
+GIVEN: a list of literals, possibly with duplications
+RETURNS: a clause containing exactly those literals
+</pre>
+
+<p>You get to design the representation of literals and clauses.  In
+particular, it is possible but not required that you have structs for both
+<kbd>make-pos</kbd> and <kbd>make-neg</kbd>. You
+need only <kbd>provide</kbd> the constructors above, but you will need
+to document your data definitions in the usual way.</p>
+
+</li>
+
+
+</ol>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Nov  1 17:09:12 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

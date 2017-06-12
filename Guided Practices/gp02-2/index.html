@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 2.2</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 2.2: The Prisoner's Dilemma</h1>
+
+
+
+<p>Two men are arrested, but the police do not possess enough
+information for a conviction. The police separate the two men and
+offer each the same deal- if one testifies
+against his partner (betrays), and the other stays quiet
+(doesn't betray), the betrayer goes free and the non-betrayer receives
+the full one-year sentence. If both remain silent, both are
+sentenced to only one month in jail for a minor charge. If each
+'rats out' the other, each receives a three-month sentence. Each
+prisoner must choose to either betray or remain silent; the
+decision of each is kept quiet. What should they do?  
+</p>
+
+
+<p>The outcomes for player 1 are:
+</p>
+
+<pre>
+                           Player 2 move: 
+                         Betray    Don't Betray
+ Player 1 move:
+ --------------------+------------------------
+ Betray              |    -3        0
+ --------------------+------------------------
+ Don't Betray        |   -12       -1       
+ --------------------+------------------------
+</pre>
+
+<p>Observe that for both player 1 and player 2, the "right" thing to
+do is to betray, since that avoids the possibility of -12.  But of
+course if nobody betrays, they both wind up with only a month in
+jail-- a better outcome!
+</p>
+
+<p>This problem has been the subject of much discussion and research.
+Let's take a look at a small piece of the problem.</p>
+
+
+
+<pre>
+;; DATA DEFINITIONS
+
+;; A Move is one of 
+;; -- "betray"
+;; -- "don't betray"
+
+;; move-fn : Move -> ???
+;; (define (move-fn m)
+;;   (cond
+;;     [(string=? m "betray") ...]
+;;     [(string=? m "don't betray") ...]))
+</pre>
+
+<p>Here's the task:</p>
+
+<pre>
+;;; outcome : Move Move -> Number
+;;; GIVEN: the moves of player 1 and player 2
+;;; RETURNS: the outcome for player 1
+;;; EXAMPLES: (outcome "betray" "don't betray") = 0.
+;;; see table above.
+</pre>
+
+
+<p>Here's how NOT to do it:
+</p>
+
+<pre>
+(define (outcome move1 move2)
+  (cond
+    [(string=? move1 "betray")
+     (cond
+       [(string=? move2 "betray") -3]
+       [(string=? move2 "don't betray") 0])]
+    [(string=? move1 "don't betray")
+     (cond
+       [(string=? move2 "betray") -12]
+       [(string=? move2 "don't betray") -1])]))
+
+;; TESTS:
+(begin-for-test
+  (check-equal? (outcome "betray" "betray") -3)
+  (check-equal? (outcome "betray" "don't betray") 0)
+  (check-equal? (outcome "don't betray" "betray") -12)
+  (check-equal? (outcome "don't betray" "don't betray") -1))
+
+</pre>
+
+<p>This code violates our rule that you can only use one template at a
+time.  It starts out using the template for Move on move1, but then in
+the right-hand sides of the cond, it starts using the template for
+Move on move2.  We can't apply the exception mentioned in the slides
+for Lesson 2.3, because Move is not compound data. </p>
+
+<p>Rewrite this code to follow the template by splitting each of the
+right-hand sides into a separate help function.  Be sure to use good
+function names for your help functions.</p>
+
+<p><a href="page2.html" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Thu Aug 13 16:14:16 Eastern Daylight Time 2015 <!-- hhmts end -->
+</body> </html>

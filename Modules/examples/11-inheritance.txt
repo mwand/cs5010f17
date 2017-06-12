@@ -1,0 +1,68 @@
+#lang racket
+
+(require rackunit)
+
+(define A%
+  (class* object% ()
+
+    (field [i 15][j 20])
+
+    (super-new)
+
+    (define/public (f) (+ (send this g) 1))
+
+    (define/public (g) (+ i j))
+
+    (define/public (h) (- i j))
+    
+    )) 
+
+(define B%
+  (class* A% ()
+
+    (inherit-field i j)
+    
+    (field [k 200])
+
+    (set! j 100)
+       
+    (super-new)
+
+    (send this h)
+
+    (define/override (g) (+ i j k))
+
+    (define/override (h) (super g))
+
+    ))
+
+
+
+(define C%
+  (class* B% ()
+
+    (inherit-field j k)
+    
+    (super-new)
+
+    (define/override (g) (super h))
+
+    (define/override (h) (+ j k))
+
+        
+    ))
+
+(define (p obj)
+  (list 
+      (send obj f)
+      (send obj g)
+      (send obj h)))
+
+(define (quiz)
+  (list
+   (p (new A%))
+   (p (new B%))
+   (p (new C%))))
+
+
+

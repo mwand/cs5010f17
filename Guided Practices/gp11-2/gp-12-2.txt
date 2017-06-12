@@ -1,0 +1,5 @@
+In flashing-balls.rkt, the code for add-to-scene in FlashingBall%
+duplicates some of the code for add-to-scene in Ball%.
+
+Eliminate this by using 'super.'
+

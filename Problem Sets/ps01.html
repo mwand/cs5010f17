@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<TITLE>CS 5010: Problem Set 01</TITLE>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+</head>
+
+<body>
+<h1>CS 5010: Problem Set 01: Hello, World!</h1>
+
+<p>
+<strong>Out:</strong> Monday, September 12, 2016 (revised: Sun Sep 11
+22:31:44 2016) 
+
+<p><strong>Due:</strong> Monday, September 19, 2016
+at 600pm local time
+</p>
+
+<!-- See Google spreadsheet for collected problem sets and TOTs -->
+
+
+<p>
+The goal of this problem set is to give you exercise with the systems
+we will use in CS 5010, and to make sure you know how to commit your
+solutions to the CCS github.</p>
+
+<p>Submit your homework following the instructions in <a
+href="../Info/homework.html" >Submitting Your Homework</a>, and
+include the required <a href="../Info/deliverables.html" >deliverables.</a>
+</p>
+
+<p>As of this writing, we do not know whether your private
+repositories will be set up in time for this problem set.  If we set
+up your private repository, deposit your work there, following the
+directions in <a
+href="../Info/homework.html" >Submitting Your Homework</a>.  Otherwise, set
+up a public repository called <kbd>pdp-YOURNAME</kbd>, where
+<kbd>YOURNAME</kbd> is your CCIS login name, in your CCIS github
+repository, and deposit your work in a folder called
+<kbd>set01</kbd> there.
+
+<p>We will check to see whether you have provided all the deliverable
+functions for this problem set, but the problem set will otherwise be
+ungraded.</p>
+
+<p>You must use the HtDP Beginning Student Language to solve the
+  problems.  </p>
+
+<p>For these problems, download a copy of <a href="extras.rkt"
+>extras.rkt</a> and put it in the folder with your solutions.  Then
+import this library by including the line
+
+<pre>
+(require "extras.rkt")
+</pre>
+
+at the top of your file with the other requires.  Then, for each
+problem, put in lines that say
+
+<pre>
+(provide <em>function</em>)
+</pre>
+
+for each deliverable function.
+<span class="new">Also, include a line calling
+<kbd>check-location</kbd> to check to see if your file is correctly
+named and in the right place in your repository.
+</span> Thus, for problem 1, the top of your
+file should say
+
+<pre>
+(require rackunit)
+(require "extras.rkt")
+<span class="new">(check-location "01" "q1.rkt")</span>
+
+(provide distance-to-origin) 
+</pre>
+</p>
+
+<p>This will allow our testing framework to import your file and check
+ to see that you've provided all the deliverable functions.</p>
+
+
+<p>Remember that you must follow the design recipe.  Your <a
+  href="../Info/deliverables.html" >deliverables</a> include the data
+  definitions (including interpretation and templates), contract and
+  purpose header, code, and tests.  Be sure to sync your work and fill
+  out a Work Session Report at the end of every work session.  Use the
+  Work Session Report that is found <a href="http://goo.gl/forms/hnBjrLa967" >here</a></p>
+
+
+<hr>
+
+<p>Do the following exercises from <a
+href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html"
+>HtDP/2e</a>.  These should all be easy, but be sure to include all of
+the items in the design recipe.  If there are no data definitions
+necessary, then say so in your file. 
+</p>
+
+<p>Note: the numbers of these exercises in HtDP2e may change.</p>
+
+<ol>
+
+  <li>Exercise 11.  Name this function
+  <kbd>distance-to-origin</kbd>.</li>
+
+  <li>Exercise 14 (<kbd>string-last</kbd>).</li>
+
+  <li>Exercise 16 (<kbd>image-area</kbd>).</li>
+
+  <li>Exercise 19 (<kbd>string-insert</kbd>). </li>
+
+  <li>Exercise 20 (<kbd>string-delete</kbd>).</li>
+
+</ol>
+
+
+
+<hr>
+<address></address>
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Sep 14 10:32:44 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>
+  

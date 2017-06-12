@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 11.2</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 11.2 - Solution</h1>
+
+<p>The question was:</p>
+
+<p>In flashing-balls.rkt, the code for add-to-scene in FlashingBall%
+duplicates some of the code for add-to-scene in Ball%.
+
+Eliminate this by using <kbd>super</kbd>.
+</p>
+
+<h2>Solution:</h2>
+
+<p>There are a number of ways to do this.  Here's how I did it:
+</p>
+
+<ol>
+
+  <li>In Ball%, make add-to-scene look at a field called 'color' instead
+of referring to the constant "red".
+
+<pre>
+    <span class="new">(field [color "red"])</span>
+
+    (define/public (add-to-scene s)
+      (place-image
+       (circle radius 
+               (if selected? "solid" "outline")
+               <span class="new">color</span>)      ;;; <---- changed line
+       x y s))
+</pre>
+  </li>
+    
+<li> In FlashingBall%, inherit the field 'color.'  Then have
+change-colors update the color field, and have add-to-scene call super
+instead of duplicating the code from the superclass:
+
+<pre>
+
+    <span class="new">(inherit-field color)</span>
+
+    ;; -> Void
+    ;; EFFECT: rotate the list of colors, and reset time-left
+    (define (change-colors)
+      (set! colors (append (rest colors) (list (first colors))))
+      ;; put desired color into 'color' field
+      <span class="new">(set! color (first colors))</span>    ; <--- new line
+      (set! time-left color-change-interval))
+    
+    ;; Scene -> Scene
+    ;; RETURNS: a scene like the given one, but with the flashing ball
+    ;; painted on it.
+    ;; EFFECT: decrements time-left and changes colors if necessary
+    (define/override (add-to-scene s)
+      (begin
+        (if (zero? time-left)
+          (change-colors)
+          (set! time-left (- time-left 1)))
+        <span class="strike">;; (place-image
+        ;;   (circle radius
+        ;;     (if selected? "solid" "outline")
+        ;;     (first colors))
+        ;;   x y s)</span>
+        <span class="new">(super add-to-scene s)</span>   ; <-- call to super replaces
+                                 ;     duplicated code
+        ))
+</pre>
+
+</ol>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Nov 18 15:03:03 Eastern Standard Time 2015 <!-- hhmts end -->
+</body> </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 10.1</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 10.1 - Solution</h1>
+
+<p>The question was:</p>
+
+<p>
+Imagine we are working in a class called <kbd>Class1%</kbd>, with init-fields
+<kbd>x</kbd>, <kbd>y</kbd>, and <kbd>z</kbd> (all containing integers).
+</p>
+
+
+<p>Consider the following method definition:
+</p>
+
+
+<pre>
+;; Number -> Class1%
+;; GIVEN: a number u
+;; RETURNS: an object just like this one, except that the new x field contains
+;; x+y, and the new y field contains z+u.
+(define/public (method1 u)
+  (new Class1%
+    [x (+ x y)]
+    [y (+ z u)]
+    [z z]))
+</pre>
+
+
+<p>Your task is to transform this into an imperative method using the
+Void transform.  The new contract and purpose statement are:
+</p>
+
+<pre>
+;; Number -> Void
+;; GIVEN: a number u
+;; EFFECT: alters the fields of this object so that  the new x field
+;; contains the value of x+y, and the new y field contains the value
+;; of z+u.
+
+;; EXAMPLE: if obj1 has fields x=10, y=20, and z=100, then calling
+;; (send obj1 method1 5)
+;; should leave obj1 with fields x=30, y=105, z=100.
+</pre>
+
+<p>
+Which of the following are correct versions of the new method?
+</p>
+
+
+<p>Answer:</p>
+
+<p>Versions 2, 3, and 4 are correct. Versions 1 and 5 are
+incorrect. Let's look at each one in more detail.</p>
+
+<pre>
+;;; Version 1:
+
+(define/public (method1 u)
+  (new Class1%
+    [x (+ x y)]
+    [y (+ z u)]))
+
+;; Ans: incorrect.  This returns a new object instead of altering the
+;; current one.  Also, this initialization will fail because it does
+;; not give a value for z.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Version 2:
+
+(define/public (method1 u)
+  (set! x (+ x y))
+  (set! y (+ z u)))
+
+;; Ans: correct.  The value of z is unchanged, so there is no need to
+;; set! it.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Version 3:
+
+(define/public (method1 u)
+  (set! x (+ x y))
+  (set! y (+ z u))
+  (set! z z))
+
+;; Ans: correct.  The value of z is unchanged, so this set! does the
+;; right thing.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Version 4:
+
+(define/public (method1 u)
+  (set! x (+ x y))
+  (set! z z)
+  (set! y (+ z u)))
+
+;; Ans: correct.  The assignments do not have to be in the same order, so
+;; long as the fields get the correct values.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Version 5:
+
+(define/public (method1 u)
+  (set! y (+ z u))
+  (set! x (+ x y)))
+
+;; Ans: incorrect.  The set! to x will see the new value of y, not the old
+;; one.  When writing imperative code you must be careful about the
+;; order of assignments.
+</pre>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Nov 10 22:32:54 Eastern Standard Time 2015 <!-- hhmts end -->
+</body> </html>

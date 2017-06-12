@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 8.4</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 8.4</h1>
+
+<p>All we need to do is to redefine <kbd>successors</kbd>.  For
+example, we could write</p>
+
+<pre>
+;; Node Graph -> ListOfNode
+;; STRATEGY: Use template for Graph on g
+(define (successors n1 g)
+  (cond
+    [(empty? g) empty]
+    [else (if (node=? (node-info-node (first g)) n1)
+              (node-info-successors (first g))
+              (successors n1 (rest g)))]))
+
+;; NodeInfo -> Node
+;; Use template for NodeInfo on i
+(define (node-info-node i)
+  (first i))
+
+;; NodeInfo -> ListOfNode
+;; Use template for NodeInfo on i
+(define  (node-info-successors i)
+  (rest i))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Of course, these help functions are very simple, so we might inline
+;; them and write
+
+;; Node Graph -> ListOfNode
+;; STRATEGY: Use template for Graph on g
+(define (successors n1 g)
+  (cond
+    [(empty? g) empty]
+    [else (if (node=? (first (first g)) n1)
+              (rest (first g))
+              (successors n1 (rest g)))]))
+
+</pre>
+
+<p>Do you think the second version is clearer or less clear than the
+first one?  If the person you who followed you in your job had to
+maintain this code, how hard would it be for him or her to figure out
+the meaning of (first (first g)) ?  What could be done to improve this
+code?
+</p>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Oct 27 08:36:01 Eastern Daylight Time 2015 <!-- hhmts end -->
+</body> </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 4.5</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 4.5 Halting Measures</h1>
+
+<pre>
+Consider the following function, defined on ListOfNumbers:
+
+;; odd-elements : ListOfNumbers -> ListOfNumbers
+(define (odd-elements lst)
+  (cond
+    [(empty? lst) empty]
+    [(empty? (rest lst)) (first lst)]
+    [else (cons (first lst)
+                (odd-elements (rest (rest lst))))]))
+
+Which of the following are valid halting measures for odd-elements ?
+
+a) when lst is empty
+b) when lst has one or fewer elements
+c) the length of lst
+d) the number of elements of lst
+e) the largest element of lst
+
+Next, consider the data type
+
+An AltList is one of
+-- empty
+-- (list Number AltList)
+
+and the function
+
+alt-odd-elements : AltList -> AltList
+(define (alt-odd-elements x)
+  (cond
+    [(empty? x) empty]
+    [(empty? (second x)) (list (first x) empty)]
+    [else (list (first x)
+                (alt-odd-elements (second (second x))))]))
+
+Which of the following are valid halting measures for odd-elements ?
+
+a) when x is empty
+b) when x has one or fewer elements
+c) the length of x
+d) the number of elements of x
+e) the largest element of x
+</pre>
+
+
+<p><a href="solution.html" >[SOLUTION]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Aug 29 20:28:27 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

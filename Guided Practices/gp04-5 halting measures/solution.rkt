@@ -1,0 +1,66 @@
+Consider the following function, defined on ListOfNumbers:
+
+;; odd-elements : ListOfNumbers -> ListOfNumbers
+(define (odd-elements lst)
+  (cond
+    [(empty? lst) empty]
+    [(empty? (rest lst)) (first lst)]
+    [else (cons (first lst)
+                (odd-elements (rest (rest lst))))]))
+
+Which of the following are valid halting measures for odd-elements ?
+
+a) when lst is empty
+b) when lst has one or fewer elements
+c) the length of lst
+d) the number of elements of lst
+e) the largest element of lst
+
+Solution:
+
+(a) and (b) are not halting measures.  They are halting _conditions_.
+The point of a halting measure is to guarantee that the function
+eventually reaches the halting condition.
+
+(c) is a halting measure:  the length of any list is always a
+non-negative integer.  If (length lst) is k, then
+(length (rest (rest lst))) is k-2, which is always less than k.
+
+(d) is also a halting measure: the number of elements of lst is the
+same as its length
+
+(e) is not a halting measure.  Consider lst = (list 11 22 33 44). Its
+largest element is 44.  (rest (rest lst)) = (list 33 44), so its
+largest element is still 44.
+
+Next, consider the data type
+
+An AltList is one of
+-- empty
+-- (list Number AltList)
+
+and the function
+
+alt-odd-elements : AltList -> AltList
+(define (alt-odd-elements x)
+  (cond
+    [(empty? x) empty]
+    [(empty? (second x)) (list (first x) empty)]
+    [else (list (first x)
+                (alt-odd-elements (second (second x))))]))
+
+Which of the following are valid halting measures for odd-elements ?
+
+a) when lst is empty
+b) when lst has one or fewer elements
+c) the length of lst
+d) the number of elements of lst
+e) the largest element of lst
+
+All the answers are the same as for the previous example, except for
+(c).  The length of any AltList is either 0 or 2.   But the number of
+elements in the AltList still works as a halting measure.
+
+Halting measures for functions that follow the template from a data
+definition will almost always be very simple, like the ones considered
+here.  In Module 8 we will see more complicated halting measures.

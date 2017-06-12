@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 8.2</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 8.2</h1>
+
+<p>True/False: Which of the following is a valid halting measure for
+<kbd>even-elements</kbd>, and why?</p>
+
+<ol>
+  <li>the largest element of lst </li>
+  <li>the number of distinct elements of lst</li>
+  <li>the sum of the elements of lst</li>
+  <li>the length of lst</li>
+</ol>
+
+<h2>Answers:</h2>
+
+<ol>
+  
+  <li>False.  If the largest element is far down in the list, taking
+(rest (rest lst)) will not change the value of the largest element.
+For example, consider lst = (list 12 11 5 17 12 11).  The largest
+element in lst is 17, but the largest element in (rest (rest lst)) is
+still 17.  </li>
+
+  <li>False. If the first two elements are both duplicated farther
+down in the list, then taking (rest (rest lst)) will not change the
+number of distinct elements.  </li>
+  
+  <li> False.  If the first two elements are both 0, then the sum of
+the elements will not change.  </li>
+ 
+  <li> True. The length of a list is always a non-negative integer,
+and the length decreases by two at every recursive call.  </li>
+
+</ol>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sun Oct 19 15:18:09 Eastern Daylight Time 2014 <!-- hhmts end -->
+</body> </html>

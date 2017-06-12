@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Lecture 04 Inventory Exercises</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Lecture 04 Inventory Exercises</h1>
+
+<p>This week we will do a series of short exercises involving lists of
+books.  We'll do these one at a time.</p>
+
+<p>For each question, copy the define-structs and the contract and
+purpose statement into a Racket definition window, and write the
+function definition.  Don't worry about examples or tests.</p>
+
+<p>When you are called on, please copy your solution into one of the
+following pages:
+</p>
+
+<ul>
+  <li><a href="https://bitly.com/cs5010f14-solutions-1"
+  >bitly.com/cs5010f14-solutions-1</a></li> 
+
+  <li><a href="https://bitly.com/cs5010f14-solutions-2"
+  >bitly.com/cs5010f14-solutions-2</a></li> 
+
+</ul>
+
+<pre>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; templates omitted....
+
+(define-struct book (isbn
+                     title author
+                     publisher cost price
+                     on-hand
+                     thickness))
+
+A Book is a (make-book PosInt String String String PosInt PosInt NonNegInt
+PosReal)
+
+Interp:
+(make-book isbn title author publisher cost price n w)
+represents a book where
+isbn       is its international standard book nuber
+title      is its title
+author     is its author
+publisher  is its publisher
+cost       is its cost to the bookstore (how much we pay the publisher
+              for a copy)
+price      is its price (how much we charge for a copy)
+n          is the number of copies on hand
+w          is the thickness of the book (how much space it occupies on
+              the shelf)
+
+An Inventory is a ListOfBook
+WHERE: the list is sorted in ascending order by ISBN, and there are no
+       duplicate ISBN's in the list
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-struct line-item (isbn ncopies))
+
+A LineItem is a (make-line-item PosInt PosInt)
+
+(make-line-item i n) represents an order for n copies of a book whose ISBN
+is i.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+An Order is a ListOfLineItem
+WHERE: there are no duplicate isbn's in the order
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+</pre>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Oct  6 21:47:41 Eastern Daylight Time 2015 <!-- hhmts end -->
+</body> </html>

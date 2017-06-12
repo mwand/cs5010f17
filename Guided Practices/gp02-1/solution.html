@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice N.M</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 2.1 - Solution</h1>
+
+<p>The question was: In this example</p>
+
+<pre>
+;; ball-after-tick : Ball -> Ball
+;; GIVEN: The state of a ball b
+;; RETURNS: the state of given ball at the next tick
+;; STRATEGY: cases on whether ball would hit the wall on 
+;; the next tick
+
+(define (ball-after-tick b)
+  (if (ball-would-hit-wall? b)
+    (ball-after-bounce b)
+    (ball-after-straight-travel b)))
+</pre>
+
+What should be the contract and purpose statement for
+<kbd>ball-after-bounce</kbd> and
+<kbd>ball-after-straight-travel</kbd>?
+
+<p>Each of these is a good place to use WHERE clauses to distinguish functions
+with similar purposes.  Here's one solution:</p>
+
+<pre>
+;; ball-after-bounce : Ball -> Ball
+;; GIVEN: The state of a ball b
+;; WHERE: the ball will bounce on the next tick
+;; RETURNS: the state of given ball at the next tick
+
+;; ball-after-straight-travel : Ball -> Ball
+;; GIVEN: The state of a ball b
+;; WHERE: the ball does not bounce on the next tick
+;; RETURNS: the state of given ball at the next tick
+</pre>
+
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Jul 26 22:01:37 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

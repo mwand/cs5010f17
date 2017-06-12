@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<TITLE>CS 5010: Problem Set 05</TITLE>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+</head>
+
+<body>
+<h1>CS 5010: Problem Set 05: Working with Higher-Order Functions</h1>
+
+<p>
+<strong>Out:</strong> Monday, October 10, 2016
+
+<p><strong>Due:</strong> Monday, October 17, 2016
+at 600pm
+local time
+</p>
+
+
+<p>
+The goal of this problem set is to help you design functions using 
+higher-order functions like map, filter, foldr, etc.</p>
+
+<p>You must use the HtDP Intermediate Student Language + Lambda to solve the
+  problems.  You are to use HOFs wherever it is appropriate.  These
+  will replace almost all the uses of the List template.</p>
+
+<p>For these problems, download a copy of <a href="extras.rkt"
+>extras.rkt</a> and put it in the folder with your solutions.  Then
+import this library by including the line
+
+<pre>
+(require "extras.rkt")
+</pre>
+
+at the top of your file with the other requires.  Then, for each
+problem, put in lines that say
+
+<pre>
+(provide <em>function</em>)
+</pre>
+
+for each deliverable function, as you have done on previous problem sets.
+This will allow our testing framework to import your file and do
+automated testing on it.</p>
+
+
+<p>Remember that you must follow the design recipe.  Your <a
+  href="../Info/deliverables.html" >deliverables</a> include the data
+  definitions (including interpretation and templates), contract and
+  purpose header, code, and tests.  Be sure to follow our <a
+  href="Info/coding-conventions.html" >coding conventions</a>.  This
+  will make the TA's job much easier.</p>
+
+<p>Be sure to sync your work and fill
+  out a Work Session Report at the end of every work session.  Use the
+
+<a href="https://goo.gl/forms/67rSNKoNTIIWyReG3" >Work Session Report for
+  PS05</a>.</p>
+
+<hr>
+
+<ol>
+
+
+  <li>(The absent-minded professors, part 2). Reimplement the last
+  problem from last week's problem set (class-lists.rkt), but using
+  HOFs wherever possible and appropriate.  Use the filename
+  <kbd>q1.rkt</kbd>.  </li>
+
+<li>(The nervous registrar) The Registrar has heard about your
+excellent work with the absent-minded professors and so he asks you to
+help him solve the following problem:
+
+<p>He needed a program to take a list of (student, class) pairs, and
+  produce a list of class rosters, one roster for each class that has
+  at least one student enrolled (detailed specifications below).  He
+  hired several teams of Racket programmers who had never taken PDP,
+  and therefore produced solutions that were late and over-budget.
+  Now he needs your help to test their solutions.</p>
+
+<p> You are to design a tester that will accept any good solution to
+the registrar's original problem, and reject any incorrect
+solution. Your solution should be in the form of a file called
+<kbd>q2.rkt</kbd>.  Here are more detailed specifications:
+</p>
+
+<pre>
+An EnrollmentAssertion is a (make-enrollment Student Class).
+(make-enrollment s c) represents the assertion that student s is
+enrolled in class c.
+
+A ClassRosterAssertion is a (make-roster Class SetOfStudent).
+(make-roster c ss) represents the assertion that the students in class
+c are exactly the students in set ss.
+
+Student is unspecified, but you may assume that students may be
+compared for equality with equal? (Among other things, this means that
+we don't have to worry about the first name/last name problems that
+Professors Shivers and Felleisen had; the Registrar knows the student
+name exactly)
+
+Class is unspecified, but you may assume that classes may be
+compared for equality with equal?
+
+Your code should not depend on your choice of data type; that
+is, it should work for any definition of Student and Class (so long as
+each is testable using equal?, as specified above).
+
+A SetOfX is a list of X's without duplication.  Two SetOfX's are
+considered equal if they have the same members.
+
+Example: (list (list 1 2) (list 2 1)) is NOT a SetOfSetOfNumber,
+because (list 1 2) and (list 2 1) represent the same set of numbers. 
+
+A ProposedSolution is a function with contract
+SetOfEnrollmentAssertion -> SetOfClassRosterAssertion
+that is, it is a function that takes a SetOfEnrollmentAssertion and
+produces a SetOfClassRosterAssertion
+
+EXAMPLE:
+If soln1 is a ProposedSolution, we might have
+  (soln1
+    (list (make-enrollment "John" "PDP")
+          (make-enrollment "Kathryn" "Networks")
+          (make-enrollment "Feng" "PDP")
+          (make-enrollment "Amy" "PDP")
+          (make-enrollment "Amy" "Networks")))
+=>
+ (list
+   (make-roster "PDP" (list "John" "Feng" "Amy"))
+   (make-roster "Networks" (list "Kathryn" "Amy")))
+
+This is an example of correct behavior by a ProposedSolution.
+
+In the output of a correct ProposedSolution, the classes may be in any
+order, and the students in each class may be in any order, but there
+must be no duplication of classes and no duplication of students
+within a class.
+
+You are to provide the following functions:
+
+make-enrollment
+enrollment-student
+enrollment-class
+make-roster
+roster-classname
+roster-students
+
+behavior-correct? : ProposedSolution SetOfEnrollmentAssertion -> Boolean
+GIVEN: a ProposedSolution soln-fn and a SetOfEnrollmentAssertion se
+RETURNS: true iff the output of soln-fn on se is an example of correct
+behavior by a ProposedSolution.
+EXAMPLE: See example above
+
+enrollments-to-rosters: SetOfEnrollmentAssertion -> SetOfClassRoster
+GIVEN: a set of enrollments
+RETURNS: a correct set of class rosters for the given enrollments
+
+enrollments-to-rosters-bad-1: SetOfEnrollmentAssertion -> SetOfClassRoster
+enrollments-to-rosters-bad-2: SetOfEnrollmentAssertion -> SetOfClassRoster
+enrollments-to-rosters-bad-3: SetOfEnrollmentAssertion -> SetOfClassRoster
+GIVEN: a set of enrollment assertions
+RETURN: an incorrect set of class rosters for the given enrollments.
+The three functions should return DIFFERENT incorrect sets of class
+rosters. 
+</pre>
+
+<p>Test your <kbd>behavior-correct?</kbd> function by writing a correct
+<kbd>enrollments-to-rosters</kbd> function and several incorrect ones (the 3
+shown above are just a start).</p>
+
+<p>The problem requires that your solution work for any choice of
+representation of Student and Class, so long as they are testable for
+equality using equal?, so you should also test your solution using at
+least two different data types for Student and Class.  You may assume
+that any ProposedSolution also works for any such choice of data types.</p>
+
+<p>As elsewhere in this problem set, use HOFs whenever possible and
+appropriate. </p>
+
+  <p>You will find this problem much easier if you follow the slogan
+"The Structure of the Program Follows the Structure of the Data".  To
+help you with this concept, please turn in a file illustrating
+the call graph for your program.  This file must contain a diagram
+showing which functions call which, so we (and you) can see the
+overall structure of your program.  You may turn this in as a text
+file, pdf, jpg, or Racket file.  Call your file <kbd>call-tree</kbd>
+with an appropriate suffix, and bring a paper copy to your
+codewalk.</p>
+
+</p>
+
+</li>
+
+
+</ol>
+
+ 
+<hr>
+
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Oct 11 10:28:12 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

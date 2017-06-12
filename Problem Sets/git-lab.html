@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Git Introduction</title>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+<style>
+body {max-width:700px}
+li {padding-bottom: 10pt}
+
+</style>
+
+</head>
+
+
+
+<body>
+<h1></h1>
+
+<h1>Laboratory Exercise: Using Git</h1>
+
+<p>In this course, we will use <a href="https://github.com" >Github</a>
+as our version control and repository system.  The way in which we
+will use git and github are explained <a href="../git.html" >here</a></p>
+
+
+<div class="exercise">
+
+<ol>
+
+  <li>If you have not already done so, read the general introduction
+  to git found <a
+  href="https://docs.google.com/presentation/d/1PkOQjpY-6_-Kg-kjtR8riCWL1hICEx-gFZhORpy4ymk/edit?usp=sharing"
+  >here</a>, and the watch the <a
+  href="https://www.youtube.com/watch?v=thrpcSzdvso" >video
+  demonstration</a>. (Alas, some of the details have changed since
+  this video demo was made, but the ideas are the same). </li>
+
+  <li>If you have not already done so, go to <a
+  href="https://github.ccs.neu.edu" >github.ccs.neu.edu</a> and log in
+  with your CCS credentials.</li>
+
+  <li>If you have not already done so, download and install a github
+	client.  We recommend <a href="http://desktop.github.com/"
+	>Github Desktop</a> for Mac and Windows. We will refer to this
+	as GHD. If you are using
+	Linux, use the git package that came with your linux
+	distribution.
+
+
+download and install a github client.  We 
+	recommend <a href="http://desktop.github.com/" >Github
+	Desktop</a> for Mac and Windows.github.com/" >Github for
+	Mac</a>. If you are using Linux, use the git package that came 
+	with your linux distribution.
+
+
+
+  <li>Open GHD.  You'll need to do the following steps in order to
+  configure GHD.  This part is slightly complicated, but you only
+  have to do it once.
+  <p></p>
+
+  <ol>
+    <li>Select "Github Enterprise".</li>
+    
+    <li>Enter your CCS login name (do not include "@ccs.neu.edu") and
+    password, and enter "https://github.ccs.neu.edu" when it asks for
+    the github server name. </li>
+    
+    <li>Go on to "configure git". This will display your CCS username
+    and email.  Accept these settings.</li>
+    
+    <li>It will next ask you about finding local repositories.  If you
+    want GHD to manage all your existing repositories, you can do
+    this.  Otherwise uncheck everything and skip this step.</li>
+    
+    <li>It will then give you some advice about "The Github Flow",
+    which involves making lots of temporary branches.  If you are
+    familiar with github and know about this stuff, feel free to do
+    what it says.  Otherwise ignore it:  your repositories will have a
+    single branch, called "master".  For a solo or pair project, this
+    is all you need.</li>
+    
+    <li>Click on the "+" sign in the upper-left corner. Click on
+    "create" to create a new local repository.  It will ask you where to
+    create it; choose whatever location you like, or accept the one
+    that is offered. NOTE: when we create
+    repositories for you, these should appear in the list of
+    repositories, and you'll click on "clone" to create a local
+    copy.</li>
+    
+    <li>Click on the little cloud in the upper right-hand corner that
+    says "publish" to connect your local repo to the github
+    server. </li>
+    
+    <li>GHD will say something like "No local changes; would you like
+    to open this repository in Explorer?".  Click to open the repo.
+    </li>
+    
+  </ol>
+
+  <p>You've now created your first repository, and you're ready to
+  go.</p>
+</li>
+
+
+  <li>Add a text file to the repository, using the tool of your
+  choice.</li>
+
+  <li>Now go back to GHD.  You should see a message that says "1
+  change" and another that says "1 uncommitted change" You should see
+  the blue message in the upper right-hand corner that says
+  "uncommitted changes".  Click on the name of your new document to
+  display the change.  You'll see some diffs. </li>
+
+  <li>Write a commit message.  Informative commit messages are Good
+  Things.  Click on the checkbox for "Commit to Master".</li>
+
+
+
+  <li><strong>THIS NEXT PART IS VERY IMPORTANT!</strong><span
+  style="color:red"> You see the little cloud in the upper right-hand
+  corner that says "Sync".  Do it!  This uploads your changes to the server.
+  </span></li>
+
+  <li>To see that your changes have been uploaded, click on "tools"
+  again.  This time, select "view on github". </li>
+
+  <li>A browser window should pop open with your repository.  You
+  should see your new file there.</li>
+
+  <li>Now let's edit the file in the browser. Click on the file to
+  view it, and then click on the little pencil to edit the file.  A
+  text window should open.  Edit the file a little.  Scroll down and
+  change the commit message if you like, then select "commit directly
+  to the 'master' branch".  Then hit "commit changes."</li>
+
+  <li>Now let's download those changes into your local copy.  In GHD,
+  if you are still looking at your repository, his "sync" to download
+  the changes to your local copy of the repository.  Open your local
+  copy to confirm that the changes have arrived.</li>
+
+  <li>Last, click on one of the little dots on the little thing that
+  looks like a spaceship, just below the "sync" button. This will show
+  the history display, where you can see the history of your commits.
+  You can go back to the head of the spaceship to look at your current
+  changes (right now there shouldn't be any).</li>
+
+  </li>
+
+</ol>
+
+
+
+</div>
+
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Sep  9 11:44:34 Eastern Daylight Time 2015 <!-- hhmts end -->
+</body> </html>

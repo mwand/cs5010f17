@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Deliverables for the Design Recipe</title>
+<link type="text/css" rel="stylesheet" href="course.css">
+</head>
+
+<body>
+
+<div id="menu">
+
+<table>
+  <tr><td><a href="cheating.html" >Plagiarism, Theft, and Other Unpleasant
+   Topics</a></td></tr>
+   <tr><td><a href="homework.html">How to Turn In Your Homework</a></td></tr>
+   <tr><td><a href="deliverables.html">Homework Deliverables</a></td></tr>
+   <tr><td><a href="coding-conventions.html">Coding Conventions</a></td></tr>
+  <tr><td><a href="../index.html">Home</a></td></tr>
+
+</table>
+</div>
+
+
+<div id="content">
+
+
+<h1>Design Recipe Deliverables</h1>
+
+
+
+
+<h3>Here are the items you need to include for each question:
+</h3>
+
+
+<ul>
+  <li>
+  <strong>For Each Data Definition:</Strong>
+  <p/>
+
+  <ol>
+    <li>A set of <kbd>struct</kbd> definitions, if necessary.</li>
+    
+    <li>A <em>constructor template</em> that specifies how to build
+    values for this data definition.</li> 
+
+    <li>An <em>interpretation</em>, explaining
+    the meaning of each element in the data in terms of the information it
+    represents.  The meaning should be the meaning of the data, not of
+    how it used in the program.
+    </li>
+
+    <li>An <em>observer template</em> for examining values of this kind of
+    data.</li>
+
+    <li>Examples if they will be helpful in understanding the
+    interpretation, or for use in tests.  If the examples are
+    primarily for use in tests, you may put them near the tests.
+    </li>
+    
+  </ol>
+  <p/>
+</li>
+
+  <li><strong>For Each Function:</strong>
+  <p/>
+
+  <ol>
+    
+    <li>Contract: a specification of data definitions for the
+    arguments and the result.  If you write
+
+    <pre>
+    list-numbered : ListOfNumber Number -> ListOfNumber
+</pre>
+
+    then your function must take <em>any</em> list of numbers and
+    <em>any</em> number and produce the output that is described by
+    the purpose statement, unless the contract is qualified by an
+    invariant (WHERE-clause).  We will talk about WHERE-clauses in
+    module 7.
+
+</li>
+
+    <a name="purpose-statement">
+    <li>Purpose Statement:</li> A short noun phrase describing
+    <em>what</em> the function is supposed to return. Typically
+    phrased in terms of information, not data.  Generally takes the
+    form GIVEN/WHERE/RETURNS, where each of these keywords is followed
+    by a short noun phrase.  Examples:
+
+    <pre>
+    GIVEN: a temperature in Fahrenheit
+    RETURNS: the corresponding temperature in Celsius
+
+    GIVEN: a Cat c and a Scene s
+    RETURNS: A scene like s, except that the cat c has been painted on it.
+
+    GIVEN: a list of numbers lon and a number n
+    WHERE: n = (length lon)
+    RETURNS: a list of numbers like lon, except that each number is
+    multiplied by its distance from the end of the list.
+    </pre>
+
+    <p>You may omit the GIVEN clause by referring to the givens in the
+    RETURNS clause. Sometimes this is easier than writing a GIVENS
+    clause, sometimes it is harder.  Examples:
+
+     <pre>
+    RETURNS: the temperature in Celsius that corresponds to the given
+    Fahrenheit temperature.
+
+    RETURNS: A scene like the given one, except that the given cat has
+    been painted on it.
+    </pre>
+
+</p>
+
+    <li>Examples.  The examples should illustrate the different
+    behaviors of the function.</li>
+
+    <li>Halting Measure.  For every function that calls itself either
+    directly or indirectly, you must include a halting measure, which
+    is a non-negative integer quantity that must decrease at every
+    recursive call. You should be prepared to defend your choice of
+    halting measure at your codewalk.  Halting measures are discussed
+    in more detail beginning in Module 05.</li>
+
+    <li>Design Strategy: A short description of how to get from the
+    purpose statement to the function definition.  These will
+    typically be one of the following phrases:
+    <p></p>
+    <ol>
+      <li>Combine simpler functions </li>
+      <li>Use template for [data definition] on [variable]</li>
+      <li>Divide into cases on [condition]</li>
+      <li>Use HOF [mapfcn] on [variable]</li>
+      <li>Call a more general function</li>
+      <!-- <li>[Initialize|Update] state of [??]</li> -->
+    </ol>
+    <p>For the first few problem sets, you will use ONLY strategies
+    1-3.  We will cover the last three in later modules.</p>
+    <p>When we get closer to the end of the course, we will let you
+    describe your own strategies.  Your strategy should be what you
+    would tweet to a friend to describe what you did.
+    </p>
+    </li>
+
+    <li>The function definition.  If your strategy is "Use Template",
+    then your code must match the template for the appropriate data
+    definition. </li>
+
+    <li>The tests.  Generally, you will define a test suite for each
+    function by writing
+  <pre>
+(begin-for-test
+  (check-equal?
+    (length lobs-1)
+    (length (bombs-after-tick lobs-1))
+    "bombs-after-tick did not return a list the same length as its input")
+    ...)
+</pre>
+
+    <p>Tests created with <kbd>begin-for-test</kbd> will be run at the
+    end of the file.</p>
+
+    </li>
+
+  </ol>
+
+</li>
+
+ <a name="oo-deliverables">
+ <h3>Additional Deliverables and Coding Conventions for
+ Object-Oriented Programs</h3> 
+
+<ul>
+
+  <li><strong>For Each Interface:</strong><p/>
+
+  <ol>
+
+    <li>Interface names should end in <kbd>&lt;%&gt;</kbd> .</li>
+    
+    <li>A purpose statement for the interface.</li>
+
+    <li>A data definition of the form
+   <pre>
+A DataItem is an object of any class that implements DataItem<%>
+    </pre>
+
+    (replace <kbd>DataItem</kbd> with the name of your interface.)
+</li>
+    
+    <li>For each method in the interface, a contract and purpose
+    statement of the method.  Contracts should always be written in
+    terms of data definitions, not interfaces or classes
+    (e.g. DataItem, not DataItem&lt;%&gt; or DataItem%).
+
+    <!-- You may write <kbd>Widget</kbd> -->
+    <!-- in place of <kbd>Widget&lt;%&gt;</kbd> in contracts if you -->
+    <!-- prefer. -->
+
+</li>
+  
+  </ol></li> <!-- end For Each Interface -->
+
+  <li><strong>For Each Class:</strong><p/>
+
+  <ol>
+
+    <li>Class names should end in <kbd>%</kbd> .</li>
+    <li>A purpose statement saying what information the class
+    represents. </li>
+
+    <li>A constructor template showing how to build an object of that
+    class.  </li>
+
+    <li>Every field (both init-fields and other fields) must have an
+    interpretation stating what kind of data is contained in the field
+    and what that field represents.  If there is an invariant relating
+    two or more fields, it must be stated.</li>
+
+    <li>A set of unit tests that exercise every method and function in
+    the class.  In our test framework, these will be located outside
+    the class. </li>
+
+    <li>Every method in the class must come from some interface that
+    the class implements.  Exception: methods named
+    <kbd>for-test:...</kbd> need not be part of any interface, but
+    they may only be used for testing.</li>
+
+    <li>A class may not contain any private methods.  Private methods
+    should be written as ordinary functions instead.</li>
+
+  </ol>
+  
+  </li>	<!-- end For Each Class -->
+
+  <li><strong>For Each Method:</strong><p/>
+
+  <ol>
+    <li>A contract that is identical to the contract in the
+    interface. </li>
+
+    <li>A purpose statement that specializes the purpose statement in
+    the interface to the current class.</li>
+
+    <li>Examples, if these are necessary to clarify the purpose
+    statement.  These should generally be stated in human-readable
+    language. </li>
+
+    <li>A Design Strategy, if needed to explain the method
+    definition.  These can be any tweet-sized description of how your
+    code works.</li>
+
+    <li>Tests.  These will be part of the unit tests for the class.</li>
+
+  </ol>
+
+
+
+
+  </li> <!-- end For Each Method -->
+
+</ul>
+
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Thu Nov  3 23:31:05 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

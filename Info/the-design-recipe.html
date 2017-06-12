@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>The Design Recipe</title>
+<link type="text/css" rel="stylesheet" href="course.css">
+<style>
+body {width:80%;}
+</style>
+</head>
+
+<body>
+<h1 align="center">The Design Recipe</h1>
+
+<ol>
+  <li>
+
+  <strong>Information Analysis and Data Design</strong>
+
+  <p/>
+
+  <ul>
+
+    <li>What is the general purpose of the program? What kind of
+    information does the program need?</li>
+
+    <li>Write down a wishlist of the main (top-level) functions you
+    will need. Write down a contract and purpose statement (see below)
+    for each function on your wishlist.</li>
+
+    <li>Create data definitions for data elements that represent the
+    information. </p>
+    <ul>
+      <li>Each data definition should have a purpose statement
+    with an <strong>interpretation</strong> for each field. </li>
+    <li>For each stuctured data
+    definition (enumeration, compound, mixed, recursive), construct
+    its <strong>template</strong>.  (See the <a href="template-recipe.html" >recipe for writing templates</a>)</li>
+
+</ul></li>
+
+  </ul></li>
+
+
+  <li><strong>Contract and Purpose Statement</strong>
+  <p/>
+
+  For each function, answer the following questions:
+
+  <ul>
+
+    <li>What kind of data does the function consume? Which kind of
+    data does it produce?</li>
+    
+    <li>What does the function compute? (in one line, or as close to
+    it as you can get). Each function should work on one kind of data
+    and do exactly one thing. Every reader of your program should
+    understand what your functions compute without having to read the
+    code of the function itself. </li>
+
+    <li>The contract (also called the "signature") should say what
+    kinds of <strong>data</strong> the function consumes and
+    produces.  The purpose statement should explain what the function
+    computes in terms of the <strong>information</strong> that is
+    represented by that data.</li>
+
+    <li>If there are connections between the arguments that are not
+    captured by the contract, write them down as an
+    <strong>invariant</strong>.  This is typically written as a WHERE
+    clause in the purpose statement.
+</li>
+
+
+  </ul>
+  </li>
+
+  <li><strong>Examples</strong><p/>
+
+  <p>Illustrate the contract and the purpose statement with some
+  functional examples. To construct a functional example, pick one
+  example of data from the contract and determine what you expect
+  back.  If the function takes an argument that is enumeration data,
+  choose examples from each subclass of the enumeration. Write down
+  the examples as comments in your program.</p>
+
+  </li>
+
+
+  <li><strong>Design Strategy</strong>
+
+  <p> Select a design strategy from the list of strategies discussed
+  in class. For the moment, this will be one of <em>domain
+  knowledge</em>, <em>function composition</em>, and <em>structural
+  decomposition</em>.</p>
+
+</li>
+  <li><strong>Function Definition</strong>
+
+  <p>Use your selected design strategy to produce the code for the
+  function. For the case of the structural decomposition strategy,
+  this means making a copy of the template and filling in the blanks
+  with small bits of code that produce the right values for your
+  function.</p>
+
+<ul>
+
+  <li>Can you deal with the simple cond cases? Your examples should
+  cover those cases directly. </li>
+
+  <li>For each of the recursive cases, what do the expressions in the
+  recursive cases compute? Use the purpose statement of the function
+  to figure out what the recursive function application computes.</li>
+
+  <li>How can you combine the results of the recursive call with the
+  data that is already available to get the desired output?  If this
+  isn't obvious, imagine what would have to happen for your examples
+  to work properly.</li>
+
+</ul>
+</li>
+
+<li><strong>Tests</strong>
+<p/>
+
+<ul>
+
+  <li>Turn your examples into test cases using <code>test-case</code>,
+   <code>check-equal?</code> and <code>check</code>.  Assemble the
+   test cases for each function into a test suite using
+   <code>define-test-suite</code> and run them using
+   <code>run-tests</code>. </li>
+
+  <li>You should have at least one test case for each cond clause.</li>
+
+  <li>Write your tests so that the reader can easily see that they are
+  correct.  Use meaningful names for the various values in the tests.
+  Make sure that each test is accompanied by an error message,
+  test-case name, or comment that shows what it is testing for.</li>
+
+  <li>As you debug your function, create additional tests.</li>
+
+  <li>Always ask: how could an incorrect function pass your tests?
+  How could your tests reject a correct function?</li>
+
+
+
+
+
+</li>
+</ul>
+
+</li>
+</ol>
+
+  
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Aug 15 11:08:00 -0400 2012 <!-- hhmts end -->
+</body> </html>

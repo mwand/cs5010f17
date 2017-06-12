@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<TITLE>CS 5010: Problem Set 03</TITLE>
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+</head>
+
+<body>
+<h1>CS 5010: Problem Set 03: Iterative Design</h1>
+
+<p>
+<strong>Out:</strong> Monday, September 26, 2016
+
+<p><strong>Due:</strong> Monday, October 3, 2016
+at 600pm
+local time
+</p>
+
+<!-- See Google spreadsheet for collected problem sets and TOTs -->
+
+
+<p>
+The goal of this problem set is to help you design functions that deal
+with the Universe model, and to give you practice with the Iterative
+Design Recipe.</p>
+
+<p>You will also get experience with the Perfect Bounce and Smooth
+Dragging, which we will be using in many of our exercises.</p>
+
+<p>You must use the HtDP <span class="strike">Beginning</span> <span
+class="new">Intermediate</span> Student Language to solve the problems.
+</p>
+
+<p>For these problems, download a copy of <a href="extras.rkt"
+>extras.rkt</a> and put it in the folder with your solutions.  Then
+import this library by including the line
+
+<pre>
+(require "extras.rkt")
+</pre>
+
+at the top of your file with the other requires.  Also, be sure to
+include extras.rkt in the folder that you submit. Then, for each
+problem, put in lines that say
+
+<pre>
+(provide <em>function</em>)
+</pre>
+
+for each deliverable function, as you have done on previous problem sets.
+This will allow our testing framework to import your file and do
+automated testing on it.  You can use <kbd>check-location</kbd>, as
+you did on the preceding problem set, to double-check that your
+solutions are in the right place.</p>
+
+
+<p>Remember that you must follow the design recipe.  Your <a
+  href="../Info/homework.html" >deliverables</a> include the data
+  definitions (including interpretation and templates), contract and
+  purpose header, code, and tests.   Be sure to follow our <a
+  href="../Info/coding-conventions.html" >coding conventions</a>.  This
+  will make the TA's job much easier.</p>
+
+<p>Be sure to sync your work and fill out a Work Session Report at the
+  end of every work session.  Use the
+
+<a href="https://goo.gl/forms/VIBv1pfY16eqp9E72" >Work Session Report for
+  PS03</a>.</p> 
+
+<p><strong>Note:</strong> For all universe programs, you may assume
+that the mouse is never dragged or moved outside of the canvas.  Once
+the mouse enters the canvas, if the mouse ever leaves the canvas, then
+the behavior of your system is unspecified.</p>
+
+
+<hr>
+
+<ol>
+
+  <li>(screensaver-1).  Your boss has assigned you to a project to
+  build a screensaver.  The specifications for the screensaver are as
+  follows:<p></p>
+
+  <ul>
+
+    <li> The screensaver is a universe program that displays two
+    circles that move around a canvas.</li>
+
+    <li> Each circle is displayed as an outline blue circle with a
+    radius of 40 pixels. In addition, the circle's
+    current velocity is displayed as a string (vx, vy) in the center
+    of the circle.  </li>
+
+    <li>The circles bounce smoothly off the edge of the
+    canvas. Bouncing is defined as follows: if the circle in its
+    normal motion would hit or go past one side of the canvas at the
+    next tick, then instead at the next tick it should appear tangent
+    to the edge of the canvas, travelling at the same speed, but in
+    the opposite direction.  If the circle would go past a corner,
+    then both the x- and y- velocities are reversed.  We call
+    this a <em>perfect bounce</em>.
+
+    <p>
+    <span
+    class="new">Here's a clarification (thanks to Professor Clinger):
+
+    <p class="new">The x and y coordinates of a circle are constrained to keep the
+    entire circle within the canvas at all times.  If a circle's
+    position and velocity would cause any part of a circle to lie
+    outside of the canvas at the end of a tick, then its x and y
+    coordinates at the end of that tick are calculated as follows:
+    first calculate the new x and y coordinates without regard to the
+    boundaries, and then adjust those calculated coordinates
+    (separately) by the smallest adjustments that keep the entire
+    circle within the canvas.  If an x or y coordinate is adjusted
+    during that process, then the corresponding velocity component
+    is reversed as well.</p>
+
+    <p class="new">Example: A circle whose center is at x=45 and y=80, with
+    velocity components vx=-15 and vy=20 would appear at x=30, if
+    it were unconstrained by the wall.  So at the next tick, the
+    center should be at x=40 and y = 100, with velocity components
+    vx=15 and vy=20.</p>
+
+    </span>
+
+    </li>
+
+    <li>The space bar pauses or unpauses the entire simulation.  The
+    simulation is initially paused.
+    </li>
+
+
+    <li>The canvas is 400 pixels wide and 300 pixels high. 
+    </li>
+
+    <li> The two circles are initially centered at positions
+    (200,100) and (200,200), and have velocities of (-12, 20) and (23,
+    -14), respectively. Remember that we are using computer-graphics
+    coordinates, in which y increases as you go down the page
+    (south) and in which (0,0) is the upper left-hand corner of the
+    canvas. </li>
+
+  </ul>
+
+  <p>Here's a demo:</p>
+
+
+  <p><center>
+<video src="ps03-demo1.mp4" controls />
+</center>
+</p>
+
+  <p>You are to deliver a file named <kbd>screensaver-1.rkt</kbd> that
+  provides the following functions:</p>
+
+  <pre>
+;; screensaver : PosReal -> WorldState
+;; GIVEN: the speed of the simulation, in seconds/tick
+;; EFFECT: runs the simulation, starting with the initial state as
+;; specified in the problem set.
+;; RETURNS: the final state of the world
+
+;; initial-world : Any -> WorldState
+;; GIVEN: any value (ignored)
+;; RETURNS: the initial world specified in the problem set
+
+;; world-after-tick : WorldState -> WorldState
+;; RETURNS: the world state that should follow the given world state
+;; after a tick.
+
+;; world-after-key-event : WorldState KeyEvent -> WorldState
+;; RETURNS: the WorldState that should follow the given worldstate
+;; after the given keyevent
+
+;; world-circ1 : WorldState -> Circle
+;; world-circ2 : WorldState -> Circle
+;; world-paused? : WorldState -> Boolean
+;; RETURNS: the specified attribute of the WorldState
+;; NOTE: if these are part of the world struct, you don't need to
+;; write any deliverables for these functions.
+
+;; new-circle : NonNegInt NonNegInt Int Int -> Circle
+;; GIVEN: 2 non-negative integers x and y, and 2 integers vx and vy
+;; RETURNS: a circle centered at (x,y), which will travel with
+;; velocity (vx, vy).
+
+;; circ-x : Circle -> NonNegInt
+;; circ-y : Circle -> NonNegInt
+;; circ-vx : Circle -> Int
+;; circ-vy : Circle -> Int
+;; RETURNS: the coordinates of the center of the circle and its
+;; velocity in the x- and y- directions.
+</pre>
+
+</li>
+
+
+<li>(screensaver-2).  Your boss has now decided to build a better
+    screensaver.  This one is like the original, except for the
+    following:<p></p>
+
+  <ul>
+
+    <li> Each circle is selectable and draggable.  Depressing the
+    mouse button within a circle causes the circle to be
+    "selected".  When a circle is selected, it <span class="strike">and its velocity</span>
+    are displayed in red instead of blue.</li>
+
+    <p>When the mouse button is down, its location should be indicated
+    by a solid red circle with a radius of 5 pixels. </p>
+
+    <li>Once a circle has been selected, you should be able to
+    drag it around the Universe canvas with the mouse.  As you drag
+    it, the position of the mouse within the circle (as indicated
+    by the red circle), should not change.  When the mouse button is
+    released, the circle should go back to its unselected state
+    (outline blue) in its new location.  </li>
+
+    <li>We refer to this behavior as "smooth dragging."  We will be
+    implementing other objects with this behavior in future problem
+    sets.  </li>
+
+    <span class="new"><li>A selected circle may be dragged in a way that causes some of
+    it to be dragged outside the canvas.  If, when the circle is
+    unselected, some or all of it is outside the canvas, its motion is
+    determined by the same rules as in the previous question.
+    Example:  A circle is dragged so that its center  is at x=25
+    and y=80, with
+    velocity components vx=-15 and vy=20, and is then released.  At
+    the next tick, it should have its center at <span
+    class="strike">x=20</span> <span style="color:blue">x=40</span> and y=100, while its velocity
+    components would become vx=15 and vy=20.
+    </li></span>
+
+    <li>All of this works whether or not the simulation is paused.
+    </li>
+
+
+  </ul>
+
+
+  <p>Here's a demo:</p>
+
+  <p><center>
+<video src="ps03-demo2.mp4" controls />
+</center>
+</p>
+
+  <p>  <p>You are to deliver a file named <kbd>screensaver-2.rkt</kbd> that
+  provides all the functions above, plus the following:</p>
+
+  <pre>
+;; world-after-mouse-event
+;;  : WorldState Int Int MouseEvent -> WorldState
+;; GIVEN: A World, the x- and y-coordinates of a mouse event, and the
+;; mouse event
+;; RETURNS: the world that should follow the given world after the given mouse
+;; event.
+
+;; circ-after-mouse-event :  Circle Int Int MouseEvent -> Circle
+;; GIVEN: A circle, the x- and y-coordinates of a mouse event, and the
+;; mouse event
+;; RETURNS: the circle that should follow the given circle after
+;; the given mouse event
+
+;; circ-selected? : Circle -> Boolean
+;; RETURNS: true iff the given circle is selected.
+
+;; new-circle
+;; as before, but now it returns an UNSELECTED circle.
+</pre>
+
+
+</ul>
+</li>
+
+</ol>
+
+
+<hr>
+
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Sep 28 21:16:23 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>
