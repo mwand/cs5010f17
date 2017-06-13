@@ -1,156 +1,711 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html> <head>
-<title>CS 5010: Cheating</title>
-<link type="text/css" rel="stylesheet" href="course.css">
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
 
-<!-- <style> -->
-<!--  body {margin: 5%; width: 80%; min-width:200; auto;} -->
-<!-- /* body {margin: 5%; width: 80%; line-height: 1.5; min-width:200; -->
-<!--  auto;} */ -->
-<!-- </style> -->
+<title>
+  CS 5010: Cheating
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
 
 </head>
 
 <body>
 
-<div id="menu">
+<!-- start of specific content -->
 
-<table>
-  <tr><td><a href="policies.html">General Course Policies</a></td></tr>
-  <tr><td><a href="cheating.html" >Plagiarism, Theft, and Other Unpleasant
-    Topics</a></td>
-  </tr>
-  <tr><td><a href="homework.html">How to Turn In Your Homework</a></td></tr>
-   <tr><td><a href="deliverables.html">Homework Deliverables</a></td></tr>
-   <tr><td><a href="coding-conventions.html">Coding Conventions</a></td></tr>
-  <tr><td><a href="../index.html">Home</a></td></tr>
-
-</table>
+<nav id="menu">
+  <table class="verticalspace">
+    <tr>
+      <td>
+        <a href="checklist.html">
+          Pre-Semester Checklist
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="structure.html">
+          Course Structure
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="communication.html">
+          Communication
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="hw.html">
+          Homework Policies
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="grading.html">
+          Grading
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="cheating.html">
+          Cheating
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="racket.html">
+          Why We Use Racket
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="style.html">
+          Style Guide
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="deliverables.html">
+          Deliverables
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="office.html">
+          Office Hours
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://piazza.com/northeastern/spring2017/cs5010/home">
+          Piazza
+        </a>
+      </td>
+    </tr>
+  </table>
+</nav>
+<div id="maincontent">
+  <h2>
+    Cheating
+  </h2>
+  <p>
+    Please don't cheat.
+  </p>
+  <ul class="muchindented">
+    <li>
+      <a href="#why">
+        Why You Shouldn't Cheat
+      </a>
+    </li>
+    <li>
+      <a href="#what">
+        What Counts as Cheating
+      </a>
+    </li>
+    <li>
+      <a href="#allowed">
+        What is Allowed
+      </a>
+    </li>
+    <li>
+      <a href="#consequences">
+        Consequences of Cheating
+      </a>
+    </li>
+    <li>
+      <a href="#faq">
+        Frequently Asked Questions
+      </a>
+    </li>
+  </ul>
+  <h3 id="why">
+    Why You Shouldn't Cheat
+  </h3>
+  <p>
+    The diploma you hope to earn will be a certificate representing
+    the university's belief that <em>you</em> have attained a certain
+    level of knowledge and skill within your degree program.
+  </p>
+  <p>
+    The grade you earn in this course will represent our belief
+    that <em>you</em> have attained a certain level of knowledge
+    and skill within this course.
+  </p>
+  <p>
+    <em>You</em> means <em>you</em>.  It does not mean
+    <em>you-with-help-from-your-friends</em>.
+  </p>
+  <p>
+    Honest students become angry when their classmates are awarded
+    a grade or diploma without putting in the effort needed to earn
+    that reward.
+  </p>
+  <p>
+    Faculty and advisors expect your grades to reflect your own
+    knowledge and skill, not the knowledge and skill of others
+    whose work you have stolen or used without authorization.
+  </p>
+  <p>
+    The university expects your degree to reflect your own
+    knowledge and skill, not the knowledge and skill of others.
+    Every time a graduate of the university goes out into the
+    world and performs poorly, it makes the whole university
+    look bad.  It also devalues the diplomas earned by other
+    graduates who acquired their diplomas honestly.
+  </p>
+  <p>
+    Employers also expect your diploma to represent your own
+    honest effort.  Employers do not want to hire cheaters.
+  </p>
+  <h4>
+    Why Industry Hates Cheaters
+  </h4>
+  <p>
+    Most of the economically important applications of computer science
+    involve
+    <a href="https://en.wikipedia.org/wiki/Intellectual_property">
+      intellectual property.
+    </a>
+    The rules governing intellectual property are similar, though
+    not identical, to rules established by Northeastern University's
+    <a href="http://www.northeastern.edu/osccr/academic-integrity-policy/">
+      Academic Integrity Policy
+    </a>
+    and by CCIS and course rules.
+    As explained by the current version of
+    <a href="https://en.wikipedia.org/wiki/Software_copyright#United_States">
+      Wikipedia's article on software copyright:
+    </a>
+  </p>
+  <blockquote>
+    <p>
+      In the United States, computer programs are literary works,
+      under the definition in the Copyright Act,
+      <a href="https://en.wikipedia.org/wiki/Title_17_of_the_United_States_Code">
+        17 U.S.C.
+      </a>
+      §
+      <a href="https://www.law.cornell.edu/uscode/text/17/101">
+        101.
+      </a>
+      <sup title="Apple v Franklin, 714 F.2d 1240 (3rd Cir. 1983)">
+        <a href="http://digital-law-online.info/cases/219PQ113.htm">
+          [22]
+        </a>
+      </sup>
+    </p>
+    <p>
+      There is a certain amount of work that goes into making copyright
+      successful and just as with other works, copyright for computer
+      programs prohibits not only literal copying, but also copying
+      of "nonliteral elements", such as [a] program's
+      <a href="https://en.wikipedia.org/wiki/Structure,_sequence_and_organization">
+        structure, sequence and organization.
+      </a>
+      These non-literal aspects, however, can be protected only
+      "to the extent that they incorporate authorship in
+      programmer's expression of original ideas, as distinguished
+      from the ideas themselves."
+      <sup title="Computer Assocs. Int'l v Altai, Inc.,">
+        [23]
+      </sup>
+    </p>
+  </blockquote>
+  <p>
+    The university and course rules that prohibit unauthorized
+    collaboration are similar to but simpler than the US laws
+    and case law that protect programmers and their employers from
+    unauthorized use of copyrighted software.
+  </p>
+  <p>
+    If you can't follow the course rules, you probably won't
+    obey US copyright law either.
+  </p>
+  <p>
+    Employers know that students who cheat in school are apt
+    to become employees who cheat at work.
+    Employees who cheat can cost their employers a great deal
+    of money.
+    That's why employers try not to hire students who cheat.
+  </p>
+  <h3 id="what">
+    What Counts as Cheating
+  </h3>
+  <p>
+    You should read the university's
+    <a href="http://www.northeastern.edu/osccr/academic-integrity-policy/">
+      Academic Integrity Policy,
+    </a>
+    paying special attention to its definitions of cheating,
+    plagiarism, unauthorized collaboration, and facilitating
+    academic dishonesty:
+  </p>
+  <blockquote>
+    <p>
+      <strong>
+        Cheating:
+      </strong>
+      The University defines cheating as using or attempting to
+      use unauthorized materials, information, or
+      study aids in any academic exercise. When completing any
+      academic assignment, a student shall rely on his or her own
+      mastery of the subject.
+    </p>
+  </blockquote>
+  <blockquote>
+    <p>
+      <strong>
+        Plagiarism:
+      </strong>
+      The University defines plagiarism as using as one’s own the
+      words, ideas, data, code, or other original academic material
+      of another without providing proper citation or attribution.
+      Plagiarism can apply to any assignment, either final or
+      drafted copies, and it can occur either accidentally or
+      deliberately.
+    </p>
+  </blockquote>
+  <blockquote>
+    <p>
+      <strong>
+        Unauthorized Collaboration:
+      </strong>
+      The University defines unauthorized collaboration as
+      instances when students submit individual academic works
+      that are substantially similar to one another. While several
+      students may have the same source material, any analysis,
+      interpretation, or reporting of data required by an assignment
+      must be each individual’s independent work unless the
+      instructor has explicitly granted permission for group work.
+    </p>
+  </blockquote>
+  <blockquote>
+    <p>
+      <strong>
+        Facilitating Academic Dishonesty:
+      </strong>
+      The University defines facilitating academic dishonesty as
+      intentionally or knowingly helping or contributing to the
+      violation of any provision of this policy.
+    </p>
+    <p>
+      Examples include, but are not limited to:
+    </p>
+    <ul>
+      <li>
+        Doing academic work for another student.
+      </li>
+      <li>
+        Making available previously used academic work for
+        another individual who intends to resubmit the work for credit.
+      </li>
+    </ul>
+  </blockquote>
+  <p>
+    Those are general definitions because they apply to all
+    colleges, departments, and courses within the university.
+    The course rules, stated below, are even more specific.
+  </p>
+  <h4 id="what2">
+    What Counts as Cheating in CS 5010
+  </h4>
+  <p>
+    <em>Any</em> collaboration on or discussion of how to do a
+    problem set, with anyone other than your
+    assigned partner, counts as cheating.
+    In particular, any collaboration on or discussion of
+  </p>
+  <ul>
+    <li>
+      general design of a program or function
+    </li>
+    <li>
+      names of specific data types or functions
+    </li>
+    <li>
+      definitions of specific data types or functions
+    </li>
+    <li>
+      contracts, purpose statements, and invariants
+    </li>
+    <li>
+      examples
+    </li>
+    <li>
+      tests
+    </li>
+  </ul>
+  <p>
+    counts as cheating unless those things are mentioned
+    within the problem statement
+    or in materials provided by course staff.
+  </p>
+  <p>
+    Submitting code you did not write yourself is cheating.
+    (When you have an assigned partner, that rule changes to:
+    Submitting code you and your partner did not write yourselves
+    is cheating.)
+  </p>
+  <p>
+    One thing you must learn in this course is that code includes
+    test cases and comments.
+    If you (or you and your partner) did not write your own test
+    cases and comments, you are cheating.
+    (You are of course allowed to submit test cases and comments
+    that appear within or have been derived from test cases and
+    comments in materials provided by course staff.)
+  </p>
+  <p>
+    Telling anyone about the questions you were asked during a
+    codewalk is cheating.
+    (It counts as facilitating academic dishonesty.)
+  </p>
+  <p>
+    Looking at someone else's code is cheating.
+    That includes looking at test cases and comments.
+  </p>
+  <p>
+    Letting someone else look at your own code is cheating.
+    That includes test cases and comments.
+  </p>
+  <p>
+    Giving someone a written or machine-readable copy of some
+    of your test cases, comments, definitions, or other code
+    is cheating.
+    Accepting a copy is also cheating.
+  </p>
+  <p>
+    Leaving a copy of your solution or any part thereof
+    in a public place where other students could steal it
+    will be regarded as facilitating academic dishonesty,
+    which counts as cheating even if you never intended
+    for anyone to steal your work.
+    That means you should never write part of your design
+    or code on a white board or piece of paper or USB drive
+    or any other medium where it could be seen or copied
+    by other students.
+  </p>
+  <p>
+    In particular, you should never leave your laptop
+    unattended in any public place, even if access is
+    protected by a password.  Someone might steal your
+    laptop as well as your files.
+  </p>
+  <p>
+    Reading similar programs written by students in a different
+    section or semester is cheating.
+    If, while surfing the web, you accidentally discover
+    and start to read a program or code fragment that does
+    something similar to what you have been asked to do in a problem set,
+    then you should stop reading immediately, take note of its
+    URL, and add a comment to your own solution that says
+    you accidentally started to read the material
+    located at that URL.
+  </p>
+  <p>
+    Telling someone about a web site you have discovered,
+    even accidentally, that gives advice or contains code
+    fragments that would make it easier to do a problem set
+    is cheating.
+    (Again, if you find a web site helpful to you as you are
+    doing a problem set, you must cite that material and its
+    URL in a comment within your program.  Failing to do so
+    will be regarded as plagiarism, which is a form of academic
+    dishonesty.)
+  </p>
+  <p>
+    If you are ever unsure about what counts as cheating in this
+    course, you should contact the course staff (via a private
+    message to the instructors on Piazza) and ask.
+  </p>
+  <p>
+    If you ever suspect that you or your partner may have
+    violated course rules, you should contact the course
+    staff.  It will go better for you if you tell us about
+    it yourself instead of making us discover the violation.
+  </p>
+  <h3 id="allowed">
+    What is Allowed
+  </h3>
+  <p>
+    You are encouraged to study materials provided by the
+    course staff and to discuss those materials with your
+    fellow students, so long as you do not begin to discuss
+    specific details of how those materials might be applied
+    to a specific problem set.
+  </p>
+  <p>
+    You are allowed to study standard reference materials
+    such as the documentation for Racket, Git, and other
+    tools.
+  </p>
+  <p>
+    You are allowed to read books and articles and web pages
+    that are not especially relevant to any problem sets
+    assigned in CS 5010.
+    (You should keep in mind that not everything you read
+    is true.)
+  </p>
+  <p>
+    You are allowed to read about algorithms and programming
+    techniques that might be relevant to a problem set, so long
+    as your solution to the problem set includes comments that
+    cite any relevant material you have read.
+    (Failure to cite relevant materials counts as plagiarism,
+    which is a form of academic dishonesty.)
+    You are not allowed to search the web for programs or
+    program fragments that solve a problem similar to the one
+    you have been asked to solve.
+  </p>
+  <h3 id="consequences">
+    Consequences of Cheating
+  </h3>
+  <p>
+    If you cheat, you will not learn as much as you should.
+  </p>
+  <p>
+    If you cheat, you will probably be caught.
+  </p>
+  <p>
+    When you are suspected of cheating, the instructor will
+    invite you to discuss your solution in a private interview.
+    Even if the instructor concludes you were not cheating,
+    that interview will give the instructor a better idea of
+    what you have learned in the course, which may influence
+    your semester grade
+    (<a href="grading.html#discretion">instructor's discretion</a>).
+  </p>
+  <p>
+    When you are caught cheating, your semester grade will
+    be lowered.
+  </p>
+  <p>
+    The instructor will also send a memo to
+    Northeastern University's
+    <a href="http://www.northeastern.edu/osccr/">
+      Office of Student Conduct and Conflict Resolution
+    </a>
+    (OSCCR)
+    that describes the incident and your part in it.
+    University and CCIS policy require the instructor
+    to write that memo and to report the incident.
+  </p>
+  <p>
+    The instructor will send a copy of that memo to
+    the CCIS Committee on Academic Integrity,
+    as required by CCIS policy.
+  </p>
+  <p>
+    OSCCR and CCIS may impose further sanctions.
+  </p>
+  <p>
+    For a first offense, OSCCR usually imposes some form
+    of disciplinary probation and requires the student
+    to perform some task designed to raise the student's
+    awareness of the importance of academic honesty.
+    For a second offense, OSCCR will probably suspend
+    or expel the student from the university.
+  </p>
+  <p>
+    For a first offense, CCIS may impose some sanction
+    such as barring the student from co-op opportunities.
+    For a second offense, CCIS usually expels the student
+    from the MS program.
+  </p>
+  <h3 id="faq">
+    Frequently Asked Questions
+  </h3>
+  <ol>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      Why am I being accused of cheating, when I did nothing
+      more than talk with my friend about how to do the
+      problem set?
+      <br />
+      <strong>
+        A:
+      </strong>
+      Because you knew that was
+      <a href="#what2">against the rules</a>.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      Why am I being accused of cheating, when I did nothing
+      more than talk with my friend about how to test our
+      programs?
+      <br />
+      <strong>
+        A:
+      </strong>
+      Because you knew that was
+      <a href="#what2">against the rules</a>.
+      Tests are a very important part of your program,
+      as are comments.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      Why am I being accused of cheating, when what I did
+      would not be considered wrong in my home country?
+      <br />
+      <strong>
+        A:
+      </strong>
+      Because you enrolled in a graduate program located
+      in the US, not in North Korea.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      My friend can't figure out how to do the problem set.
+      Should I help?
+      <br />
+      <strong>
+        A:
+      </strong>
+      No.  If you help a student who is not your partner
+      to write his or her solution,
+      both of you will suffer the serious
+      <a href="#consequences">consequences</a> of cheating.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      I can't figure out how to finish the problem set.
+      Why not cheat?
+      <br />
+      <strong>
+        A:
+      </strong>
+      Because you won't learn as much if you cheat, and
+      a low grade for the assignment won't hurt your
+      semester grade as much as cheating will.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      I can't figure out how to start the problem set.
+      Why not cheat?
+      <br />
+      <strong>
+        A:
+      </strong>
+      You'll get a zero for the problem set even if you cheat,
+      and you'll also suffer the serious
+      <a href="#consequences">consequences</a> of cheating.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      I'm having trouble with all of the problem sets.
+      If I don't cheat, I'll have to drop the course.
+      Why not cheat?
+      <br />
+      <strong>
+        A:
+      </strong>
+      If you drop the course, you'll be allowed to try again.
+      If you try to cheat your way through it,
+      your semester grade will be so low you'll probably
+      have to take it again anyway,
+      and you'll also suffer the serious
+      <a href="#consequences">consequences</a> of cheating.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      I can't possibly pass this course without cheating.
+      Why not cheat?
+      <br />
+      <strong>
+        A:
+      </strong>
+      Because you won't pass this course by cheating.
+      If you don't think you can pass CS 5010 without cheating,
+      then you don't belong in this MS program.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      Do you really think you're going to catch all cheaters?
+      <br />
+      <strong>
+        A:
+      </strong>
+      No, but we catch enough to make a difference.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      I may not be honest, but I'm really smart.
+      I'm going to change all the variable names,
+      and rearrange the code, and rewrite the comments.
+      How are you going to catch me?
+      <br />
+      <strong>
+        A:
+      </strong>
+      You'll be surprised.
+      If you were smart enough to evade detection,
+      you'd be smart enough to do your own work.
+    </li>
+    <li>
+      <strong>
+        Q:
+      </strong>
+      I've never cheated before, and I'll never cheat again.
+      Can't you please overlook this one time
+      and give me a second chance?
+      <br />
+      <strong>
+        A:
+      </strong>
+      By not expelling you from the course, MS program, or
+      university, we are giving you a second chance.
+      Next time, we won't be so forgiving.
+    </li>
+  </ol>
 </div>
 
-<div id="content">
+<!-- end of specific content -->
 
-<h1>Plagiarism, Theft, and Other Unpleasant Topics</h1>
-
-<h2 align="center"><strong><span class="new">[** for fall 2017: need to add material
-about github.com, etc. **]</span></strong>
-</h2>
-
-<p><strong>Plagiarism is Theft: <font color="blue"><em>We will consider all collaborations outside of your assigned
-partnership as <font color="red">theft</font>.
-This includes telling your friends what we asked
-during codewalks.</em></font></strong>
-We <font color="red">will</font> report all occurrences to the
-administration.  Warning: if you didn't write the code, that fact will
-almost always become obvious during codewalks.  Also, we routinely
-submit assignments to automated plagiarism detectors.
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
 </p>
 
-<p>Students who are guilty of plagiarism have in the past been suspended
-and in exceptional cases dismissed from the program. (I know of one
-student who was dismissed from the program a week before graduation!).
-</p>
-
-<p>The official University definition of plagiarism is  <a
-href="http://www.northeastern.edu/osccr/academic-integrity-policy/"
-target="new_window">here</a>.  Read it! But we have a simple summary:
-<h1 align="center"><span style="color:red">DON'T SHARE BITS</span></h1>
-</p>
-
-<p>Here are some typical situations:</p>
-
-<ul>
-  <li>If you share files or even portions of files with somebody else, we
-<em>will</em> detect it and you <em>will</em> get sent to the
-  University 
-<a href="http://www.northeastern.edu/osccr/" >Office of Student
-  Conduct and Resolution</a> (known as OSCCR). Period.  End of story.</li>
-
-
-<li>If your friend comes and says that he or she is lost and the
-problem is due tomorrow, and can he just please look at your solution,
-or your data definitions, or even just your test cases, tell him that
-the University policy requires that you tell him <em><strong>"NO."</strong></em>  If you give
-him or her your files, you <em>will</em> be sent to OSCCR. (And of course he
-will be sent to OSCCR.)<p> I know this may be different from the way
-things were in your home country, but this is the USA, and we do
-things differently here:  we believe that each person rises or falls
-on his or her own efforts.</p> </li>
-
-<li>If the problem is due tomorrow and your roommate has solved the
-problem and has left his machine unlocked and you will just take a
-peek at his solution and maybe just mail yourself a copy,
-<strong>DON'T DO IT:</strong> you <strong>WILL</strong> be sent to OSCCR (and your
-punishment may be harsher:  theft is much worse than collaboration.)</li>
-
-<li>If you sit in the library with a group of people and you write test
-cases on the whiteboard, and you all submit the same test cases, even
-with the numbers changed, you <em>will</em> be sent to OSCCR.</li>
-
-<li> <!-- added Sun Oct  5 10:58:17 2014 -->
-Your friend tells you about StackOverflow, pastebin, or some other web
-site where you can ask a question, share a code snippet, etc., and you
-think "Wow! I'll just ask the internet!".  DON'T DO IT: We will find
-it (we monitor all the obvious places), and you WILL get sent to
-OSCCR.
-
-<p>(It's ok to look for stuff on the internet. If you find something
-useful, you must cite your source in a footnote, just like you would
-for a research paper.  It's NOT ok to actively ask questions anywhere
-but on Piazza.)</p>
-
-<p>(And if you happen to find a solution, or large portions of a
-solution, to a problem set from this course, <strong>don't look at
-it!</strong> I shouldn't have to tell you that's cheating.)</p>
-
-</li>
-
-</ul>
-
-<p>If at any time you feel that you or your partner may have violated
-this policy, it is imperative that you contact the course staff
-immediately. It will be much the worse for you if our software detects
-your indiscretion. If you or your partner have cheated; if you have
-any doubt about whether you or your partner have done things honestly;
-if, even by accident, your team might have represented any other
-person's work as your own: COME TALK TO THE STAFF AS SOON AS
-POSSIBLE. You are better off if you work with us than if we have to
-come find you.  </p>
-
-<p>A final thought: Students typically report that this course
-requires about 20 hours of work per week, so budget your time
-accordingly. We know that students who are under time pressure are far
-more likely to resort to theft. Time pressure or stress is not an
-acceptable excuse. <span style="color:red"><strong>The measure of character is
-not what you do when things are easy; it is what you do when things
-get tough.</strong></span> </p>
-
-<p><strong>Security:</strong> Guard your work! If you keep your work
-on your home machine, be sure your machine is secure, both from
-Internet hostiles and from your roommates, etc. If you are not sitting
-at your machne, keep it locked! (and don't give anybody the
-password). It only takes a minute for your roommate, or for the person
-sitting next to you in the hallway, to stick a USB drive in your
-machine and steal your work.  <strong>Don't discount this; we have
-encountered theft by roommates on a regular basis in the
-past.</strong> Remember that physical security is a prerequisite for
-information security.</p>
-
-<p>If you keep your local repository on our CCS servers, make sure
-that it is protected 600. Leaving it group- or world- readable means
-that anyone can steal your work. Your home directory includes, by
-default, a directory called <kbd>classes</kbd> that is readable only
-by you. Put all your class work here. If you put class material in
-some unprotected directory, and somebody else copies it, <em>you</em>
-will be held responsible. </p>
-
-
-<hr>
-<address></address>
-<font size=-1>
-<p align=right>
-<!-- hhmts start -->
-Last modified: Tue Oct 25 21:25:27 Eastern Daylight Time 2016 <!-- hhmts end -->
-</body> </html>
+</body>
+</html>

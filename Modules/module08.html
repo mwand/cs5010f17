@@ -1,98 +1,147 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>CS 5010 Module 08</title>
-<link type="text/css" rel="stylesheet" href="../css/course.css">
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Module 08
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
 </head>
 
-<!-- Be sure to change title and h1 each week. -->
-
 <body>
-<h1>CS 5010 Module 08</h1>
 
-<h2>Module Overview</h2>
+<!-- start of specific content -->
 
-<p>
-In some problems, we will need to recur on quantities that are not
-pieces of the input structure.  We call this "general
-recursion."  In this module, you will see examples of problems that
-are solvable by general recursion.  You will also see how invariants
-can be used as a tool to express deep knowledge about how and why our
-programs work, and as a tool to guide the development of our programs.
+<div id="maincontent">
+  <h2>
+    CS 5010: Module 08
+  </h2>
+  <div>
+    <h3>
+      Module Overview
+    </h3>
+    <p>
+      In some problems, we will need to recur on quantities that
+      are not pieces of the input structure. We call this
+      <em>general recursion</em>.
+      In this module, you will see examples of problems that can
+      be solved using general recursion. You will also see how
+      invariants can be used as a tool to express deep knowledge
+      about how and why our programs work, and as a tool to guide
+      the development of our programs.
+    </p>
+    <p>
+      This module also introduces asymptotic notation, which is
+      useful for reasoning about the efficiency of programs.
+    </p>
+    <p>
+      Efficiency is too large a subject to be covered in a single
+      module.  Most of you will be required to take an
+      entire core course (Algorithms) on the subject.
+      In this course, we will introduce only the basic principles
+      of writing efficient programs.
+    </p>
+    <h3>
+      Course Map
+    </h3>
+    <img src="module08.jpg" width="700" alt="course map">
+    <h3>
+      Readings
+    </h3>
+    <p>
+      Read Part V from our
+      <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">
+        textbook.
+      </a>
+      We are doing things in a different order than the textbook.
+      We are also doing this topic rather differently, so use the
+      textbook as background rather than as a normative reference.
+    </p>
+    <h3>
+      Resources
+    </h3>
+    <ul>
+      <li>
+        <a href="../Examples">
+          Examples for Module 08
+        </a>
+      </li>
+    </ul>
+    <h3>
+      Lessons
+    </h3>
+    <ul>
+      <li>
+        <a href="../PDF/Lesson8.1.pdf">
+          Lesson 8.1: Introducing General Recursion
+        </a>
+      </li>
+      <li>
+        <a href="../GuidedPractices/gp08-1/">
+          Guided Practice 8.1
+        </a>
+      </li>
+      <li>
+        <a href="../PDF/Lesson8.2.pdf">
+          Lesson 8.2: Halting Measures
+        </a>
+      </li>
+      <li>
+        <a href="../GuidedPractices/gp08-2/">
+          Guided Practice 8.2
+        </a>
+      </li>
+      <li>
+        <a href="../Efficiency/page1.html">
+          Lesson 8.3: Asymptotic Notation
+        </a>
+      </li>
+      <li>
+        <a href="../Efficiency/lessGeneral1.html">
+          Lesson 8.4: A Less General Definition
+        </a>
+      </li>
+      <li>
+        <a href="../Efficiency/threeRules.html">
+          Lesson 8.5: Three Rules of Optimization
+        </a>
+      </li>
+      <li>
+        <a href="../Efficiency/computeLess1.html">
+          Lesson 8.6: Case Studies: Compute Less
+        </a>
+      </li>
+    </ul>
+    <h3>
+      Problem Set
+    </h3>
+    <p>
+      <a href="../ProblemSets/ps08.html">
+        Problem Set 08
+      </a>
+      was assigned on Monday, 13 March.
+    </p>
+  </div>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
 </p>
 
-<h2>Course Map</h2>
-
-<img src="images/course-maps/module08.jpg"
-     width="700px"
-     alt="course map, week 08">
-
-<h2>Readings</h2>
-
-<p>Part V from the <a
-href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html"
->textbook</a>.  we are doing this topic rather differently than
-the textbook does, so use the textbook for background rather than as a
-normative reference.
-</p>
-
-<h2>Resources</h2>
-
-<ul>
-  <li><a href="examples/07-invariants.html" >In-Class
-  Exercises</a></li>
-
-</ul>
-
-
-<h2>Lessons and Guided Practices</h2>
-
-
-<ul>
-
-  <li><a
-  href="../Slides/Lesson 8.1 Introducing General Recursion.pptx"
-  >Lesson 8.1 Introducing General Recursion</a></li>
-  
-  <li><a href="../Guided Practices/gp08-1/index.html" >Guided Practice 8.1</a></li>
-
-  <li><a href="../Slides/Lesson 8.2 Halting Measures.pptx" >Lesson 8.2
-  Halting Measures</a></li>
-  
-  <li><a href="../Guided Practices/gp08-2/index.html" >Guided Practice 8.2</a></li>
-
-  <li><a href="../Slides/Lesson 8.3 Linear Search.pptx" >Lesson 8.3
-  Linear Search</a></li>
-
-  <li><a href="../Guided Practices/gp08-3/index.html" >Guided Practice 8.3</a></li>
-  
-  <li><a href="../Slides/Lesson 8.4 Binary Search.pptx" >Lesson 8.4
-  Binary Search</a></li>
-
-  <li><a href="../Guided Practices/gp08-4/index.html" >Guided Practice
-  8.4</a></li>
-
-  <li><a href="../Slides/Lesson 8.5 Searching in a Graph.pptx" >Lesson
-  8.5 Searching in a Graph</a></li>
-
-  <li><a href="../Slides/Lesson 8.6 Integer Square Root.pptx" > Lesson 8.6
-  Integer Square Root</a></li>
-
-  <li><a href="../Slides/Lesson 8.7 Midterm Review.pptx" >Lesson 8.7 Midterm Review</a></li>
-  
-</ul>
-
-<h2>Problem Set</h2>
-
-<p>
-<a
-href="../Problem Sets/ps08.html"
->Problem Set 08</a> 
-
-<hr>
-<address></address>
-<font size=-1>
-<p align=right>
-<!-- hhmts start -->
-Last modified: Wed Oct 26 07:38:27 Eastern Daylight Time 2016 <!-- hhmts end -->
-</body> </html>
+</body>
+</html>

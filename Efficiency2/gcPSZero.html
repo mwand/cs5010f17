@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  A More Typical Benchmark
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    A More Typical Benchmark
+  </h3>
+  <div>
+    <p>
+      To measure the relative performance of garbage collection
+      and explicit deallocation on more typical programs, we
+      need a more typical benchmark.
+    </p>
+    <p>
+      The flight-scheduling problem posed by Problem Set 00,
+      at the beginning of the semester,
+      gives us a more typical benchmark.
+      Because this is not a course on algorithms,
+      I expected most students would come up with a solution
+      based on some kind of path search,
+      using a context argument to avoid paths that go through
+      the same airport twice.
+      A straightforward implementation of that idea runs in
+      exponential time.
+    </p>
+    <p>
+      I wrote my exponential-time solution in Scheme,
+      translated that solution
+      into Java, and then translated the Java solution into C++.
+      Each translation was as literal as I could reasonably
+      make it, but the idiomatic lists provided by Java and C++
+      are mutable, so each translation used a little more
+      mutation and a little less allocation.
+      On a storage allocation/deallocation benchmark,
+      that should favor C++ over Java, and Java over Scheme.
+    </p>
+    <p>
+      I ran that flight-scheduling benchmark on two inputs.
+      The first input was a set of flights similar to the
+      flights used to test Problem Set 07.
+      The second input was a larger set of flights.
+      Here are the timings from my usual benchmark machine.
+    </p>
+    <table class="center">
+      <tr>
+        <th>
+          System
+        </th>
+        <th>
+          Time (seconds)
+        </th>
+        <th>
+          Time (seconds) for larger benchmark
+        </th>
+        <th>
+          Memory
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Scheme
+        </td>
+        <td>
+          6.8
+        </td>
+        <td>
+          473
+        </td>
+        <td>
+          109M
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Java
+        </td>
+        <td>
+          4.8
+        </td>
+        <td>
+          417
+        </td>
+        <td>
+          1333M
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Java
+        </td>
+        <td>
+          
+        </td>
+        <td>
+          492
+        </td>
+        <td>
+          165M
+        </td>
+      </tr>
+      <tr>
+        <td>
+          C++
+        </td>
+        <td>
+          16.0
+        </td>
+        <td>
+          1507
+        </td>
+        <td>
+          157M
+        </td>
+      </tr>
+    </table>
+    <p>
+      On this benchmark, C++ is only three times as slow as Java.
+    </p>
+    <p>
+      One of the reasons garbage collection is often faster than
+      explicit deallocation is that garbage collectors can trade
+      space for time.
+      By default, Oracle's JVM uses a very large heap space,
+      which reduces gc time.
+    </p>
+    <p>
+      When I asked Java to try to use at most a hundred megabytes
+      of heap space, it used 165 megabytes, which is not much more
+      space that was needed by C++.
+      The overall running time increased by 18%.
+    </p>
+    <p>
+      Explicit deallocation tends to use less space than garbage
+      collection.  That is a significant advantage of explicit
+      deallocation.
+    </p>
+    <p>
+      For this benchmark, I used a 32-bit implementation of Scheme,
+      but the Java and C++ programs were using 64-bit pointers.
+      To make the space comparison fairer, you should mentally
+      double the space used by Scheme.
+    </p>
+    <p>
+      It's worth noting that explicit deallocation's advantage
+      in terms of space is less (on this particular benchmark!)
+      than the space saved by using 32-bit pointers instead of 64-bit.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="gcGenerational1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="gcBench1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

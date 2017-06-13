@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Push Model: What Happens
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Push Model: What Happens
+  </h3>
+  <div>
+    <ul>
+      <li>
+        <code>b1.intersects(b2)</code>
+      </li>
+      <li>
+        <code>b1</code> sends its data to <code>b2</code>.
+      </li>
+      <li>
+        <code>b2</code> does the arithmetic.
+      </li>
+    </ul>
+    <p>
+      In this design,
+      <code>b2</code> doesn't know who is asking it
+      to do the arithmetic.
+    </p>
+    <p>
+      This is sometimes called <em>double dispatch</em>.
+      It shows up often in object-oriented programming.
+    </p>
+    <p>
+      A related pattern is called the <em>visitor</em> pattern
+      (which is mostly unrelated to the
+      <em>functional visitor pattern</em>,
+      which is more important).
+      The visitor pattern involves a double dispatch when
+      one of the structures is itemization data.
+      We don’t have time in this course to deal with the visitor
+      pattern, but you should now be equipped to learn about it.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="statePatternsDesign3b.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="statePatternsPushOrPull.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

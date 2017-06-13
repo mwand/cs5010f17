@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The equals(Object) Method in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      The equals(Object) Method in Java
+    </h3>
+    <p>
+      In Java, the default notion of equality on objects is
+      defined by an <code>equals</code> method, which accepts
+      any <code>Object</code> as its argument and returns a
+      boolean indicating whether that object should be considered
+      equal to this object.
+    </p>
+    <p>
+      If you don't define an <code>equals(Object)</code> method
+      in a Java class, then it will inherit an <code>equals</code>
+      method from its superclass.
+    </p>
+    <p>
+      In the Java classes we have defined so far, we have not
+      specified a superclass.
+      When no superclass is specified, the superclass is <code>Object</code>.
+      When objects of a class are immutable, as has been true for
+      all of the classes we have defined so far,
+      the <code>equals</code> method that would
+      be inherited from the <code>Object</code> class is almost
+      certainly inappropriate.
+    </p>
+    <p>
+      That means we need to define an <code>equals</code> method
+      in our classes.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="equality4.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="equality6.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

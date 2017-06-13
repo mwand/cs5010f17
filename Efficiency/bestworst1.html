@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Best, Worst, and Average Case
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Best, Worst, and Average Case
+  </h3>
+  <div>
+    <p>
+      When discussing the efficiency of a program or algorithm,
+      we need to distinguish between the worst case, the average
+      case, and the best case.
+    </p>
+    <p>
+      Here, for example, is a summary of the asymptotic running times
+      for four sorting algorithms:
+    </p>
+    <div class="center">
+      <table class="center">
+        <tr>
+          <th>
+            
+          </th>
+          <th>
+            worst case
+          </th>
+          <th>
+            average case
+          </th>
+          <th>
+            best case
+          </th>
+        </tr>
+        <tr>
+          <th>
+            selection sort
+          </th>
+          <td>
+            &Theta;(n<sup>2</sup>)
+          </td>
+          <td>
+            &Theta;(n<sup>2</sup>)
+          </td>
+          <td>
+            &Theta;(n<sup>2</sup>)
+          </td>
+        </tr>
+        <tr>
+          <th>
+            insertion sort
+          </th>
+          <td>
+            &Theta;(n<sup>2</sup>)
+          </td>
+          <td>
+            &Theta;(n<sup>2</sup>)
+          </td>
+          <td>
+            &Theta;(n)
+          </td>
+        </tr>
+        <tr>
+          <th>
+            quicksort
+          </th>
+          <td>
+            &Theta;(n<sup>2</sup>)
+          </td>
+          <td>
+            &Theta;(n lg n)
+          </td>
+          <td>
+            &Theta;(n lg n)
+          </td>
+        </tr>
+        <tr>
+          <th>
+            merge sort
+          </th>
+          <td>
+            &Theta;(n lg n)
+          </td>
+          <td>
+            &Theta;(n lg n)
+          </td>
+          <td>
+            &Theta;(n lg n)
+          </td>
+        </tr>
+      </table>
+    </div>
+    <p>
+      Selection sort always takes &Theta;(n<sup>2</sup>) time
+      because it compares each of the n elements to be sorted
+      against each of the other n-1 elements.
+    </p>
+    <p>
+      The other three algorithms in that table have a best case
+      that avoids most of those comparisons.
+      In their best case, they rely on the transitivity of total
+      orders to avoid comparing <var>x</var> against <var>z</var>
+      when the algorithm has already determined that
+      <var>x</var> is less than some <var>y</var> that
+      is less than <var>z</var>.
+    </p>
+    <p>
+      Avoiding computations whose outcome is implied by previous
+      computations is another way to compute less.
+    </p>
+    <p>
+      We will illustrate that by proving the correctness of a
+      quicksort program.  We will then analyze the best and
+      worst case for that program.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="exponentiation9.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="quicksort1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Guided Practice 4.3: Computing on Lists of Structures
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Guided Practice 4.3: Computing on Lists of Structures
+  </h2>
+  <p>
+    Starting with
+    <a href="../../Examples/04-2-books.rkt">
+      <code>04-2-books.rkt</code>
+    </a>
+    (from this week's examples), design the following functions:
+  </p>
+  <pre>
+    ;; inventory-total-value : LOB -&gt; Number
+    ;; GIVEN: a LOB
+    ;; RETURNS: the value of all the copies on hand of all the books in the
+    ;; given LOB
+    ;; (inventory-total-value lob1) = 390
+    
+    (begin-for-test
+      (check-equal? 
+        (inventory-total-value empty)
+        0
+        "value of the empty inventory should have been 0")
+      (check-equal?
+        (inventory-total-value lob1)
+        390
+        "simple test"))
+    
+    ;; books-out-of-stock : LOB -&gt; LOB
+    ;; GIVEN: a list of books
+    ;; RETURNS: a list of the books that are out of stock in the given LOB
+    ;; Example:
+    ;; (books-out-of-stock lob1) =
+    ;;  (list
+    ;;    (make-book "Shakespeare" "Hamlet" 0 2)
+    ;;    (make-book "Shakespeare" "Macbeth" 0 10))
+  </pre>
+  <p>
+    <a href="page2.html">
+      [ANSWER]
+    </a>
+  </p>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

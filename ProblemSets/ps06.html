@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 06
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 06
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 20 February 2017
+      <br />
+      <strong>Due:</strong> Monday, 27 February 2017 at 6pm
+      <br />
+      <strong>Corrected:</strong> Tuesday, 21 February,
+      to correct the return type for
+      <code>departs-at</code> and  <code>arrives-at</code>
+      <strong>Corrected:</strong> Thursday, 23 February,
+      to correct the example for
+      <code>flight=?</code>
+    </p>
+  </div>
+  <div>
+    <p>
+      This is a
+      <a href="http://en.wikipedia.org/wiki/Pair_programming">
+        pair programming
+      </a>
+      assignment.  You are required to
+      complete this problem set in collaboration with your assigned
+      partner, but neither of you are allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      We have created a repository for you and your partner to use
+      in this problem set and for the next two problem sets as well.
+      The name of that repository is of the form
+      <code>pdp-<em>ID1</em>-<em>ID2</em></code>,
+      where <code><em>ID1</em></code> is either your CCIS ID
+      or your partner's CCIS ID, and <code><em>ID2</em></code>
+      is the other CCIS ID for your team.
+    </p>
+    <p>
+      In those repositories, we have created files named
+      <code><em>ID1</em>-log.txt</code> and
+      <code><em>ID2</em>-log.txt</code> for you to use when
+      filing work session reports, as in previous problem sets.
+      You and your partner are required to push your files at
+      the end of every work session.
+      (You <em>may</em> push your files several times during
+      a work session, but we do not require you to do so.)
+    </p>
+    <p>
+      At the end of every work session, you are required to update
+      your log file to record the time you spent in that work session.
+      (Please do not include the time you spent in any previous work
+      sessions, as those times will already have been recorded in
+      previous versions of your log file.)
+      If both of you work together during a work session, both of
+      you must update your log files, recording only the time <em>you</em>
+      spent working.  Do not include your partner's time in
+      your log file, but be sure to push the updated versions of
+      both log files.
+    </p>
+    <hr />
+    <p>
+      The main purpose of this problem set is to give you practice
+      working in tandem with another programmer.
+      This problem set will also give you more
+      practice programming with lists and higher order functions,
+      and will lay the foundation for a subsequent problem set.
+    </p>
+    <p>
+      You must use the HtDP
+      <strong>Intermediate Student Language + Lambda</strong>
+      for this problem set.
+      You should use HOFs wherever appropriate.
+    </p>
+    <p>
+      As in previous problem sets, you must download a copy of
+      <a href="extras.rkt">
+        extras.rkt
+      </a>
+      and push it to the <code>set06</code> directory with your solutions.
+      Then import that library by including the line
+      <code>(require "extras.rkt")</code>
+      at the top of your files with your other <code>require</code>
+      declarations.  Following those <code>require</code> declarations,
+      write <code>provide</code> declarations that provide all of
+      the functions you are required to provide, without providing any
+      functions you are not required to provide.
+      That will allow our testing framework to import your files
+      and do automated testing on them.
+      You can use <code>check-location</code> to double-check that your
+      files are in the right place.
+    </p>
+    <p>
+      Remember that you must follow the design recipe, which is a
+      process, not a list of deliverables.
+      Your
+      <a href="../Info/deliverables.html">
+        deliverables
+      </a>
+      include the artifacts produced by the various steps of the
+      design recipe: data definitions (including interpretation and
+      templates, contracts, purpose statements, definitions, and tests).
+      Be sure to follow our
+      <a href="../Info/style.html">
+        coding conventions.
+      </a>
+      Doing so will make codewalks easier for everyone.
+    </p>
+    <hr />
+  </div>
+  <h3>
+    Problem Specification
+  </h3>
+  <p>
+    The program you are to write solves a simple flight scheduling
+    problem:  What is the quickest way to get from one airport to
+    another using a given set of scheduled flights?
+  </p>
+  <p>
+    This is, of course, a variation on Problem Set 00.
+    You and your partner are allowed to use any code either of you
+    wrote for Problem Set 00.  You are also allowed to use any
+    code, including tests, given to you by course staff.
+    You are not allowed to use code or tests written by anyone else.
+  </p>
+  <p>
+    We have divided that problem into two parts.
+    In the first part, you will implement two abstract data types.
+    In the second part, you will use those ADTs in your solution to
+    the scheduling problem.
+  </p>
+  <ol>
+    <li>
+      In a file named <code>flight.rkt</code>, write data definitions
+      for the UTC and Flight data types specified below, define all
+      11 of the functions associated with those types as specified
+      below, and
+      <code>provide</code> all of those functions.
+      <pre>
+        ;;; make-UTC : NonNegInt NonNegInt -> UTC
+        ;;; GIVEN: the hour and minute parts of a time in UTC
+        ;;; WHERE: the hour is less than 24 and the minute is less than 60
+        ;;; RETURNS: the UTC time determined by the arguments
+        ;;; EXAMPLES: see below
+        
+        ;;; UTC-hour   : UTC -> NonNegInt
+        ;;; UTC-minute : UTC -> NonNegInt
+        ;;; GIVEN: a representation of a time in UTC as returned by make-UTC
+        ;;; RETURNS: the hour part or minute part (respectively)
+        ;;; EXAMPLES:
+        ;;;     (UTC-hour   (make-UTC 15 31))  =>  15
+        ;;;     (UTC-minute (make-UTC 15 31))  =>  31
+        
+        ;;; UTC=? : UTC UTC -> Boolean
+        ;;; GIVEN: two UTC times
+        ;;; RETURNS: true iff they have the same hour and minute parts
+        ;;; EXAMPLES:
+        ;;;     (UTC=? (make-UTC 15 31) (make-UTC 15 31))  =>  true
+        ;;;     (UTC=? (make-UTC 15 31) (make-UTC 14 31))  =>  false
+        ;;;     (UTC=? (make-UTC 15 31) (make-UTC 15 32))  =>  false
+        
+        
+        ;;; make-flight : String String String UTC UTC -> Flight
+        ;;; GIVEN: the name of a flight, the name of the airport from
+        ;;;     which the flight departs, the name of the airport at
+        ;;;     which the flight arrives, the time of departure in UTC,
+        ;;;     and the time of arrival in UTC
+        ;;; RETURNS: a flight value that encapsulates the given information
+        ;;; EXAMPLE:
+        ;;;     (define flt1
+        ;;;       (make-flight "United 448"
+        ;;;                    "BOS" "DEN"
+        ;;;                    (make-UTC 20 03) (make-UTC 00 53)))
+        
+        ;;; flight-name : Flight -> String
+        ;;; GIVEN: a flight
+        ;;; RETURNS: the name of the Flight
+        ;;; EXAMPLE:
+        ;;;     (flight-name flt1)  =>  "United 448"
+        
+        ;;; departs : Flight -> String
+        ;;; GIVEN: a flight
+        ;;; RETURNS: the name of the airport from which the flight departs
+        ;;; EXAMPLE:
+        ;;;     (departs flt1)  =>  "BOS"
+        
+        ;;; arrives : Flight -> String
+        ;;; GIVEN: a flight
+        ;;; RETURNS: the name of the airport at which the flight arrives
+        ;;; EXAMPLE:
+        ;;;     (arrives flt1)  =>  "DEN"
+        
+        ;;; departs-at : Flight -> UTC
+        ;;; GIVEN: a flight
+        ;;; RETURNS: the time (in UTC, see above) at which the flight departs
+        ;;; EXAMPLE:
+        ;;;     (departs-at flt1)  =>  (make-UTC 20 03)
+        
+        ;;; arrives-at : Flight -> UTC
+        ;;; GIVEN: a flight
+        ;;; RETURNS: the time (in UTC, see above) at which the flight arrives
+        ;;; EXAMPLE:
+        ;;;     (arrives-at flt1)  =>  (make-UTC 00 53)
+        
+        ;;; flight=? : Flight Flight -> Boolean
+        ;;; GIVEN: two flights
+        ;;; RETURNS: true if and only if the two flights have the same
+        ;;;     name, depart from the same airport, arrive at the same
+        ;;;     airport, depart at the same time, and arrive at the same time
+        ;;; EXAMPLES:
+        ;;;
+        ;;;     (flight=? flt1 flt1)  =>  true
+        ;;;
+        ;;;     (flight=? (make-flight "United 448"
+        ;;;                            "BOS" "DEN"
+        ;;;                            (make-UTC 20 00) (make-UTC 00 55))
+        ;;;               flt1)
+        ;;; =>  false
+      </pre>
+      <p>
+        The following examples will be used in part 2 as well.
+      </p>
+      <pre>
+        ;;; Pan American is no longer flying.
+        
+        (define panAmFlights '())
+        
+        (define deltaFlights
+          (let ((u make-UTC)) ; so u can abbreviate make-UTC
+            (list
+             (make-flight "Delta 0121" "LGA" "MSP" (u 11 00) (u 14 09))
+             (make-flight "Delta 1609" "MSP" "DEN" (u 20 35) (u 22 52))
+             (make-flight "Delta 5703" "DEN" "LAX" (u 14 04) (u 17 15))
+             (make-flight "Delta 2077" "LAX" "PDX" (u 17 35) (u 20 09))
+             (make-flight "Delta 2163" "MSP" "PDX" (u 15 00) (u 19 02)))))
+      </pre>
+    </li>
+    <li>
+      In a file named <code>q2.rkt</code>, import the ADTs you wrote
+      for part 1 by adding the following to your usual sequence of
+      <code>require</code> declarations:
+      <pre>
+        (require "flight.rkt")
+      </pre>
+      <p>
+        Then define and <code>provide</code> the three functions
+        specified below.
+      </p>
+      <pre>
+        ;;; can-get-there? : String String ListOfFlight -> Boolean
+        ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
+        ;;;     and a ListOfFlight that describes all of the flights a
+        ;;;     traveller is willing to consider taking
+        ;;; WHERE: there are no non-trivial round trips
+        ;;;     (Once you depart from an airport, you can't get back to it.)
+        ;;; RETURNS: true if and only if it is possible to fly from the
+        ;;;     first airport (ap1) to the second airport (ap2) using
+        ;;;     only the given flights
+        ;;; EXAMPLES:
+        ;;;     (can-get-there? "06N" "JFK" panAmFlights)  =>  false
+        ;;;     (can-get-there? "JFK" "JFK" panAmFlights)  =>  true
+        ;;;     (can-get-there? "06N" "LAX" deltaFlights)  =>  false
+        ;;;     (can-get-there? "LAX" "06N" deltaFlights)  =>  false
+        ;;;     (can-get-there? "LGA" "PDX" deltaFlights)  =>  true
+        
+        ;;; fastest-itinerary : String String ListOfFlight -> ListOfFlight
+        ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
+        ;;;     and a ListOfFlight that describes all of the flights a
+        ;;;     traveller is willing to consider taking
+        ;;; WHERE: there are no non-trivial round trips, and
+        ;;;     it is possible to fly from the first airport (ap1) to
+        ;;;     the second airport (ap2) using only the given flights
+        ;;; RETURNS: a list of flights that tells how to fly from the
+        ;;;     first airport (ap1) to the second airport (ap2) in the
+        ;;;     least possible time, using only the given flights
+        ;;; NOTE: to simplify the problem, your program should incorporate
+        ;;;     the totally unrealistic simplification that no layover
+        ;;;     time is necessary, so it is possible to arrive at 1500
+        ;;;     and leave immediately on a different flight that departs
+        ;;;     at 1500
+        ;;; EXAMPLES:
+        ;;;     (fastest-itinerary "JFK" "JFK" panAmFlights)  =>  empty
+        ;;;
+        ;;;     (fastest-itinerary "LGA" "PDX" deltaFlights)
+        ;;; =>  (list (make-flight "Delta 0121"
+        ;;;                        "LGA" "MSP"
+        ;;;                        (make-UTC 11 00) (make-UTC 14 09))
+        ;;;           (make-flight "Delta 2163"
+        ;;;                        "MSP" "PDX"
+        ;;;                        (make-UTC 15 00) (make-UTC 19 02)))
+        
+        ;;; travel-time : String String ListOfFlight -> NonNegInt
+        ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
+        ;;;     and a ListOfFlight that describes all of the flights a
+        ;;;     traveller is willing to consider taking
+        ;;; WHERE: there are no non-trivial round trips, and
+        ;;;     it is possible to fly from the first airport (ap1) to
+        ;;;     the second airport (ap2) using only the given flights
+        ;;; RETURNS: the number of minutes it takes to fly from the first
+        ;;;     airport (ap1) to the second airport (ap2), including any
+        ;;;     layovers, by the fastest possible route that uses only
+        ;;;     the given flights
+        ;;; EXAMPLES:
+        ;;;     (travel-time "JFK" "JFK" panAmFlights)  =>  0
+        ;;;     (travel-time "LGA" "PDX" deltaFlights)  =>  482
+      </pre>
+    </li>
+  </ol>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

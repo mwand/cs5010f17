@@ -1,0 +1,133 @@
+# Given lo and hi, returns the number of prime numbers in the range [lo,hi].
+
+primeCount (lo, hi)
+  length (primes (lo, hi));
+
+# Given lo and hi, returns a list of the prime numbers in [lo,hi].
+
+primes (lo, hi)
+  filter ((λ (p) inRange (p, lo, hi)),
+          primesThruN (hi));
+
+# Precondition: lo <= hi.
+# Returns true iff lo <= k <= hi.
+
+inRange (k, lo, hi)
+  if k < lo
+    then false
+  else if k > hi
+    then false
+  else true;
+
+# Returns a list of the prime numbers less than or equal to n.
+
+primesThruN (n)
+  sieve (rest (rest (naturalsThruN (n))));
+
+# Returns a list of the natural numbers less than or equal to n.
+
+naturalsThruN (n)
+  (λ (loop)
+    loop (loop, n, empty))
+  ((λ (loop, n, nums)
+     if n = 0
+       then cons (0, nums)
+       else loop (loop, n - 1, cons (n, nums))));
+
+# Sieve of Eratosthenes.
+# Given a list of natural numbers whose first element is a prime,
+# where the list contains all natural numbers greater than one
+# (up through some limit) that are not divisible by a prime less than
+# the first element,
+# returns a list of all primes greater than or equal to the first
+# element of the given list and less than or equal to the limit.
+
+sieve (lst)
+  if isEmpty (lst)
+    then empty
+    else (λ (p)
+           (cons (p, sieve (removeMultiples (p, lst)))))
+         (first (lst));
+
+# Returns the list obtained by removing all multiples of k from lst.
+
+removeMultiples (k, lst)
+  removeMultiplesLoop (k, lst, k);
+
+# Precondition: m is a multiple of k, the list is sorted,
+# and the list contains no multiples of k less than m.
+# Returns the list obtained by removing all multiples of k from lst.
+
+removeMultiplesLoop (k, lst, m)
+  if isEmpty (lst)
+    then empty
+  else if m < first (lst)
+    then removeMultiplesLoop (k, lst, m + k)
+  else if m = first (lst)
+    then removeMultiplesLoop (k, rest (lst), m + k)
+  else cons (first (lst),
+             removeMultiplesLoop (k, rest (lst), m));
+
+################################################################
+#
+# Functions defined on lists.
+#
+################################################################
+
+# Returns the length of the list.
+
+length (lst)
+  if isEmpty (lst) then 0 else 1 + length (rest (lst));
+
+# Returns a list of the given list's elements for which the
+# given predicate is true.
+
+filter (pred, lst)
+  if isEmpty (lst)
+    then empty
+  else if pred (first (lst))
+    then cons (first (lst),
+               filter (pred, rest (lst)))
+  else filter (pred, rest (lst));
+
+################################################################
+#
+# An abstract data type of lists.
+#
+# Representation:
+#     A list is a function that, given a 3-argument selector
+#     function, returns the result of calling that function on
+#     these three things:
+#         a boolean indicating whether the list is empty
+#         the first element of the list
+#         the rest of the list
+#
+################################################################
+
+empty (op)                      # the empty list
+  op (true, empty, empty);
+
+cons (x, lst)                   # returns x consed onto lst
+  (λ (op)
+    (op (false, x, lst)));
+
+isEmpty (lst)                   # returns true iff lst is empty
+  lst ((λ (x, y, z) x));
+
+first (lst)                     # returns first element of a non-empty lst
+  if isEmpty (lst)
+    then false + false          # throws exception if lst is empty
+    else first0 (lst);
+
+rest (lst)                      # returns rest of a non-empty lst
+  if isEmpty (lst)
+    then false + false          # throws exception if lst is empty
+    else rest0 (lst);
+
+# Private help functions.
+
+first0 (lst)                    # unsafe (non-checking) version of first
+  lst ((λ (x, y, z) y));
+
+rest0 (lst)                     # unsafe (non-checking) version of rest
+  lst ((λ (x, y, z) z))

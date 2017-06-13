@@ -1,115 +1,152 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>CS 5010 Module 02</title>
-<link type="text/css" rel="stylesheet" href="../css/course.css">
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Module 02
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
 </head>
 
-<!-- Be sure to change title and h1 each week. -->
-
 <body>
-<h1>CS 5010 Module 02</h1>
 
-<h2>Module Overview</h2>
+<!-- start of specific content -->
 
-<p>This week will be largely devoted to the "Use Template" strategy,
-which is the design recipe you will use most often in this course.  We
-will also talk about the "Divide Into Cases" strategy, about testing,
-and give you a checklist for reviewing and polishing your program
-before you turn it in.  This completes our survey of the Function
-Design Recipe. You will also review Racket's facilities for
-producing images and scenes.</p>
+<div id="maincontent">
+  <h2>
+    CS 5010: Module 02
+  </h2>
+  <div>
+    <h3>
+      Module Overview
+    </h3>
+    <p>
+      This week will be largely devoted to the <em>Use Template</em>
+      strategy, which is the design recipe you will use most often
+      in this course.
+      We will also talk about the <em>Divide Into Cases</em> strategy,
+      about testing, and give you a checklist for reviewing and polishing
+      your program before you turn it in.
+      This completes our survey of the Function Design Recipe.
+       You will also review Racket's facilities for producing images and scenes.
+    </p>
+    <h3>
+      Course Map
+    </h3>
+    <img src="module02.jpg" width="700" alt="course map">
+    <p>
+      Here's another view that shows where we are in the course:
+    </p>
+    <img src="Lesson2.1.jpg" width="700" alt="use template">
+    <h3>
+      Readings
+    </h3>
+    <p>
+      Read the Prologue and Part I from our
+      <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">
+        textbook,
+      </a>
+      which introduce you to programming in
+      Racket's Basic Student Language, using fixed-size data.
+    </p>
+    <h3>
+      Resources
+    </h3>
+    <ul>
+      <li>
+        <a href="../Examples">
+          Examples for Module 02
+        </a>
+      </li>
+      <li>
+        <a href="../Examples/02-7-ball-after-mouse-with-tests.rkt">
+          02-7-ball-after-mouse-with-tests.rkt
+        </a>
+        is an especially good example for you to study
+      </li>
+      <li>
+        <a href="http://www.jamasoftware.com/wp-content/uploads/documents/wiegers-testing-the-requirements.pdf">
+          Early testing helps in industry.
+        </a>
+        (Note that early testing is <em>not</em> the same as
+        test-driven design.)
+      </li>
+    </ul>
+    <h3>
+      Lessons
+    </h3>
+    <ul>
+      <li>
+        <a href="../PDF/Lesson2.1.pdf">
+          Lesson 2.1: Design Strategies 2: Using a Template
+        </a>
+      </li>
+      <li>
+        <a href="../GuidedPractices/gp02-1/">
+          Guided Practice 2.1
+        </a>
+      </li>
+      <li>
+        <a href="../PDF/Lesson2.2.pdf">
+          Lesson 2.2: Design Strategies 3: Dividing into Cases
+        </a>
+      </li>
+      <li>
+        <a href="../PDF/Lesson2.3.pdf">
+          Lesson 2.3: Examining Two Pieces of Data
+        </a>
+      </li>
+      <li>
+        <a href="../GuidedPractices/gp02-2/">
+          Guided Practice 2.2
+        </a>
+      </li>
+      <li>
+        <a href="../PDF/Lesson2.4.pdf">
+          Lesson 2.4: Testing
+        </a>
+      </li>
+      <li>
+        <a href="../PDF/Lesson2.5.pdf">
+          Lesson 2.5: Program Review
+        </a>
+      </li>
+      <li>
+        <a href="../PDF/Lesson2.6.pdf">
+          Lesson 2.6: Working with Images and Scenes
+        </a>
+      </li>
+    </ul>
+    <h3>
+      Problem Set
+    </h3>
+    <p>
+      <a href="../ProblemSets/ps02.html">
+        Problem Set 02
+      </a>
+      was assigned on Monday, 23 January.
+    </p>
+  </div>
+</div>
 
+<!-- end of specific content -->
 
-<h2>Course Map</h2>
-
-<img src="images/course-maps/module02.jpg" width="700px" alt="course
-map, week 2">
-
-<p>Here's another view that shows where we are in the course</p>
-
-<img src="images/course-maps/Lesson 2.1 Structural Decomposition.jpg"
-width="700px" alt="from principles to design strategies: structural decomposition">
-
-<h2>Readings</h2>
-
-<p>Prologue and Part I from the <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html" >textbook</a>, which cover an
-introduction to programming, fixed-size data, and the Basic Student
-Language in Racket.
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
 </p>
 
-<h2>Resources</h2>
-
-<ul>
-  <li>Examples are in the <a
-  href="http://www.ccs.neu.edu/course/cs5010f16/Examples/"
-  >Examples folder</a></li>
-
-  <li><a href="Class Notes/Module 02/car-order.html" >The Car-Order
-  Problem</a>
-  and one <a href="Class Notes/Module 02/car-order.rkt"
-  >solution</a>.
-
-  </li>
-
-  <!-- <li> <a href="examples/02-6-ball-after-mouse-with-tests.rkt" >02-6-ball-after-mouse-with-tests.rkt</a></li> -->
-  
-  <li>A <a href="http://www.jamasoftware.com/wp-content/uploads/documents/wiegers-testing-the-requirements.pdf" >white paper</a> on how early testing helps in industry.  Note that
-  this is NOT the same as test-driven design.</li>
-</ul>
-
-
-<h2>Lessons</h2>
-
-
-<ul>
-
-   <!-- <li><a href="../Videos/module02-intro.mp4" >Weekly Welcome Video</a></li> -->
-
-  <li><a href="../Slides/Lesson 2.1 Using a Template.pptx" >Lesson 2.1
-  Design Strategies 2:
-  Using a Template</a></li>   
-
-  <li><a href="../Slides/Lesson 2.2 Dividing into cases.pptx" >Lesson
-  2.2 Design Strategies 3: Dividing into Cases</a></li>
-
-  <li><a href="../Slides/Lesson 2.3 Examining More than One Value.pptx" >Lesson
-  2.3 Examining Two Pieces of Data</a></li>
-
-  <li><a href="../Guided Practices/gp02-1/index.html" >Guided Practice 2.1</a></li> 
-
-  <li><a href="../Slides/Lesson 2.4 Testing.pptx" >Lesson 2.4 Testing</a></li>  
-  
-  <li><a href="../Slides/Lesson 2.5 Program Review.pptx" >Lesson 2.5 Program Review</a></li>  
-  
-  <li><a href="../Slides/Lesson 2.6 Working with images and%20scenes.pptx" >
-  Lesson 2.6 Working with images and scenes</a></li>   
-
-</ul>
-
-<h2>Problem Set</h2>
-
-<p>
-<strong><a
-href="../Problem Sets/ps02.html"
->Problem Set 02</a></strong>
-</p>
-
-<p>This is the first problem set that will be codewalked.  Pay careful
-attention to the <a href="../Info/deliverables.html" >deliverables</a>
-and to the <a href="../Info/master-rubric-public.txt" >master
-rubric</a>. </p>
-
-<p> Your first codewalks will be conducted the week of September 28.
-If you are a student in Boston, you will receive an email with a
-personal URL at which you can sign up for your codewalk session.  If
-you are in Seattle, consult with your instructor about the codewalk
-schedule.</p>
-
-<hr>
-<address></address>
-<font size=-1>
-<p align=right>
-<!-- hhmts start -->
-Last modified: Wed Sep 21 22:01:56 Eastern Daylight Time 2016 <!-- hhmts end -->
-</body> </html>
+</body>
+</html>

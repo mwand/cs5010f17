@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Ackermann's Function in Scheme
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Ackermann's Function in Scheme
+  </h3>
+  <div>
+    <pre>
+      (import (scheme base)
+              (rnrs arithmetic fixnums)
+              (scheme write)
+              (scheme process-context)
+              (scheme time)
+              (scheme inexact))
+      
+      (define (ack m n)
+        (cond ((fx=? m 0)
+               (fx+ n 1))
+              ((fx=? n 0)
+               (ack (fx- m 1) 1))
+              (else
+               (ack (fx- m 1)
+                    (ack m (fx- n 1))))))
+      
+      (define args (command-line))
+      
+      (define (go)
+        (let ((m (string->number (list-ref args 1)))
+              (n (string->number (list-ref args 2))))
+          (if (and (fixnum? m)
+                   (fixnum? n))
+              (let* ((t0 (current-jiffy))
+      	              (result (ack m n))
+                     (t1 (current-jiffy)))
+                (write (inexact (/ (- t1 t0) (jiffies-per-second))))
+                (display " seconds to compute (ack ")
+                (write m)
+                (display " ")
+                (write n)
+                (display ")\n")
+                (write result)
+                (newline)))))
+      
+      (go)
+    </pre>
+    <p>
+      The fairness of that translation might be a little controversial
+      because:
+    </p>
+    <ul>
+      <li>
+        It uses fixnum-only arithmetic instead of Scheme's usual
+        generic arithmetic.
+      </li>
+      <li>
+        It measures only the time consumed by the call to
+        <code>ack</code>, excluding the time needed to compile this program
+        and to load the libraries it uses.
+      </li>
+    </ul>
+    <p>
+      Using fixnum arithmetic might be fair because C and Java
+      aren't using generic arithmetic.
+    </p>
+    <p>
+      Excluding compilation time might be fair because we're
+      going to exclude compilation time for C and Java when
+      we run the benchmarks.
+    </p>
+    <p>
+      Excluding the time needed to load libraries might be
+      fair because the C version links the needed libraries
+      into an executable ahead of time.
+    </p>
+    <p>
+      When we time the Java version, however, we won't link the
+      libraries into an executable ahead of time.
+      If you use inputs that make this benchmark run for only
+      a few seconds, that will be unfair to Java.
+      With this particular benchmark, however, using inputs
+      that would make the Java version run for more than a
+      few seconds would generate a stack overflow, which
+      might look worse than a slow running time.
+      What's fair?
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="ackermann3.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="ackermann5.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Testing Across Classes is Hard
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Testing Across Classes is Hard
+    </h3>
+    <p>
+      Testing across multiple classes that implement the same
+      interface is hard to do well.
+    </p>
+    <p>
+      For one thing, the tests have to know all of the classes
+      that implement the interface.  For black-box testing,
+      knowing all classes is generally impossible.
+    </p>
+    <p>
+      For another thing, more classes that implement the interface
+      might be added over time as the program evolves.
+      It's hard to keep the tests in sync with the program.
+    </p>
+    <p>
+      If the tested classes are designed to be extended using
+      inheritance, testing all classes that implement the
+      interface entails testing all subclasses as well.
+      That, too, is generally impossible to accomplish with
+      black-box testing, and it's especially hard to keep the
+      tests in sync with the program as new subclasses come and
+      go due to refactoring.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="testingObjects7.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="../Modules/module09.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Case Study: Immutable Finite Functions, Part 2
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Case Study: Immutable Finite Functions, Part 2
+  </h2>
+  <div>
+    <p>
+      In this case study, we design a second implementation
+      of the <code>IMap&lt;K,V&gt;</code> data type defined in
+      the previous lesson.
+      That second implementation will use binary search trees
+      instead of linear search.
+    </p>
+    <p>
+      To reduce duplication of code, we define an abstract base class
+      from which all of our implementations of
+      <code>IMap&lt;K,V&gt;</code> can inherit.
+    </p>
+    <p>
+      To reduce duplication of code in our implementation of
+      binary search trees, we define a second abstract base class
+      from which the classes for empty and non-empty trees can inherit.
+    </p>
+    <p>
+      This case study will also provide many opportunities to
+      discuss Java-specific syntax, semantics, and APIs.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy1IMapSummary.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2Objectives.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

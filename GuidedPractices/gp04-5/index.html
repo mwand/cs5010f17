@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Guided Practice 4.5: Halting Measures
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Guided Practice 4.5: Halting Measures
+  </h2>
+  <pre>
+    Consider the following function, defined on ListOfNumbers:
+    
+    ;; odd-elements : ListOfNumbers -&gt; ListOfNumbers
+    (define (odd-elements lst)
+      (cond
+        [(empty? lst) empty]
+        [(empty? (rest lst)) (first lst)]
+        [else (cons (first lst)
+                    (odd-elements (rest (rest lst))))]))
+    
+    Which of the following are valid halting measures for odd-elements ?
+    
+    a) when lst is empty
+    b) when lst has one or fewer elements
+    c) the length of lst
+    d) the number of elements of lst
+    e) the largest element of lst
+    
+    Next, consider the data type
+    
+    An AltList is one of
+    -- empty
+    -- (list Number AltList)
+    
+    and the function
+    
+    alt-odd-elements : AltList -&gt; AltList
+    (define (alt-odd-elements x)
+      (cond
+        [(empty? x) empty]
+        [(empty? (second x)) (list (first x) empty)]
+        [else (list (first x)
+                    (alt-odd-elements (second (second x))))]))
+    
+    Which of the following are valid halting measures for odd-elements ?
+    
+    a) when x is empty
+    b) when x has one or fewer elements
+    c) the length of x
+    d) the number of elements of x
+    e) the largest element of x
+  </pre>
+  <p>
+    <a href="solution.html">
+      [ANSWER]
+    </a>
+  </p>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

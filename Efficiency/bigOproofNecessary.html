@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The Hypotheses Are Necessary
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h4>
+    The Hypotheses Are Necessary
+  </h4>
+  <p>
+    In the second theorem, the hypothesis that says
+    (&lambda; n . 1) &isin; O(f)
+    is annoying but necessary.
+  </p>
+  <p>
+    Consider the following functions:
+  </p>
+  <blockquote>
+    <p>
+      f(n) = min (1, 1/n)
+    </p>
+    <p>
+      g(n) = 1
+    </p>
+  </blockquote>
+  <p>
+    Then g &isin; O(f) by the more general definition, but
+    g &notin; O(f) by the less general definition.
+  </p>
+  <p>
+    That means the less general definition is not exactly
+    the same as the definition we'd get by restricting the
+    more general definition
+    to functions that accept only natural numbers as arguments.
+  </p>
+  <p>
+    In computer science, the less general definition of O(f)
+    is almost never used unless f is positive-valued and monotonic,
+    which implies &nbsp; (&lambda; n . 1) &isin; O(f).
+    That's why, in computer science, it is almost always safe to
+    use the more general definition instead of the less general.
+  </p>
+</div>
+<div id="footer">
+  <form action="bigOproof2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="../Modules/module08.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Tail Calls in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Tail Calls in Java
+  </h3>
+  <div>
+    <p>
+      A method call is a tail call if and only if it occurs in
+      a tail context.
+    </p>
+    <p>
+      <strong>
+        Intuition:
+      </strong>
+      There are two ways to implement a tail call.
+    </p>
+    <ul>
+      <li>
+        The inefficient way is to have the tail call return its value
+        to this method, which immediately returns that value to its caller.
+      </li>
+      <li>
+        The more efficient way is to have the tail call return that value
+        directly to the caller of this method, so this method doesn't
+        have to wait around just so it can pass it along.
+      </li>
+    </ul>
+    <p>
+      The more efficient technique can be implemented by arranging for
+      this method to pass the return address it was given to the
+      method it's calling, instead of creating a brand new return
+      address that points to machine code whose only job is to
+      return to the given return address.
+    </p>
+    <p>
+      <strong>
+        Example:
+      </strong>
+    </p>
+    <pre>
+      return x.toString();
+    </pre>
+    <p>
+      The call to the <code>toString()</code> method of <code>x</code>
+      is a tail call.
+      The method in which that call appears could wait around for
+      the string to be returned, at which time the method would just
+      pass that string on to the return address it was given.
+    </p>
+    <p>
+      It would be more efficient for the method in which that call
+      appears to pass the return address it was given along to the
+      <code>toString()</code> method, so the <code>toString()</code>
+      method could return its string directly to the ultimate
+      consumer of that string.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="tailContext1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="tailContext3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

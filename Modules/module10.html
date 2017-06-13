@@ -1,101 +1,130 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>CS 5010 Module 10</title>
-<link type="text/css" rel="stylesheet" href="../css/course.css">
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Module 10
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
 </head>
 
-<!-- Be sure to change title and h1 each week. -->
-
 <body>
-<h1>CS 5010 Module 10</h1>
 
-<h2>Module Overview</h2>
+<!-- start of specific content -->
 
+<div id="maincontent">
+  <h2>
+    CS 5010: Module 10
+  </h2>
+  <div>
+    <h3>
+      Module Overview
+    </h3>
+    <p>
+      In this module, we will learn about inheritance, which is a
+      mechanism that allows us to generalize the implementations
+      of similar classes. Inheritance allows us to make a new class
+      that is very similar to an old one, or to make a new class
+      that generalizes the implementations of several similar classes.
+    </p>
+    <h3>
+      Course Map
+    </h3>
+    <img src="module09.jpg" width="700" alt="course map">
+    <h3>
+      Readings
+    </h3>
+    <p>
+      No required readings.
+    </p>
+    <h3>
+      Resources
+    </h3>
+    <ul>
+      <li>
+        <a href="../Examples">
+          Examples for Module 10
+        </a>
+      </li>
+      <li>
+        <a href="http://docs.oracle.com/javase/8/docs/api/">
+          API Specifications for Java 8
+        </a>
+      </li>
+      <li>
+        Chris Okasaki.
+        <cite>
+          <a href="../Inheritance/jfp99redblack.pdf">
+            Red-Black Trees in a Functional Setting,
+          </a>
+        </cite>
+        <i>
+          Journal of Functional Programming,
+        </i>
+        9(4) 471–477, July 1999.
+      </li>
+    </ul>
+    <h3>
+      Lessons
+    </h3>
+    <ul>
+      <li>
+        <a href="../Inheritance/inheritance1.html">
+          Lesson 10.1: Basics of Inheritance
+        </a>
+      </li>
+      <li>
+        <a href="../Inheritance/inheritanceSharing1.html">
+          Lesson 10.2: Using Inheritance to Share Implementations
+        </a>
+      </li>
+      <li>
+        <a href="../Inheritance/caseStudy1.html">
+          Lesson 10.3: Case Study: Immutable Finite Functions, Part 1
+        </a>
+      </li>
+      <li>
+        <a href="../Inheritance/caseStudy2.html">
+          Lesson 10.4: Case Study: Immutable Finite Functions, Part 2
+        </a>
+      </li>
+      <li>
+        <i>
+          Lesson 10.5: Case Study: Immutable Finite Functions, Part 3
+          (coming eventually)
+        </i>
+      </li>
+    </ul>
+    <h3>
+      Problem Set
+    </h3>
+    <p>
+      <a href="../ProblemSets/ps10.html">
+        Problem Set 10
+      </a>
+      was assigned on Monday, 27 March.
+    </p>
+  </div>
+</div>
 
-<p>In this module, we will learn how to make objects communicate with
-each other and that there are two basic models for communication: pull
-and push.  We will also learn that objects must have identity in order
-to communicate reliably, and how to use state to implement objects
-with stable identities. </p>
+<!-- end of specific content -->
 
-<p>In addition, we will discuss how and when to use the publish-subscribe
-pattern to implement push-style communication between unrelated
-objects.  
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
 </p>
 
-<h2>Course Map</h2>
-
-<img src="images/course-maps/module10.jpg"
-     width="700px"
-     alt="course map, week 10">
-
-<!-- <h2>Resources</h2> -->
-
-<!-- <ul> -->
-<!--   <li><a href="examples/week10examples.zip" >Examples for Week -->
-<!--   10</a></li> -->
-
-<!-- </ul> -->
-
-
-<h2>Lessons and Guided Practices</h2>
-
-<ul>
-
-  <li><a
-  href="../Slides/Lesson 10.1 Patterns of Communication Between Objects.pptx"
-  >Lesson 10.1 Patterns of Communication Between Objects</a></li>
-
-  <li><a
-  href="../Slides/Lesson 10.2 Stateful Objects and Stable Identities.pptx"
-  >Lesson 10.2 Stateful Objects and Stable Identities</a></li>
-
-  <li><a
-  href="../Slides/Lesson 10.3 Real State vs Simulated State.pptx"
-  >Lesson 10.3 Real State vs. Simulated State</a></li>
-
-  <li><a
-  href="../Slides/Lesson 10.4 Converting from Immutable to Mutable Objects.pptx"
-  >Lesson 10.4 Converting from Immutable to Mutable Objects</a></li>
-
-  <li><a href="../Guided Practices/gp10-1/index.html" >
-  Guided Practice 10.1</a>  Be sure to do this one! It contains new
-  material.</li> 
-  
-
-  <li><a
-  href="../Slides/Lesson 10.5 Generalizing this Design.pptx"
-  >Lesson 10.5 Generalizing this Design</a></li>
-
-  <li><a
-  href="../Slides/Lesson 10.6 Publish-Subscribe.pptx"
-  >Lesson 10.6 Publish-Subscribe</a></li>
-
-
-    <li><a
-  href="../Slides/Lesson 10.7 Testing Mutable Objects.pptx"
-  >Lesson 10.7 Testing Mutable Objects</a></li>
-
-
-      <li><a
-  href="../Slides/Lesson 10.8 Callbacks and Interacting Objects.pptx"
-  >Lesson 10.8 Callbacks and Interacting Objects</a></li>
-
-</ul>
-
-  
-<h2>Problem Set</h2>
-
-<p>
-<a
-href="../Problem Sets/ps10.html"
->Problem Set 10</a> 
-
-<hr>
-<address></address>
-<font size=-1>
-<p align=right>
-<!-- hhmts start -->
-Last modified: Wed Nov  9 16:46:11 Eastern Standard Time 2016 <!-- hhmts end -->
-</body> </html>
+</body>
+</html>

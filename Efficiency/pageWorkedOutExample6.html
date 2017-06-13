@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proof of f<sub>1</sub> &isin; O(f<sub>2</sub>)
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <p>
+      We can use algebra to prove f<sub>5</sub>(x) is positive
+      for all x &gt; 2:
+    </p>
+    <blockquote>
+      <p class="center">
+        f<sub>5</sub> (x) = 10 - 2 x + x<sup>2</sup>
+        <br />
+        = 10 + x (x - 2)
+        <br />
+        &gt; 10
+      </p>
+    </blockquote>
+    <p>
+      To prove f<sub>5</sub>(x) is positive for 0 &le; x &le; 2,
+      we can use this fact from calculus:
+    </p>
+    <blockquote>
+      <p>
+        A continuous function defined on a closed
+        interval takes on its minimum value at either an endpoint of
+        the interval or at a point where its first derivative is zero.
+      </p>
+    </blockquote>
+    <p>
+      It's easy to check that f<sub>5</sub>(0) and f<sub>5</sub>(2)
+      are positive.
+    </p>
+    <p>
+      The first derivative of f<sub>5</sub> is 2x - 2, so its first derivative
+      is zero only when x=1.
+      It's easy to check that f<sub>5</sub>(1) is positive
+      also.
+    </p>
+    <p>
+      That means f<sub>5</sub>(x) is positive
+      whenever 0 &le; x &le; 2, and we have
+      already proved f<sub>5</sub>(x) is positive for x &gt; 2.
+      That means f<sub>5</sub>(x) is positive for all non-negative x,
+      which is what we had to prove.
+    </p>
+    <p>
+      Conclusion: f<sub>1</sub> &isin; O(f<sub>2</sub>).
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="pageWorkedOutExample5.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="pageExamplesQ3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

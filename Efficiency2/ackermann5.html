@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Benchmarking Ackermann's Function
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Benchmarking Ackermann's Function
+  </h3>
+  <div>
+    <p>
+      Let's run those programs and see what we learn.
+    </p>
+    <h4>
+      Timings (in seconds) for <code>ack(3,12)</code>
+    </h4>
+    <div class="floatleft">
+      <table class="center floatleft">
+        <tr>
+          <th>
+            Language
+          </th>
+          <th>
+            Implementation
+          </th>
+          <th>
+            Running Time
+          </th>
+        </tr>
+        <tr>
+          <td>
+            C
+          </td>
+          <td>
+            <code>gcc</code>
+          </td>
+          <td>
+            3.76
+          </td>
+        </tr>
+        <tr>
+          <td>
+            C
+          </td>
+          <td>
+            <code>gcc -O4</code>
+          </td>
+          <td>
+            0.35
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Java
+          </td>
+          <td>
+            HotSpot
+          </td>
+          <td>
+            2.35
+          </td>
+        </tr>
+        <tr>
+          <td>
+            ps11
+          </td>
+          <td>
+            interpreted
+          </td>
+          <td>
+            stack overflow
+          </td>
+        </tr>
+        <tr>
+          <td>
+            ps11
+          </td>
+          <td>
+            compiler A
+          </td>
+          <td>
+            37.40
+          </td>
+        </tr>
+        <tr>
+          <td>
+            ps11
+          </td>
+          <td>
+            compiler B
+          </td>
+          <td>
+            3.57
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Scheme
+          </td>
+          <td>
+            <code>sagittarius</code>
+            <br />
+            (fixnum arithmetic)
+          </td>
+          <td>
+            71.56
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Scheme
+          </td>
+          <td>
+            <code>sagittarius</code>
+            <br />
+            (generic arithmetic)
+          </td>
+          <td>
+            36.98
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Scheme
+          </td>
+          <td>
+            <code>larceny</code>
+            <br />
+            (generic arithmetic)
+          </td>
+          <td>
+            2.29
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Scheme
+          </td>
+          <td>
+            <code>larceny</code>
+            <br />
+            (fixnum arithmetic)
+          </td>
+          <td>
+            2.17
+          </td>
+        </tr>
+      </table>
+    </div>
+    <p>
+      (These timings were obtained on a Linux machine
+      with an Intel i7-4790 microprocessor running at 3.6 GHz,
+      equipped with 16 gigabytes of memory.
+      Your mileage may vary.)
+    </p>
+    <p class="clear">
+    </p>
+    <h4 class="verticalspace">
+      What did you learn from these numbers?
+    </h4>
+    <ul>
+      <li>
+        Did you learn that optimized C code runs 10 times as
+        fast as unoptimized C code?
+      </li>
+      <li>
+        Did you learn that unoptimized compiled ps11
+        runs faster than unoptimized compiled C?
+      </li>
+      <li>
+        Did you learn that Scheme runs faster than Java?
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="ackermann4.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="ackermann5b.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

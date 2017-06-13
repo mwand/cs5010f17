@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proper Tail Recursion vs Iteration
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Proper Tail Recursion vs Iteration
+  </h3>
+  <div>
+    <p>
+      Iteration (in the form of loops) can be implemented
+      using either proper tail recursion or special syntax
+      such as <code>while</code> or <code>for</code> loops.
+    </p>
+    <p>
+      Proper tail recursion is more general than special
+      syntax, because tail recursion can be used across
+      multiple functions/methods defined in widely
+      separated parts of a program.  Special syntax
+      is almost always limited to the body of a single
+      function or method.
+    </p>
+    <p>
+      Simple examples of self-tail-recursion can be rewritten as
+      an equivalent <code>while</code> or <code>for</code> loop.
+      For example,
+    </p>
+    <pre>
+          // Given two non-negative integers, returns their sum.
+      
+          static int sum (int m, int n) {
+              if (m == 0)
+                  return n;
+              else
+                  return sum (m - 1, n + 1);
+          }
+    </pre>
+    <p>
+      is equivalent to
+    </p>
+    <pre>
+          // Given two non-negative integers, returns their sum.
+      
+          static int sum (int m, int n) {
+              while (m != 0) {
+                  m = m - 1;
+                  n = n + 1;
+              }
+              return n;
+          }
+    </pre>
+    <p>
+      In current implementations of Java, the <code>while</code>
+      loop is faster and asymptotically more space efficient.
+    </p>
+    <p>
+      In a properly tail-recursive implementation of Java,
+      however,
+      those two methods would have the same asymptotic space
+      complexity.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="tailProper5.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="tailProper12.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

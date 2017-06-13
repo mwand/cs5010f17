@@ -1,0 +1,171 @@
+# Binary search tree benchmark.
+#
+# Creates a binary search tree of size n, using 0 through n-1 as keys
+# and their squares as values.  Then searches for k the number of times
+# specified by repeat, returning the square of k.
+
+bstBenchmark (n, k, repeat)
+  doSearches (makeTree (n), k, repeat);
+
+doSearches (t, k, repeat)
+  if repeat < 2
+    then lookup (k, t, notFound)
+    else (λ (val) doSearches (t, k, repeat - 1))
+         (lookup (k, t, notFound));
+
+# Returns the value associated with k in t,
+# or returns notFound if k is not a key in t.
+
+lookup (k, t, notFound)
+  if isEmpty (t)
+    then notFound
+    else (λ (k0)
+           if k = k0
+             then rootValue (t)
+             else if k < k0
+               then lookup (k, left (t), notFound)
+               else lookup (k, right (t), notFound)
+             
+           )
+         (rootKey (t));
+
+# Returns a binary search tree of size n whose keys are 0 through n-1,
+# with each key mapped to its square.
+# Adding those keys in sorted order would create an unbalanced tree,
+# so they're added in a more scattered order.
+
+makeTree (n)
+  if n > 2
+    then populateTree (emptyTree, 0, n, suitableStride (n))
+  else if n = 2
+    then insert (0, 0, insert (1, 1, emptyTree))
+  else if n = 1
+    then insert (0, 0, emptyTree)
+  else emptyTree;
+
+# Given a tree t of the given size, a desired size n, and
+# an integer k that is coprime to n,
+# returns a tree of size n, whose keys are the integers in [0,n)
+# that maps each key to its square.
+
+populateTree (t, size, n, k)
+  if size = n
+    then checkTree (t, n)
+    else (λ (key)
+           populateTree (insert (key, key * key, t), size + 1, n, k))
+         (mod (size * k, n));
+
+# Checks to make sure all keys in [0,n) are present.
+# If that is so, returns the tree.
+
+checkTree (t, n)
+  if n = 0
+    then t
+    else if lookup (n - 1, t, notFound) < notFound
+           then checkTree (t, n - 1)
+           else false + false;
+
+# Precondition: n > 0.
+# Returns an integer in the range [0,n) that's coprime to n.
+
+suitableStride (n)
+  suitableStrideLoop (n, div (n, 3));
+
+suitableStrideLoop (n, k)
+  if gcd (n, k) = 1
+    then k
+    else suitableStrideLoop (n, k + 1);
+
+# Precondition: k is non-negative, and n is positive.
+# Returns the integer quotient of k divided by n.
+
+div (k, n)
+  if k < n
+    then 0
+    else 1 + div (k - n, n);
+
+# Precondition: k is non-negative, and n is positive.
+# Returns k modulo n.
+
+mod (k, n)
+  if k < n
+    then k
+    else mod (k - n, n);
+
+# Precondition: both arguments are 1 or greater.
+# Returns their greatest common denominator.
+
+gcd (i, j)
+  if i = j
+    then i
+    else if i > j
+      then gcd (i - j, j)
+      else gcd (i, j - i);
+
+################################################################
+#
+# Abstract data type of binary search trees,
+# with integers as keys and values arbitrary.
+#
+# Representation:
+#     A tree takes a 5-argument function and returns the result
+#     of calling that function on these values:
+#         a boolean indicating whether the tree is empty
+#         the key at the root (non-empty only)
+#         the value at the root (non-empty only)
+#         the left subtree (non-empty only)
+#         the right subtree (non-empty only)
+#
+################################################################
+
+emptyTree (f)
+  f (true, false, false, false, false);
+
+newTree (key, value, left, right)
+  (λ (f) f (false, key, value, left, right));
+
+isEmpty (t)
+  t ((λ (isEmpty, key, value, left, right) isEmpty));
+
+rootKey (t)
+  t ((λ (isEmpty, key, value, left, right) key));
+
+rootValue (t)
+  t ((λ (isEmpty, key, value, left, right) value));
+
+left (t)
+  t ((λ (isEmpty, key, value, left, right) left));
+
+right (t)
+  t ((λ (isEmpty, key, value, left, right) right));
+
+insert (key, value, t)
+  if isEmpty (t)
+    then newTree (key, value, t, t)
+  else if key = rootKey (t)
+    then newTree (key, value, left (t), right (t))
+  else if key < rootKey (t)
+    then newTree (rootKey (t),
+                  rootValue (t),
+                  insert (key, value, left (t)),
+                  right (t))
+  else newTree (rootKey (t),
+                rootValue (t),
+                left (t),
+                insert (key, value, right (t)));
+
+lookup (key, t, notFound)
+  if isEmpty (t)
+    then notFound
+  else if key = rootKey (t)
+    then rootValue (t)
+  else if key < rootKey (t)
+    then lookup (key, left (t), notFound)
+  else lookup (key, right (t), notFound);
+
+size (t)
+  if isEmpty (t)
+    then 0
+    else 1 + size (left (t)) + size (right (t));
+
+notFound = 1000000000000000000

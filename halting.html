@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Halting Problem">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+Undecidability of the Halting Problem
+</title>
+<link type="text/css"
+      rel="stylesheet"
+      href="cs3800.css" />
+
+</head>
+
+
+<body>
+
+<h1>
+Undecidability of the Halting Problem
+</h1>
+
+<p>
+The undecidability of the halting problem is one of the
+most interesting and important topics in computer science.
+Indeed, it is one of the most important philosophical and
+scientific discoveries made during the twentieth century.
+</p>
+
+<p>
+The Scheme programming language, with its natural
+representation of programs as structured data, allows
+an especially simple yet rigorous treatment of this
+topic.
+We could use any other Turing-complete language instead,
+but the definitions and proofs would become more complex.
+</p>
+
+<p>
+We begin with some introductory material concerning quines
+and Turing completeness.
+</p>
+
+<hr />
+
+<h2>
+Quines
+</h2>
+
+<h4 class="center">
+Definition of Quines
+</h4>
+
+<blockquote class="darker">
+A Scheme program <code><var>Q</var></code> is a <em>quine</em>
+if and only if
+<pre class="darker">
+    (equal? <var>Q</var>
+            (eval <var>Q</var> (scheme-report-environment 5)))
+</pre>
+evaluates to <code>#t</code>.
+</blockquote>
+
+<p>
+<code>0</code> is a quine.
+</p>
+
+<pre>
+((lambda (x) (x x))
+ (lambda (x) (x x)))
+</pre>
+<p>
+is not a quine.
+</p>
+
+<pre>
+((lambda (x) (list x (list 'quote x)))
+ '(lambda (x) (list x (list 'quote x))))
+</pre>
+<p>
+is a quine.
+</p>
+
+<p>
+If you don't understand why we are using Scheme
+instead of some other language such as Java,
+then you should write a Java program that prints itself to
+<code>System.out</code>.
+</p>
+
+<p>
+Quines are named after 
+<a href="https://en.wikipedia.org/wiki/Willard_Van_Orman_Quine">Willard
+Van Orman Quine</a>, who used to teach philosophy at
+Harvard.
+</p>
+
+<hr />
+
+<h2>
+Turing Completeness
+</h2>
+
+<p>
+Let N be the set of natural numbers (starting with zero).
+</p>
+
+<blockquote class="darker">
+<strong>Theorem.</strong>
+Not all mathematical functions from N to N are computable
+by a Scheme program.
+</blockquote>
+
+<p>
+The proof of that theorem uses a technique called <em>diagonalization</em>,
+which we will also use when we prove the undecidability of
+the halting problem.
+</p>
+
+<blockquote class="darker">
+<strong>Proof.</strong>
+Suppose every mathematical function <var>f</var>: N &rarr; N
+were computed by some Scheme program <var>P<sub>f</sub></var>.
+We will use the <var>P<sub>f</sub></var> to define a function
+<var>g</var>: N &rarr; N that isn't computed by any of the
+<var>P<sub>f</sub></var>.
+
+<br />
+<br />
+
+First we assign a unique natural number to each of the
+<var>P<sub>f</sub></var>.  One way to do this is to represent
+each <var>P<sub>f</sub></var> by its UTF-8 encoding,
+and to interpret the bits of that UTF-8 encoding as the binary
+representation of a natural number <var>i<sub>f</sub></var>.
+
+<br />
+<br />
+
+Define <var>g</var>: N &rarr; N as follows.  For each natural
+number <var>i</var> that is not equal to any of the
+<var>i<sub>f</sub></var>, define <var>g</var>(<var>i</var>) = 0.
+For each <var>i<sub>f</sub></var>, define
+<var>g</var>(<var>i<sub>f</sub></var>) = 
+<var>f</var>(<var>i<sub>f</sub></var>) + 1.
+
+<br />
+<br />
+
+<var>g</var> is not computed by any of the <var>P<sub>f</sub></var>
+because it returns a different result when given <var>i<sub>f</sub></var>
+as an argument.  Therefore the <var>P<sub>f</sub></var> didn't
+compute all possible functions after all.
+</blockquote>
+
+<p>
+Nothing in the proof depends upon any special properties
+of Scheme.  We could prove the theorem for any other
+programming language by substituting that language for
+Scheme.
+</p>
+
+<p>
+Some mathematical functions are computable, but not all
+mathematical functions are computable.
+It turns out that all sufficiently powerful programming
+languages compute exactly the same set of functions from
+N to N.
+To make it easier to talk about the programming languages
+that are sufficiently powerful to compute this standard
+set of functions from N to N, we call them the
+Turing-complete languages.
+</p>
+
+<h4 class="center">
+Definition of Turing Completness
+</h4>
+
+<blockquote class="darker">
+A programming language L is Turing-complete
+if and only if
+L is at least as powerful as Scheme in the following sense:
+For every mathematical function <var>f</var>: N &rarr; N
+that can be computed by a Scheme program, one could write
+a program in L that also computes <var>f</var>.
+</blockquote>
+
+<p>
+That definition could use any sufficiently powerful
+programming language instead of Scheme, but Scheme is
+convenient because it supports arbitrarily large exact
+integers.
+The original definition of Turing completeness used
+Turing machines, which are much less convenient.
+</p>
+
+<hr />
+
+<h2>
+Halting Problem for Scheme
+</h2>
+
+<blockquote class="darker">
+<strong>Definition.</strong>
+A lambda expression <code><var>H</var></code>
+<em>solves the halting problem</em> for Scheme
+if and only if
+for all expressions <code><var>F</var></code>
+and printable values <code><var>V</var></code>
+<pre class="darker">
+    (<var>H</var> '<var>F</var> '<var>V</var>)
+</pre>
+returns <code>#t</code>
+if <code>(<var>F</var> '<var>V</var>)</code> terminates
+and returns <code>#f</code>
+if <code>(<var>F</var> '<var>V</var>)</code> does not terminate.
+</blockquote>
+
+<p>
+The restriction to printable values might make
+the halting problem easier, but it doesn't make
+the problem any harder.
+If the halting problem is undecidable when
+restricted to printable values, then it is also
+undecidable when all values are allowed.
+</p>
+
+<hr />
+
+<h2>
+Undecidability of the Halting Problem for Scheme
+</h2>
+
+<blockquote class="darker">
+<strong>Theorem.</strong>
+No lambda expression <code><var>H</var></code>
+solves the halting problem for Scheme.
+</blockquote>
+
+<blockquote class="darker">
+<strong>Proof.</strong>
+Suppose <code><var>H</var></code> is a lambda expression,
+and consider the following expression, which we'll call
+<code><var>D</var></code>:
+<pre class="darker">
+    (let ()
+      (define d (lambda (x) (if (<var>H</var> x x) (d x) #t)))
+      d)
+</pre>
+If <code>(<var>H</var> '<var>D</var> '<var>D</var>)</code>
+returns <code>#t</code>,
+then <code>(<var>D</var> '<var>D</var>)</code> does not halt,
+which means <code><var>H</var></code> does not solve the halting problem.
+
+<br />
+<br />
+
+If <code>(<var>H</var> '<var>D</var> '<var>D</var>)</code>
+returns <code>#f</code>,
+then <code>(<var>D</var> '<var>D</var>)</code> returns <code>#t</code>,
+which means <code><var>H</var></code> does not solve the halting problem.
+
+<br />
+<br />
+
+If <code>(<var>H</var> '<var>D</var> '<var>D</var>)</code>
+returns any value other than <code>#t</code> or <code>#f</code>,
+then <code><var>H</var></code> does not solve the halting problem.
+
+<br />
+<br />
+
+If <code>(<var>H</var> '<var>D</var> '<var>D</var>)</code>
+does not return,
+then <code><var>H</var></code> does not solve the halting problem.
+
+<br />
+<br />
+
+Since <code>(<var>H</var> '<var>D</var> '<var>D</var>)</code>
+must do one of the four things above,
+<code><var>H</var></code> does not solve the halting problem.
+
+<br />
+<br />
+
+Since <code><var>H</var></code>
+is an arbitrary lambda expression, we conclude that no lambda
+expression solves the halting problem for Scheme.
+</blockquote>
+
+<p>
+It's a lot easier to prove the undecidability of the halting
+problem for Scheme than for most other languages,
+but the theorem above and its proof can be stated and proved for
+any Turing-complete programming language by encoding programs
+and values as numbers (or by using the quine tricks)
+to turn any program
+<code><var>H</var></code> into a program
+<code><var>D</var></code> that loops forever if
+<code><var>H</var></code> says it halts, and halts if
+<code><var>H</var></code> says it doesn't halt.
+</p>
+
+<hr />
+
+
+
+<p>
+Last updated 19 April 2016.
+</p>
+
+<p>
+<a href="http://validator.w3.org/check/referer">
+Click here to validate HTML on this page.
+</a>
+</p>
+
+</body>
+
+</html>

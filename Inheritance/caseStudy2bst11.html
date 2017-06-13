@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Empty Binary Search Trees
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Empty Binary Search Trees
+  </h3>
+  <div>
+    <p>
+      Empty binary search trees are implemented by the following subclass.
+    </p>
+    <p>
+      Note how the highlighted call to <code>super</code>
+      uses the Java constructor in the superclass to initialize
+      the private <code>cmp</code> field of that superclass.
+    </p>
+    <pre>
+      class IMapEmptyBST&lt;K,V&gt; extends IMapBST&lt;K,V&gt; {
+      
+          // Java constructor
+      
+          IMapEmptyBST (Comparator&lt;? super K&gt; cmp) {
+              <span class="red">super(cmp)</span>;
+          }
+      
+          // abstract methods listed by Map&lt;K,V&gt;
+      
+          public int size () { return 0; }
+      
+          // abstract methods listed by IMap&lt;K,V&gt;
+      
+          public IMap&lt;K,V&gt; extend (K key, V val) {
+              return this.make (key, val, this, this);
+          }
+      
+          // abstract methods declared by IMapBase&lt;K,V&gt;
+      
+          // Returns true iff this map has a mapping for the given key.
+      
+          protected boolean hasKey (K key) { return false; }
+      
+          // Returns the value associated with the given key.
+      
+          protected V getVal (K key) {
+              throw new RuntimeException ("getVal called with empty map: " + key);
+          }
+      
+          // Abstract help methods.
+      
+          // Adds the keys of this tree, in order, to the given list.
+      
+          void addKeys (List&lt;K&gt; lst) { }
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2bst3.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2bst21.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example of Compiler Optimization
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Example of Compiler Optimization
+  </h3>
+  <div>
+    <p>
+      An optimizing compiler will recognize that most of that machine
+      code is unnecessary.
+    </p>
+    <p>
+      The null checks are unnecessary because the method has already
+      computed <code>a.length</code> and <code>b.length</code>,
+      which would have thrown an exception if either <code>a</code>
+      or <code>b</code> were <code>null</code>.
+    </p>
+    <p>
+      The value of <code>i</code> starts out as 0,
+      changes only when incremented,
+      and never exceeds the non-negative integer <code>n</code>,
+      whose value is
+      <code>a.length</code>, which must be equal to <code>b.length</code>
+      (else an exception would already have been thrown).
+      That means both of the range checks are unnecessary.
+    </p>
+    <p>
+      Removing the unnecessary null and range checks yields the
+      following machine code:
+    </p>
+    <pre>
+          // a is in r1
+          // b is in r2
+          // n is in r3
+          // result is in f0
+      
+          sub     r4,r4,r4            // i is in r4
+          b       L2                  // branch to while loop test
+      L1:
+          muli    r4,8,r5             // fetch a[i] into f1
+          fld     r5(r1),f1
+          muli    r4,8,r5             // fetch b[i] into f2
+          fld     r5(r2),f2
+          fmul    f1,f2,f1            // floating point multiplication
+          fadd    f0,f1,f0            // floating point addition
+          addi    r4,1,r4             // i = i + 1;
+      L2:
+          cmp     r4,r3,r5            // is i less than n?
+          blt     r5,L1               // if so, branch to loop body
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="opt6.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="opt8.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

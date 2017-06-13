@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 03-2-draggable-cat-corrected) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 03-2-draggable-cat-corrected) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;; draggable cat.
 ;; like falling cat, but user can drag the cat with the mouse.
 ;; button-down to select, drag to move, button-up to release.
@@ -57,38 +57,29 @@
 
 ;;; DATA DEFINITIONS
 
-;; REPRESENTATION:
-;; A World is represented as (world x-pos y-pos paused? selected?)
-;; INTERPRETATION:
-;; x-pos, y-pos : Integer      the position of the center of the cat
-;;                             in the scene 
-;; paused?                     describes whether or not the cat is paused.
-;; selected?                   describes whether or not the cat is selected.
-
-;; IMPLEMENTATION
 (define-struct world (x-pos y-pos paused? selected?))
+;; A World is a (make-world Integer Integer Boolean Boolean)
+;; Interpretation: 
+;; x-pos, y-pos give the position of the cat. 
+;; paused? describes whether or not the cat is paused.
+;; selected? describes whether or not the cat is selected.
 
-;; CONSTRUCTOR TEMPLATE:
-;; (make-world Integer Integer Boolean Boolean)
-
-;; OBSERVER TEMPLATE:
 ;; template:
 ;; world-fn : World -> ??
+#|
 (define (world-fn w)
  (... (world-x-pos w)
-      (world-y-pos w) 
-      (world-paused? w)
-      (world-selected? w)))
+   (world-y-pos w) 
+   (world-paused? w)
+   (world-selected? w)))
+|#
 
-
-;; examples of worlds, for testing:
-
+;; examples of worlds, for testing
 ;; cat is unselected in all of these
 (define unpaused-world-at-20 (make-world CAT-X-COORD 20 false false))  
 (define paused-world-at-20   (make-world CAT-X-COORD 20 true false))
 (define unpaused-world-at-28 (make-world CAT-X-COORD 28 false false))  
 (define paused-world-at-28   (make-world CAT-X-COORD 28 true false))
-
 ;; examples with cat selected
 (define selected-unpaused-world-at-20 (make-world CAT-X-COORD 20 false true))  
 (define selected-paused-world-at-20   (make-world CAT-X-COORD 20 true true))
@@ -124,8 +115,7 @@
 ;; cat paused:
 ;; (world-after-tick paused-world-at-20) = paused-world-at-20
 
-;; STRATEGY: Cases on whether cat is paused or selected, if unselected
-;;           follow constructor template for world.
+;; STRATEGY: Use template for World on w
 
 (define (world-after-tick w)
   (if (or (world-paused? w) (world-selected? w))
@@ -171,7 +161,7 @@
 ;; RETURNS: a Scene that portrays the given world.
 ;; EXAMPLE: (world-to-scene (make-world 20 ??))
 ;;          = (place-image CAT-IMAGE CAT-X-COORD 20 EMPTY-CANVAS)
-;; STRATEGY: Use observer template for World on w
+;; STRATEGY: Use template for World on w
 (define (world-to-scene w)
   (place-image CAT-IMAGE 
                (world-x-pos w)
@@ -215,7 +205,7 @@
 
 ;; world-with-paused-toggled : World -> World
 ;; RETURNS: a world just like the given one, but with paused? toggled
-;; STRATEGY: Use constructor template for World on w
+;; STRATEGY: Use template for World on w
 (define (world-with-paused-toggled w)
   (make-world
    (world-x-pos w)
@@ -348,8 +338,7 @@
 ;; RETURNS: the world following a button-down at the given location.
 ;; if the button-down is inside the cat, returns a cat just like the
 ;; given one, except that it is selected.
-;; STRATEGY: Cases on whether the mouse event is in the cat, then use
-;; template for World on w 
+;; STRATEGY: Use template for World on w
 
 (define (world-after-button-down w mx my)
   (if (in-cat? w mx my)
@@ -365,7 +354,7 @@
 ;; NOTE: this behavior is too simple for a real application.  In the
 ;; problem sets, we'll use "smooth drag", which is covered in problem
 ;; set 03.
-;; STRATEGY: Cases on whether world is selected.
+;; STRATEGY: Use template for World on w
 
 (define (world-after-drag w mx my)
   (if (world-selected? w)
@@ -376,7 +365,7 @@
 ;; RETURNS: the world following a button-up at the given location.
 ;; if the cat is selected, return a cat just like the given one,
 ;; except that it is no longer selected.
-;; STRATEGY: cases on whether world is selected
+;; STRATEGY: use template for World on w
 
 (define (world-after-button-up w mx my)
   (if (world-selected? w)
@@ -389,7 +378,7 @@
 ;; RETURNS: true iff the given coordinate is inside the bounding box of
 ;; the cat.
 ;; EXAMPLES: see tests below
-;; strategy: use observer template on w
+;; strategy: use template for World on w
 
 (define (in-cat? w x y)
   (and

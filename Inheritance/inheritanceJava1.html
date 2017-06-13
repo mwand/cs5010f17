@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Inheritance in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Inheritance in Java
+  </h3>
+  <div>
+    <ul>
+      <li>
+        To say a class <code>C2</code> is a subclass of
+        class <code>C1</code>, write
+        <pre>
+          class C2 extends C1 ...
+        </pre>
+        If no superclass of <code>C2</code> is specified in this way,
+        then the superclass of <code>C2</code> is the predefined class
+        <code>Object</code>.
+      </li>
+      <li>
+        The Java constructor of a subclass always calls a
+        Java constructor of its superclass.
+        The subclass's constructor should therefore invoke
+        a constructor of its superclass using the
+        <code>super(...)</code> syntax.
+        <ul>
+          <li>
+            If a Java constructor does not call a constructor
+            of its superclass, the Java compiler automatically
+            inserts a call of the form <code>super()</code>.
+          </li>
+          <li>
+            If the compiler inserts <code>super()</code>, but
+            the superclass does not define a constructor that
+            accepts no arguments, the Java compiler will probably
+            say it can't find the constructor you called, even
+            though it is the compiler that's calling the constructor
+            it can't find.
+          </li>
+          <li>
+            If you don't define any constructors at all for a
+            class, then the Java compiler automatically defines
+            a constructor that takes no arguments and does nothing.
+          </li>
+        </ul>
+      </li>
+      <li>
+        A subclass can refer to the <code>h</code> field of its
+        superclass using the <code>super.h</code> syntax.
+      </li>
+      <li>
+        A subclass can refer to the <code>m</code> method
+        of its superclass using the <code>super.m</code>
+        syntax.
+      </li>
+      <li>
+        Java allows methods to be overridden without any annotation,
+        but it is good programming practice to write
+        <code>@Override</code> immediately before any method
+        definitions that are intended to override a method
+        of the same name and type in a superclass.
+        <ul>
+          <li>
+            The <code>@Override</code> annotation asks the Java
+            compiler to let you know if the method definition
+            fails to override a method.
+            That's helpful if you misspell the name of the method
+            or get one of its argument types wrong.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="inheritanceExample2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="inheritanceDefaults1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

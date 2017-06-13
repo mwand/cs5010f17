@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: How to Submit Your Homework
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<nav id="menu">
+  <table class="verticalspace">
+    <tr>
+      <td>
+        <a href="checklist.html">
+          Pre-Semester Checklist
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="structure.html">
+          Course Structure
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="communication.html">
+          Communication
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="hw.html">
+          Homework Policies
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="grading.html">
+          Grading
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="cheating.html">
+          Cheating
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="racket.html">
+          Why We Use Racket
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="style.html">
+          Style Guide
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="deliverables.html">
+          Deliverables
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="office.html">
+          Office Hours
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://piazza.com/northeastern/spring2017/cs5010/home">
+          Piazza
+        </a>
+      </td>
+    </tr>
+  </table>
+</nav>
+<div id="maincontent">
+  <h2>
+    How to Submit Your Homework
+  </h2>
+  <p>
+    In this course, we will use a local (Enterprise) GitHub
+    as our version control and repository system.
+    That GitHub site is located at
+    <a href="http://github.ccs.neu.edu/">
+      github.ccs.neu.edu.
+    </a>
+    You should visit this site as soon as you have a CCIS ID
+    so you can initialize your account there.
+  </p>
+  <p>
+    We will create a private repository for you at the GitHub site
+    for CS 5010.  We expect you to commit and push your work to
+    this repository at the end of every work session.
+    When begin to work in pairs, we will create a repository
+    for each pair, shared between you and your partner.
+  </p>
+  <p class="clear">
+    At the end of each work session, you must do three things:
+  </p>
+  <ol>
+    <li>
+      Fill out a
+      <a href="yourID-log.txt">
+        work session report
+      </a>
+      and place it within your repository, outside of
+      the directories you created for the problem sets.
+    </li>
+    <li>
+      Commit and push that work session report.
+    </li>
+    <li>
+      Commit and push all of the files in the directory
+      that contains the solution you are developing for
+      the current problem set.
+    </li>
+  </ol>
+  <p>
+    You must also fill out a form describing your preferences
+    for codewalk times the following week, but you only have
+    to do that once a week, before Saturday evening.
+  </p>
+  <p>
+    If you do not commit and push your files daily,
+    we will assume you are not working on the assignment.
+    If you commit and push only the final version of your
+    assignment, we will suspect you stole the code from
+    somewhere.  Even if you wrote all the code yourself,
+    violating course rules by not pushing intermediate versions
+    may lower your grade.
+  </p>
+  <p>
+    Checking in your partially-completed assignments also serves
+    as a backup in case something happens to the files on your
+    personal machine.
+    (Your dog won't eat the GitHub site.)
+  </p>
+  <p>
+    Your homework will be collected automatically from your
+    repository at the date and time listed on the problem set
+    (usually 6pm local time on Monday).
+  </p>
+  <p>
+    Your homework for problem set <var>JJ</var> should be committed and
+    pushed to your repository in a directory named
+    <code>set</code><var>JJ</var>.
+  </p>
+  <ul>
+    <li>
+      Problem sets may contain more than one part.  Each part
+      should be submitted as a single file within your
+      <code>set</code><var>JJ</var> directory.
+    </li>
+    <li>
+      Some parts of a problem set may specify the name of the
+      file you are to use.  If so, use that file name.
+    </li>
+    <li>
+      If part <var>K</var> of a problem set does not specify a
+      file name, then your solution for that part should go into
+      a file named <code>q</code><var>J</var><code>.rkt</code>.
+      For example: In Problem Set 01, your solution to part 2
+      (Exercise 14) goes into a file named
+      <code>set01/q2.rkt</code>.
+    </li>
+    <li>
+      If your solution is in a file named
+      <code>set1/q2.rkt</code>, <code>Set01/q2.rkt</code>,
+      <code>set01/question2.rkt</code>, or any other name
+      that is different from the one and only correct name,
+      then our automated testing scripts won't find your file
+      and a variety of bad things will happen.
+    </li>
+  </ul>
+  <p>
+    Be sure to include all of the
+    <a href="deliverables.html">
+      deliverables.
+    </a>
+  </p>
+  <p>
+    We have specified
+    <a href="style.html">
+      coding conventions
+    </a>
+    we expect you to use for this course.
+    Following those conventions will improve your life and ours.
+  </p>
+  <p>
+    Your problem sets will be graded according to the
+    <a href="grading.html">
+      rubric we have described.
+    </a>
+    Some details and points of emphasis will change from week to
+    week, but those general standards will remain the same
+    throughout the course.
+  </p>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

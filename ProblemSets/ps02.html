@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 02
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 02
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 23 January 2017
+      <br />
+      <strong>Due:</strong> Monday, 30 January 2017 at 6pm
+    </p>
+  </div>
+  <div>
+    <p>
+      This is an individual assignment.  You are not allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      The main purpose of this problem set is to give you practice
+      with data design and with functions that operate on scalar and
+      itemization data.
+    </p>
+    <p>
+      You must use Racket's HtDP Beginning Student Language
+      for this problem set.
+    </p>
+    <p>
+      For these problems, download a copy of
+      <a href="extras.rkt">
+        extras.rkt
+      </a>
+      and put it in the folder with your solutions.
+      Then import this library by including the line
+    </p>
+    <pre>
+      (require "extras.rkt")
+    </pre>
+    <p>
+      at the top of your file with the other <code>require</code>
+      declarations.  Then, for each problem, put in lines that say
+    </p>
+    <pre>
+      (provide <var>function</var>)
+    </pre>
+    <p>
+      for each deliverable function.  Thus, for problem 1, the top
+      of your <code>q1.rkt</code> file should say
+    </p>
+    <pre>
+      (require rackunit)
+      (require 2htdp/universe)    ; needed for key=?
+      (require "extras.rkt")
+      
+      (provide
+        make-editor
+        editor-pre
+        editor-post
+        editor?
+        edit)
+    </pre>
+    <p>
+      This will allow our testing framework to import your file
+      and do automated testing on it.
+    </p>
+    <p>
+      Remember that you must follow the design recipe, which is a
+      process, not a list of deliverables.
+      Your
+      <a href="../Info/deliverables.html">
+        deliverables
+      </a>
+      include the artifacts produced by the various steps of the
+      design recipe: data definitions (including interpretation and
+      templates, contracts, purpose statements, definitions, and tests).
+      Be sure to follow our
+      <a href="../Info/style.html">
+        coding conventions.
+      </a>
+      Doing so will make codewalks easier for everyone.
+    </p>
+    <p>
+      Be sure to fill out a
+      <a href="../ProblemSets/yourID-log.txt">
+        work session report
+      </a>
+      at the end of each work session.
+      Tell <code>git</code> to add it to the files you will commit,
+      and then commit and push (sync) that report in addition to
+      committing and pushing your entire <code>set02</code> directory.
+      Do this at the end of every work session.
+    </p>
+    <p>
+      Remember to include a copy of <code>extras.rkt</code> racket
+      in your <code>set02</code> directory, as well as your
+      <code>q2.jpg</code> or <code>q2.png</code> file.
+    </p>
+    <hr />
+    <ol>
+      <li>
+        (Tiny Test Editor)
+        <br />
+        Do exercise 84 (the function "edit") from
+        Part I, section 5.10 of
+        <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">
+          HtDP/2e.
+        </a>
+        <p>
+          You are to write a file called <code>q1.rkt</code>
+          that provides the following functions:
+        </p>
+        <pre>
+          make-editor
+          editor-pre
+          editor-post
+          editor?
+          edit
+        </pre>
+        <p>
+          For this problem, we will consider <code>KeyEvent</code>
+          to be a scalar data type, which can be decomposed using
+          the cases strategy.
+          <code>KeyEvent</code> and <code>key=?</code> are defined
+          in the <code>2htdp/universe</code> module.
+          Look in Racket's Help Desk for details.
+          To import <code>key=?</code>, you will need to <code>require</code>
+          <code>2htdp/universe</code>.
+        </p>
+        <p>
+          We will be doing automated testing of your solution, so
+          be sure your solution is in the right place
+          (<code>set02/q1.rkt</code> in your private
+          <code>cs5010sp17/pdp-YOURUSERNAME</code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line somewhere near the top of your file:
+        </p>
+        <pre>
+          (check-location "02" "q1.rkt")
+        </pre>
+      </li>
+      <li>
+        (Finite State Machine)
+        <br />
+        This exercise is loosely based on Exercise 109 in HtDP/2e,
+        but you will <strong><em>NOT</em></strong> create any displays.
+        <p>
+          As in Exercise 109, you are to design a finite-state machine
+          and a set of functions that
+          illustrate the workings of that machine.
+          The machine you design will accept a sequence of letters
+          (with each letter represented as a <code>1String</code>)
+          if and only if that sequence matches the regular expression
+        </p>
+        <pre>
+          (d* | d* p d* | s d* | s d* p d*) (d | d e)
+        </pre>
+        <p>
+          The sequences <code>d</code>, <code>dd</code>, <code>sd</code>,
+          <code>ddddpdd</code>, and <code>sddde</code> all match that
+          regular expression, but the sequences
+          <code>ddddp</code>, and <code>spe</code> do not.
+        </p>
+        <p>
+          Your program must define two data types,
+          <code>LegalInput</code> and <code>State</code>.
+        </p>
+        <p>
+          The <code>LegalInput</code> data type consists of the
+          four one-letter strings that represent a legal second argument
+          to your <code>next-state</code> function:
+          <code>"d"</code>, <code>"p"</code>,
+          <code>"s"</code>, and <code>"e"</code>.
+          You do not need to give an interpretation for each
+          <code>LegalInput</code>, because the problem makes
+          sense even if the inputs are uninterpreted.
+          (You might be interested to know, however, that this
+          problem is related to the syntax of numerical constants
+          in many programming languages.)
+        </p>
+        <p>
+          To design your <code>State</code> data type, you will need
+          to design your finite state machine as part of your information
+          analysis and data design.  Your information analysis and design
+          should produce a state-transition diagram
+          (like the ones <a href="http://www.google.com/search?q=state%20transition%20diagram&tbm=isch">here</a>)
+          that shows the meaning of your machine states.
+          Your data design should also include an interpretation
+          for each state.
+          Make your state-transition diagram as simple as you can,
+          and submit a picture of it in
+          <a href="https://en.wikipedia.org/wiki/JPEG">
+            JPEG
+          </a>
+          or
+          <a href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">
+            PNG
+          </a>
+          format as a separate file named
+          <code>q2.jpg</code> or <code>q2.png</code>.
+          You can create this file using a graphics program or by
+          drawing your state transition diagram on a piece of paper
+          and taking a good picture of it.
+        </p>
+        <p>
+          After you have done your data design, use your design to
+          design and <code>provide</code> these four functions:
+        </p>
+        <pre>
+          initial-state : Number -> State
+          GIVEN: a number
+          RETURNS: a representation of the initial state
+              of your machine.  The given number is ignored.
+          
+          next-state : State LegalInput -> State
+          GIVEN: a state of the machine and a machine input
+          RETURNS: the state the machine should enter if it
+              is in the given state and sees the given input.
+          
+          accepting-state? : State -> Boolean
+          GIVEN: a state of the machine
+          RETURNS: true iff the given state is a final (accepting) state
+          
+          rejecting-state? : State -> Boolean
+          GIVEN: a state of the machine
+          RETURNS: true iff there is no path (empty or non-empty) from
+              the given state to an accepting state
+        </pre>
+        <p>
+          Please note that some of your machine's states are
+          likely to be neither accepting nor rejecting.
+        </p>
+        <p>
+          Remember that we will be doing automated testing of your
+          solution, so be sure your solution is in the right place
+          (<code>set02/q2.rkt</code> in your private
+          <code>cs5010sp16/pdp-YOURUSERNAME</code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line somewhere near the top of your file:
+        </p>
+        <pre>
+          (check-location "02" "q2.rkt")
+        </pre>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

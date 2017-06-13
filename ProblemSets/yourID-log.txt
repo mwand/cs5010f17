@@ -1,0 +1,14 @@
+0 hours 0 minutes spent this session
+2017-01-06
+
+After each work session, please update and commit this file with the amount of
+time you spent working, the date when you stopped, and any notes you wish to
+make for yourself.  Every commit of this file constitutes a work log entry.
+Each entry should replace the previous one, so there will only be one session
+recorded at any particular version of this file.  Do *not* change the format of
+the first two lines, as the course staff will use automated tools to track the
+amount of time students spend on each problem set.
+
+When working in a pair, update the log file for each student with the time that
+student spent working in the session.  If a student was not present at a work
+session, do not update their work log.

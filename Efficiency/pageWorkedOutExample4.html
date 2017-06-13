@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proof of f<sub>1</sub> &isin; O(f<sub>2</sub>)
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <p>
+      We think c<sub>0</sub> = 40 and c<sub>1</sub> = 2 will work.
+      Substituting for those constants and for
+      f<sub>1</sub>(x) and f<sub>2</sub>(x), we get
+    </p>
+    <blockquote>
+      <p>
+        f<sub>1</sub> (x)
+         &le; c<sub>0</sub> + c<sub>1</sub> * f<sub>2</sub> (x)
+      </p>
+      <p>
+        3 x + 30 &le; 40 + 2 * (x (x + 1) / 2)
+      </p>
+    </blockquote>
+    <p>
+      which simplifies to
+    </p>
+    <blockquote>
+      <p>
+        0 &le; 10 - 2 x + x<sup>2</sup>
+      </p>
+    </blockquote>
+    <p>
+      That's the inequality we must prove.
+    </p>
+    <p>
+      Now we see why this is so hard.  The minus sign is working
+      against us.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="pageWorkedOutExample3.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="pageWorkedOutExample5.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

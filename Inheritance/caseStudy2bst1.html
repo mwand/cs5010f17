@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Binary Search Trees
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Binary Search Trees
+  </h3>
+  <div>
+    <p>
+      Finally, we are ready to implement binary search trees.
+    </p>
+    <p>
+      We will use separate classes to represent empty and non-empty trees.
+      To reduce duplication of code, both classes will inherit from the
+      same abstract base class.
+    </p>
+    <p>
+      The purpose statement (data definition) for that base class
+      appears below.
+      Its two constructor templates refer to a static factory method
+      for creating empty trees,
+      and to a dynamic factory method for creating non-empty trees.
+    </p>
+    <pre>
+      // Constructor templates for IMapBST&lt;K,V&gt;:
+      //
+      //     IMapBST.empty(c)
+      // Interpretation:
+      //     c is the comparator to be used by the map
+      //
+      //     this.make (k, v, left, right)
+      // Interpretation:
+      //     k and v are the key and value to be used at the root
+      //     left is the left subtree
+      //     right is the right subtree
+      // Where:
+      //     k is distinct from all keys in the left and right subtrees
+      //     k is greater than all keys in the left subtree
+      //     k is less than all keys in the right subtree
+      //     the left and right subtrees obey those invariants, recursively
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2SortedIMapBase12.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2bst2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

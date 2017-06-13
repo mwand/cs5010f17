@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Non-empty Binary Search Trees
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Non-empty Binary Search Trees
+  </h3>
+  <div>
+    <p>
+      The <code>hasKey</code> and <code>getVal</code> methods
+      simply search through the tree, looking for the key.
+    </p>
+    <pre>
+          // abstract methods declared by IMapBase&lt;K,V&gt;
+      
+          // Returns true iff this map has a mapping for the given key.
+      
+          protected boolean <span class="red">hasKey</span> (K key) {
+              int cresult = this.comparator().compare (key, this.key);
+              if (cresult == 0)
+                  return true;
+              else if (cresult &lt; 0)
+                  return this.left.hasKey(key);
+              else
+                  return this.right.hasKey(key);
+          }
+      
+          // Returns the value associated with the given key.
+      
+          protected V <span class="red">getVal</span> (K key) {
+              int cresult = this.comparator().compare (key, this.key);
+              if (cresult == 0)
+                  return this.val;
+              else if (cresult &lt; 0)
+                  return this.left.getVal(key);
+              else
+                  return this.right.getVal(key);
+          }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2bst22.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2bst24.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

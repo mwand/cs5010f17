@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  How Inheritance Works
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    How Inheritance Works
+  </h3>
+  <div>
+    <p>
+      Searching an inheritance chain may sound slow,
+      but implementations of OO languages use a variety of
+      clever tricks to make that search run quite.
+    </p>
+    <p>
+      A Java compiler can
+      arrange all of the methods defined or inherited by a class into
+      a linear sequence called the
+      <a href="https://en.wikipedia.org/wiki/Virtual_method_table">
+        virtual method table.
+      </a>
+      If the Java compiler sees a method call such as
+      <code>x.f(3,4)</code>, where the type of <code>x</code>
+      is a class type, the compiler can use that type
+      to figure out what the virtual method table for <code>x</code>
+      will look like, and then searches that table
+      <em>at compile time</em> to find the unique entry
+      for a method named <code>f</code> that takes two arguments,
+      both of type <code>int</code>.
+      The compiler generally cannot determine which version of
+      <code>f</code> will be present in that entry at run time,
+      because that depends on the class of <code>x</code>, which
+      may be different from the type of <code>x</code>,
+      but the compiler can compute the <em>index</em> of that entry
+      at compile time.
+    </p>
+    <p>
+      The compiler then generates machine code that, at run time,
+      will obtain the virtual method table for <code>x</code>,
+      use the index computed at compile time to fetch a pointer
+      to the code for the <code>f(int,int)</code> method
+      of <code>x</code>, and jumps to that code.
+    </p>
+    <p>
+      The machine code for <code>x.f(3,4)</code> will look
+      something like this:
+    </p>
+    <pre>
+      load    24(sp),r0     ; evaluate x into register r0
+      loadi   3,r1          ; evaluate 3 into register r1
+      loadi   4,r2          ; evaluate 4 into register r2
+      load    8(r0),r3      ; fetch virtual method table
+      load    368(r3),r3    ; fetch pointer to code for f
+      jmpi    (r3)          ; jump to code for f
+    </pre>
+    <p>
+      That sequence of code should run very quickly.
+    </p>
+    <p>
+      Note that the value of <code>x</code> is passed in
+      register <code>r0</code>, which becomes the home of
+      <code>this</code> within the machine code for
+      <code>f</code>.
+    </p>
+    <p>
+      The virtual method table may be fairly large, as
+      suggested by the 368 in that example, but all objects
+      of the same class will share the same virtual method
+      table.
+    </p>
+    <p>
+      Objects of different classes will have different
+      virtual method tables, which is what allows methods
+      to be overridden by subclasses.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="inheritanceHow1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="inheritanceHow3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

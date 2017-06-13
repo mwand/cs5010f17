@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  An Implementation of UTC
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <pre>
+      // Constructor template for UTC1:
+      //     new UTC1 (h, m)
+      // Interpretation:
+      //     h is the hour (between 0 and 23, inclusive)
+      //     m is the minute (between 0 and 59, inclusive)
+      
+      class UTC1 implements UTC {
+      
+          int h;    // the hour, limited to [0,23]
+          int m;    // the minute, limited to [0,59]
+      
+          // the Java constructor
+      
+          UTC1 (int h, int m) {
+              this.h = h;
+              this.m = m;
+          }
+      
+          // public methods
+      
+          // Returns the hour, between 0 and 23 inclusive.
+      
+          public int hour () { return h; }
+      
+          // Returns the minute, between 0 and 59 inclusive.
+      
+          public int minute () { return m; }
+      
+          // Returns true iff the given UTC is equal to this UTC.
+      
+          public boolean isEqual (UTC t2) {
+              return (h == t2.hour()) && (m == t2.minute());
+          }
+      
+          ...
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="UTC3.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="../Modules/module09.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -4,8 +4,6 @@
 (require rackunit)
 (require "extras.rkt")
 
-;; No data definitions here because we're just doing math.
-
 ;; zero-of-quadratic? : Real^4 -> Boolean
 ;; RETURNS: whether ax^2 + bx + c < tolerance
 (define (zero-of-quadratic? a b c x tol)
@@ -16,11 +14,11 @@
 
 (define (quadratic-solution1 a b c)
   (/ (+ (- b) (sqrt (- (* b b) (* 4 a c))))
-    (* 2 a)))
+     (* 2 a)))
 
 (define (quadratic-solution2 a b c)
   (/ (- (- b) (sqrt (- (* b b) (* 4 a c))))
-    (* 2 a)))
+     (* 2 a)))
 
 (begin-for-test
   (check-true (zero-of-quadratic? 1 0 4 (quadratic-solution1 1 0 4) .01))

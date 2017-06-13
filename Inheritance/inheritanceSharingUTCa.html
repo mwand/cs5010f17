@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example: UTC
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    The <code>UTC</code> Example
+  </h3>
+  <div>
+    <p>
+      In the
+      <a href="../InterfacesClasses/staticMethods1.html">
+        previous lesson,
+      </a>
+      we defined a class <code>UTC2</code> that inherits
+      several of its methods from another class <code>UTC1</code>.
+    </p>
+    <p>
+      That use of inheritance was inelegant and somewhat fragile.
+      Why does <code>UTC2</code> inherit from <code>UTC1</code>
+      instead of the other way around?
+      What if some future programmer modifies <code>UTC1</code>
+      without realizing the modified behavior will be
+      inherited by other classes such as <code>UTC2</code>?
+    </p>
+    <p>
+      It would be more symmetrical, more elegant, and less fragile
+      to define an <em>abstract base class</em> in which we implement
+      the common behavior.
+      Classes <code>UTC1</code> and <code>UTC2</code>
+      would both inherit from that common base class.
+      The behaviors of the <em>concrete subclasses</em>
+      <code>UTC1</code> and <code>UTC2</code>
+      would no longer be affected by changes to other concrete subclasses
+      of the abstract base class.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="inheritanceSharingMainIdeas.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="inheritanceSharingUTCb.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

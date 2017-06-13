@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 8.4</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 8.4</h1>
+
+<p>In the adjacency-list representation of graphs, a graph is
+represented as a list of node-information items, where each
+node-information item consists of the node and the list of successors
+of that node.  Here's a data definition and an example:</p>
+
+<pre>
+;; A Graph is a ListOfNodeInfo
+;; A NodeInfo is a (list Node ListOfNode)
+;; WHERE: If the graph is 
+;; '((n_1 (n_11 n_12..))
+;;   (n_2 (n_21 n_22 ...))
+;;   ...),
+;; then:
+;; there are no repetitions among the n_i
+;; AND for each i, there are no repetitions among n_i1, n_i2, etc.
+;; AND every node that occurs as an n_ij is also listed among the n_i.
+;; INTERPRETATION: the ni are the nodes in the graph, and n_i1, n_i2,
+;; etc., are the successors of n_i
+
+;; EXAMPLE:
+
+(define graph1
+  '((a (c))
+    (b (a c))
+    (c ())))
+   
+;; represents the same graph that used to be represented as
+;;   (list
+;;     (make-edge 'a 'c)
+;;     (make-edge 'b 'a)
+;;     (make-edge 'b 'c))
+</pre>
+
+<p>What is the <em>least</em> amount that
+needs to be done to convert 08-7-reachability.rkt to use this representation?
+</p>
+
+<p>Hint: This is easy.</p>
+
+
+<p><a href="solution.html" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Oct 25 22:38:33 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

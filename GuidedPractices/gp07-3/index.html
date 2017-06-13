@@ -1,0 +1,42 @@
+f<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 7.3</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 7.3</h1>
+
+<p>Modify the example in 07-3-gartersnake.rkt to return a set
+consisting of all the variables that occur undefined at least once in
+the program. </p>
+
+<pre>
+EXAMPLE:
+
+If the GarterSnake program is
+
+def f1(x):f2(y)            ; f2 is undefined, and y is undefined
+def f2(x,y): f3(y,x)       ; f3 is undefined in the body of f2
+def f3 (x,z):f1(f2(z,y),z) ; y is undefined
+
+then your function should return a list consisting of the symbols
+
+f2, f3, and y
+
+in any order.
+</pre>
+
+<p>The program isn't hard; but pay attention to the purpose statements
+and invariants!</p>
+
+
+<p><a href="07-3-all-undefined.rkt" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Oct 17 16:39:09 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

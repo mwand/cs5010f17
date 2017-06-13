@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The isEmpty and entrySet Methods
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    The <code>isEmpty</code> and <code>entrySet</code> Methods
+  </h3>
+  <div>
+    <pre>
+          // Returns true iff this map contains no key/value mappings.
+      
+          @Override
+          public boolean isEmpty () {
+              return size() == 0;
+          }
+      
+          // Returns a set of the key/value pairs in this Map.
+      
+          public Set<Entry&lt;K,V&gt;> entrySet () {
+              Iterator&lt;K&gt; it = keyIterator();
+              List<Entry&lt;K,V&gt;> entries = new ArrayList<Entry&lt;K,V&gt;>();
+              while (it.hasNext()) {
+                  K key = it.next();
+                  V value = getVal (key);
+                  Entry&lt;K,V&gt; entry = new SimpleImmutableEntry&lt;K,V&gt; (key, value);
+                  entries.add (entry);
+              }
+              return new ListSet&lt;K,V&gt; (entries);
+          }
+    </pre>
+    <p>
+      The <code>isEmpty</code> method calls <code>size()</code>
+      to compute its result.
+      That's fine if the <code>size</code> method is fast.
+      If <code>size</code> is slow in some implementation,
+      the <code>isEmpty</code> method can be overridden
+      in a subclass that's part of that implementation.
+    </p>
+    <p>
+      The <code>entrySet</code> method creates an iterator
+      by copying all keys into a <code>List</code>
+      and calling that list's <code>iterator()</code> method.
+      This is a fairly common idiom in Java.
+    </p>
+    <p>
+      All of the other methods listed in the
+      <code>Map&lt;K,V&gt;</code> interface are defined within
+      and inherited from <code>AbstractMap&lt;K,V&gt;</code>.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2IMapBase6.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2IMapBase11.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

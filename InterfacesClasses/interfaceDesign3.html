@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example 2: Widget
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Example 2: Widget
+  </h3>
+  <div>
+    <pre>
+      // Every object that lives in the world must implement the
+      // Widget interface.
+      
+      interface Widget {
+      
+          // RETURNS: the state of this object that should follow
+          //     at time t+1
+      
+          Widget afterTick ();
+      
+          // GIVEN: coordinates of a location
+          // RETURNS: the state of this object that should follow
+          //     the specified mouse event at the given location
+      
+          Widget afterButtonDown (int mx, int my);
+          Widget afterButtonUp (int mx, int my);
+          Widget afterDrag (int mx, int my);
+      
+          // GIVEN: a key event
+          // RETURNS: the state of this object that should follow
+          //     the given key event
+      
+          Widget afterKeyEvent (KeyEvent ke);
+      
+          // GIVEN: a scene
+          // RETURNS: a scene like the given one, but with this
+          //     object painted on it
+      
+          Scene addToScene (Scene sc);
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="interfaceDesign2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="classDesign1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

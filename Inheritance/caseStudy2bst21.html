@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Non-empty Binary Search Trees
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Non-empty Binary Search Trees
+  </h3>
+  <div>
+    <p>
+      Non-empty binary search trees are implemented by the following class.
+    </p>
+    <p>
+      Note again how the highlighted call to <code>super</code>
+      uses the Java constructor in the superclass to initialize
+      the private <code>cmp</code> field of that superclass.
+    </p>
+    <p>
+      Note also how the Java constructor pre-computes the size.
+      That improves the running time of the <code>size()</code>
+      method from O(n) in the worst case to O(1).
+    </p>
+    <pre>
+      class IMapNonEmptyBST&lt;K,V&gt; extends IMapBST&lt;K,V&gt; {
+      
+          private K key;                // the key at the root of this tree
+          private V val;                // the value associated with that key
+          private IMapBST&lt;K,V&gt; left;    // the left subtree of this tree
+          private IMapBST&lt;K,V&gt; right;   // the right subtree of this tree
+      
+          private int theSize;          // the size of this tree
+      
+          // Java constructor
+          // Invariant: the left and right subtrees have the same comparator.
+      
+          IMapNonEmptyBST (K key, V val, IMapBST&lt;K,V&gt; left, IMapBST&lt;K,V&gt; right) {
+              <span class="red">super(left.comparator())</span>;
+              this.key = key;
+              this.val = val;
+              this.left = left;
+              this.right = right;
+              this.theSize = 1 + left.size() + right.size();
+          }
+          ...
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2bst11.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2bst22.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

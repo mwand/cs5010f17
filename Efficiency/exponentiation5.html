@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Divide and Conquer: Exponentiation
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Divide and Conquer: Exponentiation
+  </h3>
+  <div>
+    <pre>
+      3<sup>20</sup>
+      = (3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3) &sdot;
+        (3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3)
+      = (3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3)<sup>2</sup>
+    </pre>
+    <p>
+      If we perform the first 9 multiplications to obtain 3<sup>10</sup>,
+      and perform the last 9 multiplications to obtain 3<sup>10</sup>,
+      and then multiply those two numbers,
+      there are still 19 multiplications in all.
+    </p>
+    <p>
+      But if we notice we are calculating 3<sup>10</sup> twice,
+      we can eliminate 9 multiplications by calculating
+      3<sup>10</sup> only once and squaring that result.
+      That way, we get the desired result using only
+      <span title="Squaring counts as one multiplication.">
+        10 multiplications.
+      </span>
+    </p>
+    <p>
+      We can do even better by applying that same idea,
+      recursively, to the calculation of 3<sup>10</sup>.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="exponentiation4wrong.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="exponentiation6.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

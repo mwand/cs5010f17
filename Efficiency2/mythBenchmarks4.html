@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Kernighan and Van Wyk Benchmarks
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Kernighan and Van Wyk Benchmarks
+  </h3>
+  <div>
+    <p>
+      To illustrate some of the issues that can arise when
+      benchmarking, we will start with a micro-benchmark
+      written by
+      <a href="https://en.wikipedia.org/wiki/Brian_Kernighan">
+        Brian Kernighan.
+      </a>
+    </p>
+    <blockquote class="smaller">
+      <p>
+        (Kernighan was an early contributor to Unix and a designer
+        of the AWK and AMPL
+        programming languages; his last name is the K in AWK.
+        Kernighan was also a co-author of
+        <cite>The C Programming Language</cite>,
+        which programmers often cite as "Kernighan and Ritchie".)
+      </p>
+    </blockquote>
+    <p>
+      In 1998, Kernighan and Christopher J Van Wyk published
+      a paper based on a small set of micro-benchmarks they
+      had translated into various programming languages
+      including C, AWK, and Scheme.
+      From their abstract:
+    </p>
+    <blockquote>
+      <p>
+        ....We found enormous variation in performance, depending on
+        many factors, some uncontrollable and even unknowable.
+        There seems to be little hope of predicting performance in
+        other than a most general way; if there is a single clear
+        conclusion, it is that no benchmark result should ever be
+        taken at face value. A few general principles hold:
+      </p>
+      <p>
+        Compiled code usually runs faster than interpreted code:
+        the more a program has been ‘compiled’ before it is
+        executed, the faster it will run.
+      </p>
+      <p>
+        Memory-related issues and the effects of memory hierarchies
+        are pervasive: how memory is managed, from hardware caches
+        to garbage collection, can change runtimes dramatically....
+      </p>
+      <p>
+        ....We encountered more than a few bugs, size limitations,
+        maladroit features, and total mysteries.
+      </p>
+    </blockquote>
+  </div>
+</div>
+<div id="footer">
+  <form action="mythBenchmarks3.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="ackermann1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

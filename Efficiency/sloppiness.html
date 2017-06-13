@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Notational Sloppiness
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Notational Sloppiness
+  </h2>
+  <blockquote>
+    <ol>
+      <li>
+        (&lambda; n . n + 15) &isin; O(&lambda; n . n<sup>2</sup>)
+      </li>
+      <li>
+        (&lambda; n . n + 15) &isin; O(n<sup>2</sup>)
+      </li>
+      <li>
+        n + 15 &isin; O(n<sup>2</sup>)
+      </li>
+      <li>
+        n + 15 is O(n<sup>2</sup>)
+      </li>
+      <li>
+        n + 15 = O(n<sup>2</sup>)
+      </li>
+    </ol>
+  </blockquote>
+  <div>
+    <p>
+      People often get sloppy with big-O and related notations.
+    </p>
+    <p>
+      As we have seen, O(f) is defined only when f is a function from
+      some set X to the real numbers.  Furthermore, O(f) is a set of
+      functions that have the same domain X as f.
+    </p>
+    <p>
+      Strictly speaking, only the first example above is entirely
+      correct.
+    </p>
+    <p>
+      In the second example, n<sup>2</sup> is an expression, not a function.
+      Historically, expressions have been used interchangeably with
+      functions because few people have known about lambda calculus.
+    </p>
+    <p>
+      The third example is similar, with two expressions being used
+      where functions are necessary.
+    </p>
+    <p>
+      The fourth example shows a notational convention that's often
+      used because it gets around having to use the symbol for set
+      membership.
+    </p>
+    <p>
+      The fifth example is just plain wrong, really, but you'll see
+      it being used all over the place.  Just remember that all five
+      of the examples are intended to mean what the first example
+      expresses in correct mathematical notation.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="pageExamplesQ10yes.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="lemmas.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

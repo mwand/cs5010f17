@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Step 4: Unit Tests, part 2
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Step 4: Unit Tests, part 2
+  </h3>
+  <div>
+    <ul>
+      <li>
+        We still want 100% test coverage.
+      </li>
+      <li>
+        Test observable behavior, as in the previous lesson.
+      </li>
+      <li>
+        Don't assume the <code>equals</code> method can be used
+        to compare objects.
+      </li>
+      <li>
+        In Java, the <code>equals</code> method might test all and only
+        the observable behavior of objects it is comparing.
+        If so, you can use it to compare objects.
+        Sometimes, however, the <code>equals</code> method
+        defines some notion of equality that does not correspond
+        to identity of observable behavior.
+      </li>
+      <li>
+        In Java, all objects have an <code>equals</code> method.
+        and <code>x.equals(x)</code> is true,
+        so a false value for <code>x.equals(y)</code> counts as
+        an observable difference between <code>x</code> and <code>y</code>.
+        On the other hand, a true value for <code>x.equals(y)</code> does
+        not necessarily mean there are no observable differences between
+        <code>x</code> and <code>y</code>.
+        The behavior of the <code>equals</code> method becomes
+        even harder to relate to observable behavior when the
+        objects being compared are mutable:
+        <code>x.equals(y)</code> may be true at one moment and
+        false a moment later.
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="unitTests1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="designStrategy1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

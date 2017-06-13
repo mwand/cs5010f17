@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proper Tail Recursion vs Iteration
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Proper Tail Recursion vs Iteration
+  </h3>
+  <div>
+    <p>
+      It is natural to wonder whether special looping
+      syntaxes might be more efficient (by some constant factor)
+      than proper tail recursion.
+    </p>
+    <p>
+      That depends on the implementation.
+      In some properly tail recursive implementations of Scheme,
+      for example, <code>do</code> loops are faster than the
+      equivalent loop expressed using tail recursion.
+    </p>
+    <p>
+      In most implementations of Scheme, the special syntaxes
+      macro-expand into equivalent recursions, so the
+      special syntaxes are no faster than using tail recursion.
+    </p>
+    <p>
+      Whether proper tail recursion is as fast as the
+      <code>while</code> and <code>for</code> loops of
+      languages like C and Java also depends on the
+      implementation.
+      In one implementation of Scheme, on one target machine,
+    </p>
+    <pre>
+      ((lambda (f) (f f))
+       (lambda (f) (f f)))
+    </pre>
+    <p>
+      compiles into a branch instruction that branches to itself.
+      It is impossible for special looping syntaxes to improve
+      upon the efficiency of proper tail recursion as implemented
+      by that compiler.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="tailProper11.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="tailSummary.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

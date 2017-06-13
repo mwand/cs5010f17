@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Algorithms can be Static Methods
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Algorithms can be Static Methods
+    </h3>
+    <p>
+      Algorithms can often be implemented by static methods,
+      and this is especially useful when many different classes
+      implement the same interface.
+      Defining the algorithm's methods in each of those classes
+      would be tedious, and would also
+      violate the principle of <em>Don't Repeat Yourself</em>.
+    </p>
+    <p>
+      Consider, for example, an algorithm for sorting lists.
+      Java's standard libraries define at least 10 classes
+      that implement the <code>List</code> interface,
+      and application programs often define still more classes
+      that implement <code>List</code>.
+      Defining a separate sort method in all of those classes
+      would be silly.
+      (Inheritance wouldn't solve the problem either, because
+      requiring every class that implements <code>List</code>
+      to inherit from one common superclass would interfere
+      with the use of inheritance to accomplish other goals.)
+    </p>
+    <p>
+      List sorting algorithms should be <em>representation independent</em>:
+      They should work with any class that implements the
+      <code>List</code> interface.
+      That means we should be able to define a static <code>sort</code>
+      method that works with any <code>List</code>.
+    </p>
+    <p>
+      We don't have to do that ourselves, because Java's
+      standard libraries have already done that for us.
+      The <code>java.util.Collections</code> class
+    </p>
+    <blockquote>
+      <p>
+        consists exclusively of static methods that operate on or return
+        collections. It contains polymorphic algorithms that operate on
+        collections, "wrappers", which return a new collection backed by
+        a specified collection, and a few other odds and ends.
+      </p>
+    </blockquote>
+    <p>
+      In Java, the <code>List</code> interface extends the
+      <code>Collection</code> interface, so every <code>List</code>
+      is also a <code>Collection</code>.
+      It is considered good programming practice to define the
+      representation-independent static methods that operate on
+      all values of some interface type in a single class
+      whose name is the plural of the name of the interface.
+      <code>Collections</code>, for example is the class that
+      defines static methods that operate on or return
+      a <code>Collection</code>.
+    </p>
+    <p>
+      For our <code>UTC</code> example, therefore, we should
+      consider defining a <code>UTCs</code> class that contains
+      static methods that operate on values of the <code>UTC</code>
+      abstract data type.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="staticMethods6.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="staticAlgorithms2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

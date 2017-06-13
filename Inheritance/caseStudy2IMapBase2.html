@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The IMapBase Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    The <code>IMapBase&lt;K,V&gt;</code> Class
+  </h3>
+  <div>
+    <p>
+      The purpose statement for the
+      <code>IMapBase&lt;K,V&gt;</code> class
+      tells programmers what they have to do when defining
+      subclasses that inherit from it:
+    </p>
+    <pre>
+      // Abstract base class for classes that implement IMap&lt;K,V&gt; or SortedIMap&lt;K,V&gt;.
+      //
+      // To define a class that implements IMap&lt;K,V&gt;:
+      //     make that class a subclass of this base class
+      //     within that class, define the following abstract methods:
+      //         public    IMap&lt;K,V&gt;   extend(K key, V value)
+      //         protected boolean     hasKey(K key)
+      //         protected V           getVal(K key)
+      //         protected Iterator&lt;K&gt; keyIterator()
+      //     within that class, override the following methods:
+      //         public    int         size()
+      //
+      // To define a class that implements SortedIMap&lt;K,V&gt;:
+      //     make that class a subclass of SortedIMapBase&lt;K,V&gt;
+      //     define or override the methods listed above
+      //     define comparator()
+    </pre>
+    <p>
+      The <code>public</code> methods are listed by one or more
+      interfaces, so they have to be public.
+    </p>
+    <p>
+      The <code>protected</code> methods are abstract help methods
+      that shouldn't be called outside of the base class
+      and its subclasses.
+      That's why they aren't public.
+    </p>
+    <h4>
+      Access Modifiers
+    </h4>
+    <p>
+      In Java, <code>protected</code> is an access modifier with
+      the remarkable property that declaring a method to be
+      <code>protected</code> makes it <em>less</em> protected than if
+      no access modifier had been written at all.
+    </p>
+    <p>
+      If no access modifier had been written at all,
+      the methods would not be accessible outside of the package
+      in which the base class is defined.
+    </p>
+    <p>
+      We want those methods to be accessible in all subclasses
+      of the base class.
+      To accomplish that, we need to make them less protected.
+      Declaring them to be <code>protected</code> makes them less
+      protected: they become accessible in all subclasses, even
+      in subclasses defined outside of the package in which the
+      base class is defined.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2IMapBase.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2IMapBase3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

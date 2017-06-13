@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Static Factory Method Pattern
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Static Factory Method Pattern
+    </h3>
+    <p>
+      Although Java's <code>new C(...)</code> syntax for creating
+      new objects is straightforward, it causes
+      problems when used indiscriminately in large programs.
+    </p>
+    <p>
+      In Java, that syntax requires
+      the creating method to know the name of the class for that
+      new object.
+      That may sound reasonable for simple data types such as
+      <code>UTC</code>, but what if there are two or more classes
+      that implement the <code>UTC</code> interface?
+      What if choosing which class to use is complicated?
+    </p>
+    <p>
+      One of the classes that implements the <code>UTC</code>
+      interface might be preferred during the early phases of
+      a program's execution, but a different representation
+      might be preferred during later phases.
+      If users of the <code>UTC</code> abstract data type
+      create new values of that type using the
+      <code>new</code> operator, then every use
+      of that operator would need to be augmented by conditional
+      code that determines the current phase of the program
+      before deciding whether to create the new value via
+      <code>new UTC1(...)</code> or <code>new UTC2(...)</code>.
+    </p>
+    <p>
+      To give another example, suppose it becomes necessary to
+      improve the efficiency of a program, and someone concludes
+      its efficiency could be improved by creating at most one
+      <code>UTC</code> object for any given combination of hour
+      and minute.  Then every occurrence of <code>new UTC1(h,m)</code>
+      would have to be replaced by a fairly complicated computation
+      that determines whether a <code>UTC</code> with hour and
+      minute components equal to <code>h</code> and <code>m</code>
+      is already available.  If so, it would use that previously created
+      <code>UTC</code>.  If not, it would create a new <code>UTC</code>
+      and enter that new <code>UTC</code> into a database of
+      available <code>UTC</code> values.
+    </p>
+    <p>
+      The computations implied by those two examples are too
+      complicated to be written out in full everywhere a new
+      <code>UTC</code> value is needed.
+      Writing those computations out in many different places
+      would violate the programming principle that says
+      <em>Don't repeat yourself.</em>
+    </p>
+    <p>
+      <em>Static factory methods</em> solve the problem.
+      Instead of writing out the logic needed to decide
+      whether it is necessary to create a brand new object,
+      and to decide which representation to use for that object
+      if a new object is needed,
+      we can define a single static factory method that
+      encapsulates the necessary logic.  Everyone who needs to
+      create new values of that data type can then call the
+      static factory method instead of writing code that
+      contains explicit uses of the <code>new</code> syntax.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="staticAlgorithms2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="staticFactoryMethods2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 5.2</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 5.2: Converting Currencies</h1>
+
+<p>
+Using the HOFC strategy, write a function <kbd>convert-currencies</kbd>, which
+takes a conversion factor and a list of values in the first currency,
+and returns a list of the same values in the second currency.  For
+example, if a Euro is worth US$1.18, then 
+
+<pre>
+(convert-currencies 1.18 (list 1 10 100)) 
+ = (list 1.18 11.18 111.80)
+</pre>
+
+converts a list of values in Euros to their values in US dollars.
+</p>
+
+<p>Reminder: this is just a toy example.  In the real world, you
+should NEVER use floating-point numbers to represent currency.</p>
+
+
+<p><a href="solution.rkt" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Fri Aug 15 10:58:57 Eastern Daylight Time 2014 <!-- hhmts end -->
+</body> </html>

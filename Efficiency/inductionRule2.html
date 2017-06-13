@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Quicksort: inductive proof of correctness
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <p>
+      Having proved IH(0), we now need to prove the second
+      antecedent of the inference rule for induction:
+    </p>
+    <p class="center">
+      (&forall; n) if IH(n) then IH(n+1)
+    </p>
+    <p>
+      That is a universally quantified statement.
+      To prove it, we have to show it holds for all n.
+      To prove that, we have to show
+    </p>
+    <p class="center">
+      if IH(n) then IH(n+1)
+    </p>
+    <p>
+      is true for any natural number n.
+    </p>
+    <p>
+      To prove a statement of the form
+      <em>if X then Y</em>,
+      we assume X is true and prove Y follows by the rules of logic,
+      mathematics, and computer science.
+    </p>
+    <p>
+      And so, in our proof of correctness for <code>quicksort</code>,
+      we proceed as follows:
+    </p>
+    <ul>
+      <li>
+        We let n be an arbitrary natural number.
+      </li>
+      <li>
+        We assume IH(n), which says
+        <code>quicksort</code> returns the correct result
+        on all lists whose length is less than or equal to n.
+      </li>
+      <li>
+        We then try to prove IH(n+1):
+        <code>quicksort</code> returns the correct result
+        on all lists whose length is less than or equal to n+1.
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="quicksort2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="quicksort3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

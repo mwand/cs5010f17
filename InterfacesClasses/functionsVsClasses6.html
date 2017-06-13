@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  A Few of the Help Functions
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    A Few of the Help Functions
+  </h3>
+  <div>
+    <pre>
+      (define (my-circle-weight s)
+        (* pi (sqr (my-circle-r s))))
+      
+      (define (my-square-weight s)
+        (sqr (my-square-l s)))
+      
+      (define (my-composite-weight s)
+        (+ (weight (my-composite-front s))    ; note recursion
+           (weight (my-composite-back s))))   ;     through weight
+      
+      (define (my-composite-add-to-scene s scene)
+        ;; paint the back image first, then the front
+        (let* ((scene2 (add-to-scene (my-composite-front s)))
+               (scene3 (add-to-scene (my-composite-back s))))
+          scene3))
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="functionsVsClasses5.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="functionsVsClasses7.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

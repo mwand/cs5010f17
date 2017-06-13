@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 12
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 12
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 10 April 2017
+      <br />
+      <strong>Due:</strong> Monday, 17 April 2017 at 6pm
+    </p>
+  </div>
+  <div>
+    <p>
+      This is an individual assignment.  You are not allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      Use the repository we created for you at the beginning
+      of the semester.
+    </p>
+    <p>
+      At the end of every work session, you are required to update
+      your log file to record the time you spent in that work session.
+      (Please do not include the time you spent in any previous work
+      sessions, as those times will already have been recorded in
+      previous versions of your log file.)
+    </p>
+    <hr />
+    <p>
+      In this problem set, you will run several benchmarks
+      and report your findings.
+      You will run the benchmarks on a machine that has the
+      following software installed:
+    </p>
+    <ul>
+      <li>
+        the
+        <a href="https://gcc.gnu.org/">
+          Gnu C compiler
+        </a>
+        (<code>gcc</code>)
+      </li>
+      <li>
+        <a href="http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html">
+          Java 8
+        </a>
+      </li>
+      <li>
+        the ps11 interpreter you wrote in Problem Set 10
+        and improved in Problem Set 11
+      </li>
+      <li>
+        the
+        <a href="http://www.cesura17.net/%7Elarcenists/Nightly/">
+          Larceny
+        </a>
+        implementation of Scheme
+      </li>
+    </ul>
+    <p>
+      <code>gcc</code>, Java 8, and Larceny can be downloaded
+      from the web sites linked above.
+      If you are unable to install one or more of those systems
+      on a machine you own or control, you can use one of the
+      CCIS Linux machines in WVH 102.
+      If you use one of the CCIS Linux machines, you will probably
+      want to add <code>/course/cs5010sp17/bin</code> to your path
+      so you can run <code>larceny</code> more easily.
+    </p>
+    <p>
+      Please do not run benchmarks on <code>login.ccs.neu.edu</code>.
+      Many other students are using that server.
+      They and the CCIS system staff will be annoyed if you run
+      cpu-intensive benchmarks on that shared server.
+      Because so many other students are using that server,
+      any timings you obtain on that server would be unreliable
+      anyway.
+    </p>
+    <p>
+      In the first part of this problem set, you will run benchmarks
+      that rely on non-tail recursion (<code>fib</code>) or
+      tail recursion (<code>sumsq</code>), and you will translate
+      one of those benchmarks into an equivalent Java program that
+      uses idiomatic loops instead of tail recursion.
+    </p>
+    <p>
+      In the second part of this problem set, you will run two
+      benchmarks that were designed to measure the speed of
+      storage allocation and deallocation.
+    </p>
+    <p>
+      Your deliverables include the <code>Sumsq2.java</code> file
+      you will complete in part 1, and a <code>report.txt</code> file
+      that records the timings you measure in both parts.
+      You will also write your answer to a popular question about
+      explicit deallocation versus garbage collection.
+    </p>
+    <hr />
+  </div>
+  <h3>
+    Problem Specification
+  </h3>
+  <p>
+    We are giving you a
+    <a href="set12.tgz">
+      <code>set12</code> directory
+    </a>
+    that contains several benchmarks, a tail-recursive
+    <code>Sumsq2.java</code> program you will modify,
+    and a <code>report.txt</code> file you will modify.
+    Unpack that directory and push it to your GitHub repository.
+    Add the interpreter your team wrote in
+    Problem Sets 10 and 11 to that directory and push it again
+    to your repository.
+  </p>
+  <p>
+    You will then be ready to work on the following questions.
+  </p>
+  <ol>
+    <li>
+      Modify <code>Sumsq2.java</code> as necessary to make it
+      use loop syntax instead of tail recursion, but do not
+      modify it any more than necessary.
+      (In particular, do not use any mathematical formulas
+      that would change its asymptotic running time.)
+      Then run the benchmarks indicated for question 1
+      in the <code>report.txt</code> file, and add the
+      results you observe to that file.
+    </li>
+    <li>
+      Run the benchmarks indicated for question 2
+      in the <code>report.txt</code> file, and add the
+      results you observe to that file.
+      Then answer the question asked at the end of that file.
+    </li>
+  </ol>
+  <p>
+    After you have modified <code>Sumsq2.java</code>
+    and completed <code>report.txt</code>, push your files
+    to your repository.
+  </p>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

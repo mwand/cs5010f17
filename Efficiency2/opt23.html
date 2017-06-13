@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Optimizations that Improve Asymptotic Efficiency
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Optimizations that Improve Asymptotic Efficiency
+  </h3>
+  <div>
+    <p>
+      Compiler optimization can also recognize when a functional
+      update to an array can be performed by side effect instead
+      of creating a new array that differs from the original in only
+      one place.
+    </p>
+    <p>
+      For a one-dimensional array of length n,
+      that optimization reduces the cost of the update
+      from &Theta;(n) to O(1).
+    </p>
+    <p>
+      The resources for Module 12 include a paper that
+      proves the correctness of that optimization.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="opt22.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="optSummary.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

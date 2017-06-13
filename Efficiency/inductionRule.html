@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proof by Induction
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Proof by Induction
+  </h3>
+  <div>
+    <p>
+      We are going to use induction to prove the correctness
+      of <code>quicksort</code>.
+    </p>
+    <p>
+      A proof by induction is organized around an
+      <em>induction hypothesis</em>,
+      which is sort of like an invariant that's parameterized
+      by a non-negative integer n.
+    </p>
+    <p>
+      When proving the correctness of a program,
+      the induction hypothesis typically says the program
+      returns the correct result for all inputs whose size
+      is no greater than n, and that's the kind of induction
+      hypothesis we will use to prove the correctness of
+      <code>quicksort</code>:
+    </p>
+    <blockquote>
+      <p>
+        IH(n): If <code>x</code> is a list whose length is at most n,
+        and <code>less?</code> is a total order defined on the elements
+        of <code>x</code>, then <code>(quicksort x less?)</code>
+        returns a sorted list of the elements of <code>x</code>.
+      </p>
+    </blockquote>
+    <p>
+      Proofs by induction have the logical structure stated
+      by the following <em>rule of inference</em>:
+    </p>
+    <p class="center">
+      IH(0)
+      <br />
+      (&forall; n) if IH(n) then IH(n+1)
+      <br />
+      &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+      <br />
+      (&forall; n) IH(n)
+    </p>
+    <p>
+      That inference rule says:  If you can prove
+      <span title="antecedents">
+        the two statements above the line,
+      </span>
+      then you are allowed to infer
+      <span title="consequent">
+        the statement below the line.
+      </span>
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="quicksort1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="quicksort2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

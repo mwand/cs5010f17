@@ -1,0 +1,85 @@
+# Church numerals
+#
+# The natural number n is represented by the function that
+# takes a unary function f and returns f^n (the unary function
+# that applies f n times).
+
+# Factorial function using Church numerals.
+# Converts input to a Church numeral, does the computation
+# using Church numerals, and converts back to the native
+# representation of integers for output.
+
+fact (n) dechurch (f (church (n)));
+
+# Given a non-negative integer, returns its representation
+# as a Church numeral.
+
+church (n) if n = 0 then zero else succ (church (n - 1));
+
+# The Church numeral for 0 returns f^0, which is the identity function.
+
+zero (f) (λ (x) x);
+
+# The Church numeral for 1 is the successor of the Church numeral for 0.
+
+one (f) succ (zero) (f);
+
+# Given a Church numeral, returns its successor (the Church numeral
+# for one plus the integer represented by the given Church numeral).
+
+succ (g)
+  (λ (f)
+    (λ (x) f (g (f) (x))));
+
+# The predecessor function is complicated.
+
+pred (n)
+  (λ (f)
+    (λ (x)
+      n ((λ (g) (λ (h) h (g (f)))))
+        ((λ (g) x))
+        ((λ (n) n))));
+
+# Curried add.  Given a Church numeral m, returns a function that,
+# given a Church numeral n, returns the Church numeral for their sum.
+
+add (m) (λ (n) (λ (f) (λ (x) m (f) (n (f) (x)))));
+
+# Curried subtraction.  The add function could have been written
+# more simply, like this but with succ instead of pred.
+
+sub (m) (λ (n) m (pred) (n));
+
+# mul (m) (n) could have been defined to return m (n).
+
+mul (m) (λ (n) (λ (f) m (n (f))));
+
+# The isZero function returns a Church representation of true
+# if and only if its argument is the Church numeral for zero;
+# otherwise it returns a Church representation of false.
+
+isZero (m) m ((λ (x) fls)) (tru);
+
+# Church representation of false.
+
+fls (m) (λ (n) n);
+
+# Church representation of true.
+
+tru (m) (λ (n) m);
+
+# Factorial using Church numerals.
+# The call to force and the (λ (z) ...) stuff is necessary
+# because our interpreters implement call-by-value semantics.
+# The (λ (z) ...) delays computation of ... until that computation
+# is forced by the force function.
+
+f (n) force (isZero (n) ((λ (z) one)) ((λ (z) mul (n) (f (pred (n))))));
+
+# Given a delayed computation, performs it.
+
+force (f) f (f);
+
+# Conversion from Church numeral to native integer.
+
+dechurch (f) f ((λ (f) f + 1)) (0)

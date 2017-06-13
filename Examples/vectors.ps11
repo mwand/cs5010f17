@@ -1,0 +1,39 @@
+# Inner product of two vectors.
+# 
+# Creates two vectors of length n, with elements 0 through n-1.
+# Returns their inner product, which will be
+# 
+#     n^3/3 + n^2/2 + n/6
+
+main (n)
+  innerProduct (makeVector (n, (λ (i) i)),
+                makeVector (n, (λ (i) i)),
+                n);
+
+# Given two vectors of length n, returns their inner product.
+
+innerProduct (v1, v2, n)
+  if n > 0
+    then vref (v1, n-1) * vref (v2, n-1) + innerProduct (v1, v2, n - 1)
+    else 0;
+
+################################################################
+#
+# Abstract data type of vectors.
+#
+# Representation:
+#     A vector is a finite function from valid indexes to values.
+#
+# With that representation, there is no way to extract the size
+# of a vector.
+#
+################################################################
+
+# Returns the vector of size n whose elements are obtained
+# by calling f on the valid indexes.
+
+makeVector (n, f) f;                # pretty simple, really
+
+# Returns element i of the vector.
+
+vref (v, i) v (i)

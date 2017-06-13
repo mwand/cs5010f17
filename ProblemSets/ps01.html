@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 01
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 01
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 16 January 2017
+      <br />
+      <strong>Due:</strong> Monday, 23 January 2017 at 6pm
+    </p>
+  </div>
+  <div>
+    <p>
+      This is an individual assignment.  You are not allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      The main purpose of this problem set is to give you some practice
+      with the systems we will use in CS 5010.
+    </p>
+    <p>
+      In particular, you need to know how to commit your solution
+      and how to push your commits to the course's GitHub site.
+      To submit your solution, follow our instructions on
+      <a href="../Info/submission.html">
+        How to Submit Your Homework,
+      </a>
+      and be sure to include the required
+      <a href="../Info/deliverables.html">
+        deliverables.
+      </a>
+    </p>
+    <p>
+      We will check to see whether your have submitted a solution
+      for this problem set and whether it contains the required
+      deliverables, but this problem set will not otherwise be
+      graded.
+    </p>
+    <p>
+      You must use Racket's HtDP Beginning Student Language
+      for this problem set.
+    </p>
+    <p>
+      You should begin your work on this problem set by using
+      <code>git</code> to clone your GitHub repository from the
+      <a href="https://github.ccs.neu.edu/cs5010sp17">
+        CS 5010 GitHub site.
+      </a>
+      The name of your GitHub repository is
+      <code>pdp-</code><var>YOURNAME</var>, where <var>YOURNAME</var>
+      is your CCIS ID.
+      Your repository will probably be empty when you clone it.
+      Within your cloned repository, you should create a new
+      directory named <code>set01</code>.
+      All of the code you write for this problem set will go into
+      that directory.
+    </p>
+    <p>
+      You will also need to download a copy of
+      <a href="extras.rkt">
+        <code>extras.rkt</code>
+      </a>
+      and put it in your <code>set01</code> directory along with
+      the <code>q1.rkt</code> through <code>q5.rkt</code> files
+      you will write for this problem set.
+      Each of those files must import that library by including
+      the lines
+    </p>
+    <pre>
+      (require rackunit)
+      (require "extras.rkt")
+    </pre>
+    <p>
+      near the top of the file, preceded only by your comments
+      describing the file.
+    </p>
+    <p>
+      Immediately following those <code>require</code> declarations,
+      your file should state a <code>provide</code> declaration for
+      each deliverable function.  For example, your <code>q1.rkt</code>
+      file should say
+    </p>
+    <pre>
+      (provide cvolume)
+      (provide csurface)
+    </pre>
+    <p>
+      Those <code>provide</code> declarations allow our testing
+      infrastructure to <code>require</code> your file and check
+      to see whether you've provided all of the deliverable functions.
+    </p>
+    <p>
+      Remember to follow the design recipe.  Your
+      <a href="../Info/deliverables.html">
+        deliverables
+      </a>
+      include the data definitions you need (including interpretations
+      and templates), contracts, purpose statements, examples and tests,
+      and design strategies in addition to your function definitions.
+    </p>
+    <p>
+      Remember to fill out a
+      <a href="yourID-log.txt">
+        work session report
+      </a>
+      at the end of each
+      work session.  Tell <code>git</code> to <code>add</code> it to
+      the files you will commit, and then commit and push that report
+      in addition to committing and pushing your entire
+      <code>set01</code> directory.  Do this at the end of every work
+      session.
+    </p>
+  </div>
+  <hr />
+  <div>
+    <p>
+      Do the following exercises from
+      <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">
+        the textbook:
+      </a>
+    </p>
+    <ol>
+      <li>
+        Exercise 12 (<code>cvolume</code> and <code>csurface</code>).
+        Put your solution in a file named <code>q1.rkt</code>.
+      </li>
+      <li>
+        Exercise 14 (<code>string-last</code>).
+        Put your solution in a file named <code>q2.rkt</code>.
+      </li>
+      <li>
+        Exercise 19 (<code>string-insert</code>).
+        Put your solution in a file named <code>q3.rkt</code>.
+      </li>
+      <li>
+        Exercise 27 (refactoring the <code>profit</code> program).
+        Put your solution in a file named <code>q4.rkt</code>.
+      </li>
+      <li>
+        Exercise 38 (<code>string-remove-last</code>).
+        Put your solution in a file named <code>q5.rkt</code>.
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

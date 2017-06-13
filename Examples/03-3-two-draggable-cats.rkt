@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 03-3-two-draggable-cats) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 03-3-two-draggable-cats) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;; two draggable cats.
 ;; like draggable cat, but there are TWO cats.  They are individually
 ;; draggable.  But space pauses or unpauses the entire system.
@@ -17,7 +17,6 @@
 
 (require rackunit)
 (require "extras.rkt")
-
 (require 2htdp/universe)
 (require 2htdp/image)
 
@@ -35,15 +34,6 @@
             (on-draw world-to-scene)
             (on-key world-after-key-event)
             (on-mouse world-after-mouse-event)))
-
-;; initial-world : Integer -> World
-;; RETURNS: a world with two unselected cats at the given y coordinate
-
-(define (initial-world y)
-  (make-world
-    (make-cat CAT1-X-COORD y false)
-    (make-cat CAT2-X-COORD y false)
-    false))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -69,45 +59,27 @@
 
 ;;; DATA DEFINITIONS
 
-;; REPRESENTATION:
-;; A World is represented as a (world cat1 cat2 paused?)
-;; INTERPRETATION:
-;; cat1, cat2 : Cat      the two cats in the world
-;; paused?    : Boolean  is the world paused?
-
-;; IMPLEMENTATION:
 (define-struct world (cat1 cat2 paused?))
+;; A World is a (make-world Cat Cat Boolean)
+;; cat1 and cat2 are the two cats
+;; paused? describes whether or not the world is paused
 
-;; CONSTRCTOR TEMPLATE:
-;; (make-world Cat Cat Boolean)
-
-;; OBSERVER TEMPLATE:
+;; template:
 ;; world-fn : World -> ??
-(define (world-fn w)
-  (... (world-cat1 w) (world-cat2 w) (world-paused? w)))
+;; (define (world-fn w)
+;;   (... (world-cat1 w) (world-cat2 w) (world-paused? w)))
 
 
-;; REPRESENTATION:
-;; A Cat is represented as (cat x-pos y-pos selected?)
-;; INTERPRETATION:
-;; x-pos, y-pos : Integer      the position of the center of the cat
-;;                             in the scene 
-;; selected?                   describes whether or not the cat is selected.
-
-;; IMPLEMENTATION
 (define-struct cat (x-pos y-pos selected?))
+;; A Cat is a (make-cat Integer Integer Boolean)
+;; Interpretation: 
+;; x-pos, y-pos give the position of the cat. 
+;; selected? describes whether or not the cat is selected.
 
-;; CONSTRUCTOR TEMPLATE:
-;; (make-cat Integer Integer Boolean)
-
-;; OBSERVER TEMPLATE:
 ;; template:
 ;; cat-fn : Cat -> ??
-(define (cat-fn w)
- (... (cat-x-pos w)
-      (cat-y-pos w) 
-      (cat-selected? w)))
-
+;(define (cat-fn c)
+; (... (cat-x-pos w) (cat-y-pos w) (cat-selected? w)))
 
 ;; examples of cats, for testing
 (define selected-cat1-at-20 (make-cat CAT1-X-COORD 20 true))
@@ -165,10 +137,8 @@
 
 ;; world-after-tick : World -> World
 ;; GIVEN: a world w
-;; RETURNS: the world that should follow w after a tick.  If the world
-;;   is paused, returns it unchanged.  Otherwise, builds a new world
-;;   with updated cats.
-;; STRATEGY: Cases on whether the world is paused.
+;; RETURNS: the world that should follow w after a tick.
+;; STRATEGY: Use template for World on w
 (define (world-after-tick w)
   (if (world-paused? w)
     w
@@ -180,17 +150,17 @@
 
 
 ;; cat-after-tick : Cat -> Cat
-;; GIVEN: the state of a cat c in an unpaused world
-;; RETURNS: the state of the given cat after a tick.
+;; GIVEN: the state of a cat c
+;; RETURNS: the state of the given cat after a tick if it were in an
+;; unpaused world.
 
-;; EXAMPLES: 
+;; examples: 
 ;; cat selected
 ;; (cat-after-tick selected-cat1-at-20) = selected-cat1-at-20
 ;; cat paused:
 ;; (cat-after-tick unselected-cat1-at-20) = unselected-cat-at-28
 
-;; STRATEGY: Cases on whether the cat is selected, then use
-;;           constructor template for cat.
+;; STRATEGY: use template for Cat on c
 
 (define (cat-after-tick c)
   (if (cat-selected? c)
@@ -222,12 +192,12 @@
 ;; RETURNS: a Scene that portrays the given world.
 ;; EXAMPLE: (world-to-scene paused-world-at-20) should return a canvas with
 ;; two cats, one at (150,20) and one at (300,28)
-;; STRATEGY: Place each cat in turn.
-
+;;          
+;; STRATEGY: Use template for World on w
 (define (world-to-scene w)
-  (scene-with-cat
+  (place-cat
     (world-cat1 w)
-    (scene-with-cat
+    (place-cat
       (world-cat2 w)
       EMPTY-CANVAS)))
 
@@ -242,10 +212,10 @@
     image-of-paused-world-at-20
     "(world-to-scene paused-world-at-20) returned incorrect image"))
 
-;; scene-with-cat : Cat Scene -> Scene
+;; place-cat : Cat Scene -> Scene
 ;; RETURNS: a scene like the given one, but with the given cat painted
 ;; on it.
-(define (scene-with-cat c s)
+(define (place-cat c s)
   (place-image
     CAT-IMAGE
     (cat-x-pos c) (cat-y-pos c)
@@ -260,14 +230,14 @@
 ;;; it doesn't check to see whether image-at-20 is the right image!
 (begin-for-test
  (check-equal? 
-   (scene-with-cat selected-cat1-at-20 EMPTY-CANVAS)
+   (place-cat selected-cat1-at-20 EMPTY-CANVAS)
    image-at-20
-   "(scene-with-cat selected-cat1-at-20 EMPTY-CANVAS) returned unexpected image or value")
+   "(place-cat selected-cat1-at-20 EMPTY-CANVAS) returned unexpected image or value")
 
  (check-equal?
-   (scene-with-cat unselected-cat1-at-20 EMPTY-CANVAS)   
+   (place-cat unselected-cat1-at-20 EMPTY-CANVAS)   
    image-at-20
-   "(scene-with-cat unselected-ca1t-at-20 EMPTY-CANVAS) returned unexpected image or value"))
+   "(place-cat unselected-ca1t-at-20 EMPTY-CANVAS) returned unexpected image or value"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -285,7 +255,7 @@
 
 ;; world-with-paused-toggled : World -> World
 ;; RETURNS: a world just like the given one, but with paused? toggled
-;; STRATEGY: use constructor template for World on w
+;; STRATEGY: use template for World on w
 (define (world-with-paused-toggled w)
   (make-world
    (world-cat1 w)
@@ -526,7 +496,6 @@
 ;; cat-after-button-down : Cat Integer Integer -> Cat
 ;; RETURNS: the cat following a button-down at the given location.
 ;; STRATEGY: Use template for Cat on c
-
 (define (cat-after-button-down c x y)
   (if (in-cat? c x y)
       (make-cat (cat-x-pos c) (cat-y-pos c) true)
@@ -535,7 +504,6 @@
 ;; cat-after-drag : Cat Integer Integer -> Cat
 ;; RETURNS: the cat following a drag at the given location
 ;; STRATEGY: Use template for Cat on c
-
 (define (cat-after-drag c x y)
   (if (cat-selected? c)
       (make-cat x y true)
@@ -544,7 +512,6 @@
 ;; cat-after-button-up : Cat Integer Integer -> Cat
 ;; RETURNS: the cat following a button-up at the given location
 ;; STRATEGY: Use template for Cat on c
-
 (define (cat-after-button-up c x y)
   (if (cat-selected? c)
       (make-cat (cat-x-pos c) (cat-y-pos c) false)
@@ -555,8 +522,7 @@
 ;; RETURNS true iff the given coordinate is inside the bounding box of
 ;; the given cat.
 ;; EXAMPLES: see tests below
-;; STRATEGY: Use observer template for Cat on c
-
+;; STRATEGY: Use template for Cat on c
 (define (in-cat? c x y)
   (and
     (<= 
@@ -586,7 +552,13 @@
 
 ;; discussion question: are these tests sufficient to test in-cat?
 
-
+;; initial-world : Integer -> World
+;; RETURNS: a world with two unselected cats at the given y coordinate
+(define (initial-world y)
+  (make-world
+    (make-cat CAT1-X-COORD y false)
+    (make-cat CAT2-X-COORD y false)
+    false))
 
 
 

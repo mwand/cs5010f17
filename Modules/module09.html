@@ -1,108 +1,222 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>CS 5010 Module 09</title>
-<link type="text/css" rel="stylesheet" href="../css/course.css">
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Module 09
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
 </head>
 
 <body>
-<h1>CS 5010 Module 09</h1>
 
-<h2>Module Overview</h2>
+<!-- start of specific content -->
 
-<p>
-In this module, we will see how everything we've learned so far can be
-ported to an object-oriented context.  We'll see how:
+<div id="maincontent">
+  <h2>
+    CS 5010: Module 09
+  </h2>
+  <div>
+    <h3>
+      Module Overview
+    </h3>
+    <p>
+      In this module, we will see how everything we've learned so
+      far can be ported to an object-oriented context. We'll see how:
+    </p>
+    <ul>
+      <li>
+        objects correspond to structs
+      </li>
+      <li>
+        classes correspond to define-structs, and
+      </li>
+      <li>
+        interfaces correspond to data definitions.
+      </li>
+    </ul>
+    <p>
+      We'll see how a functional orientation and an object orientation
+      are just two ways of looking at the same definitions.
+    </p>
+    <p>
+      Then we'll consider some of the subtleties of testing in an
+      object-oriented setting.
+    </p>
+    <p>
+      We'll summarize by rewriting the Design Recipe for an
+      object-oriented setting, and see how our deliverables
+      should appear in your program.
+    </p>
+    <h3>
+      Course Map
+    </h3>
+    <img src="module09.jpg" width="700" alt="course map">
+    <h3>
+      Readings
+    </h3>
+    <p>
+      No required readings.
+    </p>
+    <p>
+      Most of you know Java well enough to have considered using it
+      for Problem Set 00.
+    </p>
+    <p>
+      Those of you who don't know Java need to learn it in a hurry.
+      The tutorial resources listed below are designed to teach you
+      what you need to know about Java.
+    </p>
+    <h3>
+      Resources
+    </h3>
+    <p>
+      You have been using DrRacket's editor to create and to edit
+      Racket programs.
+      For Java programs, you will need to use a different
+      text editor such as
+      <a href="https://www.gnu.org/software/emacs/">
+        Emacs
+      </a>
+      or
+      <a href="https://eclipse.org/">
+        Eclipse.
+      </a>
+    </p>
+    <p>
+      We will test your Java programs using JDK 8 on a Linux machine
+      or Macintosh.
+      That means you may need to
+      <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">
+        install JDK 8
+      </a>
+      on the machine you
+      use for writing your CS 5010 programs, so you can test your
+      programs using the same version of Java we will be using to
+      test your programs.
+      (If you are using a Linux machine, Java is probably already
+      installed.  If you are using a Macintosh, you probably
+      installed Java at the beginning of the semester when you
+      installed the XCode Command Line Tools.
+      If you are using a Windows machine, you will probably have
+      to install Java yourself.)
+    </p>
+    <p>
+      If you are unable to install JDK 8 on the machine you have
+      been using for writing programs, you can test your programs
+      on <code>login.ccs.neu.edu</code>.
+    </p>
+    <p>
+      We recommend the following tutorials, especially if you do
+      not feel comfortable programming in Java
+      or do not know how to invoke the Java compiler and runtime system
+      from a Linux command line.
+    </p>
+    <ul>
+      <li>
+        <a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html">
+          "Hello World!" for Solaris OS and Linux
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html">
+          Lesson: A Closer Look at the "Hello World!" Application
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.oracle.com/javase/tutorial/getStarted/QandE/questions.html">
+          Questions and Exercises: Getting Started
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html">
+          Lesson: Common Problems (and Their Solutions)
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.oracle.com/javase/tutorial/java/index.html">
+          Trail: Learning the Java Language
+        </a>
+        <br />
+        (You can use this as a reference manual for the Java language.
+        The real
+        <a href="https://docs.oracle.com/javase/specs/index.html">
+          reference manuals for Java
+        </a>
+        are far more detailed, and tell you more than you need to know
+        for this course.)
+      </li>
+    </ul>
+    <h3>
+      Lessons
+    </h3>
+    <ul>
+      <li>
+        <a href="../InterfacesClasses/classesObjectsMethods1.html">
+          Lesson 9.1: Classes, Objects, and Methods
+        </a>
+      </li>
+      <li>
+        <a href="../InterfacesClasses/UTC1.html">
+          Lesson 9.2: Case Study: Universal Coordinated Time (UTC)
+        </a>
+      </li>
+      <li>
+        <a href="../InterfacesClasses/functionsVsClasses1.html">
+          Lesson 9.3: Functions vs Classes
+        </a>
+      </li>
+      <li>
+        <a href="../InterfacesClasses/equality1.html">
+          Lesson 9.4: Equality
+        </a>
+      </li>
+      <li>
+        <a href="../InterfacesClasses/staticMethods1.html">
+          Lesson 9.5: Static Methods
+        </a>
+      </li>
+      <li>
+        <a href="../InterfacesClasses/testingObjects1.html">
+          Lesson 9.6: Testing Simple Objects
+        </a>
+      </li>
+      <li>
+        <a href="../InterfacesClasses/designRecipeClasses1.html">
+          Lesson 9.7: Design Recipe Using Classes
+        </a>
+      </li>
+    </ul>
+    <h3>
+      Problem Set
+    </h3>
+    <p>
+      <a href="../ProblemSets/ps09.html">
+        Problem Set 09
+      </a>
+      was assigned on Monday, 20 March.
+    </p>
+  </div>
+</div>
 
-<ul>
-  <li>objects correspond to structs</li>
-  <li>classes correspond to define-structs, and </li>
-  <li>interfaces correspond to data definitions.</li>
-</ul>
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
 </p>
 
-<p>We'll see how the functional orientation and the object orientation
-are just two ways of looking at the same definitions.</p>
-
-<p>Then we'll consider some of the subtleties of testing in an
-object-oriented setting.</p>
-
-<p>We'll summarize by rewriting the Design Recipe for an
-object-oriented setting, and see how our deliverables should appear in
-your program.</p>
-
-
-
-
-<h2>Course Map</h2>
-
-<img src="images/course-maps/module09.jpg"
-     width="700px"
-     alt="course map, week 09">
-
-<h2>Readings</h2>
-
-<p>None.  If you have not used any object-oriented language, you need to
-learn something about OOP in a hurry.  The materials in Lesson 9.1
-are a good start, but you will probably need more.  Go down to the
-bookstore and identify a book that is comfortable for you. </p>
-
-<h2>Resources</h2>
-
-<!-- <ul> -->
-<!--   <li><a href="examples/week09examples.zip" >Examples for Week -->
-<!--   9</a></li> -->
-
-<!-- </ul> -->
-
-<ul>
-  <li><a href="Class Notes/09-interfaces.rkt" >Notes</a> on interfaces and "the implementation is up to you"
-</li>
-</ul>
-
-
-<h2>Lessons and Guided Practices</h2>
-
-<ul>
-
-    <li><a
-  href="../Slides/Lesson 9.1 Classes, Objects, and Methods.pptx"
-  >Lesson 9.1 Classes, Objects, and Methods</a></li>
-
-  <li><a href="../Slides/Lesson 9.2 A Case Study- Space Invaders.pptx"
-  >
-  Lesson 9.2 A Case Study - Space Invaders</a></li>
-
-
-  <li><a
-  href="../Slides/Lesson 9.3 Functions vs Classes.pptx"
-  >Lesson 9.3 Functions vs Classes</a></li>
-
-  
-    <li><a
-  href="../Slides/Lesson 9.4 Testing Simple Objects.pptx"
-  >Lesson 9.4 Testing Simple Objects</a></li>
-
-
-  <li><a
-  href="../Slides/Lesson 9.5 The Design Recipe Using Classes.pptx"
-  >Lesson 9.5 The Design Recipe Using Classes</a></li>
-
-</ul>
-
-  
-<h2>Problem Set</h2>
-
-<p>
-<a
-href="../Problem Sets/ps09.html"
->Problem Set 09</a> 
-
- 
-<hr>
-<address></address>
-<font size=-1>
-<p align=right>
-<!-- hhmts start -->
-Last modified: Wed Nov  9 14:20:04 Eastern Standard Time 2016 <!-- hhmts end -->
-</body> </html>
+</body>
+</html>

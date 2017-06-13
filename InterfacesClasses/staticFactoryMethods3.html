@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Static Factory Method Pattern
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Static Factory Method Pattern
+    </h3>
+    <p>
+      In your programming assignments, you have seen how
+      multiple representations of an abstract data type
+      help you to debug violations of the ADT's abstraction
+      barrier.
+    </p>
+    <p>
+      Changing the static factory method to choose randomly between
+      two different representations is therefore
+      a useful debugging technique:
+    </p>
+    <pre>
+      import java.util.Random;
+      
+      // The UTCs class defines static methods for the UTC type.
+      // In particular, it defines a static factory method for creating
+      // values of the UTC type.
+      
+      public class UTCs {
+      
+          ...
+      
+          // random number generator, to be used as a coin flip
+      
+          private static Random coinFlips = new Random();
+      
+          // static factory method for creating a UTC
+          // GIVEN: the hour in [0,23] and the minute in [0,59]
+          // RETURNS: a UTC with that hour and minute
+      
+          public static UTC make (int h, int m) {
+              // flips a coin to decide whether to return an object
+              // of class UTC1 or UTC2
+      
+              if (coinFlips.nextBoolean())
+                  return new UTC1 (h, m);
+              else
+                  return new UTC2 (h, m);
+          }
+      
+          ...
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="staticFactoryMethods2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="staticFactoryMethods4.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

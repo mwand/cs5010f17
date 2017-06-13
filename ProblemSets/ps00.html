@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 00
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 00
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Tuesday, 3 January 2017
+      <br />
+      <strong>Due:</strong> Thursday, 12 January 2017 at 6pm
+    </p>
+  </div>
+  <div>
+    <p>
+      This is an individual assignment.  You are not allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      The main purpose of this problem set is to give us some idea of
+      your programming skills at the beginning of the semester, when
+      most of you are just starting the MS program.  This problem set
+      will also allow us to identify students whose programming skills
+      are strong enough for us to invite them to take a programming
+      test that could result in this course being waived for those
+      students.  Students who do not do well on Problem Set 00 will
+      not be allowed to take that placement test.
+    </p>
+    <p>
+      This Problem Set 00 may be too hard for you to finish before
+      its due date, in which case you should still submit a plain text
+      (Latin-1 or UTF-8) file named <code>README</code>
+      (not <code>README.txt</code>) that says
+      <code>Problem Set 00 is too hard for me.</code>  Students who submit a
+      <code>README</code> file that begins with that sentence will receive full
+      credit for Problem Set 00, but will not be allowed to take the
+      placement test.
+    </p>
+    <p>
+      Students who are able to complete the problem set should create
+      a <code>README</code> file that tells us how to compile and run
+      your program
+      on a Linux, Macintosh, or Windows machine (your choice, but
+      please specify your choice in the <code>README</code> file).
+      You may use an
+      integrated development environment (IDE) to write your program,
+      but you must submit your program as a set of plain text source
+      files.  Do not submit your program using any formats that would
+      make sense only when viewed or interpreted by an IDE.  If we
+      cannot read, compile, and run your program without having to use
+      an IDE, we will assume Problem Set 00 was too hard for you.
+    </p>
+  </div>
+  <hr />
+  <div>
+    <h3>
+      Submitting Your Solution
+    </h3>
+    <p>
+      A third purpose of this problem set is to make sure all MS
+      students have obtained a CCIS account, know how to use <code>sftp</code>
+      to transfer files between machines, and can use Linux well enough
+      to package files and to submit them by following these
+      instructions:
+    </p>
+    <ol>
+      <li value="0">
+        If you're using a personal computer, make sure the <code>ssh</code>
+        and <code>sftp</code> utilities are installed on your machine.  If not,
+        install them.
+        (If you're using Linux, they should already be installed.
+        If you're using a Macintosh, you can install those utilities by
+        installing the Xcode Command Line Tools.  If you're using a
+        Windows machine, you may have to install a freeware version of
+        those utilities such as PuTTY or OpenSSH.)
+      </li>
+      <li>
+        When you have obtained a CCIS account, you will have a home
+        directory on the CCIS shared file system.  Log into a CCIS
+        Linux machine (in WVH 102, or you can use the
+        <code>ssh</code> utility to log
+        in remotely), and create a <code>~/classes/problem00</code> directory as
+        follows:
+        <pre>
+          % mkdir classes
+          % cd classes
+          % mkdir problem00
+        </pre>
+      </li>
+      <li>
+        Use the <code>sftp</code> utility to copy your <code>README</code>
+        and program files
+        into the directory you created in step 1.  Suppose, for example,
+        that your CCIS ID is <code>sidewinder</code>, you have written
+        your program
+        in Java, and your <code>README</code> file along with all of your Java
+        files reside in some directory on your own personal computer.  Then
+        you can open a terminal window (called a Command Prompt window
+        on Windows machines) on your computer, <code>cd</code> to the
+        directory that
+        contains your files, and copy them to the CCIS shared file
+        system as follows:
+        <pre>
+          % sftp sidewinder@login.ccs.neu.edu
+          sidewinder@login.ccs.neu.edu's password: 
+          Connected to login.ccs.neu.edu
+          sftp> cd classes/problem00
+          sftp> put README
+          sftp> mput *.java
+          sftp> bye
+        </pre>
+      </li>
+      <li>
+        Log into a CCIS Linux machine, use the <code>tar</code> utility to
+        create a <code>problem00.tgz</code> file that packages your entire
+        <code>classes/problem00</code>
+        directory into a single compressed file, and submit that file
+        using the <code>/course/cs5010sp17/submit</code> program.  For example:
+        <pre>
+          % ssh sidewinder@login.ccs.neu.edu
+          % cd classes
+          % tar -czf problem00.tgz problem00
+          % /course/cs5010sp17/submit sidewinder 0 problem00.tgz
+        </pre>
+        (Use your own CCIS ID instead of <code>sidewinder</code>.  The 0 in the
+        last line means this is a submission for Problem Set 00.)
+      </li>
+      <li>
+        If all goes well, step 3 will end by giving you a
+        confirmation number.  Please write down that confirmation number
+        so you can prove you have submitted Problem Set 00.
+      </li>
+    </ol>
+  </div>
+  <hr />
+  <div>
+    <h3>
+      Problem Specification
+    </h3>
+    <p>
+      The program you are to write solves a simple flight scheduling
+      problem:  What is the quickest way to get from one airport to
+      another using a given set of scheduled flights?
+    </p>
+    <p>
+      You may write your program using any language that is currently
+      installed and available on
+      <code>
+        login.ccs.neu.edu
+      </code>
+      (which is a CCIS Linux machine).
+    </p>
+    <p>
+      Your program must provide three public operations named
+      <code>canGetThere</code>,
+      <code>fastestItinerary</code>, and
+      <code>travelTime</code>.
+      Those operations are specified below.
+    </p>
+    <p>
+      Your implementation of those operations must use an immutable
+      abstract data type <code>Flight</code>, specified below, together with a
+      <code>ListOfFlight</code> data type whose values are homogeneous lists of
+      values drawn from the <code>Flight</code> ADT; the
+      <code>ListOfFlight</code> data type
+      should use lists that are idiomatic in your chosen programming
+      language.
+    </p>
+    <p>
+      To make this problem set easier for you, we are giving you
+      <a href="#samples">
+        sample implementations
+      </a>
+      of the <code>Flight</code> ADT and
+      <code>ListOfFlight</code> data
+      type, written in several different programming languages.  If
+      you choose to use one of the programming languages we used to
+      write those sample implementations, you may use the sample
+      implementation we give you for that language.  If your chosen
+      programming language is not among those we used for the sample
+      implementations, then you will need to translate one of the
+      sample implementations into your language of choice, taking care
+      to preserve the <code>Flight</code> ADT's immutability, operations,
+      types, and specifications.
+    </p>
+    <p>
+      Your implementation may also define its own data types, and may
+      use any data types that are provided by the programming language
+      you use, including its standard libraries.
+    </p>
+    <p>
+      To qualify for the placement test, your implementation must be
+      correct and reasonably efficient.  It should, for example, take
+      no more than a few seconds to find the shortest itineraries that
+      connect every pair of airports served by the flights listed in
+      the <code>deltaFlights</code> example defined by the sample
+      implementations.
+    </p>
+    <h4>
+      Specifications of
+      <code>canGetThere</code>,
+      <code>fastestItinerary</code>,
+      and <code>travelTime</code>:
+    </h4>
+    <pre>
+      ;;; canGetThere : String String ListOfFlight -> Boolean
+      ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
+      ;;;     and a ListOfFlight that describes all of the flights a
+      ;;;     traveller is willing to consider taking
+      ;;; RETURNS: true if and only if it is possible to fly from the
+      ;;;     first airport (ap1) to the second airport (ap2) using
+      ;;;     only the given flights
+      ;;; EXAMPLES:
+      ;;;     canGetThere ( "06N", "JFK", panAmFlights )  =>  false
+      ;;;     canGetThere ( "06N", "LAX", deltaFlights )  =>  false
+      ;;;     canGetThere ( "LAX", "06N", deltaFlights )  =>  false
+      ;;;     canGetThere ( "LGA", "PDX", deltaFlights )  =>  true
+      
+      ;;; fastestItinerary : String String ListOfFlight -> ListOfFlight
+      ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
+      ;;;     and a ListOfFlight that describes all of the flights a
+      ;;;     traveller is willing to consider taking
+      ;;; WHERE: it is possible to fly from the first airport (ap1) to
+      ;;;     the second airport (ap2) using only the given flights
+      ;;; RETURNS: a list of flights that tells how to fly from the
+      ;;;     first airport (ap1) to the second airport (ap2) in the
+      ;;;     least possible time, using only the given flights
+      ;;; NOTE: to simplify the problem, your program should incorporate
+      ;;;     the totally unrealistic simplification that no layover
+      ;;;     time is necessary, so it is possible to arrive at 1500
+      ;;;     and leave immediately on a different flight that departs
+      ;;;     at 1500
+      ;;; EXAMPLES:
+      ;;;     fastestItinerary ( "LGA", "PDX", deltaFlights )
+      ;;; =>  [ makeFlight ( "Delta 0121", "LGA", "MSP", 1100, 1409 ),
+      ;;;       makeFlight ( "Delta 2163", "MSP", "PDX", 1500, 1902 ) ]
+      ;;;
+      ;;; (In that example, the [x,y] notation indicates a list of two
+      ;;; elements.  The programming language you choose may use some
+      ;;; other notation for lists, or it may not offer any standard
+      ;;; notation for lists that would be useful for showing examples.)
+      
+      ;;; travelTime : String String ListOfFlight -> PosInt
+      ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
+      ;;;     and a ListOfFlight that describes all of the flights a
+      ;;;     traveller is willing to consider taking
+      ;;; WHERE: it is possible to fly from the first airport (ap1) to
+      ;;;     the second airport (ap2) using only the given flights
+      ;;; RETURNS: the number of minutes it takes to fly from the first
+      ;;;     airport (ap1) to the second airport (ap2), including any
+      ;;;     layovers, by the fastest possible route that uses only
+      ;;;     the given flights
+      ;;; EXAMPLES:
+      ;;;     travelTime ( "LGA", "PDX", deltaFlights )  =>  482
+    </pre>
+    <h4>
+      Specification of the <code>Flight</code> ADT:
+    </h4>
+    <pre>
+      ;;; makeFlight : String String String NonNegInt NonNegInt -> Flight
+      ;;; GIVEN: the name of a flight, the name of the airport from
+      ;;;     which the flight departs, the name of the airport at
+      ;;;     which the flight arrives, the time of departure in UTC,
+      ;;;     and the time of arrival in UTC
+      ;;; WHERE: the UTC times are less than 2400, their two low-order
+      ;;;     digits are less than 60 and indicate minutes, and their
+      ;;;     higher-order digits indicate hours
+      ;;; RETURNS: a Flight value that encapsulates the given information
+      ;;; EXAMPLE:
+      ;;;     makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 )
+      
+      ;;; flightName : Flight -> String
+      ;;; GIVEN: a Flight
+      ;;; RETURNS: the name of the Flight
+      ;;; EXAMPLE:
+      ;;;     flightName ( makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  "United 448"
+      
+      ;;; departsFrom : Flight -> String
+      ;;; GIVEN: a Flight
+      ;;; RETURNS: the name of the airport from which the flight departs
+      ;;; EXAMPLE:
+      ;;;     departsFrom ( makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  "BOS"
+      
+      ;;; arrivesAt : Flight -> String
+      ;;; GIVEN: a Flight
+      ;;; RETURNS: the name of the airport at which the flight arrives
+      ;;; EXAMPLE:
+      ;;;     arrivesAt ( makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  "DEN"
+      
+      ;;; departureTime : Flight -> NonNegInt
+      ;;; GIVEN: a Flight
+      ;;; RETURNS: the time (in UTC, see above) at which the flight departs
+      ;;; EXAMPLE:
+      ;;;     departureTime ( makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  2003
+      
+      ;;; arrivalTime : Flight -> NonNegInt
+      ;;; GIVEN: a Flight
+      ;;; RETURNS: the time (in UTC, see above) at which the flight arrives
+      ;;; EXAMPLE:
+      ;;;     arrivalTime ( makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  0053
+      
+      ;;; sameFlight : Flight Flight -> Boolean
+      ;;; GIVEN: two flights
+      ;;; RETURNS: true if and only if the two flights have the same
+      ;;;     name, depart from the same airport, arrive at the same
+      ;;;     airport, depart at the same time, and arrive at the same time
+      ;;; EXAMPLES:
+      ;;;
+      ;;;     sameFlight ( makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ),
+      ;;;                  makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  true
+      ;;;
+      ;;;     sameFlight ( makeFlight ( "United 448", "BOS", "DEN", 2000, 0055 ),
+      ;;;                  makeFlight ( "United 448", "BOS", "DEN", 2003, 0053 ))
+      ;;; =>  false
+    </pre>
+  </div>
+  <hr />
+  <div>
+    <h3 id="samples">
+      Sample Implementations
+    </h3>
+    <p>
+      We are giving you sample implementations, in three programming
+      languages, of the <code>Flight</code> ADT and the
+      <code>
+        ListOfFlight
+      </code>
+      data type.
+      You should translate those implementations into the language
+      you choose to use for this problem set.
+    </p>
+    <ul>
+      <li>
+        <a href="CPlusPlus00.tar.gz">
+          C++
+        </a>
+      </li>
+      <li>
+        <a href="Java00.tar.gz">
+          Java
+        </a>
+      </li>
+      <li>
+        <a href="Scheme00.tar.gz">
+          Scheme
+        </a>
+        <a href="http://www.scheme-reports.org/">
+          (R7RS)
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

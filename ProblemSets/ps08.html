@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 08
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 08
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 13 March 2017
+      <br />
+      <strong>Due:</strong> Monday, 20 March 2017 at 6pm
+    </p>
+  </div>
+  <div>
+    <p>
+      This is a
+      <a href="http://en.wikipedia.org/wiki/Pair_programming">
+        pair programming
+      </a>
+      assignment.  You are required to
+      complete this problem set in collaboration with your assigned
+      partner, but neither of you are allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      As in previous problem sets,
+      you and your partner are required to push your files at
+      the end of every work session.
+      (You <em>may</em> push your files several times during
+      a work session, but we do not require you to do so.)
+    </p>
+    <p>
+      At the end of every work session, you are required to update
+      your log file to record the time you spent in that work session.
+      (Please do not include the time you spent in any previous work
+      sessions, as those times will already have been recorded in
+      previous versions of your log file.)
+      If both of you work together during a work session, both of
+      you must update your log files, recording only the time <em>you</em>
+      spent working.  Do not include your partner's time in
+      your log file, but be sure to push the updated versions of
+      both log files.
+    </p>
+    <hr />
+    <p>
+      This problem set is designed to give you a chance to make
+      your scheduling program run faster.
+    </p>
+    <p>
+      You must use the HtDP
+      <strong>Intermediate Student Language + Lambda</strong>
+      for this problem set.
+    </p>
+    <p>
+      As in previous problem sets, you must download a copy of
+      <a href="extras.rkt">
+        <code>extras.rkt</code>
+      </a>
+      and push it to the <code>set08</code> directory with your solutions.
+      Then import that library by including the line
+      <code>(require "extras.rkt")</code>
+      at the top of your files with your other <code>require</code>
+      declarations.  Following those <code>require</code> declarations,
+      write <code>provide</code> declarations that provide all of
+      the functions you are required to provide, without providing any
+      functions you are not required to provide.
+      That will allow our testing framework to import your files
+      and do automated testing on them.
+      You can use <code>check-location</code> to double-check that your
+      files are in the right place.
+    </p>
+    <p>
+      Remember that you must follow the design recipe, which is a
+      process, not a list of deliverables.
+      Your
+      <a href="../Info/deliverables.html">
+        deliverables
+      </a>
+      include the artifacts produced by the various steps of the
+      design recipe: data definitions (including interpretation and
+      templates, contracts, purpose statements, definitions, and tests).
+      Be sure to follow our
+      <a href="../Info/style.html">
+        coding conventions.
+      </a>
+      Doing so will make codewalks easier for everyone.
+    </p>
+    <hr />
+  </div>
+  <h3>
+    Problem Specification
+  </h3>
+  <ol>
+    <li>
+      Copy your <code>q2.rkt</code> program of Problem Set 07
+      to a file named <code>set08/q1.rkt</code>.
+      Modify <code>q1.rkt</code> and <code>flight.rkt</code>
+      as necessary to make your program run in
+      <a href="http://mathworld.wolfram.com/PolynomialTime.html">
+        polynomial time.
+      </a>
+      <p>
+        As in Problem Set 07, your program must respect
+        the abstraction barrier associated with the
+        <code>UTC</code> and <code>Flight</code>
+        abstract data types.
+        As in Problem Set 06, you are allowed to implement those
+        ADTs as you see fit.
+      </p>
+    </li>
+    <li>
+      After you have finished your <code>set07/q1.rkt</code> program,
+      analyze its asymptotic running time.
+      In a plain text file named <code>set08/q2.txt</code>,
+      write a one-sentence summary of its asymptotic running time.
+      <p>
+        Following that sentence, display a table showing how the
+        running time of your optimized program varies with the
+        parameter <code>n</code> for the simple benchmark shown below,
+        using a range of values for <code>n</code> that is adequate
+        to illustrate the asymptotic running time you are claiming
+        for your program.
+      </p>
+    </li>
+  </ol>
+  <pre>
+    ;;; all-airports : ListOfFlight -> ListOfString
+    ;;; RETURNS: A list of all airports served by some flight
+    ;;;     in the given list.
+    
+    (define (all-airports flights)
+      (all-airports-loop (append (map departs flights)
+                                 (map arrives flights))
+                         empty))
+    
+    ;;; all-airports-loop : ListOfString ListOfString -> ListOfString
+    ;;; GIVEN: two lists of strings
+    ;;; WHERE: the second list is a set (no element occurs twice)
+    ;;; RETURNS: the set union of the given lists
+    
+    (define (all-airports-loop names airports)
+      (if (empty? names)
+          airports
+          (all-airports-loop (rest names)
+                             (if (member (first names) airports)
+                                 airports
+                                 (cons (first names) airports)))))
+    
+    ;;; visit-all-pairs-of-airports :
+    ;;;     (String String ListOfFlight -> X) ListOfFlight -> ListOfX
+    ;;; GIVEN: a function whose arguments are suitable for can-get-there?
+    ;;; RETURNS: a list of the results obtained by calling that function
+    ;;;     on all pairs of airports served by the given flights,
+    ;;;     passing the given list of flights as a third argument.
+    
+    (define (visit-all-pairs-of-airports visitor flights)
+      (let ((airports (all-airports flights)))
+        (apply append
+               (map (lambda (ap1)
+                      (map (lambda (ap2)
+                             (visitor ap1 ap2 flights))
+                           airports))
+                    airports))))
+    
+    ;;; make-stress-test0 : NonNegInt -> ListOfFlight
+    ;;; GIVEN: a non-negative integer n
+    ;;; RETURNS: a list of 2n flights connecting n+1 airports
+    
+    (define (make-stress-test0 n)
+      (if (= n 0)
+          empty
+          (let* ((name1 (string-append "NoWays " (number->string (+ n n))))
+                 (name2 (string-append "NoWays " (number->string (+ n n 1))))
+                 (ap1 (string-append "AP" (number->string n)))
+                 (ap2 (string-append "AP" (number->string (+ n 1))))
+                 (t1 (make-UTC (remainder (* 107 n) 24)
+                               (remainder (* 223 n) 60)))
+                 (t2 (make-UTC (remainder (* 151 n) 24)
+                               (remainder (* 197 n) 60)))
+                 (t3 (make-UTC (remainder (* 163 n) 24)
+                               (remainder (* 201 n) 60)))
+                 (t4 (make-UTC (remainder (* 295 n) 24)
+                               (remainder (* 183 n) 60)))
+                 (f1 (make-flight name1 ap1 ap2 t1 t2))
+                 (f2 (make-flight name2 ap1 ap2 t3 t4)))
+            (cons f1 (cons f2 (make-stress-test0 (- n 1)))))))
+    
+    ;;; benchmark0 : NonNegInt -> List
+    ;;; GIVEN: a non-negative integer parameter n
+    ;;; RETURNS: a list of length n^2 showing the travel time for
+    ;;;     every pair of airports in a stress test of size Theta(n)
+    ;;; EFFECT: prints the total running time
+    
+    (define (benchmark0 n)
+      (let ((flights (make-stress-test0 n)))
+        (time (visit-all-pairs-of-airports
+               (lambda (ap1 ap2 flights)
+                 (if (can-get-there? ap1 ap2 flights)
+                     (list ap1 ap2 (travel-time ap1 ap2 flights))
+                     (list ap1 ap2 -1)))
+               flights))))
+  </pre>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

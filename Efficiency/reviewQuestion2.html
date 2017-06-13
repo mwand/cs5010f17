@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Check Your Understanding
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Check Your Understanding
+  </h2>
+  <div data-ng-app="mc1">
+    <div>
+      <p>
+        Let f(n) be the sum of the integers 1 through n,
+        and let g(n) be the number of nodes in a complete binary tree
+        of height n.
+      </p>
+      <p>
+        Which of the following is true?
+      </p>
+    </div>
+    <form data-ng-controller="AnswerFormCtrl1">
+      <input type="radio" name="answer" value="A" data-ng-model="answer">
+        &Omega;(g) &sub; &Omega;(f)
+        <br />
+      <input type="radio" name="answer" value="B" data-ng-model="answer">
+        &Omega;(f) = &Omega;(g)
+        <br />
+      <input type="radio" name="answer" value="C" data-ng-model="answer">
+        &Omega;(f) &sub; &Omega;(g)
+        <br />
+      <input type="radio" name="answer" value="D" data-ng-model="answer">
+        &Omega;(f) &nsub; &Omega;(g) and &Omega;(g) &nsub; &Omega;(f)
+        <br />
+      <input type="submit" value="Submit Answer" data-ng-click="dispatchOnAnswer(answer)">
+    </form>
+  </div>
+</div>
+<div id="footer">
+  <form action="reviewQuestion1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="reviewQuestion3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<script src="angular.min.js">
+</script>
+
+<script>
+  (function() {
+    "use strict";
+    var app = angular.module("mc1", []);
+    app.controller("AnswerFormCtrl1",["$scope", function($scope) {
+      $scope.answer = undefined;
+      $scope.dispatchOnAnswer = function(answer) {
+        switch (answer) {
+          case "A":
+          window.location.href ="#";
+          alert("Correct. ");
+          break;
+
+          case "B":
+          window.location.href ="#";
+          alert("Incorrect. ");
+          break;
+
+          case "C":
+          window.location.href ="#";
+          alert("Incorrect. ");
+          break;
+
+          case "D":
+          window.location.href ="#";
+          alert("Incorrect. ");
+          break;
+
+          default:
+            alert("You must answer the question before submitting.");
+        }
+      }
+    }]);
+  }()); // end of anonymous function call
+</script>
+
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 8.3</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 8.3</h1>
+
+<p>Modify 08-2-binary-search.rkt to design the following function:</p>
+
+<pre>
+;; binary-search-count : Nat (Nat -> Real) -> Nat
+;; GIVEN: a natural number N, and a function f : Nat -> Real
+;; WHERE: f is monotonic (ie, i<=j implies f(i) <= f(j))
+;; RETURNS: the number of i in [0,N] s.t. f(i) = f(N)
+
+;; EXAMPLES/TESTS:
+
+; list-to-fn : ListOfReal -> (Nat -> Real)
+(define (list-to-fn lst)
+  (lambda (n)
+    (list-ref lst n)))
+
+(define fn1 (list-to-fn '(3 4 5 5 5 6 6 6 7 7 7 8)))
+
+(begin-for-test
+  (check-equal?
+    (binary-search-count 11 fn1)
+    1)
+  (check-equal?
+    (binary-search-count 10 fn1)
+    3)
+  (check-equal?
+    (binary-search-count 9 fn1)
+    2)
+  (check-equal?
+    (binary-search-count 2 fn1)
+    1)
+  (check-equal?
+    (binary-search-count 3 fn1)
+    2)
+  (check-equal?
+   (binary-search-count 4 fn1)
+   3)
+  )
+</pre>
+
+<p>Remember that your invariants,halting measure, and termination
+argument are at least as important as your code.</p>
+
+
+<p><a href="solution.rkt" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Thu Nov  5 13:43:20 Eastern Standard Time 2015 <!-- hhmts end -->
+</body> </html>

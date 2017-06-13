@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Interfaces in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <pre>
+      // This is a Java comment.
+      //
+      // You're looking at a file named Interface1.java,
+      // which defines an interface named Interface1.
+      //
+      // That interface just lists the names and contracts
+      // of three methods.
+      //
+      // In Java, as in most programming languages, you must
+      // write down the contract for every method or function,
+      // and the compiler enforces those contracts.  If you
+      // write code that violates a contract, the compiler
+      // won't let you run your program.
+      //
+      // Ordinarily, we would write a purpose statement
+      // for each method, but we're leaving that out to
+      // emphasize the simplicity of Java interfaces.
+      
+      interface Interface1 {
+      
+          int foo ();
+          int bar (int n);
+          int baz (int n);
+      }
+    </pre>
+    <blockquote>
+      <p>
+        A few more comments about Java:
+      </p>
+      <p>
+        In Java, the names of most data types start with
+        a capital letter, but Java treats a small set of
+        primitive data types, such as <code>int</code>, differently.
+        The capitalized data types are called <em>reference</em> types.
+        The un-capitalized data types are the <em>primitive</em> types.
+      </p>
+      <p>
+        As you have probably noticed by now, a method's return
+        type is written in front of the name of the method, and
+        the type of each argument is written in front of the
+        name of the argument.  That's a syntactic peculiarity
+        Java copied from C.
+      </p>
+      <p>
+        Java copied many other syntactic peculiarities from C
+        and other languages.  Having become popular, Java is
+        now a language many other languages are copying.
+      </p>
+    </blockquote>
+  </div>
+</div>
+<div id="footer">
+  <form action="interfaces2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="classdefinition1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

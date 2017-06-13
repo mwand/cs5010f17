@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 02-3-traffic-light-with-timer) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 02-4-traffic-light-with-timer) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
 (require rackunit)
 (require "extras.rkt")
 
@@ -12,19 +12,28 @@
 ;; time-until-change at the next second. 
 
 ;; DATA DEFINITIONS:
-;; a TrafficLightColor (TLColor) is represented by one of the strings
+;; a TrafficLightColor (TLColor) is one of
 ;; -- "red"
 ;; -- "yellow" 
 ;; -- "green"
 ;; INTERP: self-evident
-;; EXAMPLES:
+;; EXAMPLES
 (define red-color "red")
 (define yellow-color "yellow")
 (define green-color "green")
 
+;; TEMPLATE
+;; tlc-fn : TLColor -> ??
+;(define (tlc-fn c)
+;  (cond
+;    [(string=? c "red")    
+;     ...]
+;    [(string=? c "yellow")
+;     ...]
+;    [(string=? c "green")  
+;     ...]))    
 
 ;; countdown timer
-
 ;; A TimerState is a NonNegativeInteger
 ;; WHERE: 0 < t <= COLOR-CHANGE-INTERVAL
 ;; INTERP: number of seconds until the next color change.
@@ -45,7 +54,7 @@
 ;; EXAMPLES:
 ;; (timer-at-next-second 17) = 16
 ;; (timer-at-next-second 1) = COLOR-CHANGE-INTERVAL
-;; STRATEGY: if t = 1 then recycle, otherwise decrement
+;; STRATEGY: Cases
 (define (timer-at-next-second t)
   (if (= t 1)
     COLOR-CHANGE-INTERVAL
@@ -80,7 +89,7 @@ works out
 |#
 
 ;; VERSION 1
-;; STRATEGY: Cases on c : Color
+;; STRATEGY: Structural Decomposition on c
 
 #;(define (color-at-next-second c t) 
   (cond
@@ -108,7 +117,7 @@ works out
 ;; (next-color "red") = "green"
 ;; (next-color "yellow") = "red"
 ;; (next-color "green") = "yellow"
-;; STRATEGY: cases on c : TLColor
+;; STRATEGY: use template for TLColor on c
 
 (define (next-color c) 
   (cond
@@ -125,13 +134,13 @@ works out
 
 (begin-for-test
   (check-equal? (next-color "green") "yellow"
-    "next color after green was not yellow")
+    "next color after green not yellow")
 
   (check-equal? (next-color "yellow") "red"
-    "next color after yellow was not red")
+    "next color after yellow not red")
 
   (check-equal? (next-color "red") "green"
-    "next color after red was not green"))
+    "next color after red not green"))
 
 
 

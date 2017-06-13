@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Abstract Base Class for SortedIMap
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Abstract Base Class for <code>SortedIMap&lt;K,V&gt;</code>
+  </h3>
+  <div>
+    <p>
+      We don't have to override the <code>hashCode()</code> method,
+      because the inherited <code>hashCode()</code> method still
+      returns the same result for any maps that are equal according
+      to our new definition of the <code>equals</code> method, but
+      the new definition of <code>equals</code> allows us to write
+      a <code>hashCode()</code> method that depends on the order in
+      which keys are generated.
+      That allows us to write a better
+      <code>hashCode()</code> method.
+    </p>
+    <p>
+      This <code>hashCode()</code> method below doesn't take advantage
+      of that, but it does emphasize the fact that computing a
+      hash code for sorted maps can be done differently than for
+      unsorted maps.
+    </p>
+    <pre>
+          public int hashCode () {
+              Iterator&lt;K&gt; it = keyIterator();
+              int result = 2005052521;
+              while (it.hasNext()) {
+                  K key = it.next();
+                  V val = getVal (key);
+                  int keyHash = key.hashCode();
+                  int valHash = val.hashCode();
+                  result = result - 978278598 * keyHash + 1048370044 * valHash;
+              }
+              return result;
+          }
+    </pre>
+    <p>
+      We can override the <code>toString()</code> method as well.
+      We could, for example, define the <code>toString()</code>
+      method so it shows every tenth key up to some maximum number
+      of keys.
+      Doing so is left as an exercise for the reader.
+    </p>
+    <p>
+      That completes our definition of the
+      <code>SortedIMapBase&lt;K,V&gt;</code> class.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2SortedIMapBase11.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2bst1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

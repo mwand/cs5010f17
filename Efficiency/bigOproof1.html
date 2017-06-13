@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proof of the First Theorem
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <p>
+    <strong>Theorem.</strong>
+    If f: N &rarr; R and g: N &rarr; R are non-negative
+    for all arguments n, and g is in O(f) according to the
+    <a href="lessGeneralBigO.html">
+      less general definition,
+    </a>
+    then g is in O(f) according to the
+    <a href="pageBigO.html">
+      more general definition.
+    </a>
+  </p>
+  <p>
+    <strong>Proof.</strong>
+    Suppose g is in O(f) by the less general definition.
+    Let c and n<sub>0</sub> be positive constants such that
+    for all n &ge; n<sub>0</sub>
+  </p>
+  <blockquote>
+    <p>
+      g(n) &nbsp;&nbsp; &le; &nbsp;&nbsp; c &sdot; f(n)
+    </p>
+  </blockquote>
+  <p>
+    Let c<sub>1</sub> = c and let
+  </p>
+  <blockquote>
+    <p>
+      c<sub>0</sub> = max { g(n) | n &lt; n<sub>0</sub> }
+    </p>
+  </blockquote>
+  <p>
+    Then for every n
+  </p>
+  <ul>
+    <li>
+      if n &lt; n<sub>0</sub> then
+      <blockquote>
+        <p>
+          g(n) &nbsp; &le; &nbsp; c<sub>0</sub>
+               &nbsp; &le; &nbsp; c<sub>0</sub> + c<sub>1</sub> &sdot; f(n)
+        </p>
+      </blockquote>
+    </li>
+    <li>
+      if n &ge; n<sub>0</sub> then
+      <blockquote>
+        <p>
+          g(n) &nbsp; &le; &nbsp; c &sdot; f(n)
+               &nbsp; = &nbsp; c<sub>1</sub> &sdot; f(n)
+             &nbsp; &le; &nbsp; c<sub>0</sub> + c<sub>1</sub> &sdot; f(n)
+        </p>
+      </blockquote>
+    </li>
+  </ul>
+  <p>
+    So g &isin; O(f) by the more general definition.
+    &#x220e;
+  </p>
+</div>
+<div id="footer">
+  <form action="lessGeneralBigOsummary.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="bigOproof2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example: an equals Method for the UTC1 Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Example: an equals Method for the UTC1 Class
+    </h3>
+    <p>
+      Within the
+      <a href="UTC4.html"><code>UTC1</code></a> class
+      of our example, we can define a suitable <code>equals</code>
+      method like this:
+    </p>
+    <pre>
+          public boolean equals (Object x) {
+              if (x instanceof UTC) {
+                  UTC t2 = (UTC) x;
+                  return isEqual (t2);
+              }
+              else return false;
+          }
+    </pre>
+    <p>
+      The <code>(x instanceof UTC)</code> test determines whether
+      the object <code>x</code> is of a class that implements the
+      <code>UTC</code> interface.  If so, then we can define an
+      <em>alias</em> <code>t2</code> for <code>x</code>,
+      and use the <code>isEqual</code> method of the class
+      to determine whether <code>x</code> should be considered
+      equal to this <code>UTC</code>.
+    </p>
+    <h4>
+      Casts
+    </h4>
+    <p>
+      The definition of <code>t2</code> is rather interesting:
+    </p>
+    <pre>
+                  UTC t2 = (UTC) x;
+    </pre>
+    <p>
+      That line defines a local variable named <code>t2</code> whose
+      value is the same as the value of <code>x</code>.
+      Defining a second variable with the same value may seem pointless,
+      but it's convenient because the
+      type of the expression <code>t2</code> is <code>UTC</code>,
+      whereas the type of the expression <code>x</code> is <code>Object</code>.
+      If we were to try to pass <code>x</code> as an argument to the
+      <code>isEqual</code> method, the Java compiler would report
+      a type error because the <code>isEqual</code> method only
+      accepts arguments of type <code>UTC</code>.
+    </p>
+    <p>
+      The right hand side of the variable declaration for <code>t2</code>
+      <em>casts</em> <code>x</code> from type <code>Object</code> to
+      type <code>UTC</code>.
+      That <em>cast</em> is a type conversion.
+      It tells the Java compiler not to complain about the fact
+      that the type of <code>x</code> is different from <code>UTC</code>.
+    </p>
+    <p>
+      In some unsafe programming languages, compilers just
+      trust the programmer and perform the type conversion
+      without checking to see whether the value of <code>x</code>
+      actually supports the operations listed in the <code>UTC</code>
+      interface.
+      If the programmer makes a mistake, the program will blow up
+      (if we're lucky) or generate incorrect results (if we're unlucky).
+      That's why programming languages in which compilers trust
+      the programmer's casts without checking are said to be unsafe.
+    </p>
+    <p>
+      In Java, C#, and other safe languages, compilers don't
+      just trust the programmer.  Compilers generate code that
+      will check the value of <code>x</code> at run time to make sure
+      it is safe to use that value as though it were a <code>UTC</code>.
+      If that run-time check fails, it will throw an exception
+      that can be handled by an exception handler programmers
+      have written to deal with such mistakes.
+      At worst, if the programmers have not defined an exception handler,
+      a default exception handler will report the error, along with
+      information that will make it easier to fix the program,
+      and terminate the program in a clean manner.
+      That's part of why programming languages such as Java and C#
+      are said to be safe.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="equality6.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="hashcode1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

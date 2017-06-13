@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example of Compiler Optimization
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Example of Compiler Optimization
+  </h3>
+  <div>
+    <p>
+      Consider the following method, which is written in Java:
+    </p>
+    <pre>
+      // Returns the inner product of the given arrays.
+      
+      static double ip (double[] a, double[] b) {
+          int n = a.length;
+          double result = 0.0;
+          for (int i = 0; i &lt; n; i = i + 1)
+              result = result + a[i] * b[i];
+          return result;
+      }
+    </pre>
+    <p>
+      If you didn't know your Java compiler is an optimizing compiler,
+      you might worry so much about the micro-efficiency of that method
+      that you decide to write uglier code in an uglier
+      programming language:
+    </p>
+    <pre>
+      double ip (register double *a, register double *b, register int n) {
+        register double result = 0.0;
+        while (n-- &gt; 0) {
+          result += *(a++) * *(b++);
+        }
+        return result;
+      }
+    </pre>
+    <p>
+      How much would you gain by writing such ugly code?
+    </p>
+    <p>
+      Let's find out.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="opt2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="opt4.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

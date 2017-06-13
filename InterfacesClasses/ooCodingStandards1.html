@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Coding Standards
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Coding Standards, Part 1
+  </h3>
+  <div>
+    <ul>
+      <li>
+        A public method is a method whose definition begins
+        with <code>public</code>.
+      </li>
+      <li>
+        If a method is listed in an interface, its definition
+        must be public.
+        (The Java compiler enforces this.)
+      </li>
+      <li>
+        Every public method of the class
+        <em>MUST</em> be listed in an interface the class
+        implements.
+      </li>
+      <li>
+        Your class may also define non-public help methods.
+        If a help method is called only from within the class,
+        then it should be declared <code>private</code>.
+      </li>
+      <li>
+        You may write non-public help methods to be used only
+        for testing.  Those methods cannot be private, unless
+        the tests that call them are written within the class,
+        but they should not be public.
+      </li>
+      <li>
+        Your non-public methods should come after all of the
+        public methods.
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="classDesign3.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="ooCodingStandards2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  A Less General Definition of O(f)
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <p>
+    <strong>Theorem.</strong>
+    If f: N &rarr; R and g: N &rarr; R are non-negative
+    for all arguments n, and g is in O(f) according to the
+    <a href="lessGeneralBigO.html">
+      less general definition,
+    </a>
+    then g is in O(f) according to the
+    <a href="pageBigO.html">
+      more general definition.
+    </a>
+  </p>
+  <p>
+    <strong>Theorem.</strong>
+    If f: N &rarr; R and g: N &rarr; R are non-negative
+    for all arguments n, and the constant function that
+    always returns 1 is in O(f) according to the
+    <a href="lessGeneralBigO.html">
+      less general definition,
+    </a>
+    and g is in O(f) according to the
+    <a href="pageBigO.html">
+      more general definition,
+    </a>
+    then g is also in O(f) according to the
+    <a href="lessGeneralBigO.html">
+      less general definition.
+    </a>
+  </p>
+  <p>
+    In practice, computer scientists who use the less general
+    definition write O(f) only when f is positive-valued and
+    monotonic, which implies the constant-valued
+    function that always returns 1 is in O(f).
+  </p>
+  <blockquote>
+    <p>
+      <strong>Exercise:</strong>
+      Can you give an example of a positive-valued function
+      f: N &rarr; R for which (&lambda; n . 1) &notin; O(f)
+      according to the less general definition?
+    </p>
+  </blockquote>
+  <p>
+    The two theorems above therefore prove that, so far as
+    computer scientists are concerned, the less general
+    definition is basically the definition you'd get by
+    restricting the more general definition to functions
+    from the natural numbers to the positive real numbers.
+  </p>
+</div>
+<div id="footer">
+  <form action="lessGeneralBigO.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="lessGeneralBigO3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

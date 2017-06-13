@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Code Outline (Functional Version), part 2
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Code Outline (Functional Version), part 2
+  </h3>
+  <div>
+    <pre>
+      ;;; weight : Shape -> Number
+      ;;; GIVEN: a shape
+      ;;; RETURNS: the weight of the shape, assuming each shape
+      ;;;     weighs 1 gram per pixel of area
+      ;;; STRATEGY: use template for Shape on s
+      
+      (define (weight s)
+        (cond ((my-circle? s)
+               (my-circle-weight s))
+              ((my-square? s)
+               (my-square-weight s))
+              ((my-composite? s)
+               (my-composite-weight s))))
+      
+      ;;; add-to-scene : Shape Scene -> Scene
+      ;;; RETURNS: a scene like the given one, but with the
+      ;;;     given shape painted on it
+      ;;; STRATEGY: use template for Shape on s
+      
+      (define (add-to-scene s scene)
+        (cond ((my-circle? s)
+               (my-circle-add-to-scene s scene))
+              ((my-square? s)
+               (my-square-add-to-scene s scene))
+              ((my-composite? s)
+               (my-composite-add-to-scene s scene))))
+    </pre>
+    <p>
+      There are six small help functions left to write:
+    </p>
+    <ul>
+      <li>
+        <code>my-circle-weight</code>
+      </li>
+      <li>
+        <code>my-square-weight</code>
+      </li>
+      <li>
+        <code>my-composite-weight</code>
+      </li>
+      <li>
+        <code>my-circle-add-to-scene</code>
+      </li>
+      <li>
+        <code>my-square-add-to-scene</code>
+      </li>
+      <li>
+        <code>my-composite-add-to-scene</code>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="functionsVsClasses4.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="functionsVsClasses6.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

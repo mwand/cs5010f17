@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Design #3: Pushing Information
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Design #3: Pushing Information
+  </h3>
+  <div>
+    <p>
+      In this third design, when this ball is asked whether it intersects
+      with some other ball, it sends its information to the other
+      ball, and asks that other ball to compute the intersection.
+    </p>
+    <pre>
+      // A Ball3 is an object of any class that implements Ball3.
+      
+      interface Ball3 {
+      
+          // Does the given ball intersect with this one?
+      
+          boolean intersects (Ball3 b);
+      
+          // GIVEN: the x, y, r for some ball
+          // RETURNS: does that ball intersect this ball?
+      
+          boolean <span class="red">intersectResponder</span> (int x, int y, int r);
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="statePatternsDesign2c.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="statePatternsDesign3b.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

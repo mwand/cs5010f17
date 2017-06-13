@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Subclass: UTC2
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Subclass: UTC2
+  </h3>
+  <div>
+    <p>
+      Here is the new definition of <code>UTC2</code>.
+    </p>
+    <p>
+      The <span class="red"><code>extends UTC1</code></span>
+      declares <code>UTC1</code>
+      to be the superclass, so all of the fields and methods
+      defined in <code>UTC1</code> will be inherited by
+      <code>UTC2</code>.
+    </p>
+    <p>
+      There might be some methods in <code>UTC1</code> that
+      rely on the <code>h</code> field being the UTC hour rather
+      than the EST hour.
+      We don't want to break those methods, so we define our
+      own <code>h</code> field in <code>UTC2</code>.
+    </p>
+    <p>
+      The call to <span class="red"><code>super</code></span>
+      inside the Java constructor
+      invokes the Java constructor for the superclass, which
+      initializes the <code>h</code> and <code>m</code> fields
+      of the superclass.
+      The assignment to <code>this.h</code> then initializes
+      the <code>h</code> field of <code>UTC2</code>.
+    </p>
+    <pre>
+      // Constructor template for UTC2:
+      //     new UTC2 (h, m)
+      // Interpretation:
+      //     h is the UTC hour (between 0 and 23, inclusive)
+      //     m is the UTC minute (between 0 and 59, inclusive)
+      // Representation:
+      //     Internally, the hour is represented in Eastern Standard Time,
+      //     which is five hours behind UTC.
+      
+      class UTC2 <span class="red">extends UTC1</span> implements UTC {
+      
+          // the h field inherited from UTC1 will not be used
+          // we will use the following h field instead
+      
+          int h;    // the hour in EST, limited to [0,23]
+      
+          // the Java constructor
+      
+          UTC2 (int h, int m) {
+              <span class="red">super (h, m);</span>    // invokes the constructor for UTC1
+              this.h = (h >= 5) ? (h - 5) : h + 19;
+          }
+      
+          // public methods
+      
+          // Returns the hour, between 0 and 23 inclusive.
+      
+          <span class="red">@Override</span>
+          public int hour () {
+              if (h < 19)
+                  return h + 5;
+              else
+                  return h - 19;
+          }
+      
+          // The minute, isEqual, equals, hashCode, and toString
+          // methods are inherited from UTC1.
+      
+          // a main method for unit testing
+      
+          public static void main (String[] args) {
+              UTC2tests.main(args);
+          }
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="inheritanceExample2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="inheritanceJava1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

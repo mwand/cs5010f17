@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Good OO Design
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Properties of Good OO Design
+  </h3>
+  <div>
+    <p>
+      This is not a course on OO design, but we can state some
+      general principles.  If you stray too far from these,
+      that is a sign of bad design.
+    </p>
+    <ul>
+      <li>
+        One bundle of operations = one interface
+        <ul>
+          <li>
+            If the interface consists of two kinds of things,
+            working on disjoint pieces of data, consider splitting it.
+          </li>
+        </ul>
+      </li>
+      <li>
+        One structure = one class
+      </li>
+      <li>
+        Keep interfaces as small as possible.
+      </li>
+      <li>
+        Keep operations near their data.
+      </li>
+      <li>
+        Keep values local where possible.
+      </li>
+      <li>
+        Our older design principles still hold.
+        <ul>
+          <li>
+            contracts, purpose statements, and invariants
+          </li>
+          <li>
+            If not every combination of values is meaningful,
+            write an invariant (precondition) to document this.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <form action="designStrategy2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="programReview1.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 8.1</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 8.1</h1>
+
+<ol>
+
+  <li>Write a data definition for SortedList.  Hint: You will need an
+  invariant.
+
+  <p>There are probably many ways of doing this.  Here's one solution:</p>
+
+  <pre>
+A SortedList is one of
+-- empty
+-- (cons Number SortedList)
+   WHERE: the Number is less than or equal to any of the elements in
+          the SortedList
+</pre>
+
+  <p>If you have a different solution, we can discuss it in class or
+  on Piazza.</p>
+
+
+  </li>
+
+  <li>Write two DIFFERENT function definitions for even-elements and
+  odd-elements.  Assume the elements of the list are numbered starting
+  at 1.
+
+<pre>EXAMPLES:
+(odd-elements (list 10 20 30 40)) = (list 10 30)
+(even-elements (list 10 20 30 40)) = (list 20 40)
+(odd-elements (list 10)) = (list 10)
+(even-elements (list 10)) = empty
+</pre>
+
+  <p>Here are my solutions:</p>
+
+  <pre>
+;; odd-elements : ListOfNumber -> ListOfNumber
+;; Strategy: Recur on (rest (rest lst))
+(define (odd-elements lst)
+  (cond
+    [(empty? lst) empty]
+    [(empty? (rest lst)) (list (first lst))]
+    [else (cons
+            (first lst)
+            (odd-elements (rest (rest lst))))]))
+
+;; even-elements : ListOfNumber -> ListOfNumber
+;; Strategy: Recur on (rest (rest lst))
+(define (even-elements lst)
+  (cond
+    [(empty? lst) empty]
+    [(empty? (rest lst)) empty]
+    [else (cons
+            (first (rest lst))
+            (even-elements (rest (rest lst))))]))
+
+;; Solution 2:
+
+;; Here's a very different solution.  Here we make odd-elements and
+;; even-elements mutually recursive.  This actually fits into the
+;; destructor template for ListOfX. Here we are recurring on (rest
+;; lst), so this could fairly be called structural recursion.
+
+;; strategy: Use template for ListOfX on lst
+(define (odd-elements lst)
+  (cond
+    [(empty? lst) empty]
+    [else (cons
+            (first lst)
+            (even-elements (rest lst)))]))
+
+;; strategy: Use template for ListOfX on lst
+(define (even-elements lst)
+  (cond
+    [(empty? lst) empty]
+    [else (odd-elements (rest lst))]))
+
+</pre>
+   
+</li>
+
+  
+</ol>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Oct 27 08:29:34 Eastern Daylight Time 2015 <!-- hhmts end -->
+</body> </html>

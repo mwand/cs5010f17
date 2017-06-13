@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Packages in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Packages in Java
+  </h3>
+  <div>
+    <p>
+      The misleading name of the <code>protected</code> access modifier
+      gives you some idea of why we have been defining all classes
+      in the default package.
+      The Java package system is moderately confusing,
+      especially for programmers who are just learning Java.
+    </p>
+    <p>
+      We can't avoid packages completely, however, because we need
+      to import parts of packages that are part of Java's standard
+      libraries.
+    </p>
+    <p>
+      For the <code>IMapBase&lt;K,V&gt;</code> class,
+      these are the things we need to import from the
+      <code>java.util</code> package:
+    </p>
+    <pre>
+      import java.util.Map;
+      import java.util.Map.Entry;
+      import java.util.AbstractMap;
+      import java.util.AbstractMap.SimpleImmutableEntry;
+      
+      import java.util.Set;
+      import java.util.AbstractSet;
+      
+      import java.util.List;
+      import java.util.ArrayList;
+      
+      import java.util.Iterator;
+    </pre>
+    <p>
+      Java's <code>import</code> declarations are analogous to the
+      <code>import</code> declarations of Scheme or the
+      <code>require</code> declarations of Racket.
+      Java packages are analogous to Scheme libraries
+      and Racket modules.
+    </p>
+    <p>
+      As in Scheme, an <code>import</code> declaration can import
+      named parts of a package or it can import all parts exported
+      by a package.
+      The <code>import</code> declarations shown above import one
+      class per declaration.
+      To import everything that can be imported from the
+      <code>java.util</code> package, a Java programmer would write:
+    </p>
+    <pre>
+      import java.util.*;
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2IMapBase2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2IMapBase4.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

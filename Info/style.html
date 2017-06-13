@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Style Guide
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<nav id="menu">
+  <table class="verticalspace">
+    <tr>
+      <td>
+        <a href="checklist.html">
+          Pre-Semester Checklist
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="structure.html">
+          Course Structure
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="communication.html">
+          Communication
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="hw.html">
+          Homework Policies
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="grading.html">
+          Grading
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="cheating.html">
+          Cheating
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="racket.html">
+          Why We Use Racket
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="style.html">
+          Style Guide
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="deliverables.html">
+          Deliverables
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="office.html">
+          Office Hours
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://piazza.com/northeastern/spring2017/cs5010/home">
+          Piazza
+        </a>
+      </td>
+    </tr>
+  </table>
+</nav>
+<div id="maincontent">
+  <h2>
+    Style Guide
+  </h2>
+  <p>
+    Programs are easier to read and to understand when they
+    are written in a familiar style and follow standard coding
+    conventions.
+    Most organizations that develop software therefore require
+    programmers to write programs that follow the organization's
+    preferred style and coding conventions.
+  </p>
+  <blockquote>
+    <p>
+      <strong>
+        Example:
+      </strong>
+      <a href="http://geosoft.no/development/cppstyle.html">
+        C++ Programming Style Guidelines
+      </a>
+    </p>
+  </blockquote>
+  <p>
+    Although guidelines are often
+    arbitrary, arbitrary deviation from accepted style makes
+    readers wonder why the code is written so strangely.
+    Is there some peculiarity of the particular program that
+    motivates the nonstandard style?  Or is the programmer
+    using nonstandard style merely because the programmer is
+    inexperienced or unfamiliar with the programming
+    language or with software development in general?
+  </p>
+  <p>
+    In CS 5010, we want you to use the coding style and
+    conventions described here.
+    We have divided our guidelines into three groups:
+  </p>
+  <ul>
+    <li>
+      <a href="#general">
+        general guidelines
+      </a>
+      that are largely independent of the programming
+      language(s) you are using
+    </li>
+    <li>
+      <a href="#specific">
+        language-specific guidelines
+      </a>
+      you should follow when programming in Racket
+      or in similar languages such as Scheme or Clojure
+    </li>
+    <li>
+      <a href="#course">
+        course-specific guidelines
+      </a>
+      you should follow in this course
+    </li>
+  </ul>
+  <h3 id="general">
+    General Guidelines
+  </h3>
+  <h4>
+    Design Guidelines
+  </h4>
+  <p>
+    If you have been given a specification to implement,
+    you are not allowed to change that specification.
+    If you believe the specification is itself incorrect,
+    you should ask the person(s) who gave you the specification
+    to correct it.
+  </p>
+  <p>
+    In particular, you are not allowed to change the names,
+    contracts, or purpose statements of functions or methods
+    you have been asked to write.
+    <em>
+      Rationale:
+    </em>
+    Changing any of those things will prevent your code from
+    working when it is combined with other parts of the program
+    that rely on the given specifications.
+  </p>
+  <p>
+    Similarly, you are not allowed to change the definitions of
+    any types defined by the specification.
+  </p>
+  <p>
+    Functions and methods should be short.
+    If you find yourself writing a long function or method,
+    you should probably define one or more help functions
+    that would allow you to write a shorter and clearer
+    definition of that function or method.
+  </p>
+  <p>
+    When designing your own help functions and methods,
+    each function or method should accomplish exactly one
+    thing.
+    <em>
+      Rationale:
+    </em>
+    Functions and methods that try to accomplish several
+    things at once will be harder to read, and they will
+    also be harder to reuse as your program evolves.
+  </p>
+  <p>
+    Try not to recompute the same value(s) repeatedly.
+    <em>
+      Rationale:
+    </em>
+    Performing exactly the same computation multiple times
+    is inefficient.
+  </p>
+  <p>
+    Don't write the same or similar code in multiple places.
+    <em>
+      Rationale:
+    </em>
+    If you find yourself writing similar code within two or
+    more definitions, you should probably write a help function
+    that accomplishes the common task and call that help function
+    from within all definitions of functions and methods that
+    need to accomplish the task.
+  </p>
+  <p>
+    Don't hard-wire magic numbers within your code.
+    Although occurrences of 0 and 1 within your code will
+    probably always be zero and one, other numerical
+    constants may be subject to change as your
+    program evolves.
+    <em>
+      Rationale:
+    </em>
+    Even if you think the numerical constant 3.141592653589793
+    is unlikely to change, multiple copies of that constant
+    are less readable and more prone to editing mistakes
+    than a symbolic name such as PI.
+    Furthermore, the numerical value of pi might depend
+    on the precision of your floating point hardware and
+    libraries, which are more likely to change than you
+    may realize.
+  </p>
+  <p>
+    Don't hard-wire any kind of magic constants within your code.
+    That includes strings used to name the legal values of
+    itemization data.
+    <em>
+      Rationale:
+    </em>
+    You may think repeating the string "red" throughout your
+    program is just as readable as repeating the symbolic
+    constant RED, but some future refactoring of your program
+    might change the value of that constant to
+    <code>0xf80000</code>.
+  </p>
+  <p>
+    When the value of a boolean expression is being used to
+    compute a boolean value, you don't need a conditional
+    expression or statement.
+    <em>
+      Example:
+    </em>
+    <code>(x > 0) ? true : false</code>
+    is equivalent to
+    <code>(x > 0)</code>, which is shorter and easier to read.
+  </p>
+  <h4>
+    Naming Guidelines
+  </h4>
+  <p>
+    Most programming languages are case-sensitive,
+    but you should never use two different names in the
+    same scope whose only difference is the casing of one or
+    more letters.
+    Even if your programming language is not case-sensitive,
+    you should use consistent case for every reference to a
+    name.
+  </p>
+  <p>
+    <a href="http://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/">
+      The larger the scope of a name, the more important it is
+      to use a meaningful name.
+    </a>
+    <em>
+      Example:
+    </em>
+    An index variable whose scope is confined to a small
+    <code>for</code> loop might well be named <code>i</code>,
+    but using <code>i</code> as the name of a global or
+    instance variable is ill-advised.
+  </p>
+  <p>
+    When naming a function that has no side effects,
+    the name of the function should be a noun that describes
+    the information represented by the result of the function,
+    possibly augmented by some succinct suggestion of the
+    relationship between that result and (some of) the arguments.
+    <em>
+      Example:
+    </em>
+    When naming a function that returns the quotient of
+    <code>x</code> and <code>y</code> modulo <code>n</code>,
+    <code>quotientModN</code> is a better name than
+    <code>divideXbyY</code>.
+  </p>
+  <p>
+    When naming a function or method that operates by side
+    effect, its name should be a verb that describes the side
+    effect.
+    <em>
+      Example:
+    </em>
+    When naming a method that converts its argument to a string
+    and prints that string, <code>print</code> is a better name
+    than <code>asString</code>.
+  </p>
+  <h4>
+    Formatting Guidelines
+  </h4>
+  <p>
+    Do not write any lines that are longer than 80 characters.
+    <em>
+      Rationale:
+    </em>
+    Long lines are harder to read.
+    Long lines are especially hard to read if they wrap when
+    the font size is increased to make your code readable when
+    displayed by a video projector during code reviews.
+  </p>
+  <p>
+    Do not use any tab characters in your programs.
+    <em>
+      Rationale:
+    </em>
+    Tabs have no standard interpretation.
+    Your organization may impose its own standard interpretation
+    of tab characters, but tab characters can still make your code
+    look weird when viewed by anyone who is using display software
+    that hasn't been adjusted to match your organization's preferred
+    interpretation.
+    <em>
+      Example:
+    </em>
+    In this course, we will use DrRacket, GitHub, and editors such
+    as Emacs to examine your code.  If your code contains tab
+    characters, its indentation will change depending on the tool
+    used to view it.  If its indentation looks wrong when we view
+    it, you will be criticized for improper indentation, and you
+    will deserve that criticism.
+  </p>
+  <h3 id="specific">
+    Language-specific Guidelines
+  </h3>
+  <p>
+    The Racket project has published its own
+    <a href="http://docs.racket-lang.org/style/">
+      style guidelines
+    </a>
+    for programmers using Racket.
+    For CS 5010, we ask you to follow the simplified guidelines
+    listed below.
+  </p>
+  <p>
+    Functions that return a boolean are known as predicates.
+    Their names should end with a question mark.
+    <em>
+      Example:
+    </em>
+    <code>string?</code>
+  </p>
+  <p>
+    Functions that do not return a useful value,
+    so they are executed only for their side effects,
+    should have names that end with an exclamation mark.
+    <em>
+      Example:
+    </em>
+    <code>vector-set!</code>
+  </p>
+  <p>
+    DrRacket's editor can indent your code for you.
+    Even if you prefer to indent your code yourself,
+    your indentation should be almost indistinguishable
+    from the indentation suggested by DrRacket.
+  </p>
+  <p>
+    Every left parenthesis should appear at the beginning
+    of a line, or preceded by another left parenthesis,
+    or preceded by a space.
+  </p>
+  <p>
+    Right parentheses should not be preceded by a space,
+    with one exception: the right parentheses that follow
+    a long list of items, each indented individually, may
+    be on a line by themselves, preceded by a space, and
+    indented to line up with the items above them.
+  </p>
+  <p>
+    An <code>if</code> expression's test expression should
+    begin on the same line as the <code>if</code>.
+    Unless the <code>if</code> expression is very short,
+    its then and else parts should each begin on separate
+    lines.
+  </p>
+  <p>
+    Every <code>cond</code> clause should begin on a separate line.
+    The first <code>cond</code> clause should begin on the
+    same line as the <code>cond</code>.
+    (Professor Wand's online materials often put the first
+    <code>cond</code> on the following line.  That's acceptable
+    practice but I don't recommend it.)
+    All subsequent <code>cond</code> clauses should begin
+    on a new line, properly indented.
+  </p>
+  <h3 id="course">
+    Course-specific Guidelines
+  </h3>
+  <p>
+    Each file of code should start with a purpose statement
+    explaining what the code is intended to accomplish.
+  </p>
+  <p>
+    The <code>require</code> declarations go next,
+    followed by <code>provide</code> declarations.
+  </p>
+  <p>
+    Data definitions and global constant definitions belong
+    near the beginning of a file.
+  </p>
+  <p>
+    Constant names should consist entirely of capital letters
+    and hyphens.
+    <em>
+      Example:
+    </em>
+    <code>INITIAL-VELOCITY</code>.
+  </p>
+  <p>
+    Type names begin with a capital letter.
+    If a type name is formed from two or more words, use
+    <a href="https://en.wikipedia.org/wiki/Camel_case">
+      CamelCase.
+    </a>
+  </p>
+  <p>
+    Structure and field names do not begin with a capital letter.
+    They should look like variable names.
+  </p>
+  <p>
+    In variable names, use hyphens to separate words, not
+    underscores or CamelCase.
+  </p>
+  <p>
+    Unit tests belong in the same file with the definitions
+    they test.
+    Short tests can be placed directly after the function(s)
+    they test, where they can serve as examples.
+    Longer tests can go near the end of the file.
+  </p>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

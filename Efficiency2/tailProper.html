@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proper Tail Recursion
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Proper Tail Recursion
+  </h3>
+  <div>
+    <p>
+      Compilers and interpreters that use the more efficient
+      technique for <strong><em>all</em></strong> tail calls
+      are said to be <em>properly tail recursive</em>.
+    </p>
+    <p>
+      The standards for some programming languages, such as Scheme,
+      require implementations of the language to be
+      properly tail recursive.
+      There are a few other languages, such as Standard ML,
+      whose implementations are properly tail recursive
+      even though their language specifications do not
+      explicitly require them to be properly tail recursive.
+    </p>
+    <p>
+      If you are using a properly tail recursive implementation
+      of your programming language, then you can be sure the
+      tail calls in your programs are implemented in the more
+      efficient way.
+    </p>
+    <p>
+      If you are using an implementation that performs tail call
+      optimization, you can only hope your tail calls are being
+      implemented efficiently.
+      Some of them probably are, but others probably aren't.
+    </p>
+    <p>
+      If you are using Java or some other language that makes
+      proper tail recursion difficult, you can be sure your
+      tail calls are being implemented inefficiently.
+    </p>
+    <p>
+      At this time in history, most compilers and interpreters
+      for most programming languages implement tail calls
+      inefficiently.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="tailOptimization.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="tailProper2.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

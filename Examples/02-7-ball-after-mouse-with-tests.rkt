@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 02-6-ball-after-mouse-with-tests) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 02-7-ball-after-mouse-with-tests) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;; testing for itemization-then-compound
 
 (require rackunit)
@@ -11,98 +11,88 @@
 
 ;; DATA DEFINITIONS
 
-;; REPRESENTATION:
-;; A Ball is represented as (ball x y radius selected?) with the
-;; following fields:
-;; x, y : Integer        the coordinates of the center of the ball, in pixels,
-;;                       relative to the origin of the scene.
-;; radius : NonNegReal   the radius of the ball, in pixels
-;; selected? : Boolean   true iff the ball has been selected for dragging.
-
-;; IMPLEMENTATION:
 (define-struct ball (x y radius selected?))
 
-;; CONSTRUCTOR TEMPLATE
-;; (make-ball Integer Integer NonNegReal Boolean)
+;; A Ball is a (make-ball Number Number Number Boolean)
+;; x and y are the coordinates of the center of the ball, in pixels,
+;; relative to the origin of the scene.
+;; radius is the radius of the ball, in pixels
+;; selected? is true iff the ball has been selected for dragging.
 
-;; OBSERVER TEMPLATE
-;; ball-fn : Ball -> ??
-(define (ball-fn b)
-  (... (ball-x b)
-       (ball-y b)
-       (ball-radius b)
-       (ball-selected? b)))
+;; TEMPLATE:
+;; (define (ball-fn b)
+;;   (...
+;;     (ball-x b)
+;;     (ball-y b)
+;;     (ball-radius b)
+;;     (ball-selected? b)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
 
-;; ball-after-mouse : Ball Integer Integer MouseEvent -> Ball
+;; ball-after-mouse : Ball Number Number MouseEvent -> Ball
 ;; GIVEN: a ball, a location and a mouse event
 ;; RETURNS: the ball after the given mouse event at the given location
 ;; STRATEGY: Cases on MouseEvent
 (define (ball-after-mouse b mx my mev)
-  (cond
-    [(mouse=? mev "button-down") (ball-after-button-down b mx my)]
-    [(mouse=? mev "drag") (ball-after-drag b mx my)]
-    [(mouse=? mev "button-up") (ball-after-button-up b mx my)]
-    [else b]))
+  (cond [(mouse=? mev "button-down") (ball-after-button-down b mx my)]
+        [(mouse=? mev "drag") (ball-after-drag b mx my)]
+        [(mouse=? mev "button-up") (ball-after-button-up b mx my)]
+        [else b]))
 
-;; ball-after-drag : Ball Integer Integer -> Ball
+;; ball-after-drag : Ball Number Number -> Ball
 ;; GIVEN: a ball and a location
 ;; RETURNS: the ball after a drag event at the given location.
-;; STRATEGY: Cases on whether the ball is selected
+;; STRATEGY: Use template for Ball
 (define (ball-after-drag b x y)
   (if (ball-selected? b)
-    (ball-moved-to b x y)
-    b))
+      (ball-moved-to b x y)
+      b))
 
-;; ball-moved-to : Ball Integer Integer -> Ball
+;; ball-moved-to : Ball Number Number -> Ball
 ;; GIVEN: a ball and a set of coordinates
 ;; RETURNS: a ball like the given one, except that it has been moved to
 ;; the given coordinates
-;; STRATEGY: Create ball with correct values in the fields
+;; STRATEGY: Use template for Ball
 (define (ball-moved-to b x y)
-  (make-ball
-    x
-    y
-    (ball-radius b)
-    (ball-selected? b)))
+  (make-ball x
+             y
+             (ball-radius b)
+             (ball-selected? b)))
 
 ;; ball-after-button-down : Ball Number Number -> Ball
 ;; GIVEN: a ball and a set of coordinates
 ;; RETURNS: if the given coordinates are inside the ball, returns a ball just
 ;; like the given one, except that selected? is true.
 ;; if they are not inside the ball, return the ball unchanged.
-;; STRATEGY: Cases on whether the position is inside the ball
+;; STRATEGY: Use template for Ball
 (define (ball-after-button-down b mx my)
   (if (inside-ball? mx my b)
-    (ball-make-selected b)
-    b))
+      (ball-make-selected b)
+      b))
 
 ;; ball-make-selected : Ball -> Ball
 ;; RETURNS: a ball just like the given one, except that selected? is
 ;; true.
-;; STRATEGY: Create a ball with correct values in the fields
+;; STRATEGY: Use template for Ball
 (define (ball-make-selected b)
-  (make-ball
-    (ball-x b)
-    (ball-y b)
-    (ball-radius b)
-    true))
+  (make-ball (ball-x b)
+             (ball-y b)
+             (ball-radius b)
+             true))
 
 ;; inside-ball? : Number Number Ball -> Boolean
 ;; RETURNS: true if the given coordinates are inside the given ball.
-;; STRATEGY: Transcribe mathematical formula
+;; STRATEGY: Use template for Ball
 (define (inside-ball? mx my b)
-  (<= 
-    (+ 
-      (sqr (- (ball-x b) mx))
-      (sqr (- (ball-y b) my)))
-    (sqr (ball-radius b))))
+  (<= (+ (sqr (- (ball-x b) mx))
+         (sqr (- (ball-y b) my)))
+      (sqr (ball-radius b))))
 
 ;; ball-after-button-up : Ball Number Number -> Ball
 ;; RETURNS: the ball that should follow the given one after a button up.
-;; STRATEGY: Create a ball like the current one, but unselected
+;; STRATEGY: function composition
 (define (ball-after-button-up b mx my) 
   (ball-make-unselected b))
 
@@ -110,13 +100,12 @@
 ;; ball-make-unselected : Ball -> Ball
 ;; RETURNS: a ball just like the given one, except that selected? is
 ;; false. 
-;; STRATEGY: Create a ball with the correct values in the fields
+;; STRATEGY: Use template for Ball
 (define (ball-make-unselected b)
-  (make-ball
-    (ball-x b)
-    (ball-y b)
-    (ball-radius b)
-    false))  
+  (make-ball (ball-x b)
+             (ball-y b)
+             (ball-radius b)
+             false))  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -145,95 +134,95 @@
   (make-ball point-outside-x point-outside-y 10 true))
 
 (begin-for-test
-
+  
   ;; ball-unselected
   ;; point-inside
   (check-equal?
-    (ball-after-mouse ball-unselected point-inside-x point-inside-y
-      "button-down")
-    ball-selected)
-
+   (ball-after-mouse ball-unselected point-inside-x point-inside-y
+                     "button-down")
+   ball-selected)
+  
   (check-equal?
-    (ball-after-mouse ball-unselected point-inside-x point-inside-y
-      "drag")
-    ball-unselected)
-
+   (ball-after-mouse ball-unselected point-inside-x point-inside-y
+                     "drag")
+   ball-unselected)
+  
   (check-equal?
-    (ball-after-mouse ball-unselected point-inside-x point-inside-y
-      "button-up")
-    ball-unselected)
-
+   (ball-after-mouse ball-unselected point-inside-x point-inside-y
+                     "button-up")
+   ball-unselected)
+  
   ;; ball-unselected
   ;; point-outside
   (check-equal?
-    (ball-after-mouse ball-unselected point-outside-x point-outside-y
-      "button-down")
-    ball-unselected)
-
+   (ball-after-mouse ball-unselected point-outside-x point-outside-y
+                     "button-down")
+   ball-unselected)
+  
   (check-equal?
-    (ball-after-mouse ball-unselected point-outside-x point-outside-y
-      "drag")
-    ball-unselected)
-
+   (ball-after-mouse ball-unselected point-outside-x point-outside-y
+                     "drag")
+   ball-unselected)
+  
   (check-equal?
-    (ball-after-mouse ball-unselected point-outside-x point-outside-y
-      "button-up")
-    ball-unselected)
-
+   (ball-after-mouse ball-unselected point-outside-x point-outside-y
+                     "button-up")
+   ball-unselected)
+  
   ;; ball-selected
   ;; point-inside
   (check-equal?
-    (ball-after-mouse ball-selected point-inside-x point-inside-y
-      "button-down")
-    ball-selected)
-
+   (ball-after-mouse ball-selected point-inside-x point-inside-y
+                     "button-down")
+   ball-selected)
+  
   (check-equal?
-    (ball-after-mouse ball-selected point-inside-x point-inside-y
-      "drag")
-     ball-moved-to-point-inside)
-
+   (ball-after-mouse ball-selected point-inside-x point-inside-y
+                     "drag")
+   ball-moved-to-point-inside)
+  
   (check-equal?
-    (ball-after-mouse ball-selected point-inside-x point-inside-y
-      "button-up")
-    ball-unselected)
-
+   (ball-after-mouse ball-selected point-inside-x point-inside-y
+                     "button-up")
+   ball-unselected)
+  
   ;; ball-selected
   ;; point-outside
   (check-equal?
-    (ball-after-mouse ball-selected point-outside-x point-outside-y
-      "button-down")
-    ball-selected)
-
+   (ball-after-mouse ball-selected point-outside-x point-outside-y
+                     "button-down")
+   ball-selected)
+  
   (check-equal?
-    (ball-after-mouse ball-selected point-outside-x point-outside-y
-      "drag")
-    ball-moved-to-point-outside)
-
+   (ball-after-mouse ball-selected point-outside-x point-outside-y
+                     "drag")
+   ball-moved-to-point-outside)
+  
   (check-equal?
-    (ball-after-mouse ball-selected point-outside-x point-outside-y
-      "button-up")
-    ball-unselected)
-
-)
+   (ball-after-mouse ball-selected point-outside-x point-outside-y
+                     "button-up")
+   ball-unselected)
+  
+  )
 
 ;; extra tests added during debugging:
 
 (begin-for-test
-
+  
   (check-equal?
-    (ball-after-mouse 
-      ball-unselected 
-      point-inside-x point-inside-y
-      "button-down")
-    (ball-after-button-down
-      ball-unselected 
-      point-inside-x point-inside-y))
-
+   (ball-after-mouse 
+    ball-unselected 
+    point-inside-x point-inside-y
+    "button-down")
+   (ball-after-button-down
+    ball-unselected 
+    point-inside-x point-inside-y))
+  
   (check-equal?
-    (ball-after-button-down
-      ball-unselected 
-      point-inside-x point-inside-y)
-    (ball-make-selected ball-unselected)))
+   (ball-after-button-down
+    ball-unselected 
+    point-inside-x point-inside-y)
+   (ball-make-selected ball-unselected)))
 
 
 

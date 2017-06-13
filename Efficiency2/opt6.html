@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example of Compiler Optimization
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Example of Compiler Optimization
+  </h3>
+  <div>
+    <p>
+      Let's look at the code for ip itself.
+    </p>
+    <pre>
+      double ip (double[] a, double[] b) {
+          int n = a.length;
+          if (n != b.length)
+              throw new RuntimeException();
+          double result = 0.0;
+          for (int i = 0; i &lt; n; i = i + 1)
+              result = result + a[i] * b[i];
+          return result;
+      }
+    </pre>
+    <p>
+      The "obvious" machine code for the for loop would look something
+      like this:
+    </p>
+    <pre>
+          // a is in r1
+          // b is in r2
+          // n is in r3
+          // result is in f0
+      
+          sub     r4,r4,r4            // i is in r4
+          b       L2                  // branch to while loop test
+      L1:
+          cmpi    r1,0,r5             // null check for a
+          trapeq  r5
+          cmpi    r4,0,r5             // range check for a[i]
+          traplt  r5
+          ldi     -4(r1),r5
+          cmp     r4,r5,r5
+          trapge  r5
+          muli    r4,8,r5             // fetch a[i] into f1
+          fld     r5(r1),f1
+          cmpi    r2,0,r5             // null check for b
+          trapeq  r5
+          cmpi    r4,0,r5             // range check for b[i]
+          traplt  r5
+          ldi     -4(r2),r5
+          cmp     r4,r5,r5
+          trapge  r5
+          muli    r4,8,r5             // fetch b[i] into f2
+          fld     r5(r2),f2
+          fmul    f1,f2,f1            // floating point multiplication
+          fadd    f0,f1,f0            // floating point addition
+          addi    r4,1,r4             // i = i + 1;
+      L2:
+          cmp     r4,r3,r5            // is i less than n?
+          blt     r5,L1               // if so, branch to loop body
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="opt5.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="opt7.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

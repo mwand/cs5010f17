@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Proof of the Second Theorem
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <p>
+    <strong>Theorem.</strong>
+    If f: N &rarr; R and g: N &rarr; R are non-negative
+    for all arguments n, and the constant function that
+    always returns 1 is in O(f) according to the
+    <a href="lessGeneralBigO.html">
+      less general definition,
+    </a>
+    and g is in O(f) according to the
+    <a href="pageBigO.html">
+      more general definition,
+    </a>
+    then g is also in O(f) according to the
+    <a href="lessGeneralBigO.html">
+      less general definition.
+    </a>
+  </p>
+  <p>
+    <strong>Proof.</strong>
+    Let c<sub>0</sub> and c<sub>1</sub> be positive constants
+    such that
+  </p>
+  <blockquote>
+    <p>
+      &forall; n &nbsp; g(n) &nbsp; &le; &nbsp; 
+      c<sub>0</sub> + c<sub>1</sub> &sdot; f(n)
+    </p>
+  </blockquote>
+  <p>
+    Let n<sub>0</sub> and c be positive constants such that
+  </p>
+  <blockquote>
+    <p>
+      &forall; n &gt; n<sub>0</sub>
+      &nbsp; 1 &nbsp; &le; &nbsp; c &sdot; f(n)
+    </p>
+  </blockquote>
+  <p>
+    Multiplying both sides of the inequality by c<sub>0</sub>,
+  </p>
+  <blockquote>
+    <p>
+      &forall; n &gt; n<sub>0</sub> &nbsp;
+          c<sub>0</sub> &nbsp; &le; &nbsp; c<sub>0</sub> &sdot; c &sdot; f(n)
+    </p>
+  </blockquote>
+  <p>
+    so for all n &ge; n<sub>0</sub>
+  </p>
+  <blockquote>
+    <p>
+      g(n) &nbsp; &le; &nbsp; c<sub>0</sub> + c<sub>1</sub> &sdot; f(n)
+           &nbsp; &le; &nbsp; (c<sub>0</sub> &sdot; c &sdot; f(n))
+      + c<sub>1</sub> &sdot; f(n)
+      &nbsp; = &nbsp; (c<sub>0</sub> &sdot; c + c<sub>1</sub>) &sdot; f(n)
+    </p>
+  </blockquote>
+  <p>
+    &#x220e;
+  </p>
+</div>
+<div id="footer">
+  <form action="bigOproof1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="bigOproofNecessary.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Divide and Conquer: Exponentiation
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Divide and Conquer: Exponentiation
+  </h3>
+  <div>
+    <pre>
+      3<sup>20</sup>
+      = (3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3) &sdot;
+        (3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3 &sdot; 3)
+    </pre>
+    <p>
+      If we perform the first 9 multiplications to obtain 3<sup>10</sup>,
+      and perform the last 9 multiplications to obtain 3<sup>10</sup>,
+      and then multiply those two numbers,
+      there are still 19 multiplications in all.
+    </p>
+    <p>
+      True or false:
+    </p>
+    <p class="indented">
+      No matter how we perform the calculation, we end up having
+      to perform 19 multiplications.
+      <br />
+      <a href="exponentiation4wrong.html" class="button">
+        True
+      </a>
+      <a href="exponentiation5.html" class="button">
+        False
+      </a>
+    </p>
+  </div>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

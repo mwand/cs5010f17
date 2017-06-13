@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Abstract Methods of the Abstract Base Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Abstract Methods of the Abstract Base Class
+  </h3>
+  <div>
+    <p>
+      The base class declares one public abstract method,
+      <code>extend&ltK,V&gt;</code>, which was listed in the
+      <code>IMap&lt;K,V&gt;</code> interface.
+      That method must be public because it was listed in an
+      interface.
+    </p>
+    <p>
+      The base class declares three more abstract help methods.
+      Those methods should not be public, because they should
+      not be called outside of the base class and its subclasses.
+      To make it possible for subclasses to be defined in a different
+      package, we need to reduce the access protection of those
+      help methods by declaring them <code>protected</code>.
+    </p>
+    <pre>
+      abstract class IMapBase&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements IMap&lt;K,V&gt; {
+      
+          ...
+      
+          // public methods listed by IMap&lt;K,V&gt; interface
+      
+          // Returns an IMap like this one except the given key is associated
+          // with the given value.  The extend operation does not modify this
+          // IMap.
+      
+          public abstract IMap&lt;K,V&gt; extend (K key, V value);
+      
+          ...
+      
+          // abstract help methods
+      
+          // Returns true iff this map has a mapping for the given key.
+      
+          protected abstract boolean hasKey (K key);
+      
+          // Returns the value associated with the given key.
+      
+          protected abstract V getVal (K key);
+      
+          // Returns an iterator for the keys of this IMap.
+      
+          protected abstract Iterator&lt;K&gt; keyIterator();
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2IMapBase4.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2IMapBase6.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

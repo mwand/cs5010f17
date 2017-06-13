@@ -1,0 +1,1087 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.ccs.neu.edu/home/vkoutav/scheme/lab1.html -->
+<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+<TITLE>Lesson 0.4 Introduction to Racket</TITLE> 
+<link type="text/css" rel="stylesheet" href="../css/course.css">
+<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<STYLE>
+
+div.exercise {
+  background-color: rgb(255, 255, 153);
+  padding: 1px 1px;
+}
+
+img {
+  /* vertical-align: middle; */
+  margin-top: 5px; margin-bottom: 5px;  
+  margin-left: 5px; margin-right: 5px;
+
+pre     {font-size: 12pt; }
+
+}
+
+</STYLE>
+ 
+<META name="GENERATOR" content="MSHTML 10.00.8400.0"></HEAD> 
+<BODY>
+<H1>Lesson 0.4 Introduction to Racket</H1>
+<H2>Preliminaries</H2>
+
+
+<P> The purpose of this lesson is to familiarize you with the basics
+  of Racket (a dialect of Scheme).  You will learn about
+<ul class="condensed">
+  <li>Expressions</li>
+  <li>Numbers, Booleans, and Arithmetic</li>
+  <li>Functions</li>
+  <li>Structs</li>
+  <li>Images</li>
+  <li>Lists</li>
+</ul>
+
+<p>This is a long lesson: it covers the features of Racket that will
+be covered from now until Week 4.</p>
+
+<p>In this lesson, we will often refer to "contracts" and "purpose
+statements".  For the purpose of this lesson, you can treat these as
+informal notions.  We will learn more about contracts and purpose
+statements in Lesson 1.4. </p>
+
+<p>As you go through this lesson, you should follow along, trying all
+the examples in the DrRacket interaction window.  Don't just try
+what's shown on the page-- try variations as well, and see what
+happens. (This is an example of what we mean when we say <em>active
+learning</em>.) </p>
+
+<p>To do this, install DrRacket (if you have not done so already), and
+open it.  The exact way in which you open DrRacket will depend on your
+OS.
+
+Then click "Choose Language..." either in the <em>Language</em>
+  submenu in the menu bar or in the language selector in the bottom
+  left corner of the DrRacket window and choose the "Beginning
+  Student" language under "Teaching Languages / How to Design
+  Programs".
+
+<H2>Expressions</H2>
+<P>Maybe the most fundamental building block in Racket (and other languages) is 
+an expression. An expression is a piece of syntax that <EM>returns one 
+result</EM>. An expression can be as simple as a single number</P>
+<PRE><CODE>    5
+</CODE></PRE>
+<P>or more complex as the calculation of the square root of a number</P>
+<PRE><CODE>    (sqrt 5)
+</CODE></PRE>
+<P>(Don't be alarmed if you don't understand the above syntax just yet.)</P>
+<P>You can try typing the above examples in the bottom half (a.k.a. Interaction 
+Window) of DrRacket.  There you will see a prompt <CODE>&gt;</CODE> and next to 
+it you can type an expression. Whenever you write an expression next to the 
+prompt and press enter, DrRacket will "evaluate" the expression and print the 
+"result" in the line underneath.</P>
+<PRE><CODE>    &gt; 5
+    5
+
+    &gt; (sqrt 5)
+    #i2.23606797749979
+</code>
+</pre>
+
+<P>The <CODE>#i</CODE> prefix warns that the printed result is inexact. For
+example, it's a bad idea to compare inexact numbers for equality. If
+you really need to do this (say for an automated test), use
+<kbd>check-within</kbd> (in BSL) or <kbd>check-=</kbd> (in rackunit),
+which take a third argument representing the error tolerance.</P>
+
+
+</CODE></PRE>
+<P>In the next section we will see how we can use the interaction window of 
+DrRacket as an advanced calculator.</P>
+<H2>Numbers, Booleans, and Arithmetic</H2>
+<P>As we mentioned above, some of the <EM>primitive</EM> expressions in Racket 
+are numbers; positive and negative, integers and decimals</P>
+<PRE><CODE>    &gt; 17
+    17
+
+    &gt; -10
+    -10
+
+    &gt; 3.1415
+    3.1415
+</CODE></PRE>
+
+<p>Racket has lots of numbers besides these.  For example, you can
+write any rational number as a primitive expression:
+</p>
+
+<code>
+<PRE>
+> 1/2
+0.5
+
+> 12/10
+1.2
+
+> 9/5
+1.8
+</PRE>
+</code>
+
+<P>Racket also has a set of arithmetic <EM>operators</EM> that work with
+ numbers.</P>
+<PRE><CODE>    ; + : Number Number -&gt; Number
+    ; Adds two numbers and returns the result
+
+    ; - : Number Number -&gt; Number
+    ; Subtracts two numbers and returns the result
+
+    ; * : Number Number -&gt; Number
+    ; Multiplies two numbers and returns the result
+
+    ; / : Number Number -&gt; Number
+    ; Divides two numbers and returns the result
+</CODE></PRE>
+
+<P><CODE>+</CODE>, <CODE>-</CODE>, <CODE>*</CODE>, <CODE>/</CODE> are the names 
+of the operators.</P>
+
+<P><CODE>Number Number -&gt; Number</CODE> is the <EM>Contract</EM> for each 
+of them. It says that these operators take two numbers as arguments and
+ return a number as a result.  If you are going to use an operator
+ correctly, you need to know its contract!</P>
+
+<P>Now let's see how we can <EM>apply</EM> these operators to some 
+<EM>operands</EM> (a.k.a. arguments) and start doing something interesting with 
+our Racket calculator.</P>
+<P>To apply an operator to some operands we need a pair of parentheses that 
+enclose both the operator and the operands, in that order.</P>
+<PRE><CODE>    &gt; (+ 3 5)
+    8
+</CODE></PRE>
+<P>The operator is always the <EM>first</EM> thing in the parentheses, followed 
+by the operands. Here <CODE>+</CODE> is the operator, <CODE>3</CODE> is the 
+first operand, and <CODE>5</CODE> the second operand. The order of the operands 
+is important:</P>
+<PRE><CODE>    &gt; (- 13 7)
+    6
+
+    &gt; (- 7 13)
+    -6
+</CODE></PRE>
+<P>Whenever you see the "parentheses-notation" in Racket you should immediately 
+recognize that it is the <EM>application</EM> of an operator to several 
+operands, and you should be able to recognize that the first thing between the 
+parentheses is the operator, the second thing is the first operand, the third is 
+the second operand, etc.</P>
+<P>So now we have a simple calculator where we can do one operation after the 
+other. To calculate 3*2 + 5*3 we can type:</P>
+<PRE><CODE>    &gt; (* 3 2)
+    6
+
+    &gt; (* 5 3)
+    15
+
+    &gt; (+ 6 15)
+    21
+</CODE></PRE>
+<P>Remember that all of the above are expressions. Each one is being evaluated 
+by DrRacket and a result is returned in its place. Having this in mind we can 
+build more complex expressions, and make our calculator compute 3*2 + 5*3 
+writing just one big expression:</P>
+<PRE><CODE>    &gt; (+ (* 3 2) (* 5 3))
+    21
+</CODE></PRE>
+
+<p> In Racket (as in its predecessors, Scheme, and Lisp), there are no
+operator precedences to be memorized.  Instead, the parentheses
+always tell you the order in which complex expressions are evaluated:
+parenthesized subexpressions are evaluated before the expressions that
+contain them.  After all, you couldn't do it any other way.</p>
+
+<P>If your expression is complicated, break it across multiple lines.
+When you do this, ALWAYS use indentation to make the expression more 
+readable:</P>
+
+<PRE><CODE>    &gt; (+ (+ (- 20 5)
+            (+ 10 4))
+         (* (- 100 93)
+            (* 3.5 
+               (- 5 3))))
+    78
+</CODE></PRE>
+
+<p>In practice, expressions this long should be split using
+functions.  We'll see how to do that a little later.
+</p>
+
+<P>We now know how to use Racket as a decent calculator to do arithmetic. But 
+let's not stop there. Let's see how we can also do <EM>logical
+ calculations</EM>.</P>
+<P>Racket has some more primitive expressions, the set of <EM>booleans</EM>:</P>
+<PRE><CODE>    ; True
+    &gt; true
+    true
+
+    ; False
+    &gt; false
+    false
+</CODE></PRE>
+<P>It also provides operators that can be applied on booleans</P>
+<PRE><CODE>    ; and : Boolean Boolean -&gt; Boolean
+    ; Logic conjunction
+
+    ; or : Boolean Boolean -&gt; Boolean
+    ; Logic disjunction (Inclusive)
+
+    ; not : Boolean -&gt; Boolean
+    ; Logic negation
+
+
+    &gt; (not false)
+    true
+
+    &gt; (and true false)
+    false
+
+    &gt; (or (and true
+               (or true false))
+          (or (not true)
+              (not (and (not false)
+                        true))))
+    true
+</CODE></PRE>
+
+<P>There are also operators that connect the world of numbers and
+the world of booleans. These operators perform <EM>tests</EM> on
+numeric (or other) data and return a boolean value. These are called
+<EM>predicates</EM>.</P>
+
+
+<PRE><CODE>    ; = : Number Number -&gt; Boolean
+    ; Tests two numbers for equality
+
+    ; &lt; : Number Number -&gt; Boolean
+    ; Tests if the first operand is less than the second
+
+    ; &gt; : Number Number -&gt; Boolean
+    ; Tests if the first operand is greater than the second
+
+    ; &lt;= : Number Number -&gt; Boolean
+    ; Tests if the first operand is less or equal than the second
+
+    ; &gt;= : Number Number -&gt; Boolean
+    ; Tests if the first operand is greater or equal than the second
+</CODE></PRE>
+<P>So for example:</P>
+<PRE><CODE>    &gt; (&lt; 300.0001 300)
+    false
+
+    &gt; (= (+ (* 3 50)
+            (* 3 25))
+         (* 3
+            (+ 50 25)))
+    true
+</CODE></PRE>
+<P>Q: What happens when you try this?</P>
+<PRE><CODE>    &gt; (&lt; 3 (&lt; 2 1))
+</CODE></PRE>
+<P>Be careful of the contracts of operators to avoid these <EM>type 
+errors</EM>.</P>
+
+
+<H2>Conditionals</H2>
+<P>There are times that we need the value of an expression to change depending 
+on some condition.  Racket provides a construct to implement this kind of 
+branching.</P>
+<PRE><CODE>    (cond 
+      [test-1 expr-1]
+      [test-2 expr-2]
+      [test-3 expr-3]
+      ...
+      [else expr-n])
+</CODE></PRE>
+
+<P>The cond is a multi-branch conditional. Each clause has a test and
+an associated expression. The first test that succeeds triggers its
+associated expression, and the value of the associated expression is
+returned.  The final else clause is chosen if no other test
+succeeded.</P>
+
+<p>Here's an example:</p>
+
+<code>
+<pre>
+(cond
+  [(< x 0) -1]
+  [(= x 0) 1]
+  [(> x 0) 2])
+</pre>
+</code>
+
+<p>This returns -1, 1, or 2, depending on the whether the value of the
+variable <kbd>x</kbd> is negative, zero, or positive.  We haven't seen
+variables yet, but we will soon.</p>
+
+<P>Here's another example:</P>
+
+<PRE><CODE>      &gt; (cond 
+          [(&lt; (sqrt 5) (/ 5 2)) true]
+          [else false])
+</CODE></PRE>
+
+<p>This example is UGLY CODE, for two reasons:</p>
+
+<p>First, it's a two-way <kbd>cond</kbd>.  Racket provides an
+<kbd>if</kbd> construct that should be used instead.  So a better
+version might be:
+</p>
+
+<code>
+<pre>
+(if
+  (< (sqrt 5) (/ 5 2))
+  true
+  false)
+</pre>
+</code>
+
+
+<p> Second, the value of this expression is always the same as the
+value of </p>
+
+<pre>
+     (< (sqrt 5) (/ 5 2))
+</pre>
+
+<p>If you write code like this on your assignments, you WILL be penalized.</p>
+
+<p>If you are ever tempted to write
+
+<pre>
+(if <em>condition</em> true false)
+</pre>
+
+<p>just write</p>
+
+<pre>
+<em>condition</em>
+</pre>
+
+<p>instead.  Of course, if the expression had been</p>
+
+<PRE>
+     (if (< (sqrt 5) (/ 5 2))
+         27
+         42)
+</PRE>
+
+<p>then this issue would not have come up.</p>
+
+<DIV class="exercise"> <P>Ex 1: Write an expression whose value is the
+number of seconds in a leap year (a leap year has 366 days).  Next,
+write 2 more expressions that have the same value.</P></DIV>
+
+<DIV class="exercise"> <P>Ex 2: Write an expression that returns
+<kbd>true</kbd> if the result of 100/3 is greater than the result of
+(100 + 3) / (3 + 3) and <kbd>false</kbd> otherwise. </P></DIV>
+
+<!-- ;;;;;;;;;;;;;;;; -->
+
+<H2>Defining Functions</H2>
+
+<P>At this point our DrRacket calculator can do a great deal of things. It's 
+almost like a scientific calculator, but we are not there just yet. It would be 
+nice if we were able to define our own operators on numbers and booleans and 
+extend the functionality of our calculator. Racket has a special syntax for 
+doing just that:</P>
+
+<PRE><CODE>    (define (<em>fcn-name arg-1 arg-2 ...</em>) <em>expr</em>)
+</CODE></PRE>
+
+<P>With this syntax we can define a new function called
+<CODE><em>fcn-name</em></CODE>.  This new function takes a number of arguments
+<CODE><em>arg-1</em></CODE>, <CODE><em>arg-2</em></CODE>, etc., and when applied
+evaluates the expression <CODE><em>expr</em></CODE> and returns the
+result.  We call <kbd><em>expr</em></kbd> the "body" of the function.</p>
+
+<p>Note: in this lesson, we use <em>slanted font</em> to indicate a
+pattern to be filled in.</p>
+
+<p>For example let's define the Boolean operation
+'nand', using 'and' and 'not':</P>
+
+<PRE><CODE>    ; nand : Boolean Boolean -&gt; Boolean
+    ; RETURNS the negation of the conjunction of the two given booleans.
+    (define (nand x y)
+      (not (and x y)))
+</CODE></PRE>
+<P>We can use our new function just like any other operator:</P>
+<PRE><CODE>    &gt; (nand true true)
+    false
+</CODE></PRE>
+
+<p>In this example, we see that <CODE><em>expr</em></CODE> can refer
+to the arguments to produce its resulting value.  </p>
+
+<p>This example also shows that we should always equip our functions
+with a contract, like those we wrote for the basic operators, and with
+a <em>purpose statement</em> that describes what value the function
+returns.  Contracts and purpose statements are a key part of our
+design method, and we will see much more about them in subsequent lessons.</p>
+
+<P>Next, let's define a function that returns the average of two
+ numbers:</P>
+
+
+<code>
+<PRE>
+    ; average : Number Number -&gt; Number
+    ; RETURNS: the average of its arguments
+    ; usage:
+    ; (average 3 5)    =&gt;  4
+    ; (average -7 7)  =&gt;  0
+
+    (define (average x y)
+      (/ (+ x y) 2))
+</PRE>
+</code>
+
+<P>We can use conditionals in a function definition.  For example, we can define the absolute-value function <kbd>abs</kbd>:</p>
+
+<PRE>
+; abs : Real -> Real
+; RETURNS: the absolute value of the given real number.
+(define (abs x)
+  (if (< x 0)
+      (- 0 x)
+      x))
+</PRE>
+
+<p>Here we wrote the contract as <kbd>Real -> Real</kbd> rather
+than <kbd>Number -> Number</kbd> because Racket has complex numbers,
+and this function definition doesn't give the right answer if
+<samp>x</samp> is complex.
+</p>
+
+<DIV class="exercise">
+<P>Ex 3: Write the definition of a function that converts a temperature from
+ degrees Fahrenheit to degrees Celsius. The formula for the conversion is C = 
+(F-32) * (5/9) . The contract, purpose statement and examples for this function are: 
+<PRE><CODE>    ; f-&gt;c : Real -&gt; Real
+    ; GIVEN: a temperature in degrees Fahrenheit as an argument
+    ; RETURNS: the equivalent temperature in degrees Celsius.
+    ; Examples:
+    ; (f-&gt;c 32)  =&gt; 0
+    ; (f-&gt;c 100) =&gt; 37.77777777777777....
+</CODE></PRE>
+<P>Test your function with <EM>at least</EM> the given examples.  How
+is the value of (f->c 100) displayed?</p>
+</DIV>
+
+<p/>
+
+<DIV class="exercise">
+<P>Ex 4: Define a function called <CODE>tip</CODE> that takes two arguments, a
+ number representing the amount of a bill in dollars, and a decimal number 
+between 0.0 and 1.0, representing the percentage of tip one wants to give (e.g. 
+0.15 = 15%). <CODE>tip</CODE> should return the amount of the tip in dollars. 
+The contract, purpose statement, and examples of <CODE>tip</CODE> are the 
+following:</P>
+<PRE><CODE>    ; tip : Real Real[0.0,1.0] -&gt; Number
+    ; GIVEN: the amount of the bill in dollars and the
+    ; percentage of tip
+    ; RETURNS: the amount of the tip in dollars.
+    ; Examples:
+    ; (tip 10 0.15)  =&gt; 1.5
+    ; (tip 20 0.17)  =&gt; 3.4
+</CODE></PRE>
+<P>Test your function with <EM>at least</EM> the given
+examples.</P></DIV>
+
+<DIV class="exercise">
+<P>Ex 5: Define a function called <CODE>sq</CODE> that computes the square of a
+ number. Write the contract, purpose statement, examples and definition of this 
+function.  Follow the examples of contracts and purpose statements above.</P></DIV>
+
+<DIV class="exercise">
+<P>Ex 6: One of the solutions of the <xA href="http://en.wikipedia.org/wiki/Quadratic_Equation">quadratic 
+equation </A> a*x^2 + b*x + c = 0 is given by the formula: </P><IMG class="tex" alt="x_+ = \frac{-b + \sqrt {b^2-4ac}}{2a}" 
+src="Images/formula.png"> 
+<P>Write the contract, purpose statement, examples, and definition of a 
+function <CODE>quadratic-root</CODE> that takes as arguments <CODE>a</CODE>, 
+<CODE>b</CODE>, and <CODE>c</CODE>, and computes the root of the corresponding
+ quadratic equation.  Test your code on simple examples, like x^2-4 =
+0 or x^2-2x+1 = 0.  What does your function give as a solution for
+x^2+4 = 0 ?</P></DIV>
+
+<DIV class="exercise">
+<P>Ex 7: Define a function called <CODE>circumference</CODE> that computes the
+ circumference of a circle.  The contract, purpose statement, and usage of 
+<CODE>circumference</CODE> are:</P>
+<PRE><CODE>    ; circumference : Real -&gt; Real
+    ; GIVEN: the radius r of a circle 
+    ; RETURNS: its circumference, using the formula 2 * pi * r.
+    ; Examples:
+    ; (circumference 1)  =&gt;  2*pi
+    ; (circumference 0)  =&gt;  0
+</CODE></PRE>
+<P>(<kbd>pi</kbd> is a predefined constant in Racket) Test your
+function with <EM>at least</EM> the given examples.  How is the value
+of twice pi displayed?</P></DIV>
+
+<DIV class="exercise">
+
+<P>Ex 8: The area included in a circle of radius <CODE>r</CODE> is
+ given by the formula <kbd> pi * r^2</kbd>. Using the interaction
+ window of DrRacket as a calculator, compute the area included in
+ circles of radius 1, 5, and 7.</P>
+
+<P>Write the contract, purpose statement, examples, and the definition of a 
+function called <CODE>circle-area</CODE> that computes the area included in a
+ circle of radius <CODE>r</CODE>, using the above formula. Use the three
+ calculations you did above as your examples.</P></DIV>
+
+<DIV class="exercise">
+<P>Ex 9: Find out what the operator <CODE>remainder</CODE> does by typing it in 
+the definitions window, highlighting it, and pressing F1.</P>
+<P>Try applying <CODE>remainder</CODE> on some examples to make sure you 
+understand what it does. (how is it different from
+<CODE>modulo</CODE>? Find some arguments for which
+<kbd>remainder</kbd> and <kbd>modulo</kbd> give different results.)</P>
+
+<P>Define a predicate <CODE>is-even?</CODE> that takes a number as an
+ argument and returns true if this number is divisible by 2, and false
+ otherwise. Do not use the function <kbd>even?</kbd> that is
+ predefined in BSL Use <CODE>remainder</CODE> or something
+ similar.</P></DIV>
+
+
+<DIV class="exercise">
+
+<P>Ex 10: Define a function that takes three numbers as arguments and
+returns the sum of the two larger numbers. As always, write down
+contract, purpose statement, and examples. </P></DIV>
+
+
+<H2>Data Structures I: Structs</H2>
+
+<p>Like other programming languages, Racket has many kinds of data
+structures.  In this course, we will primarily use two built-in data
+structures: <em>structs</em> and <em>lists</em>.  Let's first talk
+about structs.</p>
+
+<P>In Racket, we define a struct type by writing:
+</P>
+
+<PRE><CODE> (define-struct <em>data-type-name</em> (<em>field-1</em> <em>field-2</em> ...))  </CODE></PRE>
+
+<P>The above code tells racket to introduce a
+type with a certain name that has certain named fields. (As before, we
+write <em>data-type-name</em> to indicate a place where you should
+write the name of your desired data type, etc.)
+Racket then
+creates some functions for us:
+
+<ul class="condensed">
+  
+  <li><code>make-<em>data-type-name</em> : T1
+T2 ... -&gt; <Em>Data-Type-Name</Em></code>
+
+  <p>This function takes as many arguments as there are fields in our
+type definition. Note that the contract here says <code>T1</code> and
+<code>T2</code> instead of <code>Number</code> or
+<code>Boolean</code>. That is because different data types will
+generally have fields of different types, i.e. you might want to
+create one where the first field is of type <code>Number</code> and
+another one where the first field is of type <code>Boolean</code>. You
+might even have a field that should contain a value of a data type
+that you defined yourself!</p>
+
+  </li>
+
+  <li><code><em>data-type-name</em>? : Any -&gt;
+Boolean</code>
+
+  <p>This predicate takes any value as an argument and
+returns <code>true</code> if that argument has the type that we just
+defined (i.e. if it was created by <code>make-<em>data-type-name</em></code>
+(and of course <code>false</code> in any other case).</p>
+
+  </li>
+
+
+  <li><code><em>data-type-name-field-1</em> : <Em>Data-Type-Name</Em> -&gt; T1</code><br/>
+<code><em>data-type-name-field-2</em> : <Em>Data-Type-Name</Em> -&gt; T2</code><br/> ...
+<p>These functions can be used to extract the values that were given
+as arguments to <code>make-<em>data-type-name</em></code>.
+  </p>
+  </li>
+
+</ul>
+
+
+<P>Let's see how that works in an example. Let's define a data type
+called <code>Point</code>. It represents a position in a
+two-dimensional plane, and is defined as follows:</P>
+
+<PRE><CODE> (define-struct point (x y)) </CODE></PRE>
+
+
+<P>(Note that we always write the type name with an upper-case first
+letter while we write names in definitions always in lower-case).</P>
+
+<P>The definition above causes Racket to define the following
+functions:
+
+<ul class="condensed">
+<li><code>make-point</code></li> <li><code>point?</code></li>
+<li><code>point-x</code></li> <li><code>point-y</code></li> </ul>
+
+
+<DIV class="exercise">
+<P>Ex11: What do you think are the contracts for the
+<code>point</code>-functions?</p>
+
+<p>Hint: The Beginning Student language already contains a data type
+much like <kbd>Point</kbd>, called <kbd>Posn</kbd>.  You can look up
+the contracts for <kbd>Posn</kbd> in the Racket Help Desk.  There are
+many ways to reach the Help Desk.  For example, enter "make-posn" into
+the Racket command prompt, select it and press F1.</P>
+</div>
+
+<DIV class="exercise">
+<P>Ex12: What are
+the values of the following expressions? Be sure to predict the
+answers in your head before trying the expressions.
+<ul class="condensed">
+  <li><code>(make-point 5 3)</code></li>
+  <li><code>(point? 5)</code></li> <li><code>(point? true)</code></li>
+  <li><code>(point? (make-point 2 1))</code></li>
+  <li><code>(point-x (make-point 8 5))</code></li>
+  <li><code>(point-y (make-point 42 15))</code></li>
+</ul>
+</div>
+
+<DIV class="exercise">
+  <P>Ex13: What will happen if you type <code>(make-point true
+false)</code>? what is the result of <code>(point-x (make-point true
+false))</code>?</P>
+</div>
+
+<DIV class="exercise">
+<P>Ex14: Which
+functions will Racket create when we execute this:
+<code>(define-struct student (id name major))</code>?</P>
+</DIV>
+
+<H2>More on Struct-definitions</H2>
+
+<p><em>You should have done at least Ex11 and Ex13 before you continue here!</em></p>
+
+<p>The contracts of <code>make-point</code> and <code>point-x</code> are 
+<ul class="condensed">
+<li><code>make-point : Number Number -&gt; Point</code></li>
+<li><code>point-x : Point -&gt; Number</code></li>
+</ul>
+</p>
+
+<p> But <code>(point-x (make-point true false))</code> works and
+returns <code>true</code>. which is not a Number! That is because
+Racket does not care that much about types and contracts - it will
+only stop if you ask it to do something it just can't, like asking for
+the x-component of a Boolean, but otherwise it will shove values
+around without complaining.</p>
+
+<p>Racket also does not care what the values represent. If the
+x-component of your Point, is a number, you can use it to represent
+a percentage of something or a temperature in degress celsius, or any
+other quantity that that is represented as a number.  </p>
+
+<p> Racket does not generate the correct contracts of the point-functions, nor do they appear 
+out of thin air. We have to write  down some information for other programs to know what
+contracts to follow. That is, somewhere we have to specify the
+following information:
+
+<ul class="condensed">
+<li>What actual types do the fields of the struct have (instead of T1, T2, etc.)?</li>
+<li>What do the fields represent (temperature (in degrees celsius or fahrenheit?)?
+distances (centimeters? meters? feet?)? ...)</li>
+</ul>
+</p>
+
+<p>The way we do this is a comment next to the struct-definition:</p>
+<pre>
+    (define-struct point (x y))
+    ;; A Point is a (make-point Number Number).
+    ;; It represents a position on the screen.
+    ;; Interpretation:
+    ;;   x = the x-coordinate on the screen (in pixels from the left).
+    ;;   y = the y-coordinate on the screen (in pixels from the top).
+</pre>
+
+<p>Here, the first line tells us what the types of the fields are
+(i.e. both x and y are Numbers) and the following tells us what the
+type in general and its fields in particular represent. Now it is easy
+for everyone to see that <code>(make-point true false)</code> is not
+allowed and may lead to errors somewhere, and that x is neither
+degrees celsius nor meters nor feet.  We'll see much more about this
+in Lesson 1.3 </p>
+
+
+<DIV class="exercise">
+<P>Ex15: Write down reasonable comments for the
+definition of the type Student from Ex14 that define the types of the
+fields and their interpretation.</p></DIV>
+
+<H2>Images</H2>
+
+<p>In this class, we will work with images quite often.  To work with
+images, include the following code at the top of your file:</p>
+
+<pre><code>(require 2htdp/image)</code></pre></p>
+
+<p>This loads the image library.  Here are the basic functions for
+calculating with images:</p>
+
+<pre><code>    ;; bitmap : Path -&gt; Image
+    ;; GIVEN: a path to a file containing an image as a .jpg or .png
+    ;; The path is given as a string, e.g. "myfile.jpg"
+    ;; RETURNS: the image found in that file.
+
+    ;; above : Image ... -&gt; Image
+    ;; GIVEN an arbitrary number of images
+    ;; RETURNS: an image in which the given images appear one above
+    ;; the other from top to bottom.
+
+    ;; beside : Image ... -&gt; Image
+    ;; GIVEN an arbitrary number of images
+    ;; RETURNS: an image in which the given images appear next to each 
+    ;; from left to right.
+
+    ;; An OutlineMode represents a style for drawing an shape.
+    ;;  - "outline" --only the shape's outline is drawn
+    ;;  - "solid"   --the whole inside of the shape is filled
+
+    ;; rectangle : Number Number OutlineMode Color -&gt; Image
+    ;; RETURNS: an image of a rectangle with given width, height,
+    ;; drawing mode and color
+
+    ;; circle : Number OutlineMode Color -&gt; Image
+    ;; RETURNS: an image of a circle with given radius, drawing mode
+    ;; and color.
+
+    ;; text : String Number Color -&gt; Image
+    ;; RETURNS: An image consisting of the given string, rendered
+    ;; in the given color and with the given number as text size.
+
+    ;; empty-scene : Number Number -&gt; Image
+    ;; RETURNS: The image of an empty rectangle with given width and
+    ;; height.  An empty rectangle is a white rectangle with a black
+    ;; outline. 
+
+    ;; place-image : Image Real Real Image -&gt; Image
+    ;; GIVEN: An Image img1, 2 Reals x and y, and an Image img2
+    ;; RETURNS: An image like img2, but with img1 placed with its
+    ;; center placed at the given coordinates.  The coordinates are
+    ;; given relative to the top-left corner of img2.  The resulting
+    ;; image is cropped to the dimensions of img2.
+</code></pre>
+
+<p> Observe that the contract for rectangle says that it expects one
+    of exactly two strings as its third argument: either the string
+    <kbd>"outline"</kbd> or the string <kbd>"solid"</kbd>.  If you
+    give it some other string, you've violated <kbd>rectangle</kbd>'s contract,
+    and its behavior is unpredictable!  Maybe it will just produce an
+    error, or maybe it will erase your disk! Who knows?  The contract
+    doesn't tell us.  </p>
+
+<p>Similarly, we've written <kbd>Color</kbd> for the fourth argument
+to <kbd>rectangle</kbd>.  Look in the Help Desk to find out the
+permissible values for a Color.</p>
+
+
+
+
+<div class="exercise">
+<p>Ex16: Create a folder on git and save your Racket file there. Then also copy some image to that
+folder (either take it from your computer or download one from the internet). Then put the following
+in your racket file:
+<pre><code>(define my-image (bitmap "[the file name of your image]"))</code></pre>
+Play around with some of the image functions, also try something like
+<pre><code>(above my-image my-image my-image)</code></pre></p>
+</div>
+
+<div class="exercise">
+<p>Ex17: Create some solid blue rectangles with the following dimensions:
+<ul class="condensed">
+<li>2x4</li>
+<li>4x8</li>
+<li>8x16</li>
+<li>16x32</li>
+</ul></p>
+</div>
+
+<div class="exercise">
+<p>Ex18: Give the dimensions of the next 2 rectangles in the
+sequence.  Write down a formula that describes the n-th rectangle in
+this sequence.  Write down a contract, purpose statement, examples,
+and definition for a  function 
+<code>rec-sequence</code> that takes an argument <code>n</code>, where <code>n</code> is a number 
+that tells the function to return the <code>n</code>th rectangle in this
+sequence. <em>Test the function!</em></p>
+</div>
+
+<div class="exercise">
+<p>Ex19: Write the following function:
+<pre>
+    ;; rectangle-from-proportions: PosReal PosReal -&gt; Rectangle
+    ;; RETURNS: a solid blue rectangle, whose width in pixels is given
+    ;; by the first argument, and whose proportion (ratio of height to
+    ;; width, i.e. height = width * proportion) is given by the second
+    ;; argument. 
+</code></pre>
+Test the function!</p>
+</div>
+
+<div class="exercise">
+
+<p>Ex20: Try to assemble a human shape from circles and rectangles
+using the image functions above.  It does not need to look fancy, just
+imagine a head, a chest and arms and feet. Then use the stepper to see
+how DrRacket assembles your image.</p>
+</div>
+
+<div class="exercise">
+<p>Ex21: Here is a struct definition:
+<pre><code>(define-struct person (first-name last-name age height weight))</code></pre>
+
+Write down a reasonable comment part of that data definition that
+specifies types and interpretations of the fields. Then write the
+function <code>person-image</code> that takes a person and returns an
+image like the ones in Ex20, but in a way that the height and width of
+this image is related to the height of the person (i.e. if one person
+is twice the size of another person, the image for the first person
+should be twice as high and wide as the image of the second
+person).</p> </div>
+
+<div class="exercise">
+<p>Ex21a: Write a function <kbd>person+name-image</kbd>, which returns
+an image like the one returned by <code>person-image</code>
+except that the full (first + last) name of the person is drawn below
+the image of the person.  You may want to use the built-in function
+<kbd>string-append</kbd>.  Look in the help desk to see what it returns.</p>
+</div>
+
+<h2>Lists</h2>
+<p>Structs can already consist of more than one value, but very often we need
+to store an arbitrary number of values. A fundamental part of programming in
+Racket lets us do just that: lists. In contrast to the structs we have
+seen, there are two basic ways to create a list value. The first is rather
+self-explanatory:
+<pre><code>    ;; empty : List
+    ;; The empty list
+</code></pre>
+But somehow, we also have to get values into lists, so we have a second constructor:
+<pre><code>    ;; cons: Any List -&gt; List
+    ;; Given some value and a list, returns a new list in which the given value is the
+    ;; first element and the given list is the rest of the new list.
+</code></pre>
+Can you guess how to create a list with one element? The answer is to use <code>cons</code> with
+that element and the empty list, that is: 
+<pre><code>    &gt; (cons "Something" empty)
+    (cons "Something" empty)
+</code></pre>
+
+<p>And a list of two elements? Well, this time we'll have to use <code>cons</code> twice:
+<pre><code>    > (cons "Something" (cons "Some other thing" empty))
+    (cons "Something" (cons "Some other thing" empty))
+</code></pre>
+Note that <code>cons</code> <em>prefixes</em> an element to the list--
+that is, it returns a new list that is like the old list, except that
+the new element is added at the front.</p>
+
+<div class="exercise">
+<p>Ex22: Write down an expression whose value is the list of numbers from 1 to 5.</p>
+<p>Ex23: Write down an expression whose value is a list of 5 booleans, alternating between true and false,
+starting with true</p></div>
+
+
+<p>Writing down all these constructors is a bit cumbersome, so here's a shorthand
+for creating lists:
+<pre><code>    ;; list : Any ... -&gt; List
+    ;; Takes any number of values and returns a list of those values.
+    ;; Example: (list 1 2 3 4 5) =&gt; (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
+</pre></code>
+That is a lot shorter! Now that we have seen how to construct lists, what can we
+do with them? We'll deconstruct them again, piece by piece:
+<pre><code>    ;; list-fn : List -&gt; ??
+    ; (define (list-fn lst)
+    ;   (cond
+    ;     [(empty? lst) ...]
+    ;     [else (... (first lst) (list-fn (rest lst)))]))
+</code></pre>
+
+If you forgot what <code>cond</code> is about, look a few headlines
+back. Apart from that, you'll see that there is a predicate
+<code>empty?</code> that lets you check if a list is empty. If it is
+not, then the list must have been constructed by using
+<code>cons</code>, and that means that there must be a first element
+of the list and some rest - and as you may have guessed, the functions
+<code>first</code> and <code>rest</code> return just those.</p>
+
+
+<p>A interesting thing is the call to <code>list-fn</code> in the last
+line of <code>list-fn</code>. This is what we call
+<em>recursion</em>. There is a lot to be said about recursion later in
+the term, but for now we'll just use this technique to process
+lists.</p>
+
+
+<p>Let us rather talk about what we do in this function: we get some
+list as an argument, and we know that there are two cases how that
+list could have been constructed: either using <code>empty</code> or
+using <code>cons</code>. Well, there has to be a result in any case,
+but if the list is empty, we cannot extract a value from it, so we
+have to replace the dots in the first case with a meaningful value in
+case the list is empty. If, on the other hand, there is a value and a
+rest, both of them may influence the final result of our
+computation. Therefore, we calculate the result of the computation of
+the rest of the list (which may be empty or have some more elements,
+but less than the list we were given) and then <em>combine</em> it
+with the first element. Let's look at an example:</p>
+
+<pre><code>    ;; sum : List -&gt; Number
+    ;; RETURNS: the sum of the numbers in the given list
+    ;; EXAMPLES: 
+    ;; (sum empty) = 0
+    ;; (sum (list 1)) = 1
+    ;; (sum (list 1 2 3) = 6
+
+    (define (sum lst)
+      (cond
+        [(empty? lst) 0]
+        [else (+ (first lst) (sum (rest lst)))]))
+</code></pre>
+
+<p>Look what we inserted here: the sum of all the numbers in an empty
+list is clearly 0. And if we take the number that is first in a list
+and add it to the sum of all the numbers in the rest of the list, we
+clearly get the sum of all numbers in the list. We do not necessarily
+have to use any of the values in the list in every case:</p>
+
+
+<pre><code>    ;; list-length : List -&gt; Number
+    ;; RETURNS the length of the given list
+    ;; EXAMPLES: 
+    ;; (list-length empty) = 0
+    ;; (list-length (list 1)) = 1
+    ;; (list-length (list 1 2 3) = 3
+
+    (define (list-length lst)
+      (cond
+        [(empty? lst) 0]
+        [else (+ 1 (list-length (rest lst)))]))
+</code></pre>
+
+<p>Here, the length of an empty list is again clearly 0, and the
+length of a list where there is a first element and a rest must be 1 +
+the length of that rest.</p>
+
+<div class="exercise">
+<p>Ex24: Write a function that returns the product of all the numbers in a list (Hint:
+be careful with the empty list)</p>
+</div>
+
+
+<p>Look at the following pieces of code. Is there anything wrong with either one
+or both of them?</p>
+<pre><code>    (list-length (list 1 5 "a" true 3))
+
+    (sum (list 1 5 "a" true 3))
+</code></pre>
+
+<p> <code>list-length</code> works just fine, but <code>sum</code>
+does not. Racket complains because this code violates the contract of
++: + expects a number as its first argument, and here it is given
+<kbd>true</kbd>.  <code>(+ true 3)</code> is not a valid
+operation. And indeed, altough we have not mentioned contracts for a while,
+we have severely violated our contracts. Could you guess what the
+contract for <code>first</code> would be? As we said that the contract
+of <code>cons</code> is </p>
+
+<pre><code>    ;; cons : Any List -&gt; List</code></pre>
+Therefore we cannot know anything for sure about the first element in a list. 
+Thus, the right contract would be 
+
+<pre>
+   ;; first : List -> Any
+   ;; WHERE: the list is non-empty
+</pre>
+But <code>+</code> requires Numbers as arguments, so it is not safe to
+ supply it with
+arguments of type Any. To fix this, we introduce further conventions that Racket
+itself does not care about as long as everything works (like with list-length):
+we introduce specialized lists for certain types, for example the type ListOfNumber,
+(in short: LoN). You can still use <code>empty</code>, <code>cons</code>,
+<code>list</code>, <code>first</code> and <code>rest</code>, but you can change
+the contracts to have (Some-Type) instead of Any and ListOf(Some-Type) instead
+of List. So for ListOfNumber we'll have
+
+<pre>
+;; cons  : Number ListOfNumber -&gt; List-Of-Number
+;; first :ListOfNumber -&gt; Number
+</pre>
+
+but for ListofBoolean we'll have
+
+<pre>
+;; cons  : Boolean ListOfBoolean -&gt; ListOfBoolean
+;; first : ListOfBoolean -&gt; Boolean
+</pre>
+
+<div class="exercise">
+<p>Ex25: Design a function that, given a list of booleans, returns
+  true if all booleans in the
+list are true. Write down contract, purpose statement and examples, and test your function.</p>
+<p>Ex26: Design a function that takes a list of Points and draws a solid blue circle with radius
+10 at every Point in that list into a 300x300 scene.</p>
+<p>Ex27: Design a function that takes a list of strings and draws the combined text of those
+strings, separated by spaces.</p>
+<p>Ex27a: There are two ways to do Ex27 with the functions available to you. Try the way that 
+you did not use to solve Ex27.</p>
+<p>Ex28: Design a function that takes a list of lists of strings as an argument that treats
+each of the lists of strings as a line (assembled like in Ex27) in a text and renders the 
+whole text as an image.</p> 
+<p>Ex29: Look up the <kbd>beside/align</kbd> function on the Racket Help Desk. Use it to design a function
+that takes a list of people (as defined in Ex21) and uses the function from Ex21 to draw these
+people, placing them beside each other to form some kind of a group
+photo.</p>
+
+<p>Ex30: Design a function that, given a list of booleans, returns a list with each boolean
+reversed (e.g. <code>(neg-list (list true false true)) =>
+(cons false (cons true (cons false empty))</code> &nbsp; ).</p>
+
+<p>Ex31: Design a function that, given a list of Numbers, returns a
+list of Images, where each image is a circle that has a radius based
+on a number of the input list.</p>
+
+
+<p>Ex32: Design a function that takes a list of Points and returns the
+sum of the distances to each of those Points from (0,0). You should
+write a helper function to calculate the distance.
+
+<!-- Use the <a -->
+<!-- href="http://en.wiktionary.org/wiki/Manhattan_distance" -->
+<!-- target="_blank" >Manhattan distance</a> measure (distance = x + -->
+<!-- y). -->
+ 
+</p>
+
+</div> <HR/> 
+
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Wed Sep 14 23:05:07 Eastern Daylight Time 2016 <!-- hhmts end -->
+
+</DIV></BODY></HTML>

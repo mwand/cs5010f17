@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 10
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 10
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 27 March 2017
+      <br />
+      <strong>Due:</strong> Monday, 3 April 2017 at 6pm
+      <br />
+      <strong>Corrected:</strong> Tuesday, 28 March 2017
+      (minor corrections and clarifications)
+      <br />
+      <strong>Corrected:</strong> Saturday, 1 April 2017
+      (purpose statement for <code>ConstantExp</code>)
+    </p>
+  </div>
+  <div>
+    <p>
+      This is a
+      <a href="http://en.wikipedia.org/wiki/Pair_programming">
+        pair programming
+      </a>
+      assignment.  You are required to
+      complete this problem set in collaboration with your assigned
+      partner, but neither of you are allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      We have created a repository for you and your partner to use.
+    </p>
+    <p>
+      In those repositories, we have created files named
+      <code><em>ID1</em>-log.txt</code> and
+      <code><em>ID2</em>-log.txt</code> for you to use when
+      filing work session reports, as in previous problem sets.
+      You and your partner are required to push your files at
+      the end of every work session.
+      (You <em>may</em> push your files several times during
+      a work session, but we do not require you to do so.)
+    </p>
+    <p>
+      At the end of every work session, you are required to update
+      your log file to record the time you spent in that work session.
+      (Please do not include the time you spent in any previous work
+      sessions, as those times will already have been recorded in
+      previous versions of your log file.)
+      If both of you work together during a work session, both of
+      you must update your log files, recording only the time <em>you</em>
+      spent working.  Do not include your partner's time in
+      your log file, but be sure to push the updated versions of
+      both log files.
+    </p>
+    <hr />
+    <p>
+      The main purpose of this problem set is to give you practice
+      implementing abstract data types and using inheritance in
+      Java.
+      You will also learn something about programming languages
+      and how they are implemented.
+    </p>
+    <p>
+      You must use Java 8 for this assignment.
+      All of your code must reside within the default package.
+      You may use/import anything in the
+      <code>java.lang</code> and <code>java.util</code>
+      packages, but you are not allowed to use any other packages.
+    </p>
+    <hr />
+  </div>
+  <h3>
+    Problem Specification
+  </h3>
+  <p>
+    You will write an interpreter for a simple functional
+    programming language with this concrete syntax:
+  </p>
+  <pre>
+    &lt;pgm&gt;     ::=  &lt;defn&gt; ;
+              ::=  &lt;defn&gt; ; &lt;pgm&gt;
+    &lt;defn&gt;    ::=  &lt;id&gt; = &lt;const&gt;
+              ::=  &lt;id&gt; (&lt;formals&gt;) &lt;expr&gt;
+    &lt;const&gt;   ::=  true 
+              ::=  false
+              ::=  &lt;int&gt;
+    &lt;lambda&gt;  ::=  (λ ( &lt;formals&gt; ) &lt;expr&gt;)
+    &lt;expr&gt;    ::=  &lt;const&gt;
+              ::=  &lt;id&gt;
+              ::=  &lt;lambda&gt;
+              ::=  &lt;arith&gt;
+              ::=  &lt;call&gt;
+              ::=  &lt;if&gt;
+              ::=  ( &lt;expr&gt; )
+    &lt;arith&gt;   ::=  &lt;expr&gt; &lt;op&gt; &lt;expr&gt;
+    &lt;call&gt;    ::=  &lt;expr&gt; (&lt;exprs&gt;)
+    &lt;if&gt;      ::=  if &lt;expr&gt; then &lt;expr&gt; else &lt;expr&gt; fi
+    
+    &lt;op&gt;      ::=  &lt; | = | &gt; | + | - | *
+    
+    &lt;formals&gt;  ::=  &lt;id&gt;
+               ::=  &lt;id&gt; , &lt;formals&gt;
+    &lt;exprs&gt;    ::=  &lt;expr&gt;
+               ::=  &lt;expr&gt; , &lt;exprs&gt;
+    
+    &lt;int&gt; and &lt;id&gt; are described by regular expressions:
+    
+        digit digit*
+    
+        letter (letter | digit)*
+  </pre>
+  <p>
+    That concrete syntax may be easy
+    for humans to read, but it is not a convenient representation
+    for compilers or interpreters.
+    Compilers and interpreters generally use a more convenient
+    internal representation known as
+    <em>abstract syntax trees</em>.
+    (Abstract syntax trees are closely related to the list representation
+    of programs used in Lisp/Scheme/Racket/Clojure, and to the XML
+    notation used to represent more general kinds of data.)
+  </p>
+  <p>
+    For the programming language above, we need abstract syntax trees
+    for programs, definitions, and expressions.
+    There are six different kinds of expressions,
+    so we need six different kinds of abstract syntax trees for
+    expressions.
+    That gives us the following conceptual hierarchy:
+  </p>
+  <pre>
+    Ast
+        Pgm
+        Def
+        Exp
+            ConstantExp
+            IdentifierExp
+            LambdaExp
+            ArithmeticExp
+            CallExp
+            IfExp
+  </pre>
+  <p>
+    We will represent the abstract syntax tree for a program
+    as a <code>List&lt;Def&gt;</code>.
+    All of the other categories within that hierarchy will be
+    represented by the Java interfaces shown below.
+    To save you from having to copy and paste those interfaces,
+    we are giving you the Java source files as a
+    <code>gzip</code>'ed <code>tar</code> file,
+    <a href="set10.tgz"><code>set10.tgz</code></a>.
+    When you unpack that file, it will expand into a
+    <code>set10</code> directory that already contains the
+    following Java source files.
+  </p>
+  <h4>
+    Abstract Syntax Trees
+  </h4>
+  <p>
+    The <code>Ast.java</code> file:
+  </p>
+  <pre>
+    // An Ast is an object of any class that implements the Ast interface.
+    //
+    // Interpretation: An Ast represents the abstract syntax tree
+    // for some part of a source program.
+    //
+    // This abstract data type simplies the parser,
+    // but should not be used by the type checker or interpreter.
+    
+    import java.util.List;
+    
+    interface Ast {
+    
+        // Returns true iff this Ast is for a program, definition,
+        // or expression, respectively
+    
+        boolean isPgm();
+        boolean isDef();
+        boolean isExp();
+    
+        // Precondition: this Ast is for a program.
+        // Returns a representation of that program.
+    
+        List&lt;Def&gt; asPgm();
+    
+        // Precondition: this Ast is for a definition.
+        // Returns a representation of that definition.
+    
+        Def asDef();
+    
+        // Precondition: this Ast is for an expression.
+        // Returns a representation of that expression.
+    
+        Exp asExp();
+    }
+  </pre>
+  <h4>
+    Definitions
+  </h4>
+  <p>
+    The <code>Def.java</code> file:
+  </p>
+  <pre>
+    // A Def is an object of any class that implements the Def interface.
+    //
+    // Interpretation: A Def represents one definition of the source program.
+    
+    interface Def extends Ast {
+    
+        // Returns the left hand side of this definition,
+        // which will be an identifier represented as a String.
+    
+        String lhs();
+    
+        // Returns the right hand side of this definition,
+        // which will be a ConstantExp or a LambdaExp.
+    
+        Exp rhs();
+    }
+  </pre>
+  <h4>
+    Expressions
+  </h4>
+  <p>
+    The <code>Exp.java</code> file:
+  </p>
+  <pre>
+    // An Exp is an object of any class that implements the Exp interface.
+    //
+    // Interpretation: An Exp represents an expression of a source program.
+    
+    import java.util.Map;
+    
+    interface Exp extends Ast {
+    
+        // Returns true iff this Exp is a constant, identifier,
+        // lambda, arithmetic, call, or if expression (respectively).
+    
+        boolean isConstant();
+        boolean isIdentifier();
+        boolean isLambda();
+        boolean isArithmetic();
+        boolean isCall();
+        boolean isIf();
+    
+        // Precondition: the corresponding predicate above is true.
+        // Returns this.
+        // (These methods amount should eliminate most casts.)
+    
+        ConstantExp   asConstant();
+        IdentifierExp asIdentifier();
+        LambdaExp     asLambda();
+        ArithmeticExp asArithmetic();
+        CallExp       asCall();
+        IfExp         asIf();
+    
+        // Returns the value of this expression when its free variables
+        //     have the values associated with them in the given Map.
+        // May run forever if this expression has no value.
+        // May throw a RuntimeException if some free variable of this
+        //     expression is not a key of the given Map or if a type
+        //     error is encountered during computation of the value.
+    
+        ExpVal value (Map&lt;String,ExpVal&gt; env);
+    }
+  </pre>
+  <p>
+    The other <code>*Exp.java</code> files:
+  </p>
+  <pre>
+    // A ConstantExp is an object of any class that implements ConstantExp.
+    //
+    // Interpretation: A ConstantExp represents an <del>identifier (or variable)</del> <ins>integer or boolean constant</ins>.
+    
+    interface ConstantExp extends Exp {
+    
+        // Returns the value of this constant expression.
+    
+        ExpVal value();
+    }
+  </pre>
+  <pre>
+    // An IdentifierExp is an object of any class that implements IdentifierExp.
+    //
+    // Interpretation: A IdentifierExp represents an identifier (or variable).
+    
+    interface IdentifierExp extends Exp {
+    
+        // Returns the name of this identifier.
+    
+        String name();
+    }
+  </pre>
+  <pre>
+    // A LambdaExp is an object of any class that implements LambdaExp.
+    //
+    // Interpretation: A LambdaExp represents a lambda expression.
+    
+    import java.util.List;
+    
+    interface LambdaExp extends Exp {
+    
+        // Returns the formal parameters of this lambda expression.
+    
+        List&lt;String&gt; formals();
+    
+        // Returns the body of this lambda expression.
+    
+        Exp body();
+    }
+  </pre>
+  <pre>
+    // An ArithmeticExp is an object of any class that implements ArithmeticExp.
+    //
+    // Interpretation: An ArithmeticExp represents an expression of the form
+    //
+    //     <expr> <op> <expr>
+    
+    interface ArithmeticExp extends Exp {
+    
+        // Returns the appropriate subexpression.
+    
+        Exp leftOperand();
+        Exp rightOperand();
+    
+        // Returns the binary operation as one of the strings
+        //     "LT"
+        //     "EQ"
+        //     "GT"
+        //     "PLUS"
+        //     "MINUS"
+        //     "TIMES"
+    
+        String operation();
+    }
+  </pre>
+  <pre>
+    // A CallExp is an object of any class that implements CallExp.
+    //
+    // Interpretation: A CallExp represents a function call.
+    
+    import java.util.List;
+    
+    interface CallExp extends Exp {
+    
+        // Returns the expression for the function part of the call.
+    
+        Exp operator();
+    
+        // Returns the list of argument expressions.
+    
+        List&lt;Exp&gt; arguments();
+    }
+  </pre>
+  <pre>
+    // An IfExp is an object of any class that implements IfExp.
+    //
+    // Interpretation: An IfExp represents an if expression.
+    
+    interface IfExp extends Exp {
+    
+        // Returns the appropriate part of this if expression.
+    
+        Exp testPart();
+        Exp thenPart();
+        Exp elsePart();
+    }
+  </pre>
+  <h4>
+    Expression Values
+  </h4>
+  <p>
+    The value of an expression in this language will always be
+    a boolean, integer, or function.
+  </p>
+  <pre>
+    // An ExpVal is an object of any class that implements the ExpVal interface.
+    //
+    // Interpretation: An ExpVal represents the value of an expression.
+    
+    interface ExpVal {
+    
+        // Returns true iff this ExpVal is a boolean, integer, or
+        // function (respectively).
+    
+        boolean isBoolean();
+        boolean isInteger();
+        boolean isFunction();
+    
+        // Precondition: the corresponding predicate above is true.
+        // Returns this.
+        // (These methods amount should eliminate most casts.)
+    
+        boolean asBoolean();
+        long asInteger();
+        FunVal asFunction();
+    }
+  </pre>
+  <pre>
+    // A FunVal is an object of any class that implements the FunVal interface.
+    //
+    // Interpretation: A FunVal represents the value of a lambda expression.
+    
+    import java.util.Map;
+    
+    interface FunVal extends ExpVal {
+    
+        // Returns the lambda expression from which this function was created.
+    
+        LambdaExp code();
+    
+        // Returns the environment that maps the free variables of that
+        // lambda expression to their values.
+    
+        Map&lt;String,ExpVal&gt; environment();
+    }
+  </pre>
+  <hr />
+  <p>
+    We have divided that problem into two parts.
+    In the first part, you will implement the abstract data types
+    for definitions, expressions, and expression values,
+    and define a public class that defines
+    public static factory methods for those types.
+    In the second part, you will define a public class that
+    defines a public static method for running
+    any given program of the language on any given inputs.
+  </p>
+  <ol>
+    <li>
+      Download and unpack the
+      <a href="set10.tgz"><code>set10.tgz</code></a> file
+      we are giving you.
+      <p>
+        Inside that <code>set10</code> directory,
+        define another file named <code>Asts.java</code>
+        that defines a class named <code>Asts</code>
+        that defines the following public static methods:
+      </p>
+      <pre>
+        // Static factory methods for Def
+        
+        // Returns a Def with the given left and right hand sides.
+        
+        public static Def def (String id1, Exp rhs) { ... }
+        
+        // Static factory methods for Exp
+        
+        // Returns an ArithmeticExp representing e1 op e2.
+        
+        public static ArithmeticExp arithmeticExp (Exp e1, String op, Exp e2) { ... }
+        
+        // Returns a CallExp with the given operator and operand expressions.
+        
+        public static CallExp callExp (Exp operator, List&lt;Exp&gt; operands) { ... }
+        
+        // Returns a ConstantExp with the given value.
+        
+        public static ConstantExp constantExp (ExpVal value) { ... }
+        
+        // Returns an IdentifierExp with the given identifier name.
+        
+        public static IdentifierExp identifierExp (String id) { ... }
+        
+        // Returns an IfExp with the given components.
+        
+        public static IfExp ifExp (Exp testPart, Exp thenPart, Exp elsePart) { ... }
+        
+        // Returns a LambdaExp with the given formals and body.
+        
+        public static LambdaExp lambdaExp (List&lt;String&gt; formals, Exp body) { ... }
+        
+        // Static factory methods for ExpVal
+        
+        // Returns a value encapsulating the given boolean.
+        
+        public static ExpVal expVal (boolean b) { ... }
+        
+        // Returns a value encapsulating the given (long) integer.
+        
+        public static ExpVal expVal (long n) { ... }
+        
+        // Returns a value encapsulating the given lambda expression
+        // and environment.
+        
+        public static FunVal expVal (LambdaExp exp, Map&lt;String,ExpVal&gt; env) { ... }
+        
+        // Static methods for creating short lists
+        
+        public static &lt;X&gt; List&lt;X&gt; list (X x1) { ... }
+        
+        public static &lt;X&gt; List&lt;X&gt; list (X x1, X x2) { ... }
+        
+        public static &lt;X&gt; List&lt;X&gt; list (X x1, X x2, X x3) { ... }
+        
+        public static &lt;X&gt; List&lt;X&gt; list (X x1, X x2, X x3, X x4) { ... }
+      </pre>
+    </li>
+    <li>
+      Inside your <code>set10</code> directory,
+      include another file named <code>Programs.java</code>
+      that defines a <code>Programs</code> class
+      that defines the following public static method:
+      <pre>
+        public static ExpVal run (List&lt;Def&gt; pgm, List&lt;ExpVal&gt; inputs) {
+            ...
+        }
+      </pre>
+      <p>
+        Here is an example, which should print 120:
+      </p>
+      <pre>
+        // fact (n) if n = 0 then 1 else n * fact (n - 1) fi
+        
+        Exp exp1
+            = Asts.arithmeticExp (Asts.identifierExp ("n"),
+                                  "MINUS",
+                                  Asts.constantExp (Asts.expVal (1)));
+        Exp call1
+            = Asts.callExp (Asts.identifierExp ("fact"),
+                            Asts.list (exp1));
+        Exp testPart
+            = Asts.arithmeticExp (Asts.identifierExp ("n"),
+                                  "EQ",
+                                  Asts.constantExp (Asts.expVal (0)));
+        Exp thenPart
+            = Asts.constantExp (Asts.expVal (1));
+        Exp elsePart
+            = Asts.arithmeticExp (Asts.identifierExp ("n"),
+                                  "TIMES",
+                                  call1);
+        Def def1
+            = Asts.def ("fact",
+                        Asts.lambdaExp (Asts.list ("n"),
+                                        Asts.ifExp (testPart,
+                                                    thenPart,
+                                                    elsePart)));
+        ExpVal result = Programs.run (Asts.list (def1),
+                                      Asts.list (Asts.expVal (5)));
+        System.out.println (result.asInteger());
+      </pre>
+    </li>
+  </ol>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

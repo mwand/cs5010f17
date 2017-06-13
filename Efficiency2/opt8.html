@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example of Compiler Optimization
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Example of Compiler Optimization
+  </h3>
+  <div>
+    <p>
+      An optimizing compiler is also likely to recognize that the
+      multiplications can be removed by introducing new variables
+      <code>n8</code> and <code>i8</code> whose values
+      are the values of <code>n</code> and <code>i</code>
+      multiplied by 8.  Using those variables instead of
+      <code>n</code> and <code>i</code> removes all references to
+      <code>n</code> and <code>i</code>, so the registers originally
+      used for <code>n</code> and <code>i</code> can be used for
+      <code>n8</code> and <code>i8</code> instead:
+    </p>
+    <pre>
+          // a is in r1
+          // b is in r2
+          // n8 is in r3
+          // result is in f0
+      
+          sub     r4,r4,r4            // i8 is in r4
+          b       L2                  // branch to while loop test
+      L1:
+          fld     r4(r1),f1           // fetch a[i] into f1
+          fld     r4(r2),f2           // fetch b[i] into f2
+          fmul    f1,f2,f1            // floating point multiplication
+          fadd    f0,f1,f0            // floating point addition
+          addi    r4,8,r4             // i8 = i8 + 8;
+      L2:
+          cmp     r4,r3,r5            // is i8 less than n8?
+          blt     r5,L1               // if so, branch to loop body
+    </pre>
+    <p>
+      Replacing multiplications by additions is an example of
+      a compiler optimization known as <em>reduction in strength</em>.
+      Reduction in strength was an important optimization years ago,
+      when multiplications usually ran slower than additions.
+      Reduction in strength remains an important optimization
+      because it often allows an optimizing compiler to replace
+      index variables by pre-scaled versions of those variables,
+      as in the machine code above.
+    </p>
+    <p>
+      That machine code is probably optimal for the hypothetical RISC
+      machine I'm assuming for this example.  Writing the method in C
+      instead of Java wouldn't make it run any faster.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="opt7.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="opt9.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

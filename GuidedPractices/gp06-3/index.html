@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 6.3</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 6.3: Alternating Lists</h1>
+
+<p>There are two questions in this Guided Practice.  The first is an
+easy exercise using the alternating lists as we have defined them.
+The second is intended to give you more insight into the nature of
+data definitions. </p>
+
+<p><strong>Question 1:</strong> Design a function <kbd>lasn-number-of-strings</kbd> that takes a <kbd>lasn</kbd> and returns the number of strings in the <strong>lasn</strong>.  
+</p>
+
+<p><a href="06-3-1-lasns.rkt" >[Solution to question 1]</a></p>
+
+<p><strong>Question 2:</strong> Our data definitions for lasn and lans
+make two assumptions:
+<ul class="condensed">
+  <li>We care equally about lasn's and lans's.</li>
+  <li>There is no relationship between the numbers and the strings in
+  any particular lans or lasn.</li>
+</ul>
+</p>
+
+<p>If our intended application violates either of those assumptions,
+then we need to go back and re-do our data analysis accordingly.</p>
+
+<p>For example, consider the following problem:  Given an alternating
+list of strings and numbers, starting with a string, return
+<kbd>true</kbd> if each number is equal to the length of the string
+preceding it, and <kbd>false</kbd> otherwise. For example:</p>
+
+<pre>
+(begin-for-test
+  (check-equal?
+    (right-lengths? empty)
+    true)
+  (check-equal?
+    (right-lengths? (list "foo" 3 "april" 5 "george" 6))
+    true)
+  (check-equal?
+    (right-lengths? (list "foo" 3 "april" 4 "george" 6))
+    false))
+</pre>
+
+<!-- <p>(<kbd>check-error</kbd>, defined in extras.rkt, passes if and only if its -->
+<!-- argument raises an error.)</p> -->
+
+<p> Here both our assumptions are violated: we are only interested in
+LASNs, not LANSs, and we are very much interested in the relation
+between the strings and the numbers.</p>
+
+<p>
+There's no obvious way to write this function using the tools we have
+and the data definition we gave in this lesson.</p>
+
+<p>To represent the data in these examples, we might write the
+following data definition:</p>
+
+<pre>
+;; A LASI is one of:
+;; -- empty
+;; -- (cons String (cons Integer LASI))
+</pre>
+
+<p>Here we are calling these LASI's so there will be no confusion with
+LASN's.</p>
+
+<p>Write out the template for LASI's, using this data definition, and
+write <kbd>right-lengths?</kbd> .  Follow the template recipe.
+Notice that <kbd>(cons String (cons Integer LASI))</kbd> is a
+"structured value."  </p>
+
+
+<p><a href="06-3-2-lasns.rkt" >[Solution to question 2]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Sep 26 13:26:44 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

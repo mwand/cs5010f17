@@ -3,12 +3,13 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 05.1-replace-anchovies-with-onions) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
 ;; Data Definitions:
 
-;; A Topping is represented as a String (any string will do)
+;; A Topping is a String.
 
-;; A Pizza is represented as list of Topping, listed from top to bottom.
+;; A Pizza is a ListOfTopping
+;; interp: a pizza is a list of toppings, listed from top to bottom
 
 ;; pizza-fn : Pizza -> ??
-;; Given a Pizza, produce ....
+; Given a Pizza, produce ....
 ;; (define (pizza-fn p)
 ;;   (cond
 ;;     [(empty? p) ...]
@@ -26,7 +27,7 @@
 ;;   : Pizza -> Pizza
 ;; RETURNS: a pizza like the given pizza, but with
 ;; anchovies in place of each layer of onions
-;; STRATEGY: Use observer template for Pizza on p
+;; STRATEGY: Use template for Pizza on p
 (define (replace-all-anchovies-with-onions p)
   (cond
     [(empty? p) empty]

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Implementation of Design #2
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Implementation of Design #2
+  </h3>
+  <div>
+    <pre>
+      class Ball2class implements Ball2 {
+          int x;    // x coordinate of this ball
+          int y;    // y coordinate of this ball
+          int r;    // radius of this ball, in pixels
+      
+          // (Java constructor and interpretations omitted)
+      
+          public boolean intersects (Ball2 b2) {
+              // ask other ball for its information
+              return coordinatesIntersection (b2.getX(),
+                                              b2.getY(),
+                                              b2.getR());
+          }
+      
+          public boolean coordinatesIntersect (int x2, int y2, int r2) {
+              // do the computation here
+              return (sqr (x - x2) + sqr (y - y2)) &lt;= (sqr (r + r2));
+          }
+      
+          private int sqr (int x) { return x * x; }
+      
+          // be prepared to answer if someone else asks you
+          // the same questions about your state
+      
+          public int getX () { return x; }
+          public int getY () { return y; }
+          public int getR () { return r; }
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="statePatternsDesign2.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="statePatternsDesign2c.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

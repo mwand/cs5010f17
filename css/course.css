@@ -1,19 +1,9 @@
-/* body,td        { background-color: #ffffe0;  */
-/*             	 /\* font-family:  Georgia, "Times New Roman", Times, serif; *\/ */
-/* 		 font-family: Arial, Verdana, sans-serif; */
-/* 	         font-size: 12pt; */
-/* 	         margin: 3%; */
-/*                  } */
-
-body {
-    font-family: "HelveticaNeueW01-45Ligh", "Helvetica Neue", HelveticaNeue, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1.25;
-  /* color: #615445; */
-  color: #000000;
-  background-color: #eeeeee;
-}
-
+body,td        { background-color: #e8f0f8; 
+            	 /* font-family:  Georgia, "Times New Roman", Times, serif; */
+		 font-family: Arial, Verdana, sans-serif;
+	         font-size: 12pt;
+	         margin: 3%;
+                 }
 
 body {min-width:640px}
 
@@ -23,7 +13,8 @@ body {min-width:640px}
 
 tt,kbd,code {font-size: 12pt;}  /* the background color in paras looks fidgety */
 
-pre     {font-size: 11pt; background-color: #eeeed0;}
+/* pre     {font-size: 11pt; background-color: #eeeed0;} */
+pre     {font-size: 11pt; background-color: #d0d8e0;}
 
 .new {color:red;}
 .strike {color:gray; text-decoration:line-through;}
@@ -43,8 +34,8 @@ li  {
 /* divs */
 
 #banner {padding: 5px;}
-#menu {float:left; width:15%}
-#content {float:right; width:80%}
+#menu {float:left; width:10%}
+#content {float:right; width:90%}
 
 #quotation {padding: 10px; margin-left: 20px; width:80%; background-color: #eeeed0}
 

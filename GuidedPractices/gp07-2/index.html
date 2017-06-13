@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 7.1</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 7.2</h1>
+
+<p>Consider the computation of</p>
+
+<pre>
+(program-all-defined?
+    (list
+     (make-def 'f1 (list 'x) (make-appexp 'f2 (list (make-varexp 'x))))
+     (make-def 'f2 (list 'x 'y) (make-appexp 'f2
+                                             (list (make-varexp 'z)
+                                                   (make-varexp 'y))))
+     (make-def 'f3 (list 'x 'y 'z)
+               (make-appexp 'f1 (list (make-appexp 'f2
+                                                   (list (make-varexp 'z)
+                                                         (make-varexp 'y)))
+                                   (make-varexp 'x))))))
+</pre>
+
+<p>Which of the following will appear as calls during
+this computation?  Which of the following satisfy the invariant?
+</p>
+
+<ol>
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f1 'x))</kbd></li>
+  
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f3 'x 'y 'z 'f2 'f1))</kbd></li>
+
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f2 'x 'y 'z 'f1))</kbd></li>
+
+  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f3 'x 'y 'f1 'z))</kbd></li>
+
+</ol>
+
+<p><a href="page2.html" >[ANSWER]</a></p>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Oct 17 16:39:07 Eastern Daylight Time 2016 <!-- hhmts end -->
+</body> </html>

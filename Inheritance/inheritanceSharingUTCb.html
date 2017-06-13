@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example: UTC
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <pre>
+      // Abstract base class for classes that implement the UTC interface.
+      
+      <span class="red">abstract</span> class UTC0 implements UTC {
+      
+          // this Java constructor has no fields to initialize
+          // (all fields will be defined in concrete subclasses)
+      
+          UTC0 () { }
+      
+          // public methods
+      
+          // Returns the hour, between 0 and 23 inclusive.
+      
+          public <span class="red">abstract</span> int hour ();
+      
+          // Returns the minute, between 0 and 59 inclusive.
+      
+          public <span class="red">abstract</span> int minute ();
+      
+          // Returns true iff the given UTC is equal to this UTC.
+      
+          public boolean isEqual (UTC t2) {
+              return (this.hour() == t2.hour()) && (this.minute() == t2.minute());
+          }
+      
+          // public methods that override methods inherited from Object
+      
+          public boolean equals (Object x) {
+              if (x instanceof UTC) {
+                  UTC t2 = (UTC) x;
+                  return isEqual (t2);
+              }
+              else return false;
+          }
+      
+          public int hashCode () {
+              return 100 * this.hour() + this.minute();
+          }
+      
+          public String toString () {
+              return ((Integer) (100 * this.hour() + this.minute())).toString();
+          }
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="inheritanceSharingUTCa.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="inheritanceSharingUTCc.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

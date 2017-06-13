@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The IMaps Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    The IMaps Class
+  </h3>
+  <div>
+    <p>
+      Having defined the
+      <code>SortedMap&lt;K,V&gt;</code> interface,
+      and anticipating our definition of an
+      <code>IMapBST&lt;K,V&gt;</code> class,
+      we define a second static factory method that
+      accepts a comparator as its argument
+      and returns an empty binary search tree.
+    </p>
+    <pre>
+      // The IMaps class defines static methods for the IMap&lt;K,V&gt; type.
+      // In particular, it defines static factory methods for creating
+      // empty maps of the IMap&lt;K,V&gt; type.
+      
+      import java.util.Iterator;
+      import java.util.Comparator;
+      
+      class IMaps {
+      
+          private static IMap theEmptyIMap = new IMapList();
+      
+          // static factory methods for creating an empty IMap&lt;K,V&gt;
+      
+          @SuppressWarnings("unchecked")
+          public static &lt;K,V&gt; IMap&lt;K,V&gt; empty () {
+              return (IMap&lt;K,V&gt;) theEmptyIMap;
+          }
+      
+          @SuppressWarnings("unchecked")
+          public static &lt;K,V&gt; SortedIMap&lt;K,V&gt; empty (Comparator&lt;? super K&gt; c) {
+              return <span class="red">IMapBST.empty(c)</span>;
+          }
+      
+          // main method for testing
+      
+          public static void main (String[] args) {
+              IMapTests.main (args);
+          }
+      }
+    </pre>
+    <p>
+      The highlighted expression calls a static factory method of the
+      <code>IMapBST</code> class, which we have yet to define.
+    </p>
+    <p>
+      It is not unusual for one static factory method to call another.
+      In this example, the <code>IMaps</code> class has to know about
+      the <code>IMapList</code> and <code>IMapBST</code> classes.
+      It doesn't have to know about any other classes that might be
+      used by the <code>IMapBST.empty</code> method.
+    </p>
+    <h4>
+      How to Suppress Warning Messages
+    </h4>
+    <p>
+      Java compilers ordinarily generate code that checks casts at
+      run time.
+      For historical reasons, Java compilers are unable to generate
+      code to check casts that involve type parameters.
+    </p>
+    <p>
+      Java compilers emit messages that warn programmers when
+      a cast will not be checked at run time.
+      Those warning messages are annoying and relatively unhelpful
+      because they are informing programmers of a defect in the
+      design of the Java language and its implementations rather
+      than a defect in the program being compiled.
+    </p>
+    <p>
+      It is therefore considered good practice to use the
+    </p>
+    <pre>
+          @SuppressWarnings("unchecked")
+    </pre>
+    <p>
+      annotation to suppress warning messages caused by this defect
+      of the Java language and its implementations.
+      It is sometimes possible to eliminate the warnings by
+      rewriting the code, but that is not always possible.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2SortedIMap.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2IMapBase.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

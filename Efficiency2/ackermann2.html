@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Ackermann's Function in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Ackermann's Function in Java
+  </h3>
+  <div>
+    <pre>
+      class Ack {
+      
+          static int ack(int m, int n) {
+              if (m == 0)
+                  return n+1;
+              else if (n == 0)
+                  return ack(m-1, 1);
+              else
+                  return ack(m-1, ack(m, n-1));
+          }
+      
+          public static void main (String[] args) {
+              int m = 3;
+              int n = 9;
+              if (args.length &gt; 0)
+                  m = Integer.parseInt (args[0]);
+              if (args.length &gt; 1)
+                  n = Integer.parseInt (args[1]);
+              System.out.println (ack (m, n));
+          }
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="ackermann1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="ackermann3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

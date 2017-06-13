@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  CS 5010: Problem Set 11
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    CS 5010: Problem Set 11
+  </h2>
+  <div>
+    <p>
+      <strong>Out:</strong> Monday, 3 April 2017
+      <br />
+      <strong>Due:</strong> Monday, 10 April 2017 at 6pm
+      <br />
+      <strong>Corrected:</strong> Monday, 3 April 2017
+      <br />
+      <strong>Corrected:</strong> Tuesday, 4 April 2017:
+      <ul>
+        <li>
+          you may use imports seen in Java files we give you
+        </li>
+        <li>
+          corrected concrete syntax
+          (semicolon is separator, not terminator)
+        </li>
+        <li>
+          <code>set11parserV2</code> replaces <code>set11parser</code>
+        </li>
+      </ul>
+    </p>
+  </div>
+  <div>
+    <p>
+      This is a
+      <a href="http://en.wikipedia.org/wiki/Pair_programming">
+        pair programming
+      </a>
+      assignment.  You are required to
+      complete this problem set in collaboration with your assigned
+      partner, but neither of you are allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
+    <p>
+      We have created a repository for you and your partner to use.
+    </p>
+    <p>
+      In those repositories, we have created files named
+      <code><em>ID1</em>-log.txt</code> and
+      <code><em>ID2</em>-log.txt</code> for you to use when
+      filing work session reports, as in previous problem sets.
+      You and your partner are required to push your files at
+      the end of every work session.
+      (You <em>may</em> push your files several times during
+      a work session, but we do not require you to do so.)
+    </p>
+    <p>
+      At the end of every work session, you are required to update
+      your log file to record the time you spent in that work session.
+      (Please do not include the time you spent in any previous work
+      sessions, as those times will already have been recorded in
+      previous versions of your log file.)
+      If both of you work together during a work session, both of
+      you must update your log files, recording only the time <em>you</em>
+      spent working.  Do not include your partner's time in
+      your log file, but be sure to push the updated versions of
+      both log files.
+    </p>
+    <hr />
+    <p>
+      In the first part of this problem set,
+      you will define a <code>Programs.main</code> method
+      that reads a <code>ps11</code> program from a file
+      specified on the command line, parses that program,
+      and runs it on one or more inputs specified on the
+      command line, printing the result computed by the program.
+      That should make it easier for you to finish debugging
+      the interpreter you wrote in Problem Set 10.
+    </p>
+    <p>
+      In the second part of this problem set,
+      you will implement a simple static analysis:
+      given the name of a file containing a <code>ps11</code> program,
+      return a set containing the names of all undefined variables
+      that are referenced anywhere in the program.
+    </p>
+    <p>
+      You must use Java 8 for this assignment.
+      All of your code must reside within the default package.
+      You may use/import anything in the
+      <code>java.lang</code> and <code>java.util</code>
+      packages,
+      <ins>
+        and you may import the specific things imported by
+        the Java files we are giving you as a hint,
+      </ins>
+      but you are not allowed to use any other packages.
+    </p>
+    <hr />
+  </div>
+  <h3>
+    Problem Specification
+  </h3>
+  <p>
+    In Problem Set 10, you wrote an interpreter for
+    a simple functional programming language.
+  </p>
+  <p>
+    For Problem Set 11, we are going to change the concrete syntax
+    <ins>
+      by making semicolon a separator rather than a terminator, and
+    </ins>
+    by eliminating the <code>fi</code> token that terminated
+    <code>if</code> expressions in the concrete syntax given
+    in Problem Set 10.  For Problem Set 11, the concrete syntax is:
+  </p>
+  <pre>
+    &lt;pgm&gt;     ::=  &lt;defn&gt;
+              ::=  &lt;defn&gt; ; &lt;pgm&gt;
+    &lt;defn&gt;    ::=  &lt;id&gt; = &lt;const&gt;
+              ::=  &lt;id&gt; (&lt;formals&gt;) &lt;expr&gt;
+    &lt;const&gt;   ::=  true 
+              ::=  false
+              ::=  &lt;int&gt;
+    &lt;lambda&gt;  ::=  (λ ( &lt;formals&gt; ) &lt;expr&gt;)
+    &lt;expr&gt;    ::=  &lt;const&gt;
+              ::=  &lt;id&gt;
+              ::=  &lt;lambda&gt;
+              ::=  &lt;arith&gt;
+              ::=  &lt;call&gt;
+              ::=  &lt;if&gt;
+              ::=  ( &lt;expr&gt; )
+    &lt;arith&gt;   ::=  &lt;expr&gt; &lt;op&gt; &lt;expr&gt;
+    &lt;call&gt;    ::=  &lt;expr&gt; (&lt;exprs&gt;)
+    &lt;if&gt;      ::=  if &lt;expr&gt; then &lt;expr&gt; else &lt;expr&gt;
+    
+    &lt;op&gt;      ::=  &lt; | = | &gt; | + | - | *
+    
+    &lt;formals&gt;  ::=  &lt;id&gt;
+               ::=  &lt;id&gt; , &lt;formals&gt;
+    &lt;exprs&gt;    ::=  &lt;expr&gt;
+               ::=  &lt;expr&gt; , &lt;exprs&gt;
+    
+    &lt;int&gt; and &lt;id&gt; are described by regular expressions:
+    
+        digit digit*
+    
+        letter (letter | digit)*
+  </pre>
+  <p>
+    That change to the concrete syntax should not affect any code
+    code you wrote for Problem Set 10, because your interpreter
+    used abstract syntax, which remains the same in Problem Set 11.
+  </p>
+  <p>
+    The concrete syntax we use will also allow comments, which
+    start with the <code>#</code> character and extend through
+    the end of the line.
+  </p>
+  <p>
+    The context-free grammar shown above is ambiguous,
+    but it can be converted into an unambiguous grammar
+    that generates the same set of programs.
+    The unambiguous grammar we will use as the official
+    concrete syntax is the
+    <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">
+      LL(1) grammar
+    </a>
+    given in the <code>cfg.pg</code> file within the
+    <a href="set11parser.tgz">
+      <code>set11parser</code> directory
+    </a>
+    we are giving you as a hint for part 1 of this problem set.
+    That directory contains a <code>README</code> file that
+    describes the files in that directory.
+    You should read that README file before you start to work
+    on this problem set.
+  </p>
+  <hr />
+  <p>
+    If you did a good job on Problem Set 10, this problem set
+    will be easy.  If the interpreter you wrote for Problem Set 10
+    had problems, this problem set will give you a chance to fix
+    those problems.
+  </p>
+  <ol>
+    <li>
+      Copy the program you wrote for Problem Set 11 into a
+      directory named <code>set11</code>.
+      Add a definition of the following public static method to
+      the <code>Programs</code> class defined in your
+      <code>Programs.java</code> file:
+      <pre>
+        // Runs the ps11 program found in the file named on the command line
+        // on the integer inputs that follow its name on the command line,
+        // printing the result computed by the program.
+        //
+        // Example:
+        //
+        //     % java Programs sieve.ps11 2 100
+        //     25
+        
+        public static void main (String[] args) { ... }
+      </pre>
+      <p>
+        <strong>Hint:</strong>
+        We are giving you a
+        <a href="set11parser.tgz">
+          directory of Java code
+        </a>
+        that contains a
+        <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">
+          recursive descent parser
+        </a>
+        for <code>ps11</code> programs.
+        The <code>Scanner</code> class defined in <code>Scanner.java</code>
+        defines several public static methods you may find helpful.
+      </p>
+    </li>
+    <li>
+      Add a definition of the following public static method to
+      the <code>Programs</code> class defined in your
+      <code>Programs.java</code> file:
+      <pre>
+        // Reads the ps11 program found in the file named by the given string
+        // and returns the set of all variable names that occur free within
+        // the program.
+        //
+        // Examples:
+        //     Programs.undefined ("church.ps11")    // returns an empty set
+        //     Programs.undefined ("bad.ps11")       // returns { "x", "z" }
+        //
+        //   where bad.ps11 is a file containing:
+        // 
+        //     f (x, y) g (x, y) (y, z);
+        //     g (z, y) if 3 > 4 then x else f
+        
+        public static Set&lt;String&gt undefined (String filename) { ... }
+      </pre>
+    </li>
+  </ol>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 2.2</title>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+</head>
+
+<body>
+<h1>Guided Practice 2.2: The Prisoner's Dilemma</h1>
+
+<p>Here's one solution.  We use the template for Move on move1, and then we
+call one of two help functions.  Each help function uses the template
+for Move on move2.</p>
+
+<pre>
+;; STRATEGY: Use template for Move on move1
+
+(define (outcome move1 move2)
+  (cond
+    [(string=? move1 "betray")
+     (outcome-after-betray move2)]
+    [(string=? move1 "don't betray")
+     (outcome-after-dont-betray move2)]))
+
+;; outcome-after-betray : Move -> Number
+;; GIVEN: player2's move
+;; RETURNS: the outcome if player1 moved "betray"
+;; STRATEGY: Use template for Move on move2
+
+(define (outcome-after-betray move2)
+  (cond
+    [(string=? move2 "betray") -3]
+    [(string=? move2 "don't betray") 0]))
+
+;; outcome-after-dont-betray : Move -> Number
+;; GIVEN: player2's move
+;; RETURNS: the outcome if player1 moved "don't betray"
+;; STRATEGY: Use template for Move on move2
+
+(define (outcome-after-dont-betray move2)
+  (cond
+    [(string=? move2 "betray") -12]
+    [(string=? move2 "don't betray") -1]))
+</pre>
+
+<p>Notice how the information we have about the situation in which we
+call the function is shown twice:</p>
+
+<ul class="condensed">
+  <li>once in the function name</li>
+  <li>and again in purpose statement</li>
+</ul>
+
+<p>We'll see much more about expressing context information in later modules.
+</p>
+
+<hr> 
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Thu Aug 13 16:08:32 Eastern Daylight Time 2015 <!-- hhmts end -->
+</body> </html> 

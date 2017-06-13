@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Contracts and Purpose Statements for Methods
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Contracts and Purpose Statements for Methods
+  </h3>
+  <div>
+    <pre class="clear floatleft smaller">
+      class Bomb implements Widget {
+          ...
+          // RETURNS: a bomb like this one, but
+          //     as it should be after a tick
+          // DETAILS: the bomb moves vertically
+      
+    </pre>
+    <blockquote class="floatright halfwidth">
+      <p>
+        The DETAILS part of the purpose statement refines
+        the purpose statement given in the <code>Widget</code> interface.
+      </p>
+    </blockquote>
+    <pre class="clear floatleft smaller">
+          public Bomb afterTick () {
+              return new Bomb (x, y + BOMB_SPEED);
+          }
+      }
+    </pre>
+    <blockquote class="floatright halfwidth">
+      <p>
+        <code>Bomb</code> implements the <code>Widget</code>
+        interface, so the value returned by <code>afterTick</code>
+        is a <code>Widget</code>.  So <code>afterTick</code>
+        satisfies its contract.
+      </p>
+    </blockquote>
+    <blockquote class="clear">
+      This method is so simple it doesn't need examples.
+    </blockquote>
+  </div>
+</div>
+<div id="footer">
+  <form action="methodDesign1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="methodDesign3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

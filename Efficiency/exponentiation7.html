@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Divide and Conquer: Exponentiation
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Divide and Conquer: Exponentiation
+  </h3>
+  <div>
+    <p>
+      When computing 3<sup>20</sup>, our divide-and-conquer
+      algorithm reduced the number of multiplications from
+      19 to 5.
+    </p>
+    <p>
+      In general, when computing <var>x<sup>n</sup></var>,
+      our divide-and-conquer algorithm reduces the number
+      of multiplications from &Theta;(n) to &Theta;(lg n).
+    </p>
+    <p>
+      Let's see how much difference that makes when computing
+      3<sup>100000</sup>.
+    </p>
+    <p>
+      To benchmark the divide-and-conquer algorithm against
+      the obvious &Theta;(n) algorithm, we have to translate
+      those algorithms into some programming language.
+      I'm going to use Scheme instead of Racket, because
+      there are implementations of Scheme that run faster
+      than any implementation of Racket.
+    </p>
+  </div>
+</div>
+<div id="footer">
+  <form action="exponentiation6.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="exponentiation8.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

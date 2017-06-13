@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Check Your Understanding (9 of 10)
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Check Your Understanding (9 of 10)
+  </h2>
+  <div class="muchlarger muchindented">
+    <p>
+      f<sub>1</sub>(x) = 3 x + 30
+      <br />
+      f<sub>2</sub>(x) = x (x + 1) / 2
+      <br />
+      f<sub>3</sub>(x) = 2<sup>x</sup> - 1
+    </p>
+  </div>
+  <div>
+    <p>
+      If f<sub>3</sub> is an element of O(f<sub>2</sub>),
+      then there must exist constants c<sub>0</sub> and c<sub>1</sub>
+      such that
+    </p>
+    <p class="center">
+      f<sub>3</sub>(x) &le; c<sub>0</sub> +
+      c<sub>1</sub> &sdot; f<sub>2</sub>(x)
+    </p>
+    <p>
+      for every non-negative real number x.
+    </p>
+    <p>
+      Please enter your choices for c<sub>0</sub> and c<sub>1</sub>
+      into the blanks.
+    </p>
+    <form oninput="
+    c0 = parseFloat(a.value);
+    c1 = parseFloat(b.value);
+    s1.value = '';
+    s2.value = '';
+    s3.value = '';
+    if (c1 > 0) {
+        x = 1.0;
+        do {
+            x = 2.0 * x;
+            f2 = x * (x + 1.0) / 2.0;
+            f1 = Math.pow (2.0, x) - 1.0;
+            g2 = c0 + c1 * f2;
+            diff = g2 - f1;
+        }
+        while (diff >= 0);
+        if ((c1 > 0) && (diff >= 0)) {
+            s1.value = 'Yes, those values work.';
+            s2.value = '';
+            s3.value = '';
+        }
+        else {
+            s1.value = 'No, that doesn\'t work because';
+            s1.value = s1.value + ' f₃(' + x + ') = ' + f1;
+            s1.value = s1.value + ', which is greater than ';
+            s2.value = 'c0 + c1 * f₂(' + x + ') = ' + g2;
+            s3.value = 'Please try again, or go back to the previous question.'
+        }
+    }">
+      <p class="indented">
+        c<sub>0</sub> = 
+        <input type="number" id="a" value="0">
+        <br />
+        c<sub>1</sub> = 
+        <input type="number" id="b" value="0">
+        <br />
+      </p>
+      <p>
+        <output name="s1" for="a b">
+        </output>
+      </p>
+      <p class="center">
+        <output name="s2" for="a b">
+        </output>
+      </p>
+      <p>
+        <output name="s3" for="a b">
+        </output>
+      </p>
+    </form>
+  </div>
+</div>
+<div id="footer">
+  <form action="pageExamplesQ9.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="pageExamplesQ9.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>

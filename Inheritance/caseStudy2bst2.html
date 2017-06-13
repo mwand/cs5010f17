@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Binary Search Trees
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Binary Search Trees
+  </h3>
+  <div>
+    <p>
+      The base class defines a <code>private</code> field,
+      which will not be directly accessible from subclasses,
+      but subclasses will be able to fetch its value using their
+      <code>this.comparator()</code> method.
+    </p>
+    <p>
+      That private field is initialized by the Java constructor for
+      this base class.
+      Although new objects of an abstract class cannot be created,
+      the Java constructors in subclasses can invoke the Java
+      constructor defined in their superclass, which is how this
+      constructor will be invoked.
+    </p>
+    <p>
+      The factory methods (one static, one dynamic) create new
+      objects of the <code>IMapEmptyBST&lt;K,V&gt;</code> and
+      <code>IMapNonEmptyBST&lt;K,V&gt;</code> classes, respectively.
+    </p>
+    <pre>
+      // Strategy: extends SortedIMapBase&lt;K,V&gt;
+      
+      abstract class IMapBST&lt;K,V&gt; extends SortedIMapBase&lt;K,V&gt; {
+      
+          private Comparator&lt;? super K&gt; <span class="red">cmp</span>; // the comparator for this map
+      
+          IMapBST (Comparator&lt;? super K&gt; cmp) {
+              this.cmp = cmp;
+          }
+      
+          // Returns an empty map with the given comparator.
+      
+          static &lt;K,V&gt; IMapBST&lt;K,V&gt; <span class="red">empty</span> (Comparator&gt;? super K&lt; cmp) {
+              return new IMapEmptyBST&lt;K,V&gt; (cmp);
+          }
+      
+          // Returns an non-empty map with the given components.
+          // Invariants:
+          //     key does not occur in the left or right subtrees
+          //     key is greater than all keys in left subtree
+          //     key is less than all keys in right subtree
+          //     the left and right subtrees obey those invariants, recursively
+      
+          IMapBST&lt;K,V&gt; <span class="red">make</span> (K key, V val,
+                             IMapBST&lt;K,V&gt; left,
+                             IMapBST&lt;K,V&gt; right) {
+              return new IMapNonEmptyBST&lt;K,V&gt; (key, val, left, right);
+          }
+      
+          // abstract methods listed by SortedMap&lt;K,V&gt;
+      
+          public Comparator&lt;? super K&gt; <span class="red">comparator</span> () { return cmp; }
+      
+          ...
+      }
+    </pre>
+  </div>
+</div>
+<div id="footer">
+  <form action="caseStudy2bst1.html" class="inline">
+    <input type="submit" value="PREV">
+  </form>
+  <br />
+  <form action="caseStudy2bst3.html" class="inline">
+    <input type="submit" value="NEXT">
+  </form>
+</div>
+
+<!-- end of specific content -->
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+</body>
+</html>
