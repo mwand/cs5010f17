@@ -1,29 +1,31 @@
-;; The first three lines of this file were inserted by DrRacket. They record metadata
-;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 04-3-nats) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;; Recursion on the Natural Numbers
 
 (require rackunit)
 (require "extras.rkt")
 
-;; A Natural Number (Nat) is one of 
-;; -- 0
-;; -- (add1 Nat)
+;; A Nat is a natural number, represented as a Racket integer.
+
+;; CONSTRUCTOR TEMPLATES:
+;; -- 0                           
+;; -- (add1 n)  WHERE n is a Nat
+;; INTERP: self-evident
+
+;; OBSERVER TEMPLATE:
 
 ;; nat-fn : Nat -> ??
-;; HALTING MEASURE: the value of n
-#|
 (define (nat-fn n)
  (cond
   [(zero? n) ...]
-  [else (... n (nat-fn (sub1 n)))]))
-|#
+  [else (...
+         n
+         (nat-fn (sub1 n)))]))
 
+;;;;;;;;;;;;;;;; EXAMPLES ;;;;;;;;;;;;;;;;
 
 ;; double : Nat -> Nat
 ;; RETURNS: 2*n
-;; STRATEGY: use template for Nat on n
-;; HALTING MEASURE: the value of n
+;; STRATEGY: use observer template for Nat on n
+
 (define (double n)
   (cond
     [(zero? n) 0]
@@ -33,8 +35,8 @@
 
 ;; sum : Nat Nat -> Nat
 ;; RETURNS: the sum of its arguments
-;; STRATEGY: use template for Nat on x
-;; HALTING MEASURE: the value of x
+;; STRATEGY: use observer template for Nat on x
+
 (define (sum x y)
  (cond
    [(zero? x) y]
@@ -48,8 +50,8 @@
 
 ;; prod : Nat Nat -> Nat
 ;; RETURNS: the product of its arguments
- ;; STRATEGY: use template for Nat on y
- ;;
+;; STRATEGY: use observer template for Nat on y
+
 (define (prod x y)
   (cond
     [(zero? y) 0]
@@ -60,6 +62,15 @@
    (check-equal? (prod 0 4) 0)
    (check-equal? (prod 3 2) (* 3 2))
    (check-equal? (prod 27 18) (* 27 18)))
+
+;; fact : Nat -> Nat
+;; GIVEN: a natural number n
+;; RETURNS: its factorial
+
+(define (fact n)
+  (cond
+    [(zero? n) 1]
+    [else (prod n (fact (sub1 n)))]))
 
 
  

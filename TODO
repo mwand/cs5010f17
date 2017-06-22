@@ -1,4 +1,12 @@
-Items for web site
+Items for Will:
+
+/ I Am Here?
+/ PS 00
+/ Switch weeks 5 & 6 (Trees/Graphs and Generalization/Folds)
+/ Status of textbook
+/ How did yourID-log.txt work out?
+
+css: change to ../cs5010.css
 
 Drop pair programming
 update cheating page (cf Will's version)
@@ -11,13 +19,24 @@ index.html
 / update "fork me on github" banner
 / set up piazza course
 
-Switch to Will's menu
+pre-semester checklist (checklist.html)
+/ links to HtDP ?
+/ why drop I Am Here ?
+/ textbook
+
+ps00.html
+/ Need to write.
 
 
-textbooks.html
-software.html
-policies.html
-cheating.html
-homework.html
-deliverables.html
-coding-conventions.html
+
+course structure
+communication
+homework policies
+grading
+cheating
+why-we-use-racket
+style guide
+deliverables
+office hours
+piazza
+

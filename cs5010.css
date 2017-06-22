@@ -1,5 +1,8 @@
-/* CSS for an online lesson in CS 5500 */
+/* CSS for 5010 Fall 17.  Adapted from Will Clinger's cs5010.css from*/
+/* Spring 2017 */  
 
+
+/* MW says: I don't know what this FIXME refers to */
 /****************************************************************
  *
  * FIXME:
@@ -15,22 +18,16 @@
  ****************************************************************/
 
 body {
-/*min-width: 36em;*/
-/*max-width: 60em;*/
-/*height: 30em;*/
+    /* background-color: #e8f2fc; */
+    /* font-family:  "Times New Roman", Times, Georgia, serif; */
+    /* font-size: 13pt; */
+    /* font-size: 100%;*/
+/* from Fall 15 edition: */
+background-color: #ffffe0; 
+font-family:  Verdana, Arial, Helvetica, sans-serif;
+font-size: larger;
   height: 100%;
-}
-
-body {
-  background-color: #e8f2fc;
-  font-family:  "Times New Roman", Times, Georgia, serif;
-  font-size: 13pt;
-  /*
-  font-family:  Verdana, Arial, Helvetica, sans-serif;
-  font-size: larger;
-  */
-/*font-size: 100%;*/
-/*margin: 10%;*/
+  margin: 10%;
 }
 
 body #maincontent {
@@ -88,13 +85,17 @@ audio {
 
 table {
 /*  background-color: #808080;  */
-  background-color: #e8f2fc;
+    /* background-color: #e8f2fc; */
+
 }
 
 th {
 /*  background-color: #d8d8d8;  */
-  background-color: #d8e0e8;
-  font-family:  "Times New Roman", Times, Georgia, serif; 
+  /* background-color: #d8e0e8; */
+    background-color: #efefd0;
+
+  /* use same font for th */
+  /* font-family:  "Times New Roman", Times, Georgia, serif;  */
   font-size: 12pt;
   margin: 3%;
   padding: 5px;
@@ -102,8 +103,9 @@ th {
 
 td {
 /*  background-color: #d8d8d8;  */
-  background-color: #d8e0e8;
-  font-family:  "Times New Roman", Times, Georgia, serif; 
+    /* background-color: #d8e0e8; */
+    background-color: #efefd0;
+  /* font-family:  "Times New Roman", Times, Georgia, serif;  */
   font-size: 12pt;
   margin: 3%;
   padding: 5px;
@@ -111,7 +113,7 @@ td {
 
 tr .narrow { width: 96px; }
 tr .medium { width: 200px; }
-tr .wide { width: 300px; }
+tr .wide   { width: 300px; }
 
 /* alternative fonts */
 /* Verdana, Arial, sans-serif; */
@@ -120,8 +122,6 @@ tr .wide { width: 300px; }
 tt,kbd,code {
   font-size: 12pt;
 }
-
-/* code blocks have a slightly darker background */
 
 pre {
   font-size: 11pt;
@@ -164,7 +164,9 @@ li {padding-bottom: 4pt}
 }
 
 .darker {
-  background-color: #d0d0d8;
+    /* background-color: #d0d0d8; */
+    background-color: #efefd0;
+    color:  #efefd0;
 }
 
 .white {

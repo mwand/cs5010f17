@@ -1,67 +1,68 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 05-1-find-dog) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 05-1-find-dog) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require rackunit)
 (require "extras.rkt")
 
-;; Data Definition for Lists:
+;; An Animal is represented as a String (any string will do)
+;; Here, by "Animal" we mean an animal species, not an individual animal.
 
-;; A ListOfX is either
-;; -- empty  
-;; -- (cons X ListOfX)   
-;; INTERP:
-;; empty             represents the sequence with no X's
-;; (cons x xs)       represents the sequence whose first element is x
-;;                   and the rest of the sequence is represented by xs
+;; An AnimalSequence is represented as a list of Animal.
 
-;; TEMPLATE:
-;; lox-fn : ListOfX -> ?
-;; (define (lox-fn lox)
-;;   (cond
-;;     [(empty? lox) ...]
-;;     [else (...
-;;             (first lox)
-;;             (lox-fn (rest lox)))]))
+;; CONSTRUCTOR TEMPLATE:
+;; empty                Interp: the empty sequence
+;; (cons a as)
+;;   WHERE:
+;;    a  is an Animal    Interp: the first animal in the sequence
+;;    as is an AnimalSequence
+;;            Interp: the rest of the animals in the sequence
 
-
-;; find-dog : ListOfString -> Boolean
-;; RETURNS: true if "dog" is in the given list.
-;; STRATEGY: Use template for ListOfString on los
-#;(define (find-dog los)
+;; OBSERVER TEMPLATE:
+;; animal-seq-fn : AnimalSequence -> ??
+(define (animal-seq-fn as)
   (cond
-    [(empty? los) false]
+    [(empty? as) ...]
+    [else (... (first as)
+               (animal-seq-fn (rest as)))]))
+
+;; find-dog : AnimalSequence -> Boolean
+;; RETURNS: true if "dog" is in the given sequence
+;; STRATEGY: Use observer template for AnimalSequence
+#;(define (find-dog as)
+  (cond
+    [(empty? as) false]
     [else (or 
-           (string=? (first los) "dog")           
-           (find-dog (rest los)))]))
+           (string=? (first as) "dog")           
+           (find-dog (rest as)))]))
 
 (begin-for-test
   (check-equal? (find-dog (list "cat" "dog" "weasel")) true)
   (check-equal? (find-dog (list "cat" "elephant" "weasel")) false))
 
-;; find-cat : ListOfString -> Boolean
-;; RETURNS: true if "cat" is in the given list
-;; STRATEGY: Use template for ListOfString on los
-#;(define (find-cat los)
+;; find-cat : AnimalSequence -> Boolean
+;; RETURNS: true if "cat" is in the given sequence
+;; STRATEGY: Use observer template for AnimalSequence
+#;(define (find-cat as)
   (cond
-    [(empty? los) false]
+    [(empty? as) false]
     [else (or
-           (string=? (first los) "cat")
-           (find-cat (rest los)))]))
+           (string=? (first as) "cat")
+           (find-cat (rest as)))]))
 
 (begin-for-test
   (check-equal? (find-cat (list "cat" "dog" "weasel")) true)
   (check-equal? (find-cat (list "elephant" "weasel")) false))
 
-;; find-animal : ListOfString String -> Boolean
+;; find-animal : AnimalSequence Animal -> Boolean
 ;; GIVEN: A list of strings and a string
-;; RETURNS: true iff the given string is in the given los.
-;; STRATEGY: Use template for ListOfString on los
-(define (find-animal los str)
+;; RETURNS: true iff the given Animal is in the given los.
+;; STRATEGY: Use template for on as
+(define (find-animal as a)
   (cond
-    [(empty? los) false]
+    [(empty? as) false]
     [else (or 
-           (string=? (first los) str)           
-           (find-animal (rest los) str))]))
+           (string=? (first as) a)           
+           (find-animal (rest as) a))]))
 
 (begin-for-test
   "find-animal"
@@ -71,9 +72,9 @@
     false))
 
 ;; STRATEGY: Call a more general function
-(define (find-dog los)
-  (find-animal los "dog"))
+(define (find-dog as)
+  (find-animal as "dog"))
 
 ;; STRATEGY: Call a more general function
-(define (find-cat los)
-  (find-animal los "cat"))
+(define (find-cat as)
+  (find-animal as "cat"))

@@ -1,2 +1,0 @@
-This is a dummy file intended to convince git to create a directory
-structure.

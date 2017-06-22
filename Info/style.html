@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -113,9 +113,10 @@
     conventions.
     Most organizations that develop software therefore require
     programmers to write programs that follow the organization's
-    preferred style and coding conventions.
+    preferred style and coding conventions.  These conventions can be
+  very elaborate.
   </p>
-  <blockquote>
+  <blockquote class="smaller">
     <p>
       <strong>
         Example:
@@ -137,28 +138,27 @@
   </p>
   <p>
     In CS 5010, we want you to use the coding style and
-    conventions described here.
+    conventions described here.  We have attepted to keep our
+  conventions as simple as possible, consistent with making your code
+  readable by the course staff and reusable by you.
     We have divided our guidelines into three groups:
   </p>
   <ul>
     <li>
       <a href="#general">
-        general guidelines
-      </a>
+        general guidelines</a>
       that are largely independent of the programming
       language(s) you are using
     </li>
     <li>
       <a href="#specific">
-        language-specific guidelines
-      </a>
+        language-specific guidelines</a>
       you should follow when programming in Racket
       or in similar languages such as Scheme or Clojure
     </li>
     <li>
       <a href="#course">
-        course-specific guidelines
-      </a>
+        course-specific guidelines</a>
       you should follow in this course
     </li>
   </ul>
@@ -191,11 +191,15 @@
     any types defined by the specification.
   </p>
   <p>
-    Functions and methods should be short.
+    Function and method definitions should be short.
     If you find yourself writing a long function or method,
     you should probably define one or more help functions
     that would allow you to write a shorter and clearer
-    definition of that function or method.
+    definition of that function or method.    <em>
+      Rationale:
+    </em> Dividing a function or method body into smaller pieces not
+  only makes the definition clearer; it also allows the pieces to be
+  tested independently, making debugging easier.
   </p>
   <p>
     When designing your own help functions and methods,
@@ -282,17 +286,20 @@
     name.
   </p>
   <p>
-    <a href="http://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/">
+    <xa href="http://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/">
       The larger the scope of a name, the more important it is
-      to use a meaningful name.
-    </a>
+      to use a meaningful name</a>.
     <em>
       Example:
     </em>
     An index variable whose scope is confined to a small
     <code>for</code> loop might well be named <code>i</code>,
     but using <code>i</code> as the name of a global or
-    instance variable is ill-advised.
+    instance variable is ill-advised.  On the other hand, names that
+  are <a
+  href="http://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/">too
+  long</a> can be cumbersome.   Some useful advice on choosing names
+  is <a href="http://journal.stuffwithstuff.com/2009/06/05/naming-things-in-code/" >here</a>.
   </p>
   <p>
     When naming a function that has no side effects,

@@ -1,70 +1,70 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 02-3-traffic-light) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 02-2-traffic-light) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require rackunit)
 (require "extras.rkt")
 
 ;; DATA DEFINITION:
-;; a TrafficLightState (TLState) is one of
+;; a TrafficLightColor (TLColor) is represented by one of :
 ;; -- "red"
 ;; -- "yellow" 
 ;; -- "green"
 ;; INTERPRETATION: self-evident
 
 ;; TEMPLATE
-;; tls-fn : TLState -> ??
+;; tlc-fn : TLColor -> ??
 #|
-(define (tls-fn state)
+(define (tlc-fn color)
  (cond
-   [(string=? state "red")    ...]
-   [(string=? state "yellow") ...]
-   [(string=? state "green")  ...]))  
+   [(string=? color "red")    ...]
+   [(string=? color "yellow") ...]
+   [(string=? color "green")  ...]))  
 |#  
 
-;; next-state : TLState -> TLState
-;; GIVEN: a TLState
-;; RETURNS: the TLState that follows the given TLState
+;; next-color : TLColor -> TLColor
+;; GIVEN: a TLColor
+;; RETURNS: the TLColor that follows the given TLColor
 ;; EXAMPLES:
-;; (next-state "red") = "green"
-;; (next-state "yellow") = "red"
-;; (next-state "green") = "yellow"
-;; STRATEGY: Use template for TLState on state
+;; (next-color "red") = "green"
+;; (next-color "yellow") = "red"
+;; (next-color "green") = "yellow"
+;; STRATEGY: Cases on color
 
-(define (next-state state)
+(define (next-color color)
  (cond
-   [(string=? state "red")    "green"]
-   [(string=? state "yellow") "red"]
-   [(string=? state "green")  "yellow"]))
+   [(string=? color "red")    "green"]
+   [(string=? color "yellow") "red"]
+   [(string=? color "green")  "yellow"]))
 
 (begin-for-test
-  (check-equal? (next-state "green") "yellow")
-  (check-equal? (next-state "yellow") "red")
-  (check-equal? (next-state "red") "green"))
+  (check-equal? (next-color "green") "yellow")
+  (check-equal? (next-color "yellow") "red")
+  (check-equal? (next-color "red") "green"))
 
-;; two-states-later : TLState -> TLState
-;; given a TLState, produces the state that should occur two steps later
-;; (two-states-later "green") = "red", etc.
+;; two-colors-later : TLColor -> TLColor
+;; given a TLColor, produces the color that should occur two steps later
+;; (two-colors-later "green") = "red", etc.
 ;; design strategy: combine simpler functions
-(define (two-states-later tls1)
-  (next-state (next-state tls1)))
+(define (two-colors-later tlc1)
+  (next-color (next-color tlc1)))
 
-;; previous-state : TLState -> TLState
-;; GIVEN: a TLState
-;; RETURNS: the state that preceded it
-;; (previous-state "red") = "yellow"
-;; (previous-state "yellow") = "green"
-;; (previous-state "green") = "red"
-;; STRATEGY: Use template for TLState on state
+;; previous-color : TLColor -> TLColor
+;; GIVEN: a TLColor
+;; RETURNS: the color that preceded it
+;; (previous-color "red") = "yellow"
+;; (previous-color "yellow") = "green"
+;; (previous-color "green") = "red"
+;; STRATEGY: Use template for TLColor on color
 
-(define (previous-state state) ...)
+(define (previous-color color) ...)
 
 ;; (begin-for-test
-;;   (check-equal? (previous-state "red") "yellow"
+;;   (check-equal? (previous-color "red") "yellow"
 ;;     "red not preceded by yellow")
 
-;;   (check-equal? (previous-state "yellow") "green"
+;;   (check-equal? (previous-color "yellow") "green"
 ;;     "yellow not preceded by green")
 
-;;   (check-equal? (previous-state "green") "red"
+;;   (check-equal? (previous-color "green") "red"
 ;;     "green not preceded by red"))
 

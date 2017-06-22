@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -113,14 +113,15 @@
   </p>
   <ul class="clear">
     <li>
-      For each data definition:
+    For each data definition:<p></p>
+    
       <ol>
         <li>
           A set of <code>struct</code> definitions, if necessary.
         </li>
         <li>
           A <em>constructor template</em> that specifies how to
-          build values for this data definition.
+          build values for this data definition.  
         </li>
         <li>
           An <em>interpretation</em> that explains the meaning
@@ -142,7 +143,7 @@
       </ol>
     </li>
     <li>
-      For each function:
+      For each function:<p></p>
       <ol>
         <li>
           <strong>
@@ -152,8 +153,8 @@
           and for the result.
           If you write
           <pre>
-            list-numbered : ListOfNumber Number -> ListOfNumber
-          </pre>
+list-numbered : ListOfNumber Number -> ListOfNumber
+</pre>
           then your function must take <em>any</em> list of numbers
           and <em>any</em> number and produce the output specified
           by the purpose statement, unless the contract is qualified
@@ -171,30 +172,30 @@
           style, where each of those keywords is followed by a short
           noun phrase.
           Examples:
-          <pre class="smaller">
-            GIVEN: a temperature in Fahrenheit
-            RETURNS: the corresponding temperature in Celsius
-            
-            GIVEN: a Cat c and a Scene s
-            RETURNS: A scene like s, except the cat c has been painted on it.
-            
-            GIVEN: a list of numbers lon and a number n
-            WHERE: n = (length lon)
-            RETURNS: a list of numbers like lon, except each number is
-            multiplied by its distance from the end of the list.
-          </pre>
+          <pre>
+GIVEN: a temperature in Fahrenheit
+RETURNS: the corresponding temperature in Celsius
+
+GIVEN: a Cat c and a Scene s
+RETURNS: A scene like s, except the cat c has been painted on it.
+
+GIVEN: a list of numbers lon and a number n
+WHERE: n = (length lon)
+RETURNS: a list of numbers like lon, except each number is
+multiplied by its distance from the end of the list.
+</pre>
           You may omit the GIVEN part by referring to the given
           arguments in the RETURNS part.
           Sometimes this is easier than writing the GIVENS part
           separately, but sometimes it is harder.
           Examples:
-          <pre class="smaller">
-            RETURNS: the temperature in Celsius that corresponds to the given
-            Fahrenheit temperature.
-            
-            RETURNS: A scene like the given one, except that the given cat has
-            been painted on it.
-          </pre>
+<pre>
+RETURNS: the temperature in Celsius that corresponds to the given
+Fahrenheit temperature.
+
+RETURNS: A scene like the given one, except that the given cat has
+been painted on it.
+</pre>
         </li>
         <li>
           <strong>
@@ -254,14 +255,14 @@
           </strong>
           you will generally define a separate test suite for
           each function by writing something like
-          <pre class="smaller">
-            (begin-for-test
-              (check-equal?
-               (length lobs-1)
-               (length (bombs-after-tick lobs-1))
-               "bombs-after-tick did not return a list the same length as its input")
-               ...)
-          </pre>
+          <pre>
+(begin-for-test
+  (check-equal?
+    (length lobs-1)
+    (length (bombs-after-tick lobs-1))
+    "bombs-after-tick did not return a list the same length as its input")
+  ...)
+</pre>
           Tests created using <code>begin-for-test</code> will
           be executed as though they appeared at the end of the
           file.  In other words, <code>begin-for-test</code> is
@@ -272,6 +273,15 @@
         </li>
       </ol>
     </li>
+    <li>Remember that at the end of every work session, before you commit
+    and push a new version of your partial solution to your GitHub
+    repository, you must commit a form
+    <a href="yourID-log.txt">
+      a form that records the time you spent in that work session.
+    </a>
+
+
+Remember that you must commit a copy of your log file</li>
   </ul>
   <p>
     More deliverables will be required when we get to

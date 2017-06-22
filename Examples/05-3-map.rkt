@@ -8,7 +8,7 @@
 (require rackunit)
 (require "extras.rkt")
 
-;; A ListOfX is either
+;; Data 
 ;; -- empty
 ;; -- (cons X ListOfX)
 
