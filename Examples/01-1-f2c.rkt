@@ -31,7 +31,7 @@
   (check-equal? (f2c 212) 100 
     "212 Fahrenheit should be 100 Celsius"))
 
-;; f2mars ; FarenTemp -> CelsiusTemp
+;; f2mars : FarenTemp -> CelsiusTemp
 ;; GIVEN: A temperature in Fahrenheit
 ;; RETURNS: The mean temperature on the surface of Mars, in Celsius
 ;; EXAMPLE:
