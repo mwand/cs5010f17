@@ -6,7 +6,7 @@ materials distributed as part of this class.
 
 After each work session, please update and commit this file (with
 'yourID' replaced by your CCIS login name), updating the first two
-lines with the amount of time you spent working, the date when you
+lines with the amount of time you spent working and the date when you
 stopped.  You may also record any notes you wish to make about what
 you did during the session.
 

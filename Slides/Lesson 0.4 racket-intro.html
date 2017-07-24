@@ -1,9 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- saved from url=(0052)http://www.ccs.neu.edu/home/vkoutav/scheme/lab1.html -->
-<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+<HTML><HEAD>
+
+<META content="IE=5.0000" http-equiv="X-UA-Compatible">
+
 <TITLE>Lesson 0.4 Introduction to Racket</TITLE> 
-<link type="text/css" rel="stylesheet" href="../css/course.css">
-<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+<!-- <META http-equiv="Content-Type" content="text/html; charset=windows-1252"> -->
+
 <STYLE>
 
 div.exercise {
@@ -11,20 +19,27 @@ div.exercise {
   padding: 1px 1px;
 }
 
+div.exercise pre {
+  font-size: 11pt;
+  background-color: rgb(216,216,128)
+}
+
 img {
   /* vertical-align: middle; */
   margin-top: 5px; margin-bottom: 5px;  
   margin-left: 5px; margin-right: 5px;
 
-pre     {font-size: 12pt; }
+<!-- pre     {font-size: 12pt; }  -->
 
 }
 
 </STYLE>
  
-<META name="GENERATOR" content="MSHTML 10.00.8400.0"></HEAD> 
 <BODY>
 <H1>Lesson 0.4 Introduction to Racket</H1>
+
+<div id="maincontent">
+
 <H2>Preliminaries</H2>
 
 
@@ -63,7 +78,7 @@ Then click "Choose Language..." either in the <em>Language</em>
   Student" language under "Teaching Languages / How to Design
   Programs".
 
-<H2>Expressions</H2>
+<H2>1. Expressions</H2>
 <P>Maybe the most fundamental building block in Racket (and other languages) is 
 an expression. An expression is a piece of syntax that <EM>returns one 
 result</EM>. An expression can be as simple as a single number</P>
@@ -78,25 +93,27 @@ Window) of DrRacket.  There you will see a prompt <CODE>&gt;</CODE> and next to
 it you can type an expression. Whenever you write an expression next to the 
 prompt and press enter, DrRacket will "evaluate" the expression and print the 
 "result" in the line underneath.</P>
+
 <PRE><CODE>    &gt; 5
     5
 
     &gt; (sqrt 5)
     #i2.23606797749979
-</code>
-</pre>
+</code></pre>
 
 <P>The <CODE>#i</CODE> prefix warns that the printed result is inexact. For
 example, it's a bad idea to compare inexact numbers for equality. If
 you really need to do this (say for an automated test), use
-<kbd>check-within</kbd> (in BSL) or <kbd>check-=</kbd> (in rackunit),
-which take a third argument representing the error tolerance.</P>
+<kbd>check-=</kbd> (in rackunit),
+which takes a third argument representing the error tolerance.</P>
 
 
 </CODE></PRE>
 <P>In the next section we will see how we can use the interaction window of 
 DrRacket as an advanced calculator.</P>
-<H2>Numbers, Booleans, and Arithmetic</H2>
+
+
+<H2>2. Numbers, Booleans, and Arithmetic</H2>
 <P>As we mentioned above, some of the <EM>primitive</EM> expressions in Racket 
 are numbers; positive and negative, integers and decimals</P>
 <PRE><CODE>    &gt; 17
@@ -217,23 +234,21 @@ functions.  We'll see how to do that a little later.
 let's not stop there. Let's see how we can also do <EM>logical
  calculations</EM>.</P>
 <P>Racket has some more primitive expressions, the set of <EM>booleans</EM>:</P>
-<PRE><CODE>    ; True
-    &gt; true
+<PRE><CODE>    &gt; true
     true
 
-    ; False
     &gt; false
     false
 </CODE></PRE>
 <P>It also provides operators that can be applied on booleans</P>
 <PRE><CODE>    ; and : Boolean Boolean -&gt; Boolean
-    ; Logic conjunction
+    ; Logical conjunction
 
     ; or : Boolean Boolean -&gt; Boolean
-    ; Logic disjunction (Inclusive)
+    ; Logical disjunction (Inclusive)
 
     ; not : Boolean -&gt; Boolean
-    ; Logic negation
+    ; Logical negation
 
 
     &gt; (not false)
@@ -284,11 +299,13 @@ numeric (or other) data and return a boolean value. These are called
 <P>Q: What happens when you try this?</P>
 <PRE><CODE>    &gt; (&lt; 3 (&lt; 2 1))
 </CODE></PRE>
+
+<p>(Remember, that &gt; is the prompt, not the "greater-than" predicate)</p>
 <P>Be careful of the contracts of operators to avoid these <EM>type 
 errors</EM>.</P>
 
 
-<H2>Conditionals</H2>
+<H2>3. Conditionals</H2>
 <P>There are times that we need the value of an expression to change depending 
 on some condition.  Racket provides a construct to implement this kind of 
 branching.</P>
@@ -308,14 +325,13 @@ succeeded.</P>
 
 <p>Here's an example:</p>
 
-<code>
+
 <pre>
-(cond
+<code>(cond
   [(< x 0) -1]
   [(= x 0) 1]
-  [(> x 0) 2])
+  [(> x 0) 2])</code>
 </pre>
-</code>
 
 <p>This returns -1, 1, or 2, depending on the whether the value of the
 variable <kbd>x</kbd> is negative, zero, or positive.  We haven't seen
@@ -376,17 +392,17 @@ value of </p>
 
 <p>then this issue would not have come up.</p>
 
-<DIV class="exercise"> <P>Ex 1: Write an expression whose value is the
+<DIV class="exercise"> <P>Ex 3.1: Write an expression whose value is the
 number of seconds in a leap year (a leap year has 366 days).  Next,
 write 2 more expressions that have the same value.</P></DIV>
 
-<DIV class="exercise"> <P>Ex 2: Write an expression that returns
+<DIV class="exercise"> <P>Ex 3.2: Write an expression that returns
 <kbd>true</kbd> if the result of 100/3 is greater than the result of
 (100 + 3) / (3 + 3) and <kbd>false</kbd> otherwise. </P></DIV>
 
 <!-- ;;;;;;;;;;;;;;;; -->
 
-<H2>Defining Functions</H2>
+<H2>4. Function Definitions</H2>
 
 <P>At this point our DrRacket calculator can do a great deal of things. It's 
 almost like a scientific calculator, but we are not there just yet. It would be 
@@ -463,7 +479,7 @@ and this function definition doesn't give the right answer if
 </p>
 
 <DIV class="exercise">
-<P>Ex 3: Write the definition of a function that converts a temperature from
+<P>Ex 4.1: Write the definition of a function that converts a temperature from
  degrees Fahrenheit to degrees Celsius. The formula for the conversion is C = 
 (F-32) * (5/9) . The contract, purpose statement and examples for this function are: 
 <PRE><CODE>    ; f-&gt;c : Real -&gt; Real
@@ -474,13 +490,13 @@ and this function definition doesn't give the right answer if
     ; (f-&gt;c 100) =&gt; 37.77777777777777....
 </CODE></PRE>
 <P>Test your function with <EM>at least</EM> the given examples.  How
-is the value of (f->c 100) displayed?</p>
+is the value of <code>(f->c 100)</code> displayed?</p>
 </DIV>
 
 <p/>
 
 <DIV class="exercise">
-<P>Ex 4: Define a function called <CODE>tip</CODE> that takes two arguments, a
+<P>Ex 4.2: Define a function called <CODE>tip</CODE> that takes two arguments, a
  number representing the amount of a bill in dollars, and a decimal number 
 between 0.0 and 1.0, representing the percentage of tip one wants to give (e.g. 
 0.15 = 15%). <CODE>tip</CODE> should return the amount of the tip in dollars. 
@@ -498,14 +514,21 @@ following:</P>
 examples.</P></DIV>
 
 <DIV class="exercise">
-<P>Ex 5: Define a function called <CODE>sq</CODE> that computes the square of a
+<P>Ex 4.3: Define a function called <CODE>sq</CODE> that computes the square of a
  number. Write the contract, purpose statement, examples and definition of this 
 function.  Follow the examples of contracts and purpose statements above.</P></DIV>
 
 <DIV class="exercise">
-<P>Ex 6: One of the solutions of the <xA href="http://en.wikipedia.org/wiki/Quadratic_Equation">quadratic 
-equation </A> a*x^2 + b*x + c = 0 is given by the formula: </P><IMG class="tex" alt="x_+ = \frac{-b + \sqrt {b^2-4ac}}{2a}" 
-src="Images/formula.png"> 
+<P>Ex 4.4: One of the solutions of the <xA href="http://en.wikipedia.org/wiki/Quadratic_Equation">quadratic 
+equation </A> a*x^2 + b*x + c = 0 is given by the formula: </P>
+
+<center>
+<IMG alt="x_+ = \frac{-b + \sqrt {b^2-4ac}}{2a}"
+class-"center"
+src="Images/formula.png">
+</center>
+
+
 <P>Write the contract, purpose statement, examples, and definition of a 
 function <CODE>quadratic-root</CODE> that takes as arguments <CODE>a</CODE>, 
 <CODE>b</CODE>, and <CODE>c</CODE>, and computes the root of the corresponding
@@ -514,8 +537,9 @@ function <CODE>quadratic-root</CODE> that takes as arguments <CODE>a</CODE>,
 x^2+4 = 0 ?</P></DIV>
 
 <DIV class="exercise">
-<P>Ex 7: Define a function called <CODE>circumference</CODE> that computes the
- circumference of a circle.  The contract, purpose statement, and usage of 
+<P>Ex 4.5: Define a function called <CODE>circumference</CODE> that computes the
+ circumference of a circle.  The contract, purpose statement, and
+examples for 
 <CODE>circumference</CODE> are:</P>
 <PRE><CODE>    ; circumference : Real -&gt; Real
     ; GIVEN: the radius r of a circle 
@@ -530,18 +554,19 @@ of twice pi displayed?</P></DIV>
 
 <DIV class="exercise">
 
-<P>Ex 8: The area included in a circle of radius <CODE>r</CODE> is
+<P>Ex 4.6: The area included in a circle of radius <CODE>r</CODE> is
  given by the formula <kbd> pi * r^2</kbd>. Using the interaction
  window of DrRacket as a calculator, compute the area included in
  circles of radius 1, 5, and 7.</P>
 
-<P>Write the contract, purpose statement, examples, and the definition of a 
-function called <CODE>circle-area</CODE> that computes the area included in a
- circle of radius <CODE>r</CODE>, using the above formula. Use the three
- calculations you did above as your examples.</P></DIV>
+<P>Then write the contract, purpose statement, examples, and the
+definition of a function called <CODE>circle-area</CODE> that computes
+the area included in a circle of radius <CODE>r</CODE>, using the
+above formula. Use the three calculations you did above as your
+examples.</P></DIV>
 
 <DIV class="exercise">
-<P>Ex 9: Find out what the operator <CODE>remainder</CODE> does by typing it in 
+<P>Ex 4.7: Find out what the operator <CODE>remainder</CODE> does by typing it in 
 the definitions window, highlighting it, and pressing F1.</P>
 <P>Try applying <CODE>remainder</CODE> on some examples to make sure you 
 understand what it does. (how is it different from
@@ -557,12 +582,12 @@ understand what it does. (how is it different from
 
 <DIV class="exercise">
 
-<P>Ex 10: Define a function that takes three numbers as arguments and
+<P>Ex 4.8: Define a function that takes three numbers as arguments and
 returns the sum of the two larger numbers. As always, write down
 contract, purpose statement, and examples. </P></DIV>
 
 
-<H2>Data Structures I: Structs</H2>
+<H2>5. Structs</H2>
 
 <p>Like other programming languages, Racket has many kinds of data
 structures.  In this course, we will primarily use two built-in data
@@ -627,7 +652,8 @@ two-dimensional plane, and is defined as follows:</P>
 
 
 <P>(Note that we always write the type name with an upper-case first
-letter while we write names in definitions always in lower-case).</P>
+letter while we write names of functions, variables, and fields in
+lower-case (see the <a href="../Info/style.html" >Style Guide</a>).</P>
 
 <P>The definition above causes Racket to define the following
 functions:
@@ -638,18 +664,7 @@ functions:
 
 
 <DIV class="exercise">
-<P>Ex11: What do you think are the contracts for the
-<code>point</code>-functions?</p>
-
-<p>Hint: The Beginning Student language already contains a data type
-much like <kbd>Point</kbd>, called <kbd>Posn</kbd>.  You can look up
-the contracts for <kbd>Posn</kbd> in the Racket Help Desk.  There are
-many ways to reach the Help Desk.  For example, enter "make-posn" into
-the Racket command prompt, select it and press F1.</P>
-</div>
-
-<DIV class="exercise">
-<P>Ex12: What are
+<P>Ex 5.1: What are
 the values of the following expressions? Be sure to predict the
 answers in your head before trying the expressions.
 <ul class="condensed">
@@ -662,29 +677,41 @@ answers in your head before trying the expressions.
 </div>
 
 <DIV class="exercise">
-  <P>Ex13: What will happen if you type <code>(make-point true
-false)</code>? what is the result of <code>(point-x (make-point true
-false))</code>?</P>
+<P>Ex 5.2: What do you think the contracts for the
+<code>point</code>-functions should be?</p>
 </div>
 
 <DIV class="exercise">
-<P>Ex14: Which
+  <P>Ex 5.3: What will happen if you type <code>(make-point true
+false)</code>? what is the result of <code>(point-x (make-point true
+false))</code>? Now what do you think the contracts for the
+<code>point</code>-functions are?</p>
+
+<p>Compare the contracts you just wrote down with the contracts for
+the  <code>posn</code> struct in the Intermediate Student
+Language (ISL). You can look up
+the contracts for <kbd>posn</kbd> in the Racket Help Desk.  There are
+many ways to reach the Help Desk.  For example, enter "make-posn" into
+the definition window, select it, and right-click or press F1.</P>
+</div>
+
+<DIV class="exercise">
+<P>Ex 5.4: Which
 functions will Racket create when we execute this:
 <code>(define-struct student (id name major))</code>?</P>
 </DIV>
 
-<H2>More on Struct-definitions</H2>
+<H2>6. More about Struct definitions</H2>
 
-<p><em>You should have done at least Ex11 and Ex13 before you continue here!</em></p>
-
-<p>The contracts of <code>make-point</code> and <code>point-x</code> are 
+<p>The contracts for <code>make-point</code> and <code>point-x</code>
+that you wrote down in Exercise 5.2 probably looked like
 <ul class="condensed">
 <li><code>make-point : Number Number -&gt; Point</code></li>
 <li><code>point-x : Point -&gt; Number</code></li>
 </ul>
 </p>
 
-<p> But <code>(point-x (make-point true false))</code> works and
+<p> But in Exercise 5.3 you learned that <code>(point-x (make-point true false))</code> works and
 returns <code>true</code>. which is not a Number! That is because
 Racket does not care that much about types and contracts - it will
 only stop if you ask it to do something it just can't, like asking for
@@ -710,12 +737,12 @@ distances (centimeters? meters? feet?)? ...)</li>
 
 <p>The way we do this is a comment next to the struct-definition:</p>
 <pre>
-    (define-struct point (x y))
+<code>    (define-struct point (x y))
     ;; A Point is a (make-point Number Number).
     ;; It represents a position on the screen.
     ;; Interpretation:
     ;;   x = the x-coordinate on the screen (in pixels from the left).
-    ;;   y = the y-coordinate on the screen (in pixels from the top).
+    ;;   y = the y-coordinate on the screen (in pixels from the top).</code>
 </pre>
 
 <p>Here, the first line tells us what the types of the fields are
@@ -724,15 +751,15 @@ type in general and its fields in particular represent. Now it is easy
 for everyone to see that <code>(make-point true false)</code> is not
 allowed and may lead to errors somewhere, and that x is neither
 degrees celsius nor meters nor feet.  We'll see much more about this
-in Lesson 1.3 </p>
+in Lesson 1.3. </p>
 
 
 <DIV class="exercise">
-<P>Ex15: Write down reasonable comments for the
-definition of the type Student from Ex14 that define the types of the
+<P>Ex 6.1: Write down reasonable comments for the
+definition of the type Student from Ex 5.4 that define the types of the
 fields and their interpretation.</p></DIV>
 
-<H2>Images</H2>
+<H2>7. Images</H2>
 
 <p>In this class, we will work with images quite often.  To work with
 images, include the following code at the top of your file:</p>
@@ -802,16 +829,16 @@ permissible values for a Color.</p>
 
 
 <div class="exercise">
-<p>Ex16: Create a folder on git and save your Racket file there. Then also copy some image to that
+<p>Ex 7.1: Create a folder on git and save your Racket file there. Then also copy some image to that
 folder (either take it from your computer or download one from the internet). Then put the following
 in your racket file:
-<pre><code>(define my-image (bitmap "[the file name of your image]"))</code></pre>
+<pre><code>(define my-image (bitmap "<em>the file name of your image</em>"))</code></pre>
 Play around with some of the image functions, also try something like
 <pre><code>(above my-image my-image my-image)</code></pre></p>
 </div>
 
 <div class="exercise">
-<p>Ex17: Create some solid blue rectangles with the following dimensions:
+<p>Ex 7.2: Create some solid blue rectangles with the following dimensions:
 <ul class="condensed">
 <li>2x4</li>
 <li>4x8</li>
@@ -821,17 +848,17 @@ Play around with some of the image functions, also try something like
 </div>
 
 <div class="exercise">
-<p>Ex18: Give the dimensions of the next 2 rectangles in the
+<p>Ex 7.3: Give the dimensions of the next 2 rectangles in the
 sequence.  Write down a formula that describes the n-th rectangle in
 this sequence.  Write down a contract, purpose statement, examples,
 and definition for a  function 
-<code>rec-sequence</code> that takes an argument <code>n</code>, where <code>n</code> is a number 
+<code>rectangle-in-sequence</code> that takes an argument <code>n</code>, where <code>n</code> is a number 
 that tells the function to return the <code>n</code>th rectangle in this
-sequence. <em>Test the function!</em></p>
+sequence. Be sure to test your function on at least the examples above.</p>
 </div>
 
 <div class="exercise">
-<p>Ex19: Write the following function:
+<p>Ex 7.4: Write the following function:
 <pre>
     ;; rectangle-from-proportions: PosReal PosReal -&gt; Rectangle
     ;; RETURNS: a solid blue rectangle, whose width in pixels is given
@@ -839,39 +866,42 @@ sequence. <em>Test the function!</em></p>
     ;; width, i.e. height = width * proportion) is given by the second
     ;; argument. 
 </code></pre>
-Test the function!</p>
+Test your function on some examples.  How do you know that the image
+your function created is the right one? (Hint: use
+<code>image-width</code> and <code>image-height</code> from the image library).
+</p>
 </div>
 
 <div class="exercise">
 
-<p>Ex20: Try to assemble a human shape from circles and rectangles
+<p>Ex 7.5: Try to assemble a human shape from circles and rectangles
 using the image functions above.  It does not need to look fancy, just
 imagine a head, a chest and arms and feet. Then use the stepper to see
 how DrRacket assembles your image.</p>
 </div>
 
 <div class="exercise">
-<p>Ex21: Here is a struct definition:
+<p>Ex 7.6: Here is a struct definition:
 <pre><code>(define-struct person (first-name last-name age height weight))</code></pre>
 
 Write down a reasonable comment part of that data definition that
 specifies types and interpretations of the fields. Then write the
 function <code>person-image</code> that takes a person and returns an
-image like the ones in Ex20, but in a way that the height and width of
+image like the ones in Ex 7.5, but in a way that the height and width of
 this image is related to the height of the person (i.e. if one person
 is twice the size of another person, the image for the first person
 should be twice as high and wide as the image of the second
 person).</p> </div>
 
 <div class="exercise">
-<p>Ex21a: Write a function <kbd>person+name-image</kbd>, which returns
+<p>Ex 7.7: Write a function <kbd>person+name-image</kbd>, which returns
 an image like the one returned by <code>person-image</code>
 except that the full (first + last) name of the person is drawn below
 the image of the person.  You may want to use the built-in function
 <kbd>string-append</kbd>.  Look in the help desk to see what it returns.</p>
 </div>
 
-<h2>Lists</h2>
+<h2>8. Lists</h2>
 <p>Structs can already consist of more than one value, but very often we need
 to store an arbitrary number of values. A fundamental part of programming in
 Racket lets us do just that: lists. In contrast to the structs we have
@@ -900,8 +930,8 @@ that is, it returns a new list that is like the old list, except that
 the new element is added at the front.</p>
 
 <div class="exercise">
-<p>Ex22: Write down an expression whose value is the list of numbers from 1 to 5.</p>
-<p>Ex23: Write down an expression whose value is a list of 5 booleans, alternating between true and false,
+<p>Ex 8.1: Write down an expression whose value is the list of numbers from 1 to 5.</p>
+<p>Ex 8.2: Write down an expression whose value is a list of 5 booleans, alternating between true and false,
 starting with true</p></div>
 
 
@@ -912,7 +942,8 @@ for creating lists:
     ;; Example: (list 1 2 3 4 5) =&gt; (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
 </pre></code>
 That is a lot shorter! Now that we have seen how to construct lists, what can we
-do with them? We'll deconstruct them again, piece by piece:
+do with them? We observe their contents by taking them apart again,
+piece by piece: 
 <pre><code>    ;; list-fn : List -&gt; ??
     ; (define (list-fn lst)
     ;   (cond
@@ -987,7 +1018,7 @@ length of a list where there is a first element and a rest must be 1 +
 the length of that rest.</p>
 
 <div class="exercise">
-<p>Ex24: Write a function that returns the product of all the numbers in a list (Hint:
+<p>Ex 8.3: Write a function that returns the product of all the numbers in a list (Hint:
 be careful with the empty list)</p>
 </div>
 
@@ -1039,33 +1070,33 @@ but for ListofBoolean we'll have
 </pre>
 
 <div class="exercise">
-<p>Ex25: Design a function that, given a list of booleans, returns
+<p>Ex 8.4: Design a function that, given a list of booleans, returns
   true if all booleans in the
 list are true. Write down contract, purpose statement and examples, and test your function.</p>
-<p>Ex26: Design a function that takes a list of Points and draws a solid blue circle with radius
+<p>Ex 8.5: Design a function that takes a list of Points and draws a solid blue circle with radius
 10 at every Point in that list into a 300x300 scene.</p>
-<p>Ex27: Design a function that takes a list of strings and draws the combined text of those
+<p>Ex 8.6: Design a function that takes a list of strings and draws the combined text of those
 strings, separated by spaces.</p>
-<p>Ex27a: There are two ways to do Ex27 with the functions available to you. Try the way that 
-you did not use to solve Ex27.</p>
-<p>Ex28: Design a function that takes a list of lists of strings as an argument that treats
-each of the lists of strings as a line (assembled like in Ex27) in a text and renders the 
+<p>Ex 8.7: There are two ways to do Ex 8.6 with the functions available to you. Try the way that 
+you did not use to solve Ex 8.6.</p>
+<p>Ex 8.8: Design a function that takes a list of lists of strings as an argument that treats
+each of the lists of strings as a line (assembled like in Ex 8.6) in a text and renders the 
 whole text as an image.</p> 
-<p>Ex29: Look up the <kbd>beside/align</kbd> function on the Racket Help Desk. Use it to design a function
-that takes a list of people (as defined in Ex21) and uses the function from Ex21 to draw these
+<p>Ex 8.9: Look up the <kbd>beside/align</kbd> function on the Racket Help Desk. Use it to design a function
+that takes a list of people (as defined in Ex 7.6) and uses the function from Ex21 to draw these
 people, placing them beside each other to form some kind of a group
 photo.</p>
 
-<p>Ex30: Design a function that, given a list of booleans, returns a list with each boolean
-reversed (e.g. <code>(neg-list (list true false true)) =>
+<p>Ex 8.10: Design a function that, given a list of booleans, returns
+a list with each boolean negated (e.g. <code>(neg-list (list true false true)) =>
 (cons false (cons true (cons false empty))</code> &nbsp; ).</p>
 
-<p>Ex31: Design a function that, given a list of Numbers, returns a
+<p>Ex 8.11: Design a function that, given a list of Numbers, returns a
 list of Images, where each image is a circle that has a radius based
 on a number of the input list.</p>
 
 
-<p>Ex32: Design a function that takes a list of Points and returns the
+<p>Ex 8.12: Design a function that takes a list of Points and returns the
 sum of the distances to each of those Points from (0,0). You should
 write a helper function to calculate the distance.
 
@@ -1076,12 +1107,14 @@ write a helper function to calculate the distance.
  
 </p>
 
-</div> <HR/> 
+</div> <HR/>
+
+</div>
 
 
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Wed Sep 14 23:05:07 Eastern Daylight Time 2016 <!-- hhmts end -->
+Last modified: Sun Jul 23 17:36:23 Eastern Daylight Time 2017 <!-- hhmts end -->
 
 </DIV></BODY></HTML>
