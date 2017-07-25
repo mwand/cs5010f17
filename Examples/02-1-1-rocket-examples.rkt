@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 01-3-rocket-examples) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-intermediate-reader.ss" "lang")((modname 02-1-1-rocket-examples) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;; making examples human-readable
 
 ;; a rocket simulation.  
@@ -15,7 +15,7 @@
 ;; travelling vertically at some velocity.
 
 ;; REPRESENTATION:
-;; A Rocket is represented as (rocket altitude velocity)
+;; A Rocket is represented as a struct (make-rocket altitude velocity)
 ;; with the following fields:
 ;; altitude : Altitude  is the rocket's altitude
 ;; velocity : Velocity  is the rocket's velocity

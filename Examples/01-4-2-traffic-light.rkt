@@ -60,11 +60,11 @@
 
 ;; (begin-for-test
 ;;   (check-equal? (previous-color "red") "yellow"
-;;     "red not preceded by yellow")
+;;     "red should be preceded by yellow")
 
 ;;   (check-equal? (previous-color "yellow") "green"
-;;     "yellow not preceded by green")
+;;     "yellow should be preceded by green")
 
 ;;   (check-equal? (previous-color "green") "red"
-;;     "green not preceded by red"))
+;;     "green should be preceded by red"))
 
