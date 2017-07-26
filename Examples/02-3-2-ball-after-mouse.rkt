@@ -14,8 +14,9 @@
 ;; DATA DEFINITIONS
 
 ;; REPRESENTATION:
-;; A Ball is represented as (ball x y radius selected?) with the
-;; following fields:
+;; A Ball is represented as a struct
+;;   (ball x y radius selected?)
+;; with the following fields:
 ;; x, y : Integer        the coordinates of the center of the ball, in pixels,
 ;;                       relative to the origin of the scene.
 ;; radius : NonNegReal   the radius of the ball, in pixels
@@ -43,8 +44,9 @@
 (define selected-ball-at-12-25 (make-ball 12 25 10 true))
 (define selected-ball-at-17-24 (make-ball 17 24 10 true))
 
-;; MouseEvent is defined in the 2htdp/universe module. Every MouseEvent is a
-;; string, but not every string is a legal mouse event.  The predicate for 
+;; MouseEvent is defined in the 2htdp/universe module. Every
+;; MouseEvent is represented as a string, but not every string is the
+;; representation of a mouse event.  The predicate for 
 ;; comparing mouse events is mouse=? .
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

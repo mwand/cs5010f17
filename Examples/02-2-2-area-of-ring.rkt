@@ -47,7 +47,7 @@
   (* pi radius radius))
 
 ;; tests for area-of-circle
-;; pi happens to be predefined in BSL (you could look it up!)
+;; pi happens to be predefined in ISL (you could look it up!)
 
 (begin-for-test
 
@@ -60,6 +60,8 @@
   (check-= (area-of-circle 4) (* 16 pi) 0.01
     "radius = 4 should give area = 16*pi"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; COMMENTARY: remember that there are lots of functions with contract
 ;; Radius Radius -> Area.  Let's look at a few:
 
@@ -71,10 +73,12 @@
 ;; purpose statement.  The purpose of the purpose statement is to
 ;; enable us to distinguish correct definitions from incorrect ones.
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Some function definitions are correct, but are bad because they are
 ;; unclear or too complicated.  Let's look at some examples:
 
-;; STRATEGY: combine simpler functions
+;; STRATEGY: transcribe formula
 (define (area-of-ring2 inner outer)
   (- (* pi outer outer) (* pi inner inner)))
 
