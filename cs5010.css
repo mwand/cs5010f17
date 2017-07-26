@@ -17,6 +17,8 @@
  *
  ****************************************************************/
 
+html body{font-size: 13pt;}
+
 body {
     /* background-color: #e8f2fc; */
     /* font-family:  "Times New Roman", Times, Georgia, serif; */
@@ -25,9 +27,9 @@ body {
 /* from Fall 15 edition: */
 background-color: #ffffe0; 
 font-family:  Verdana, Arial, Helvetica, sans-serif;
-font-size: larger;
+/* font-size: larger; */
   height: 100%;
-  margin: 10%;
+  /* margin: 10%; */
 }
 
 body #maincontent {

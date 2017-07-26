@@ -5,27 +5,21 @@
 (define-struct boa (length girth volume))  
 (define-struct armadillo (length volume appetite))
 
-;; A ZooAnimal is one of:
-;; -- (make-spider NonNegInt PosReal)
-;; -- (make-elephant PosReal)
-;; -- (make-boa PosReal PosReal PosReal)
-;; -- (make-armadillo PosReal PosReal PosReal)
+;; A ZooAnimal is represented by one of the following structs:
+;; (make-spider nlegs volume) -- a spider 
+;; (make-elephant volume) -- an elephant 
+;; (make-boa l g volume)  -- a boa constrictor
+;; (make-armadillo l volume app) -- an armadillo
 
-;; INTERPRETATION
-;; (make-spider n vol) -- a spider with n legs and volume vol 
-;; (make-elephant vol) -- an elephant with volume vol
-;; (make-boa l g vol)  -- a boa constrictor with:
-;;                         length l cm
-;;                         girth  g cm
-;;                         volume vol cm^3
-;; (make-armadillo l vol app) -- an armadillo with:
-;;                                length l cm
-;;                                volume vol cm^3
-;;                                eats app cm^3/day of ants.
-;; NOTE: volume refers to the volume of the container in which the
-;; animal is to be shipped, and is expressed in cm^3.
+;; INTERPRETATION OF FIELDS:
+;; nlegs    : NonNegInt    number of legs of this animal
+;; volume   : PosReal      volume of shipping container required for
+;;                         this animal, in cm^3.
+;; length   : PosReal      length of this animal in cm
+;; girth    : PosReal      girth of this animal, in cm
+;; appetite : PosReal      appetite of this animal (in cm^3 of ants
+;;                         per day:)
 
-#|
 ; animal-fn: ZooAnimal -> ??
 (define (animal-fn a)
   (cond
@@ -75,14 +69,3 @@
 ;; I've been extra careful about writing NonNegInt, PosReal, etc.
 ;; If I'd written Number, that would allow for an elephant with an
 ;; imaginary volume :) 
-
-;; I've surrounded the destructor template in #| ... |#, which turns
-;; that region into a comment, just as if we'd put semicolons at the
-;; front of each line.
-
-
-
-
-
-
-
