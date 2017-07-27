@@ -181,6 +181,9 @@ works out
 ;; and color-at-next-second
 ;; Break up timer-at-next-second the same way--
 
+;; The first student in Fall 2017 who posts the code 346827 to Piazza
+;; gets a prize.
+
 ;; ready-to-change? : TimerState -> Boolean
 ;; RETURNS: true iff the given TimerState should recycle at the
 ;; next second.
