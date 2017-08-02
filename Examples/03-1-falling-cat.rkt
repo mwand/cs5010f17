@@ -21,6 +21,8 @@
 ;; GIVEN: the initial y-position of the cat
 ;; EFFECT: runs the simulation, starting with the cat falling
 ;; RETURNS: the final state of the world
+;; STRATEGY: Combine simpler functions
+
 (define (main initial-pos)
   (big-bang (make-world initial-pos false)
             (on-tick world-after-tick 0.5)
@@ -49,7 +51,7 @@
 ;;; DATA DEFINITIONS
 
 ;; REPRESENTATION:
-;; A World is represented as (world pos paused?) with the following fields:
+;; A World is represented as (make-world pos paused?) with the following fields:
 ;; INTERPRETATION:
 ;; pos     : Integer    is the y-position of the center of the cat in the scene
 ;; paused? : Boolean    tells whether or not the cat is paused
@@ -149,12 +151,12 @@
   (check-equal? 
     (world-to-scene unpaused-world-at-20)
     image-at-20
-    "(world-to-scene unpaused-world-at-20) returned incorrect image")
+    "(world-to-scene unpaused-world-at-20) should display as image-at-20")
 
   (check-equal?
     (world-to-scene paused-world-at-20)
     image-at-20
-    "(world-to-scene paused-world-at-20) returned incorrect image"))
+    "(world-to-scene paused-world-at-20) should display as image-at-20"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

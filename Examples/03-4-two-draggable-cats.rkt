@@ -70,7 +70,7 @@
 ;;; DATA DEFINITIONS
 
 ;; REPRESENTATION:
-;; A World is represented as a (world cat1 cat2 paused?)
+;; A World is represented as a (make-world cat1 cat2 paused?)
 ;; INTERPRETATION:
 ;; cat1, cat2 : Cat      the two cats in the world
 ;; paused?    : Boolean  is the world paused?
@@ -88,7 +88,7 @@
 
 
 ;; REPRESENTATION:
-;; A Cat is represented as (cat x-pos y-pos selected?)
+;; A Cat is represented as (make-cat x-pos y-pos selected?)
 ;; INTERPRETATION:
 ;; x-pos, y-pos : Integer      the position of the center of the cat
 ;;                             in the scene 

@@ -58,7 +58,7 @@
 ;;; DATA DEFINITIONS
 
 ;; REPRESENTATION:
-;; A World is represented as (world x-pos y-pos paused? selected?)
+;; A World is represented as (make-world x-pos y-pos paused? selected?)
 ;; INTERPRETATION:
 ;; x-pos, y-pos : Integer      the position of the center of the cat
 ;;                             in the scene 
@@ -133,9 +133,10 @@
     (make-world
         (world-x-pos w)
         (+ (world-y-pos w) CATSPEED)          
-        paused?
-        selected?)))
-
+        (world-paused? w)
+        (world-selected? w))))
+                       
+    
 ;; tests:
 (begin-for-test
 
@@ -398,7 +399,7 @@
       (+ (world-x-pos w) HALF-CAT-WIDTH))
     (<= 
       (- (world-y-pos w) HALF-CAT-HEIGHT)
-      x
+      y
       (+ (world-y-pos w) HALF-CAT-HEIGHT))))
 
 (begin-for-test
