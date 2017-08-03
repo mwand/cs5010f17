@@ -6,24 +6,24 @@
 (require rackunit)
 (require "extras.rkt")
 
-;; A NumberSeq is represented as a list of Number.
+;; A NumberList is represented as a list of Number.
 
-;; CONSTRUCTOR TEMPLATE:
+;; CONSTRUCTOR TEMPLATE AND INTERPRETATION
 ;; empty                  -- the empty sequence
 ;; (cons n ns)
 ;;   WHERE:
 ;;    n  is a Number      -- the first number
 ;;                           in the sequence
-;;    ns is a NumberSeq   -- the rest of the 
+;;    ns is a NumberList  -- the rest of the 
 ;;                           numbers in the sequence
 
 ;; OBSERVER TEMPLATE:
-;; ns-fn : NSeq -> ??
-(define (ns-fn lst)
+;; nl-fn : NumberList -> ??
+(define (nl-fn lst)
   (cond
     [(empty? lst) ...]
     [else (... (first lst)
-               (ns-fn (rest lst)))]))
+               (nl-fn (rest lst)))]))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,68 +49,67 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ns-length : NSeq -> Integer
-;; GIVEN: a NSeq
+;; nl-length : NumberList -> Integer
+;; GIVEN: a NumberList
 ;; RETURNS: its length
 
 ;; If the tests are simple, you can use them as examples.
 ;; But they'd better be very very simple.
 
 (begin-for-test
-  (check-equal? (ns-length empty) 0)
-  (check-equal? (ns-length (cons 11 empty)) 1)
-  (check-equal? (ns-length (cons 33 (cons 11 empty))) 2))
+  (check-equal? (nl-length empty) 0)
+  (check-equal? (nl-length (cons 11 empty)) 1)
+  (check-equal? (nl-length (cons 33 (cons 11 empty))) 2))
 
-; STRATEGY: Use observer template for NSeq on lst
+; STRATEGY: Use observer template for NumberList on lst
 
-(define (ns-length lst)
+(define (nl-length lst)
   (cond
     [(empty? lst) 0]
     [else (+ 1 
-            (ns-length (rest lst)))]))
+            (nl-length (rest lst)))]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ns-sum : NSeq -> Number
-;; GIVEN: a NSeq
+;; nl-sum : NumberList -> Number
+;; GIVEN: a NumberList
 ;; RETURNS: its sum
 
 ;; EXAMPLES/TESTS:
 (begin-for-test
-  (check-equal? (ns-sum empty) 0)
-  (check-equal? (ns-sum (cons 11 empty)) 11)
-  (check-equal? (ns-sum (cons 33 (cons 11 empty))) 44)
-  (check-equal? (ns-sum (cons 10 (cons 20 (cons 3 empty)))) 33))
+  (check-equal? (nl-sum empty) 0)
+  (check-equal? (nl-sum (cons 11 empty)) 11)
+  (check-equal? (nl-sum (cons 33 (cons 11 empty))) 44)
+  (check-equal? (nl-sum (cons 10 (cons 20 (cons 3 empty)))) 33))
 
-;; STRATEGY: Use template for NSeq on lst
+;; STRATEGY: Use template for NumberList on lst
 
-(define (ns-sum lst)
+(define (nl-sum lst)
   (cond
     [(empty? lst) 0]
     [else (+ (first lst)
-             (ns-sum (rest lst)))]))
+             (nl-sum (rest lst)))]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ns-avg : NSeq -> Number
-;; GIVEN: a non-empty NSeq
+;; nl-avg : NumberList -> Number
+;; GIVEN: a non-empty NumberList
 ;; RETURNS: its average
 
 (begin-for-test
-  "ns-avg tests"
-  (check-equal? (ns-avg (cons 11 empty)) 11)
-  (check-equal? (ns-avg (cons 33 (cons 11 empty))) 22)
-  (check-equal? (ns-avg (cons 10 (cons 20 (cons 3 empty)))) 11))
+  (check-equal? (nl-avg (cons 11 empty)) 11)
+  (check-equal? (nl-avg (cons 33 (cons 11 empty))) 22)
+  (check-equal? (nl-avg (cons 10 (cons 20 (cons 3 empty)))) 11))
 
 ; STRATEGY: combine simpler functions (!)
 
-(define (ns-avg lst)
-  (/ (ns-sum lst) (ns-length lst)))
+(define (nl-avg lst)
+  (/ (nl-sum lst) (nl-length lst)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; double-all : NSeq -> NSeq
-;; GIVEN: a NSeq
+;; double-all : NumberList -> NumberList
+;; GIVEN: a NumberList
 ;; RETURNS: a list just like the original, but with each
 ;; number doubled 
 
@@ -121,7 +120,7 @@
    (double-all (cons 33 (cons 11 empty)))
    (cons 66 (cons 22 empty))))
 
-;; STRATEGY: Use template for NSeq on lst
+;; STRATEGY: Use template for NumberList on lst
 
 (define (double-all lst)
   (cond
@@ -136,46 +135,44 @@
 
 ;; DATA DEFINITION:
 
-;; A sequence of integers (ISeq) is represented as a list of integers.
+;; A sequence of integers (IntList) is represented as a list of integers.
 ;; CONSTRUCTOR TEMPLATES:
 ;; empty                -- the empty sequence
 ;; (cons n iseq)
 ;;   WHERE:
 ;;    n : Integer     is the first integer in the sequence
-;;    iseq : ISeq     is the the rest of the sequence
+;;    iseq : IntList     is the the rest of the sequence
 
 ;; OBSERVER TEMPLATE:
-;; seq-fn : ISeq -> ??
-(define (seq-fn s)
+;; il-fn : IntList -> ??
+(define (il-fn s)
   (cond
     [(empty? s) ...]
     [else (... (first s)
-               (list-fn (rest s)))]))
+               (il-fn (rest s)))]))
 
-;; remove-evens : ISeq -> ISeq
-;; GIVEN: a ISeq
+;; remove-evens : IntList -> IntList
+;; GIVEN: a IntList
 ;; RETURNS: a sequence just like the original, but with all
 ;; the even numbers removed 
 
-(define seq-22-11-13-46-7 
+(define list-22-11-13-46-7 
     (cons 22 
           (cons 11 (cons 13 (cons 46 (cons 7 empty))))))
 ;; a list whose first even is not in the first position (not on the slides!)
-(define seq-17-22-11-13-46-7
-  (cons 17 seq-22-11-13-46-7))
+(define list-17-22-11-13-46-7 (cons 17 list-22-11-13-46-7))
 
 (begin-for-test
   (check-equal? (remove-evens empty) empty)
   (check-equal? (remove-evens (cons 11 empty)) (cons 11 empty))
   (check-equal?
-   (remove-evens seq-22-11-13-46-7)
+   (remove-evens list-22-11-13-46-7)
    (cons 11 (cons 13 (cons 7 empty))))
   (check-equal?
-    (remove-evens seq-17-22-11-13-46-7)
+    (remove-evens list-17-22-11-13-46-7)
     (cons 17 (cons 11 (cons 13 (cons 7 empty))))))
 
-;; STRATEGY: Use template for ISeq on lst
-;; HALTING MEASURE: (length lst)
+;; STRATEGY: Use template for IntList on lst
 
 (define (remove-evens lst)
   (cond
@@ -187,21 +184,21 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; remove-first-even : ISeq -> ISeq
-;; GIVEN: a ISeq
+;; remove-first-even : IntList -> IntList
+;; GIVEN: a IntList
 ;; RETURNS: a list just like the original, but with the first even
 ;; number, if any, removed.
 
 (begin-for-test
   (check-equal? (remove-first-even empty) empty)
   (check-equal? (remove-first-even (cons 11 empty)) (cons 11 empty))
-  (check-equal? (remove-first-even seq-22-11-13-46-7)
+  (check-equal? (remove-first-even list-22-11-13-46-7)
                 (cons 11 (cons 13 (cons 46 (cons 7 empty)))))
   (check-equal?
-    (remove-first-even seq-17-22-11-13-46-7)
+    (remove-first-even list-17-22-11-13-46-7)
     (cons 17 (cons 11 (cons 13 (cons 46 (cons 7 empty)))))))
 
-;; STRATEGY: Use template for ISeq on lst
+;; STRATEGY: Use template for IntList on lst
 ;; HALTING MEASURE: (length lst)
 
 (define (remove-first-even lst)
@@ -215,10 +212,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; A SortedSeq is an ISeq in which the numbers are sorted in ascending
+;; A SortedIntList is an IntList in which the numbers are sorted in ascending
 ;; order.
 
-;; A sorted sequence of integers (SortedSeq) is represented as a list
+;; A sorted sequence of integers (SortedIntList) is represented as a list
 ;; of integers. 
 
 ;; CONSTRUCTOR TEMPLATES:
@@ -226,24 +223,25 @@
 ;; (cons n seq)
 ;;   WHERE:
 ;;    n : Integer         is the first integer in the sequence
-;;    seq : SortedSeq     is the the rest of the sequence
+;;    seq : SortedIntList     is the the rest of the sequence
 ;;   AND:
 ;;    n is less than any number in seq.
 
 ;; OBSERVER TEMPLATE:
-;; Same as for ISeq.
+;; Same as for IntList.
 
 
 ;; Example 6: insert
 
-;; insert : Integer SortedSeq -> SortedSeq
+;; insert : Integer SortedIntList -> SortedIntList
 ;; GIVEN: An integer and a sorted sequence
-;; RETURNS: A new SortedSeq just like the original
+;; RETURNS: A new SortedIntList just like the original, but with the
+;; new integer inserted.
 ;; EXAMPLES:
 ;; (insert 3 empty) = (list 3)
 ;; (insert 3 (list 5 6)) = (list 3 5 6)
 ;; (insert 3 (list -1 1 5 6)) = (list -1 1 3 5 6)
-;; STRATEGY: Use observer template for SortedSeq
+;; STRATEGY: Use observer template for SortedIntList
 
 (define (insert n seq)
   (cond
@@ -263,7 +261,7 @@
 
 ;; sort is predefined in ISL+lambda, so we need a different name
 
-;; mysort : IntSeq -> SortedSeq
+;; mysort : IntList -> SortedIntList
 ;; GIVEN: An integer sequence
 ;; RETURNS: The same sequence, only sorted by <= .
 ;; EXAMPLES:
@@ -271,7 +269,7 @@
 ;; (mysort (list 3)) = (list 3)
 ;; (mysort (list 2 1 4)) = (list 1 2 4)
 ;; (mysort (list 2 1 4 2)) = (list 1 2 2 4)
-;; STRATEGY: Use observer template for IntSeq
+;; STRATEGY: Use observer template for IntList
 
 (define (mysort ints)
   (cond

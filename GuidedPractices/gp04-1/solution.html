@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../../cs5010.css" />
 
 </head>
 
@@ -33,12 +33,12 @@
     Consider the following data definition:
   </p>
   <pre>
-    ;; A ListOfStrings (LOS) is one of
+    ;; A StringList is one of
     ;; -- empty
-    ;; -- (cons String LOS)
+    ;; -- (cons String StringList)
   </pre>
   <p>
-    Which of the following expressions has a value that is a LOS ?
+    Which of the following expressions has a value that is a StringList ?
   </p>
   <p>
     Here are the answers:
@@ -51,9 +51,9 @@
         Answer: Yes.
       </strong>
       <br />
-      <code>empty</code> is a LOS and <code>"abc"</code>
+      <code>empty</code> is a StringList and <code>"abc"</code>
       is a string, so
-      <code>(cons "abc" empty)</code> is a LOS.
+      <code>(cons "abc" empty)</code> is a StringList.
     </li>
     <li>
       <code>(cons "bcd")</code>
@@ -72,7 +72,7 @@
         Answer: Yes.
       </strong>
       <br />
-      This is a LOS.
+      This is a StringList.
     </li>
     <li>
       <code>(cons "3" (cons "4" empty))</code>
@@ -81,7 +81,7 @@
         Answer: Yes.
       </strong>
       <br />
-      This too is a LOS.
+      This too is a StringList.
     </li>
     <li>
       <code>(cons 3 (cons 4 empty))</code>
@@ -96,13 +96,6 @@
 </div>
 
 <!-- end of specific content -->
-
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
 
 </body>
 </html>
