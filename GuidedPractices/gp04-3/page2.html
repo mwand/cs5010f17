@@ -30,11 +30,11 @@
     Here is one solution:
   </p>
   <pre>
-    ;; inventory-total-value : LOB -&gt; Number
-    ;; GIVEN: a LOB
+    ;; inventory-total-value : Inventory -> Integer
+    ;; GIVEN: a Inventory
     ;; RETURNS: the value of all the copies on hand of all the books in the
-    ;; given LOB
-    ;; (inventory-total-value lob1) = 390
+    ;; given Inventory
+    ;; (inventory-total-value inv1) = 390
     
     (begin-for-test
       (check-equal? 
@@ -42,26 +42,26 @@
         0
         "value of the empty inventory should have been 0")
       (check-equal?
-        (inventory-total-value lob1)
+        (inventory-total-value inv1)
         390
         "simple test"))
     
-    ;; STRATEGY: Use template for LOB on books
+    ;; STRATEGY: Use template for Inventory on books
     (define (inventory-total-value books)
       (cond [(empty? books) 0]
             [else (+ (book-inventory-value (first books))
                      (inventory-total-value (rest books)))]))
   </pre>
   <pre>
-    ;; books-out-of-stock : LOB -&gt; LOB
+    ;; books-out-of-stock : Inventory -> Inventory
     ;; GIVEN: a list of books
-    ;; RETURNS: a list of the books that are out of stock in the given LOB
+    ;; RETURNS: a list of the books that are out of stock in the given Inventory
     ;; Example:
-    ;; (books-out-of-stock lob1) =
+    ;; (books-out-of-stock inv1) =
     ;;  (list
     ;;    (make-book "Shakespeare" "Hamlet" 0 2)
     ;;    (make-book "Shakespeare" "Macbeth" 0 10))
-    ;; STRATEGY: Use template for LOB on books
+    ;; STRATEGY: Use template for Inventory on books
     
     (define (books-out-of-stock books)
       (cond [(empty? books) empty]
@@ -70,7 +70,7 @@
                       (books-out-of-stock (rest books)))]))
     
     (check-equal?
-      (books-out-of-stock lob1)
+      (books-out-of-stock inv1)
       (list
         (make-book "Shakespeare" "Hamlet" 0 2)
         (make-book "Shakespeare" "Macbeth" 0 10)))
@@ -82,7 +82,7 @@
     ;; (book-out-of-stock? (make-book "Felleisen" "HtDP/1"  0 7)) = true
     ;; STRATEGY: Use template for Book on b
     (define (book-out-of-stock? b)
-      (&lt;= (book-on-hand b) 0))
+      (= (book-on-hand b) 0))
     
     (begin-for-test
       (check-false
@@ -92,7 +92,10 @@
     
     ;; (check-equal? ... true) would have been fine, too.  Look at the
     ;; Help Desk page for check-equal? to see some other useful checks.
-  </pre>
+</pre>
+
+<p>Note how our program follows the data definition: the inventory
+  contains books, so books-out-of-stock? calls book-out-of-stock? </p>
   <p>
     Note that the design of the help function
     <code>book-out-of-stock?</code>, with its deliverables,
@@ -100,25 +103,32 @@
     Writing
   </p>
   <pre>
-    (if (&lt;= (book-on-hand (first lob)) 0) ... ...)
-  </pre>
+    (if (= (book-on-hand (first lob)) 0) ... ...)
+</pre>
   <p>
     matches the template, but is undesirable because it violates
     the principle of one-function-one-task, by forcing
     <code>books-out-of-stock</code> to know about both the
     representation of an inventory AND how being out of stock
     is represented for a book.
-  </p>
+</p>
+
+<p>These are not the only reasonable contracts for these functions.
+In <code>inventory-total-value</code>, we could have replaced
+<code>Integer</code> with any numeric type that includes Integer, but
+then any function that calls <code>inventory-total-value</code> could
+not assume that the value returned by
+<code>inventory-total-value</code> was an integer.
+We could not replace it with <code>NonNegInteger</code>, since the
+data definition for <code>BookStatus</code> allows the price field to
+be negative (!).
+</p>
+
 </div>
 
 <!-- end of specific content -->
 
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
+
 
 </body>
 </html>

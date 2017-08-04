@@ -54,7 +54,7 @@
 
 ;; CONSTRUCTOR TEMPLATE:
 ;; (make-book-status ISBN Author Title DollarAmount DollarAmount
-;; NonNegInt)
+;;                   NonNegInt)
 
 ;; OBSERVER TEMPLATE:
 ;; book-status-fn : BookStatus -> ??

@@ -34,31 +34,33 @@
     (from this week's examples), design the following functions:
   </p>
   <pre>
-    ;; inventory-total-value : LOB -> Number
-    ;; GIVEN: a LOB
+    ;; inventory-total-value : Inventory -> Integer
+    ;; GIVEN: a Inventory
     ;; RETURNS: the value of all the copies on hand of all the books in the
-    ;; given LOB
+    ;; given Inventory
     ;; (inventory-total-value lob1) = 390
     
     (begin-for-test
       (check-equal? 
         (inventory-total-value empty)
         0
-        "value of the empty inventory should have been 0")
+        "value of the empty inventory should be 0")
       (check-equal?
-        (inventory-total-value lob1)
+        (inventory-total-value inv1)
         390
-        "simple test"))
+        "value of inv1 should be 390"))
     
-    ;; books-out-of-stock : LOB -&gt; LOB
+    ;; books-out-of-stock : Inventory -> Inventory
     ;; GIVEN: a list of books
-    ;; RETURNS: a list of the books that are out of stock in the given LOB
+    ;; RETURNS: a list of the books that are out of stock in the given Inventory
     ;; Example:
-    ;; (books-out-of-stock lob1) =
+    ;; (books-out-of-stock inv1) =
     ;;  (list
     ;;    (make-book "Shakespeare" "Hamlet" 0 2)
     ;;    (make-book "Shakespeare" "Macbeth" 0 10))
-  </pre>
+</pre>
+
+<p>Are these the only reasonable contracts for these functions?</p>
   <p>
     <a href="page2.html">
       [ANSWER]
@@ -67,13 +69,6 @@
 </div>
 
 <!-- end of specific content -->
-
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
 
 </body>
 </html>
