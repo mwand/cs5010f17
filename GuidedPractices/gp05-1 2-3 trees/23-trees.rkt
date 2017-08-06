@@ -1,23 +1,28 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 6-2-trees) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
-;; solution to practice 6.2
+#reader(lib "htdp-intermediate-reader.ss" "lang")((modname 23-trees) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;; solution to practice 5.1
 
 (require rackunit)
 (require "extras.rkt")
 
+;; A 23Tree is one of
+;; -- (make-leaf-node data)
+;; -- (make-binary-node lson rson)
+;; -- (make-ternary-node lson mson rson)
+;; INTERPRETATION:
+;; data             : Real     -- the data at the leaf
+;; lson, mson, rson : 23Tree   -- the subtrees of the node
+
+
+;; IMPLEMENTATION
 (define-struct leaf-node (data))
 (define-struct binary-node (lson rson))
 (define-struct ternary-node (lson mson rson))
 
-;; A 23Tree is one of
-;; -- (make-leaf-node Number)
-;; -- (make-binary-node 23Tree 23Tree)
-;; -- (make-ternary-node 23Tree 23Tree 23Tree)
 
-;; Template:
+;; OBSERVER TEMPLATE:
 ;; tree-fn : 23Tree -> ??
-;; HALTING MEASURE: number of nodes in t
 ;(define (tree-fn t)
 ;  (cond
 ;    [(leaf-node? t) (... (leaf-node-data t))]
@@ -69,7 +74,9 @@
 
 
 ;; double-all : 23Tree -> 23Tree
-;; RETURNS: a tree like the original, but with all the leaf nodes doubled.
+;; RETURNS: a tree like the original, but with all the leaf nodes
+;; doubled.
+;; EASTER EGG: first student who finds this egg in Fall 2017 gets a prize.
 ;; STRATEGY: Use template for 23Tree on t
 
 (define (double-all t)

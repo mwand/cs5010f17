@@ -33,7 +33,7 @@
 ;; A DollarAmount may be negative.
 
 ;; A BookStatus is represented as
-;; (book-status isbn author title cost price on-hand)
+;; (make-book-status isbn author title cost price on-hand)
 
 ;; INTERP:
 ;; isbn   : ISBN          -- the ISBN of the book
