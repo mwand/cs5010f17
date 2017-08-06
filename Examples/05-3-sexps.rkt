@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 06-5-sos-and-loss) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-intermediate-reader.ss" "lang")((modname 05-3-sexps) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require rackunit)
 (require "extras.rkt") 
 
@@ -49,16 +49,16 @@
 ;; RETURNS: true if the given string occurs somewhere in the given loss.
 ;; STRATEGY: Use templates for Sexp and SexpList
 
-(define (occurs-in? Sexp str) 
+(define (occurs-in? sexp str) 
    (cond
-     [(string? Sexp) (string=? Sexp str)]
-     [else (occurs-in-loss? sos str)]))
+     [(string? sexp) (string=? sexp str)]
+     [else (occurs-in-slist? sexp str)]))
 
-(define (occurs-in-loss? loss str) 
+(define (occurs-in-slist? lst str) 
    (cond
-     [(empty? loss) false]
-     [else (or (occurs-in? (first loss) str)
-               (occurs-in-lst? (rest loss) str))]))
+     [(empty? lst) false]
+     [else (or (occurs-in? (first lst) str)
+               (occurs-in-slist? (rest lst) str))]))
 
 (begin-for-test
 
@@ -86,20 +86,20 @@
    true))
 
 ;; number-of-strings : Sexp -> Number
-;; number-of-strings-in-loss : Loss -> Number
-;; RETURNS: the number of strings in the given Sexp or loss.
+;; number-of-strings-in-slist : SexpList -> Number
+;; RETURNS: the number of strings in the given Sexp or SexpList
 ;; STRATEGY: Use templates for Sexp and SexpList
 
-(define (number-of-strings sos) 
+(define (number-of-strings s) 
   (cond
-    [(string? sos) 1]
-    [else (number-of-strings-in-loss sos)]))
+    [(string? s) 1]
+    [else (number-of-strings-in-slist s)]))
   
-(define (number-of-strings-in-loss loss) 
+(define (number-of-strings-in-slist loss) 
   (cond
     [(empty? loss) 0]
     [else (+ (number-of-strings (first loss))
-             (number-of-strings-in-loss (rest loss)))]))
+             (number-of-strings-in-slist (rest loss)))]))
 
 (begin-for-test
   
