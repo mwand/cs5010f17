@@ -30,7 +30,7 @@
 ;; 
 ;; Observer Template:
 ;; 
-;; sexp-fn : Sexp -> ??
+;; sexp-fn  : Sexp -> ??
 ;; slist-fn : SexpList -> ??
 ;; 
 ;; (define (sexp-fn s)

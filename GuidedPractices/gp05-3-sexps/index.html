@@ -1,34 +1,36 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
 <title>Guided Practice
-6.4
+5.3
 </title>
-<link type="text/css" rel="stylesheet" href="../../css/course.css">
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
 </head>
 
 <body>
-<h1>Guided Practice 6.4: S-expressions</h1>
+<div id="maincontent">>
+<h1>Guided Practice 5.3: S-expressions</h1>
 
 
 <p>Design the following functions:</p>
 
 
 <pre>
-;; characters-in : Sos -> Number
-;; characters-in-loss : LoSS -> Number
-;; RETURNS: the total number of characters in the strings
+;; characters-in-sexp  : Sexp -> Number
+;; characters-in-sexps : SexpList -> Number
+;; RETURNS: the total number of characters in the strings in the given
+;; Sexp or SexpList
 ;; EXAMPLE/TEST:
 (begin-for-test
   (check-equal?
-   (characters-in
+   (characters-in-sexp
     (list "alice" 
           (list (list "alice" "bob") "carole")
           "dave"))
    23)
 
-;; subst : SoS String String -> SoS
-;; GIVEN: a SoS and two strings, old and new
-;; RETURNS: a sos just like the given one, except that
+;; subst : Sexp String String -> Sexp
+;; GIVEN: a Sexp and two strings, old and new
+;; RETURNS: an Sexp just like the given one, except that
 ;; all instances of old are changed to new.
 ;; EXAMPLE/TEST:
 (begin-for-test
@@ -53,5 +55,5 @@
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Mon Sep 26 13:45:59 Eastern Daylight Time 2016 <!-- hhmts end -->
+Last modified: Mon Aug  7 17:02:44 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body> </html>
