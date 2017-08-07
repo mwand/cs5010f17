@@ -5,14 +5,16 @@
 (require "extras.rkt") 
 
 ;; S-expressions
+
+;; Constructor Templates
 ;; 
 ;; An Sexp is either
-;; -- a String
+;; -- a String (any string will do)
 ;; -- an SexpList
 ;; 
 ;; An SexpList is either
 ;; -- empty
-;; -- (cons Sexp SexpList
+;; -- (cons Sexp SexpList)
 ;; 
 ;; Sexps:
 ;; 
@@ -26,7 +28,7 @@
 ;;  "def"
 ;;  ("abcd" "def"))
 ;; 
-;; Template:
+;; Observer Template:
 ;; 
 ;; sexp-fn : Sexp -> ??
 ;; slist-fn : SexpList -> ??
@@ -36,17 +38,18 @@
 ;;     [(string? s) ...]
 ;;     [else (... (slist-fn s))]))
 ;; 
-;; (define (slist-fn lst)
+;; (define (slist-fn sexps)
 ;;   (cond
-;;     [(empty? lst) ...]
-;;     [else (...   (sos-fn (first lst))
-;;                  (slist-fn (rest lst)) ...)]))
+;;     [(empty? sexps) ...]
+;;     [else (... (sos-fn (first sexps))
+;;                (slist-fn (rest sexps)))]))
 ;; 
 
 ;; occurs-in? : Sexp String -> Boolean
 ;; RETURNS: true if the given string occurs somewhere in the given Sexp.
 ;; occurs-in-loss? : Loss String -> Boolean
-;; RETURNS: true if the given string occurs somewhere in the given loss.
+;; RETURNS: true if the given string occurs somewhere in the given
+;; list of Sexps.
 ;; STRATEGY: Use templates for Sexp and SexpList
 
 (define (occurs-in? sexp str) 
@@ -54,11 +57,11 @@
      [(string? sexp) (string=? sexp str)]
      [else (occurs-in-slist? sexp str)]))
 
-(define (occurs-in-slist? lst str) 
+(define (occurs-in-slist? sexps str) 
    (cond
-     [(empty? lst) false]
-     [else (or (occurs-in? (first lst) str)
-               (occurs-in-slist? (rest lst) str))]))
+     [(empty? sexps) false]
+     [else (or (occurs-in? (first sexps) str)
+               (occurs-in-slist? (rest sexps) str))]))
 
 (begin-for-test
 
@@ -95,11 +98,11 @@
     [(string? s) 1]
     [else (number-of-strings-in-slist s)]))
   
-(define (number-of-strings-in-slist loss) 
+(define (number-of-strings-in-slist sexps) 
   (cond
-    [(empty? loss) 0]
-    [else (+ (number-of-strings (first loss))
-             (number-of-strings-in-slist (rest loss)))]))
+    [(empty? sexps) 0]
+    [else (+ (number-of-strings (first sexps))
+             (number-of-strings-in-slist (rest sexps)))]))
 
 (begin-for-test
   
