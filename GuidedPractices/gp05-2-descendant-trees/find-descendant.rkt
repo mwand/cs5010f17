@@ -6,32 +6,37 @@
 (require rackunit)
 (require "extras.rkt")
 
-;; DATA DEFINITIONS
 
+;; A Person is represented as a struct
+;; (make-person name children)
+
+;; INTERPRETATION
+;; name   :   String (any string will do)  --the name of the person
+;; children : PersonList                   --the children of the
+;;                                           person
+
+;; IMPLEMENTATION:
 (define-struct person (name children))
 
-;; A Person is a 
-;; (make-person String ListOfPerson)
+;; CONSTRUCTOR TEMPLATES:
+;; For Person:
+;;   (make-person String PersonList)
+;; For PersonList:
+;;   empty
+;;   (cons Person PersonList)
 
-;; A ListOfPerson is one of
-;; -- empty
-;; -- (cons Person ListOfPerson)
+;; OBSERVER TEMPLATE:
 
-;; TEMPLATES
-#|
 ;; person-fn : Person -> ??
-(define (person-fn p)
-  (... (person-name p) 
-       (lop-fn (person-children p))))
-
-;; lop-fn : ListOfPerson -> ??
-(define (lop-fn ps)
-  (cond
-    [(empty? ps) ...]
-    [else (... (person-fn (first ps))
-               (lop-fn (rest ps)))]))
-
-|#
+;; (define (person-fn p)
+;;  (... (person-name p) (plist-fn (person-children p))))
+;;
+;; plist-fn : PersonList -> ??
+;; (define (plist-fn ps)
+;;  (cond
+;;    [(empty? ps) ...]
+;;    [else (... (person-fn (first ps))
+;;               (plist-fn (rest ps)))]))
 
 ;; person-descendant? : Person String -> Boolean
 ;; GIVEN: a person and a name
@@ -42,37 +47,25 @@
 (define (person-descendant? p str)
   (if (string=? (person-name p) str)
     true
-    (lop-any-descendant? (person-children p) str)))
+    (any-descendant? (person-children p) str)))
 
 ;; this could have been 
 ;; (or
 ;;   (string=? (person-name p) str)
-;;   (lop-any-descendant? (person-children p) str))
+;;   (any-descendant? (person-children p) str))
 
 
-;; lop-any-descendant? : ListOfPerson String -> Boolean
+;; any-descendant? : ListOfPerson String -> Boolean
 ;; GIVEN: A list of persons and a string
 ;; RETURNS: true iff any of the persons or any of their descendants
 ;; has that name. 
 ;; STRATEGY: Use template for ListOfPerson on ps
-(define (lop-any-descendant? ps str)
+(define (any-descendant? ps str)
   (cond
     [(empty? ps) false]
     [else (or
             (person-descendant? (first ps) str)
-            (lop-any-descendant? (rest ps) str))]))
-
-;; or with the HOF:
-
-;; STRATEGY: Use template for ListOfPerson on ps + HOF ormap on
-;; (person-children p)
-
-#;(define (person-descendant? p str)
-  (or
-    (string=? (person-name p) str)
-    (ormap
-      (lambda (q) (person-descendant? q))
-      (person-children p))))
+            (any-descendant? (rest ps) str))]))
 
 ;; test suite
 ;; from the slides

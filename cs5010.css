@@ -50,11 +50,11 @@ html > body #footer {
 
 /* FIXME:  For now, this will always be scaffolding for debugging. */
 
-body > p {
-/*font-size: smaller;*/
-  color: gray;
-  font-size: 50%;
-}
+/* body > p { */
+/* /\*font-size: smaller;*\/ */
+/*   color: gray; */
+/*   font-size: 50%; */
+/* } */
 
 /* FIXME:  Compatibility problem here.  */
 /* Safari seems to interpret this as a percentage of the element. */
