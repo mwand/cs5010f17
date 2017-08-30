@@ -1,7 +1,7 @@
-# cs5010f16-public
+# cs5010f17
 
-This is the cs5010 Fall 2016 public git repository.  The master branch of this repo should be an image of 
-www.ccs.neu.edu/course/cs5010f16 .
+This is the cs5010 Fall 2017 public git repository.  The master branch of this repo should be an image of 
+www.ccs.neu.edu/course/cs5010f17 .
 
 LICENSE:
 
