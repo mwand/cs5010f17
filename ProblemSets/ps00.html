@@ -27,14 +27,21 @@
     CS 5010: Problem Set 00
   </h2>
   <div>
-    <p class="duller">
-      <strong>Out:</strong> date to be announced
+    <p>
+      <strong>Out:</strong> Friday, 1 September 2017
       <br />
-      <strong>Due:</strong> date to be announced
+      <strong>Due:</strong> Monday, 11 September 2017 at 6pm local time
     </p>
   </div>
   <div>
- 
+    <p>
+      This is an individual assignment.  You are not allowed to
+      discuss this problem set with any other person.  You are also
+      not allowed to search for or to view any solutions to similar
+      problems that may be available on the World-Wide Web or in
+      other resources that might otherwise have been available to
+      you.
+    </p>
     <p>
       The main purpose of this problem set is to give us some idea of
       your programming skills at the beginning of the semester, when
@@ -54,16 +61,20 @@
       <code>README</code> file that begins with that sentence will receive full
       credit for Problem Set 00, but will not be allowed to take the
       placement test.
-</p>
-
-
-      <p>
-      This is an individual assignment.  You are not allowed to
-      discuss this problem set with any other person.  You are also
-      not allowed to search for or to view any solutions to similar
-      problems that may be available on the World Wide Web or in
-      other resources that might otherwise have been available to
-      you.
+    </p>
+    <p>
+      Students who are able to complete the problem set should create
+      a <code>README</code> file that tells us how to compile and run
+      your program
+      on a Linux, Macintosh, or Windows machine (your choice, but
+      please specify your choice in the <code>README</code> file).
+      You may use an
+      integrated development environment (IDE) to write your program,
+      but you must submit your program as a set of plain text source
+      files.  Do not submit your program using any formats that would
+      make sense only when viewed or interpreted by an IDE.  If we
+      cannot read, compile, and run your program without having to use
+      an IDE, we will assume Problem Set 00 was too hard for you.
     </p>
   </div>
   <hr />
@@ -71,18 +82,354 @@
     <h3>
       Submitting Your Solution
     </h3>
-
-<p>Directions for submitting your solution will be posted at a later date.
-</p>
-
+    <p>
+      A third purpose of this problem set is to make sure all MS
+      students have obtained a CCIS account, know how to use <code>sftp</code>
+      to transfer files between machines, and can use Linux well enough
+      to package files and to submit them by following these
+      instructions:
+    </p>
+    <ol>
+      <li value="0">
+        If you're using a personal computer, make sure the <code>ssh</code>
+        and <code>sftp</code> utilities are installed on your machine.  If not,
+        install them.
+        (If you're using Linux, they should already be installed.
+        If you're using a Macintosh, you can install those utilities by
+        installing the Xcode Command Line Tools.  If you're using a
+        Windows machine, you may have to install a freeware version of
+        those utilities such as PuTTY or OpenSSH.)
+      </li>
+      <li>
+        When you have obtained a CCIS account, you will have a home
+        directory on the CCIS shared file system.  Log into a CCIS
+        Linux machine (in WVH 102, or you can use the
+        <code>ssh</code> utility to log
+        in remotely), and create a <code>~/classes/problem00</code> directory as
+        follows:
+        <pre>
+          % mkdir classes
+          % cd classes
+          % mkdir problem00
+</pre>
+      </li>
+      <li>
+        Use the <code>sftp</code> utility to copy your <code>README</code>
+        and program files
+        into the directory you created in step 1.  Suppose, for example,
+        that your CCIS ID is <code>sidewinder</code>, you have written
+        your program
+        in Java, and your <code>README</code> file along with all of your Java
+        files reside in some directory on your own personal computer.  Then
+        you can open a terminal window (called a Command Prompt window
+        on Windows machines) on your computer, <code>cd</code> to the
+        directory that
+        contains your files, and copy them to the CCIS shared file
+        system as follows:
+        <pre>
+          % sftp sidewinder@login.ccs.neu.edu
+          sidewinder@login.ccs.neu.edu's password: 
+          Connected to login.ccs.neu.edu
+          sftp> cd classes/problem00
+          sftp> put README
+          sftp> mput *.java
+          sftp> bye
+</pre>
+      </li>
+      <li>
+        Log into a CCIS Linux machine, use the <code>tar</code> utility to
+        create a <code>problem00.tgz</code> file that packages your entire
+        <code>classes/problem00</code>
+        directory into a single compressed file, and submit that file
+        using the <code>/course/cs5010f17/submit</code> program.
+        When you submit that file, you will also tell us your NU and CCIS Ids.
+        Suppose, for example, your NU ID is 001234567 and your CCIS ID is
+        <code>sidewinder</code>.  Then you would submit your program like this:
+        <pre>
+          % ssh sidewinder@login.ccs.neu.edu
+          % cd classes
+          % tar -czf problem00.tgz problem00
+          % /course/cs5010f17/submit 001234567 sidewinder problem00.tgz
+</pre>
+        (Use your own CCIS ID instead of <code>sidewinder</code>,
+        and use your own NU ID instead of 001234567.)
+      </li>
+      <li>
+        If all goes well, step 3 will end by giving you a
+        confirmation number.  Please write down that confirmation number
+        so you can prove you have submitted Problem Set 00.
+      </li>
+    </ol>
+  </div>
   <hr />
   <div>
     <h3>
       Problem Specification
     </h3>
+    <p>
+      The program you are to write solves a problem that arises when
+      some parts of a large program are changed:
+      Which source files need to be re-compiled, and in what order should
+      they be re-compiled?
+    </p>
+    <p>
+      For this problem, we assume the large program is written in a
+      programming language that supports modular programming, with
+      a one-to-one correspondence between modules and source files.
+      Each module is named, and each module begins with declarations
+      that list the names of modules that are <em>used</em> by the module.
+      For each module <var>M</var>, we define the set of modules
+      on which <var>M</var> <em>depends</em> as the smallest set <var>D</var>
+      such that
+    </p>
+    <ol>
+      <li>
+        <var>D</var> contains every module used by <var>M</var>
+      </li>
+      <li>
+        if <var>N</var> is a module in <var>D</var>, then
+        <var>D</var> contains every module used by <var>N</var>
+      </li>
+    </ol>
+    <p>
+      We also assume:
+    </p>
+    <ul>
+      <li>
+        the operating system can tell us the time at which
+        each module was last modified
+      </li>
+      <li>
+        if a module has been compiled, its compiled form
+        is a file whose name can be computed from the name of
+        the module
+      </li>
+      <li>
+        when a module is compiled, it is compiled in one
+        of the following four modes: LP64, ILP64, LP32, or ILP32
+      </li>
+      <li>
+        that mode can be determined by examining the compiled file
+      </li>
+      <li>
+        before a module <var>M</var> is compiled in one of those modes,
+        all of the modules on which <var>M</var> depends
+        must have been compiled in that same mode,
+        and must have been compiled after they were last modified
+      </li>
+    </ul>
+    <hr />
+    <p>
+      You may write your program using any language that is currently
+      installed and available on
+      <code>
+        login.ccs.neu.edu
+      </code>
+      (which is a CCIS Linux machine).
+    </p>
+    <p>
+      Your program must define three public operations named
+      <code>isCircular</code>, <code>bestMode</code>, and
+      <code>bestPlan</code>.
+      Those operations are specified below.
+    </p>
+    <p>
+      Your implementation of those operations must use an immutable
+      abstract data type <code>Module</code>, specified below,
+      together with a
+      <code>ListOfModule</code> data type whose values are homogeneous lists of
+      values drawn from the <code>Module</code> ADT; the
+      <code>ListOfModule</code> data type
+      should use lists that are idiomatic in your chosen programming
+      language.
+      The <code>Module</code> ADT also assumes a <code>ListOfString</code>
+      data type whose values are homogeneous lists of strings.
+    </p>
+    <p>
+      To make this problem set easier for you, we are giving you
+      <a href="#samples">sample implementations</a>
+      of the <code>Module</code> ADT and
+      <code>ListOfModule</code> data
+      type, written in several different programming languages.  If
+      you choose to use one of the programming languages we used to
+      write those sample implementations, you should use the sample
+      implementation we give you for that language.  If your chosen
+      programming language is not among those we used for the sample
+      implementations, then you will need to translate one of the
+      sample implementations into your language of choice, taking care
+      to preserve the <code>Module</code> ADT's immutability, operations,
+      types, and specifications.
+    </p>
+    <p>
+      Your implementation may also define its own data types, and may
+      use any data types that are provided by the programming language
+      you use, including its standard libraries.
+    </p>
+    <p>
+      To qualify for the placement test, your implementation must be
+      correct and run in polynomial time (as a function of the number
+      of modules in the large program).
+    </p>
+    <h4>
+      Specifications of
+      <code>isCircular</code>, <code>bestMode</code>, and
+      <code>bestPlan</code>:
+    </h4>
+    <p>
+      In examples shown below,
+      <code>[<var>x</var>, <var>y</var>, <var>z</var>]</code>
+      means a list of
+      <code><var>x</var></code>, <code><var>y</var></code>, and <code><var>z</var></code>.
+    </p>
+    <pre>
+      ;;; isCircular : ListOfModule -&gt; Boolean
+      ;;; GIVEN: a list of module descriptions
+      ;;; WHERE: no two descriptions are for the same module name
+      ;;; RETURNS: true if and only if one or more of the modules
+      ;;;     depends upon itself
+      ;;; EXAMPLES:
+      ;;;
+      ;;; isCircular ([])  =&gt;  false
+      ;;;
+      ;;; isCircular
+      ;;;  ([makeModule ("Main",  ["List", "AList"], 1504188920, -1,         "LP64"),
+      ;;;    makeModule ("List",  ["Obj"],           1472652920, 1472658760, "LP64"),
+      ;;;    makeModule ("AList", ["List", "Obj"],   1472654764, 1472659242, "LP64"),
+      ;;;    makeModule ("Obj",   [],                1472630256, 1472638841, "LP64")])
+      ;;;     =&gt;  false
+      ;;;
+      ;;; isCircular
+      ;;;  ([makeModule ("M1", ["M2", "M3"], 1500, -1, "ILP32"),
+      ;;;    makeModule ("M2", ["M3"],       2000, -1, "ILP32"),
+      ;;;    makeModule ("M3", ["M2"],       2500, -1, "ILP32"))
+      ;;;     =&gt;  true
+      ;;;
+      ;;; bestMode : String ListOfModule -&gt; String
+      ;;; GIVEN: a module name <var>M</var> and a list of module descriptions
+      ;;; WHERE: no two descriptions are for the same module name,
+      ;;;     <var>M</var> is among the modules described,
+      ;;;     and none of the described modules depend upon themselves
+      ;;; RETURNS: the name of a mode (LP64, ILP64, LP32, or ILP32)
+      ;;;     that, when used to compile all of the modules that need to be
+      ;;;     compiled before module <var>M</var> can be used, would result in
+      ;;;     compiling the fewest modules
+      ;;; NOTE: this function may have more than one correct result
+      ;;; EXAMPLES:
+      ;;;
+      ;;; bestMode
+      ;;;  ("Main",
+      ;;;   [makeModule ("Main",  ["List", "AList"], 1504188920, -1,         "LP64"),
+      ;;;    makeModule ("List",  ["Obj"],           1472652920, 1472658760, "LP64"),
+      ;;;    makeModule ("AList", ["List", "Obj"],   1472654764, 1472659242, "LP64"),
+      ;;;    makeModule ("Obj",   [],                1472630256, 1472638841, "LP32")])
+      ;;;     =&gt;  "LP32"
+      ;;;
+      ;;; bestMode
+      ;;;  ("Main",
+      ;;;   [makeModule ("Main",  ["List", "AList"], 1504188920, -1,         "LP64"),
+      ;;;    makeModule ("List",  ["Obj"],           1472652920, 1472658760, "LP64"),
+      ;;;    makeModule ("AList", ["List", "Obj"],   1472654764, 1472659242, "LP64"),
+      ;;;    makeModule ("Obj",   [],                1472630256, 1472638841, "ILP32")])
+      ;;;     =&gt;  "ILP32"
+      ;;;
+      ;;; bestPlan : String ListOfModule -&gt; ListOfString
+      ;;; GIVEN: a module name <var>M</var> and a list of module descriptions
+      ;;; WHERE: no two descriptions are for the same module name,
+      ;;;     <var>M</var> is among the modules described,
+      ;;;     and none of the described modules depend upon themselves
+      ;;; RETURNS: a list of names for the modules that need to be compiled
+      ;;;     using the best mode, in the order they should be compiled,
+      ;;;     before module <var>M</var> can be used
+      ;;; NOTE: this function may have more than one correct result
+      ;;; EXAMPLE:
+      ;;;
+      ;;; bestPlan
+      ;;;  ("Main",
+      ;;;   [makeModule ("Main",  ["List", "AList"], 1504188920, -1,         "LP64"),
+      ;;;    makeModule ("List",  ["Obj"],           1472652920, 1472658760, "LP64"),
+      ;;;    makeModule ("AList", ["List", "Obj"],   1472654764, 1472659242, "LP64"),
+      ;;;    makeModule ("Obj",   [],                1472630256, 1472638841, "ILP32")])
+      ;;;     =&gt;  ["List", "AList", "Main"]
+</pre>
+    <h4>
+      Specification of the <code>Module</code> ADT:
+    </h4>
+    <pre>
+      ;;; makeModule : String ListOfString Int Int String -&gt; Module
+      ;;; GIVEN: the name of a module,
+      ;;;     a list of the names of all modules it uses
+      ;;;     a non-negative integer giving the time at which the module's
+      ;;;     source code was last modified (as the number of seconds that
+      ;;;     have elapsed since midnight on 1 January 1970),
+      ;;;     an integer giving the time at which the module was last compiled
+      ;;;     (or -1 if the module has not been compiled),
+      ;;;     and a string naming the mode in which the module was last compiled
+      ;;;     (which is meaningless if the module has not been compiled)
+      ;;; RETURNS: a description encapsulating the given information
+      ;;;
+      ;;; moduleName : Module -&gt; String
+      ;;; moduleUses : Module -&gt; ListOfString
+      ;;; modificationTime : Module -&gt; Int
+      ;;; compilationTime : Module -&gt; Int
+      ;;; compilationMode : Module -&gt; String
+      ;;;
+      ;;; GIVEN: the description of a module
+      ;;; RETURNS: the appropriate part of that description
+      ;;; EXAMPLES:
+      ;;; moduleName (makeModule ("Foo", ["Baz"], 1505109465, 1504097449, "LP64"))
+      ;;;     =&gt;  "Foo"
+      ;;; moduleUses (makeModule ("Foo", ["Baz"], 1505109465, 1504097449, "LP64"))
+      ;;;     =&gt;  ["Baz"]
+      ;;; modificationTime (makeModule ("Foo", ["Baz"], 1505109465, 1504097449, "LP64"))
+      ;;;     =&gt;  1505109465
+      ;;; compilationTime (makeModule ("Foo", ["Baz"], 1505109465, 1504097449, "LP64"))
+      ;;;     =&gt;  1504097449
+      ;;; compilationMode (makeModule ("Foo", ["Baz"], 1505109465, 1504097449, "LP64"))
+      ;;;     =&gt;  "LP64"
+</pre>
+    <hr />
+    <div>
+      <h3 id="samples">
+        Sample Implementations
+      </h3>
+      <p>
+        We are giving you sample implementations, in three programming
+        languages, of the <code>Module</code> ADT and the
+        <code>
+          ListOfModule
+        </code>
+        and
+        <code>
+          ListOfString
+        </code>
+        data types.
+        You should translate those implementations into the language
+        you choose to use for this problem set.
+      </p>
+      <ul>
+        <li>
+          <a href="CPlusPlus00.tar.gz">
+            C++
+          </a>
+        </li>
+        <li>
+          <a href="Java00.tar.gz">
+            Java
+          </a>
+        </li>
+        <li>
+          <a href="Scheme00.tar.gz">
+            Scheme
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-    <p>The problem specification will be posted at a later date.</p>
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -91,5 +438,11 @@ Click here to validate.
 </a>
 </p>
 
+-->
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sat Sep  2 09:40:57 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body>
 </html>
