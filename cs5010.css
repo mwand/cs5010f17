@@ -184,6 +184,11 @@ li {padding-bottom: 4pt}
   color: red;
 }
 
+.new {   			/* say <span class="new">*/
+  color: red;
+}
+
+
 .green {
   color: green;
 }
