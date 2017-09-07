@@ -7,7 +7,7 @@
 ;;; The Book Store example
 
 ;;; Back in the days before Amazon, there used to be things called
-;;; "book stores" where you could go to buy books.   A book
+;;; "book stores" where you could go to buy books.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; DATA DEFINITIONS
