@@ -1,0 +1,122 @@
+TA-1 Name:- 
+TA-2 Name:- 
+
+Student CCIS ID:- 
+
+Design Grade: - 
+Correctness Score: - /15
+Presentation Grade: -
+
+INSTRUCTIONS TO TAs: Delete items that do not apply.  For items that apply,
+indicate which data definitions/functions have the indicated problem.
+
+================
+
+Examples and Tests:
+
+-- should have 100% test coverage except for functions that call big-bang.
+
+================
+
+Data Design:
+
+-- bad design choices 
+
+-- missing/incomplete interpretation.  
+
+-- missing/incomplete/wrong invariants in data definitions
+
+-- missing/incorrect templates. 
+
+================
+
+Contract/Purpose Statement/Design Strategy:
+
+-- missing/incorrect contracts.
+
+-- missing/incomplete/misleading purpose statements.
+
+-- purpose statement does not mention one of the arguments.
+
+-- missing/incomplete invariant
+
+-- misleading/uninformative design strategy.
+
+-- function definition too complicated or obscure
+
+-- poor choice of function/constant names.  
+
+-- poor choice of argument names.  
+
+-- Spaghetti code.
+
+-- Annoying code duplication
+
+-- Code doesn't use map/filter/fold where it should
+
+-- missing/incomplete/incorrect termination argument (starting week 08)
+
+-- uses concepts/terms from previous semesters
+
+================
+
+Presentation:
+
+-- student shows lack of understanding of his/her submission
+
+-- student has difficulty understanding questions that are asked
+
+-- student has difficulty answering questions
+
+-- student talks around answer rather than answering precisely
+
+-- student's English is hard to understand (pronounciation)
+
+-- student speaks too softly to be heard
+
+================
+
+Interfaces, Objects, and Classes
+
+-- Interface has no purpose statement
+
+-- Method in interface has no contract
+
+-- Contract for method talks about classes, not interfaces
+
+-- Method in interface has no purpose statement/inadequate purpose
+   statement 
+
+-- Class has no purpose statement
+
+-- Class has no constructor template
+
+-- field interpretation missing or inadequate
+
+-- field interpretations/invariants inadequate to explain all values
+   assigned by program.
+   
+-- public method not in interface (for-test:* methods are OK)
+
+-- method has no contract
+
+-- method has contract different from the contract in the interface
+
+-- method has inadequate purpose statement
+
+-- method missing examples if you think they are necessary to explain
+   purpose statement
+   
+-- method missing design strategy if you think it is necessary to
+   explain the code.
+
+================
+
+Other:
+
+
+================
+
+
+
+
