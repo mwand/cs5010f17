@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<link type="text/css" rel="stylesheet" href="../../css/course.css">
+<title>Space Invaders</title>
+</head>
+
+<body>
+<h1>Space Invaders</h1>
+
+<p>Earth is being invaded by martians. Here's a description of the
+Martian fleet:</p>
+
+<ol>
+  <li> The Martians have some spaceships. </li>
+  <li> Each spaceship is either a mother ship or a drone.</li>
+  <li> A mother ship has a name, which is a String, a crew, which is a
+  list of Martians, and a possibly-empty set of daughter ships, each
+  of which is a spaceship.</li>
+  <li> When we say the fleet of a spaceship, we mean her daughter
+  ships and all their fleets.</li>
+  <li> A Martian has a name, which is a string, and some other
+  attributes, which are unspecified.</li>
+</ol>
+
+<p>Write functions to accomplish the following tasks. For each
+function, draw its call graph, and write a halting measure. Be prepared
+to explain why your halting measure decreases around every cycle in
+the graph.</p>
+
+<ol>
+  <li>Given a spaceship, is there a Martian named "Mork" in its
+  crew?</li>
+
+  <li>Given a spaceship, is there a Martian named "Mork" in its own
+  crew or in the crew of one of its daughter ships?  </li>
+  
+  <li>Given a spaceship, how many Martians named "Mork" are in the
+  crew of either the spaceship or its fleet? </li>
+
+  <li>Given a spaceship, return another spaceship just like the
+  original, except that all of its daughters that are drones have been
+  removed.</li>
+
+  <li>Given a spaceship, return another spaceship just like the
+  original, except that all of the drones in its fleet have been removed.</li>
+
+  <li>Given a spaceship, return another spaceship just like the
+  original, except that all of its daughters who have a crewmember
+  named "Mork" have been removed.  When a daughter is removed from the
+  fleet, so are all its daughters and their fleets.</li>
+
+  <li>Given a spaceship, return another spaceship just like the
+  original, except that every ship in its fleet who has a crewmember
+  named "Mork" has been removed.   When a ship is removed from the
+  fleet, so are all its daughters and their fleets.</li>
+
+  <!-- Tue Oct 18 11:14:39 2016: removed these because they are too
+  close to the problem set. -->
+
+  <!-- <li>Given a spaceship, return another spaceship just like the -->
+  <!-- original, except that all of its daughters who have a crewmember -->
+  <!-- named "Mork" have been removed.  When a daughter is removed from the -->
+  <!-- fleet, each of its daughters (a grand-daughter of the given -->
+  <!-- spaceship) are promoted to become a daughter of the given -->
+  <!-- spaceship, even if it has a Mork in its crew.</li> -->
+
+
+  <!-- <li>Given a spaceship, return another spaceship just like the -->
+  <!-- original, except that every ship in its fleet who has a crewmember -->
+  <!-- named "Mork" have been removed.  When a ship is removed from the -->
+  <!-- fleet, its daughters are promoted to become a daughter of -->
+  <!-- the nearest non-Mork ancestor.</li> -->
+
+</ol>
+
+
+
+<hr>
+<address></address>
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Tue Oct 18 12:16:23 Eastern Daylight Time 2016 <!-- hhmts end -->
+
+
+</body> </html>
