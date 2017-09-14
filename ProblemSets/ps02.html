@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,9 +28,9 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 23 January 2017
+      <strong>Out:</strong> Monday, 18 September 2017
       <br />
-      <strong>Due:</strong> Monday, 30 January 2017 at 6pm
+      <strong>Due:</strong> Monday, 25 September 2017 at 6pm local time
     </p>
   </div>
   <div>
@@ -44,47 +44,45 @@
     </p>
     <p>
       The main purpose of this problem set is to give you practice
-      with data design and with functions that operate on scalar and
-      itemization data.
+      with data design.
     </p>
     <p>
-      You must use Racket's HtDP Beginning Student Language
+      You must use Racket's HtDP Intermediate Student Language (ISL)
       for this problem set.
     </p>
     <p>
       For these problems, download a copy of
-      <a href="extras.rkt">
-        extras.rkt
-      </a>
+      <a href="extras.rkt">extras.rkt</a>
       and put it in the folder with your solutions.
       Then import this library by including the line
     </p>
     <pre>
       (require "extras.rkt")
-    </pre>
+</pre>
     <p>
       at the top of your file with the other <code>require</code>
       declarations.  Then, for each problem, put in lines that say
     </p>
     <pre>
       (provide <var>function</var>)
-    </pre>
+</pre>
     <p>
       for each deliverable function.  Thus, for problem 1, the top
       of your <code>q1.rkt</code> file should say
     </p>
     <pre>
       (require rackunit)
-      (require 2htdp/universe)    ; needed for key=?
       (require "extras.rkt")
       
       (provide
-        make-editor
-        editor-pre
-        editor-post
-        editor?
-        edit)
-    </pre>
+        make-lexer
+        lexer-token
+        lexer-input
+        initial-lexer
+        lexer-stuck?
+        lexer-shift
+        lexer-reset)
+</pre>
     <p>
       This will allow our testing framework to import your file
       and do automated testing on it.
@@ -93,23 +91,17 @@
       Remember that you must follow the design recipe, which is a
       process, not a list of deliverables.
       Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the artifacts produced by the various steps of the
       design recipe: data definitions (including interpretation and
       templates, contracts, purpose statements, definitions, and tests).
       Be sure to follow our
-      <a href="../Info/style.html">
-        coding conventions.
-      </a>
+      <a href="../Info/style.html">coding conventions</a>.
       Doing so will make codewalks easier for everyone.
     </p>
     <p>
       Be sure to fill out a
-      <a href="../ProblemSets/yourID-log.txt">
-        work session report
-      </a>
+      <a href="yourID-log.txt">work session report</a>
       at the end of each work session.
       Tell <code>git</code> to add it to the files you will commit,
       and then commit and push (sync) that report in addition to
@@ -118,156 +110,189 @@
     </p>
     <p>
       Remember to include a copy of <code>extras.rkt</code> racket
-      in your <code>set02</code> directory, as well as your
-      <code>q2.jpg</code> or <code>q2.png</code> file.
+      in your <code>set02</code> directory.
     </p>
     <hr />
     <ol>
       <li>
-        (Tiny Test Editor)
+        (Lexer)
         <br />
-        Do exercise 84 (the function "edit") from
-        Part I, section 5.10 of
-        <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">
-          HtDP/2e.
-        </a>
+        <p>
+          Application programs often have to divide textual inputs
+          into tokens such as identifiers, numbers, and punctuation.
+          That task is known as
+          <a href="https://en.wikipedia.org/wiki/Lexical_analysis">lexical
+          analysis</a>.
+          This problem asks you to write part of a simple lexical analyzer.
+        </p>
         <p>
           You are to write a file called <code>q1.rkt</code>
-          that provides the following functions:
+          that defines a <code>Lexer</code> data type and
+          provides all seven of the following functions:
         </p>
         <pre>
-          make-editor
-          editor-pre
-          editor-post
-          editor?
-          edit
-        </pre>
-        <p>
-          For this problem, we will consider <code>KeyEvent</code>
-          to be a scalar data type, which can be decomposed using
-          the cases strategy.
-          <code>KeyEvent</code> and <code>key=?</code> are defined
-          in the <code>2htdp/universe</code> module.
-          Look in Racket's Help Desk for details.
-          To import <code>key=?</code>, you will need to <code>require</code>
-          <code>2htdp/universe</code>.
-        </p>
-        <p>
-          We will be doing automated testing of your solution, so
-          be sure your solution is in the right place
-          (<code>set02/q1.rkt</code> in your private
-          <code>cs5010sp17/pdp-YOURUSERNAME</code> repository),
-          and that it provides all the functions listed above.
-          To see if your file is in the right place, insert the
-          following line somewhere near the top of your file:
-        </p>
-        <pre>
-          (check-location "02" "q1.rkt")
-        </pre>
-      </li>
-      <li>
-        (Finite State Machine)
-        <br />
-        This exercise is loosely based on Exercise 109 in HtDP/2e,
-        but you will <strong><em>NOT</em></strong> create any displays.
-        <p>
-          As in Exercise 109, you are to design a finite-state machine
-          and a set of functions that
-          illustrate the workings of that machine.
-          The machine you design will accept a sequence of letters
-          (with each letter represented as a <code>1String</code>)
-          if and only if that sequence matches the regular expression
-        </p>
-        <pre>
-          (d* | d* p d* | s d* | s d* p d*) (d | d e)
-        </pre>
-        <p>
-          The sequences <code>d</code>, <code>dd</code>, <code>sd</code>,
-          <code>ddddpdd</code>, and <code>sddde</code> all match that
-          regular expression, but the sequences
-          <code>ddddp</code>, and <code>spe</code> do not.
-        </p>
-        <p>
-          Your program must define two data types,
-          <code>LegalInput</code> and <code>State</code>.
-        </p>
-        <p>
-          The <code>LegalInput</code> data type consists of the
-          four one-letter strings that represent a legal second argument
-          to your <code>next-state</code> function:
-          <code>"d"</code>, <code>"p"</code>,
-          <code>"s"</code>, and <code>"e"</code>.
-          You do not need to give an interpretation for each
-          <code>LegalInput</code>, because the problem makes
-          sense even if the inputs are uninterpreted.
-          (You might be interested to know, however, that this
-          problem is related to the syntax of numerical constants
-          in many programming languages.)
-        </p>
-        <p>
-          To design your <code>State</code> data type, you will need
-          to design your finite state machine as part of your information
-          analysis and data design.  Your information analysis and design
-          should produce a state-transition diagram
-          (like the ones <a href="http://www.google.com/search?q=state%20transition%20diagram&tbm=isch">here</a>)
-          that shows the meaning of your machine states.
-          Your data design should also include an interpretation
-          for each state.
-          Make your state-transition diagram as simple as you can,
-          and submit a picture of it in
-          <a href="https://en.wikipedia.org/wiki/JPEG">
-            JPEG
-          </a>
-          or
-          <a href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">
-            PNG
-          </a>
-          format as a separate file named
-          <code>q2.jpg</code> or <code>q2.png</code>.
-          You can create this file using a graphics program or by
-          drawing your state transition diagram on a piece of paper
-          and taking a good picture of it.
-        </p>
-        <p>
-          After you have done your data design, use your design to
-          design and <code>provide</code> these four functions:
-        </p>
-        <pre>
-          initial-state : Number -> State
-          GIVEN: a number
-          RETURNS: a representation of the initial state
-              of your machine.  The given number is ignored.
-          
-          next-state : State LegalInput -> State
-          GIVEN: a state of the machine and a machine input
-          RETURNS: the state the machine should enter if it
-              is in the given state and sees the given input.
-          
-          accepting-state? : State -> Boolean
-          GIVEN: a state of the machine
-          RETURNS: true iff the given state is a final (accepting) state
-          
-          rejecting-state? : State -> Boolean
-          GIVEN: a state of the machine
-          RETURNS: true iff there is no path (empty or non-empty) from
-              the given state to an accepting state
-        </pre>
-        <p>
-          Please note that some of your machine's states are
-          likely to be neither accepting nor rejecting.
-        </p>
+          ;;; make-lexer : String String -&gt; Lexer
+          ;;; GIVEN: two strings s1 and s2
+          ;;; RETURNS: a Lexer whose token string is s1
+          ;;;     and whose input string is s2
+          ;;;
+          ;;; lexer-token : Lexer -&gt; String
+          ;;; GIVEN: a Lexer
+          ;;; RETURNS: its token string
+          ;;; EXAMPLE:
+          ;;;     (lexer-token (make-lexer "abc" "1234")) =&gt;  "abc"
+          ;;;
+          ;;; lexer-input : Lexer -&gt; String
+          ;;; GIVEN: a Lexer
+          ;;; RETURNS: its input string
+          ;;; EXAMPLE:
+          ;;;     (lexer-input (make-lexer "abc" "1234")) =&gt;  "1234"
+          ;;;
+          ;;; initial-lexer : String -&gt; Lexer
+          ;;; GIVEN: an arbitrary string
+          ;;; RETURNS: a Lexer lex whose token string is empty
+          ;;;     and whose input string is the given string
+          ;;;
+          ;;; lexer-stuck? : Lexer -&gt; Boolean
+          ;;; GIVEN: a Lexer
+          ;;; RETURNS: false if and only if the given Lexer's input string
+          ;;;     is non-empty and begins with an English letter or digit;
+          ;;;     otherwise returns true.
+          ;;; EXAMPLES:
+          ;;;     (lexer-stuck? (make-lexer "abc" "1234"))  =&gt;  false
+          ;;;     (lexer-stuck? (make-lexer "abc" "+1234"))  =&gt;  true
+          ;;;     (lexer-stuck? (make-lexer "abc" ""))  =&gt;  true
+          ;;;
+          ;;; lexer-shift : Lexer -&gt; Lexer
+          ;;; GIVEN: a Lexer
+          ;;; RETURNS:
+          ;;;   If the given Lexer is stuck, returns the given Lexer.
+          ;;;   If the given Lexer is not stuck, then the token string
+          ;;;       of the result consists of the characters of the given
+          ;;;       Lexer's token string followed by the first character
+          ;;;       of that Lexer's input string, and the input string
+          ;;;       of the result consists of all but the first character
+          ;;;       of the given Lexer's input string.
+          ;;; EXAMPLES:
+          ;;;     (lexer-shift (make-lexer "abc" ""))
+          ;;;         =&gt;  (make-lexer "abc" "")
+          ;;;     (lexer-shift (make-lexer "abc" "+1234"))
+          ;;;         =&gt;  (make-lexer "abc" "+1234")
+          ;;;     (lexer-shift (make-lexer "abc" "1234"))
+          ;;;         =&gt;  (make-lexer "abc1" "234")
+          ;;;
+          ;;; lexer-reset : Lexer -&gt; Lexer
+          ;;; GIVEN: a Lexer
+          ;;; RETURNS: a Lexer whose token string is empty and whose
+          ;;;     input string is empty if the given Lexer's input string
+          ;;;     is empty and otherwise consists of all but the first
+          ;;;     character of the given Lexer's input string.
+          ;;; EXAMPLES:
+          ;;;     (lexer-reset (make-lexer "abc" ""))
+          ;;;         =&gt;  (make-lexer "" "")
+          ;;;     (lexer-reset (make-lexer "abc" "+1234"))
+          ;;;         =&gt;  (make-lexer "" "1234")
+</pre>
         <p>
           Remember that we will be doing automated testing of your
           solution, so be sure your solution is in the right place
           (<code>set02/q2.rkt</code> in your private
-          <code>cs5010sp16/pdp-YOURUSERNAME</code> repository),
+          <code>cs5010f17/pdp-YOURUSERNAME</code> repository),
           and that it provides all the functions listed above.
           To see if your file is in the right place, insert the
-          following line somewhere near the top of your file:
+          following line somewhere near the top of your file,
+          but after the <code>require</code> declarations:
         </p>
         <pre>
           (check-location "02" "q2.rkt")
-        </pre>
+</pre>
+      </li>
+      <li>
+        (ChineseTrafficSignal)
+        <br />
+        <p>
+          In China, traffic signals behave differently.
+          The traffic signal you will model starts out red
+          and remains red for some period of time, such as 30 seconds.
+          The signal then becomes green for three seconds less than
+          the period of time it had been red.
+          The signal then goes blank for one second, then green for another
+          second, and then blank again for one second before
+          returning to its red state and repeating the cycle.
+        </p>
+        <p>
+          Note that the signal is red for the same period of time
+          that the signal is green or blank.
+        </p>
+        <p>
+          You are to write a file called <code>q2.rkt</code>
+          that defines a <code>ChineseTrafficSignal</code> data type and
+          provides all four of the following functions:
+        </p>
+        <pre>
+          ;;; initial-state : PosInt -&gt; ChineseTrafficSignal
+          ;;; GIVEN: an integer <var>n</var> greater than 3
+          ;;; RETURNS: a representation of a Chinese traffic signal
+          ;;;     at the beginning of its red state, which will last
+          ;;;     for <var>n</var> seconds
+          ;;; EXAMPLE:
+          ;;;     (is-red? (initial-state 4))  =&gt;  true
+          ;;;
+          ;;; next-state : ChineseTrafficSignal -&gt; ChineseTrafficSignal
+          ;;; GIVEN: a representation of a traffic signal in some state
+          ;;; RETURNS: the state that traffic signal should have one
+          ;;;     second later
+          ;;;
+          ;;; is-red? : ChineseTrafficSignal -&gt; Boolean
+          ;;; GIVEN: a representation of a traffic signal in some state
+          ;;; RETURNS: true if and only if the signal is red
+          ;;; EXAMPLES:
+          ;;;     (is-red? (next-state (initial-state 4)))  =&gt;  true
+          ;;;     (is-red?
+          ;;;      (next-state
+          ;;;       (next-state
+          ;;;        (next-state (initial-state 4)))))  =&gt;  true
+          ;;;     (is-red?
+          ;;;      (next-state
+          ;;;       (next-state
+          ;;;        (next-state
+          ;;;         (next-state (initial-state 4))))))  =&gt;  false
+          ;;;     (is-red?
+          ;;;      (next-state
+          ;;;       (next-state
+          ;;;        (next-state
+          ;;;         (next-state
+          ;;;          (next-state (initial-state 4)))))))  =&gt;  false
+          ;;;
+          ;;; is-green? : ChineseTrafficSignal -&gt; Boolean
+          ;;; GIVEN: a representation of a traffic signal in some state
+          ;;; RETURNS: true if and only if the signal is green
+          ;;; EXAMPLES:
+          ;;;     (is-green?
+          ;;;      (next-state
+          ;;;       (next-state
+          ;;;        (next-state
+          ;;;         (next-state (initial-state 4))))))  =&gt;  true
+          ;;;     (is-green?
+          ;;;      (next-state
+          ;;;       (next-state
+          ;;;        (next-state
+          ;;;         (next-state
+          ;;;          (next-state (initial-state 4)))))))  =&gt;  false
+</pre>
+        <p>
+          Remember that we will be doing automated testing of your
+          solution, so be sure your solution is in the right place
+          (<code>set02/q2.rkt</code> in your private
+          <code>cs5010f17/pdp-YOURUSERNAME</code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line somewhere near the top of your file,
+          but after the <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "02" "q2.rkt")
+</pre>
       </li>
     </ol>
   </div>
@@ -275,12 +300,16 @@
 
 <!-- end of specific content -->
 
+<!--
+
 <p class="muchsmaller">
 For debugging: 
 <a href="http://validator.w3.org/check/referer">
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
