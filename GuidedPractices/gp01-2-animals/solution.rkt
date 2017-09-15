@@ -1,15 +1,12 @@
 ;; Here is one solution:
 
-(define-struct spider (nlegs volume))
-(define-struct elephant (volume))
-(define-struct boa (length girth volume))  
-(define-struct armadillo (length volume appetite))
 
-;; A ZooAnimal is represented by one of the following structs:
+;; A ZooAnimal is represented by one of the following structs, with
+;; the indicated fields:
 ;; (make-spider nlegs volume) -- a spider 
 ;; (make-elephant volume) -- an elephant 
-;; (make-boa l g volume)  -- a boa constrictor
-;; (make-armadillo l volume app) -- an armadillo
+;; (make-boa length girth volume)  -- a boa constrictor
+;; (make-armadillo length volume appetite) -- an armadillo
 
 ;; INTERPRETATION OF FIELDS:
 ;; nlegs    : NonNegInt    number of legs of this animal
@@ -20,6 +17,20 @@
 ;; appetite : PosReal      appetite of this animal (in cm^3 of ants
 ;;                         per day:)
 
+;; IMPLEMENTATION
+
+(define-struct spider (nlegs volume))
+(define-struct elephant (volume))
+(define-struct boa (length girth volume))  
+(define-struct armadillo (length volume appetite))
+
+;; CONSTRUCTOR TEMPLATES
+;; (make-spider NonNegInt PosReal)
+;; (make-elephant PosReal)
+;; (make-boa PosReal PosReal)
+;; (make-armadillo PosReal PosReal PosReal)
+
+;; OBSERVER TEMPLATE:
 ; animal-fn: ZooAnimal -> ??
 (define (animal-fn a)
   (cond
@@ -40,7 +51,7 @@
        (armadillo-length a)
        (armadillo-volume a)
        (armadillo-appetite a))]))
-|#
+
 
 (define spider1 (make-spider 7 10.0))
 (define elephant1 (make-elephant 1.5e6))

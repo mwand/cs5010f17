@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,9 +28,9 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 16 January 2017
+      <strong>Out:</strong> Monday, 11 September 2017
       <br />
-      <strong>Due:</strong> Monday, 23 January 2017 at 6pm
+      <strong>Due:</strong> Monday, 18 September 2017 at 6pm local time
     </p>
   </div>
   <div>
@@ -50,13 +50,9 @@
       In particular, you need to know how to commit your solution
       and how to push your commits to the course's GitHub site.
       To submit your solution, follow our instructions on
-      <a href="../Info/submission.html">
-        How to Submit Your Homework,
-      </a>
+      <a href="../Info/hw.html#submission">how to submit your homework</a>,
       and be sure to include the required
-      <a href="../Info/deliverables.html">
-        deliverables.
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>.
     </p>
     <p>
       We will check to see whether your have submitted a solution
@@ -65,15 +61,13 @@
       graded.
     </p>
     <p>
-      You must use Racket's HtDP Beginning Student Language
+      You must use Racket's HtDP Intermediate Student Language (ISL)
       for this problem set.
     </p>
     <p>
       You should begin your work on this problem set by using
       <code>git</code> to clone your GitHub repository from the
-      <a href="https://github.ccs.neu.edu/cs5010sp17">
-        CS 5010 GitHub site.
-      </a>
+      <a href="https://github.ccs.neu.edu/cs5010f17">CS 5010 GitHub site</a>.
       The name of your GitHub repository is
       <code>pdp-</code><var>YOURNAME</var>, where <var>YOURNAME</var>
       is your CCIS ID.
@@ -85,9 +79,7 @@
     </p>
     <p>
       You will also need to download a copy of
-      <a href="extras.rkt">
-        <code>extras.rkt</code>
-      </a>
+      <a href="extras.rkt"><code>extras.rkt</code></a>
       and put it in your <code>set01</code> directory along with
       the <code>q1.rkt</code> through <code>q5.rkt</code> files
       you will write for this problem set.
@@ -97,7 +89,7 @@
     <pre>
       (require rackunit)
       (require "extras.rkt")
-    </pre>
+</pre>
     <p>
       near the top of the file, preceded only by your comments
       describing the file.
@@ -105,32 +97,37 @@
     <p>
       Immediately following those <code>require</code> declarations,
       your file should state a <code>provide</code> declaration for
-      each deliverable function.  For example, your <code>q1.rkt</code>
-      file should say
-    </p>
-    <pre>
-      (provide cvolume)
-      (provide csurface)
-    </pre>
-    <p>
+      each deliverable function.
       Those <code>provide</code> declarations allow our testing
       infrastructure to <code>require</code> your file and check
       to see whether you've provided all of the deliverable functions.
+      <span class="red">
+        Also, include a line calling <code>check-location</code>
+        to check whether your file is correctly named and in the
+        right place in your repository.
+      </span>
+      That call to <code>check-location</code> <em>must</em> be
+      placed after the <code>require</code> declarations,
+      but can go before the <code>provide</code> declarations.
+      Thus, for problem 1, the top of your file should say
     </p>
+    <pre>
+      (require rackunit)
+      (require "extras.rkt")
+      (check-location "01" "q1.rkt")
+      
+      (provide pyramid-volume)
+</pre>
     <p>
       Remember to follow the design recipe.  Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the data definitions you need (including interpretations
       and templates), contracts, purpose statements, examples and tests,
       and design strategies in addition to your function definitions.
     </p>
     <p>
       Remember to fill out a
-      <a href="yourID-log.txt">
-        work session report
-      </a>
+      <a href="../Info/yourID-log.txt">work session report</a>
       at the end of each
       work session.  Tell <code>git</code> to <code>add</code> it to
       the files you will commit, and then commit and push that report
@@ -141,31 +138,56 @@
   </div>
   <hr />
   <div>
-    <p>
-      Do the following exercises from
-      <a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">
-        the textbook:
-      </a>
-    </p>
     <ol>
       <li>
-        Exercise 12 (<code>cvolume</code> and <code>csurface</code>).
+        Write a function named <code>pyramid-volume</code>
+        that, given values <var>x</var> and <var>h</var>
+        in units of meters, returns the volume in cubic meters of
+        a pyramid of height <var>h</var> whose square bottom
+        has sides of length <var>x</var>.
+        (Hint: the volume of any pyramid is one third the area
+        of its base times its height.)
         Put your solution in a file named <code>q1.rkt</code>.
       </li>
       <li>
-        Exercise 14 (<code>string-last</code>).
+        A few countries have not yet converted to the metric system.
+        Write a function named <code>furlongs-to-barleycorns</code>
+        that, given a length in furlongs, returns the number of
+        barleycorns in that length.
+        (Hint: one furlong is ten chains; one chain is four rods;
+        one rod is sixteen and a half feet; one foot is twelve inches;
+        one inch is three barleycorns.
         Put your solution in a file named <code>q2.rkt</code>.
       </li>
       <li>
-        Exercise 19 (<code>string-insert</code>).
+        Write a function named <code>kelvin-to-fahrenheit</code>
+        that, given a temperature in Kelvin, returns the number
+        of Fahrenheit degrees.
+        (Hint: 0 K is -273.15 degrees Celsius, and 273.15 K is
+        0 degrees Celsius.)
         Put your solution in a file named <code>q3.rkt</code>.
       </li>
       <li>
-        Exercise 27 (refactoring the <code>profit</code> program).
+        For scientific applications, the speed of a microprocessor
+        is often expressed as the number of floating point operations
+        it can perform per second; one floating point operation per
+        second equals 1 FLOPS.
+        Write a function named <code>flopy</code> that,
+        given the speed of a microprocessor in FLOPS,
+        returns the number of floating point operations
+        it can perform in one 365-day year, with each day
+        consisting of exactly 24 hours.
         Put your solution in a file named <code>q4.rkt</code>.
       </li>
       <li>
-        Exercise 38 (<code>string-remove-last</code>).
+        The Java type <code>double</code> consists of 2<sup>64</sup>
+        distinct values, and double precision addition takes
+        two of those values as inputs, so exhaustive testing of
+        double precision addition involves 2<sup>128</sup> additions.
+        Write a function named <code>years-to-test</code> that,
+        given the speed of a microprocessor in FLOPS,
+        returns the number of 365-day years it would take to test
+        the double precision addition operation on all legal inputs.
         Put your solution in a file named <code>q5.rkt</code>.
       </li>
     </ol>
@@ -174,12 +196,16 @@
 
 <!-- end of specific content -->
 
+<!--
+
 <p class="muchsmaller">
 For debugging: 
 <a href="http://validator.w3.org/check/referer">
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
