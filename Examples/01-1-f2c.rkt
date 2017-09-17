@@ -10,7 +10,7 @@
 
 ;; DATA DEFINITIONS:
 
-;; A FarenTemp   is represented as a Real.
+;; A FahrenTemp   is represented as a Real.
 ;; A CelsiusTemp is represented as a Real.
 
 ;; f2c: FarenTemp -> CelsiusTemp         
