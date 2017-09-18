@@ -40,7 +40,28 @@
    [(ternary-node? t) (ternary-combiner
                        (23-tree-fold leaf-fn binary-combiner ternary-combiner (ternary-node-lson t))
                        (23-tree-fold leaf-fn binary-combiner ternary-combiner (ternary-node-mson t))
-                       (23-tree-fold leaf-fn binary-combiner ternary-combiner (ternary-node-rson t)))]))
+                       (23-tree-fold leaf-fn binary-combiner
+                                     ternary-combiner
+                                     (ternary-node-rson t)))]))
+
+;; or, better, using 'local' to manage local recursion
+
+(define (better-23-tree-fold
+         leaf-fn binary-combiner ternary-combiner t)
+  (local
+      ((define (folder t)
+         (cond
+           [(leaf-node? t) (leaf-fn (leaf-node-data t))]
+           [(binary-node? t)
+            (binary-combiner
+             (folder (binary-node-lson t))
+             (folder (binary-node-rson t)))]
+           [(ternary-node? t)
+            (ternary-combiner
+             (folder (ternary-node-lson t))
+             (folder (ternary-node-mson t))
+             (folder (ternary-node-rson t)))])))
+    (folder t)))
 
 
 
@@ -75,7 +96,7 @@
 ;; STRATEGY: Use template for 23Tree on t
 
 (define (leaf-max t)
-  (23-tree-fold
+  (better-23-tree-fold
    (lambda (x) x)
    (lambda (v1 v2) (max v1 v2))
    (lambda (v1 v2 v3) (max v1 v2 v3))
@@ -87,7 +108,7 @@
 ;; STRATEGY: Use template for 23Tree on t
 
 (define (double-all t) 
-  (23-tree-fold
+  (better-23-tree-fold
    (lambda (x) (make-leaf-node (* 2 x)))
    (lambda (t1 t2) (make-binary-node t1 t2))
    (lambda (t1 t2 t3) (make-ternary-node t1 t2 t3))
@@ -96,7 +117,7 @@
 ;; OR:
 
 (define (double-all2 t)
-  (23-tree-fold
+  (better-23-tree-fold
    (lambda (x) (make-leaf-node (* 2 x)))
    make-binary-node
    make-ternary-node
