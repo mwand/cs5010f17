@@ -490,13 +490,5 @@ ul.popup-on-hover li:hover:nth-child(4) span {
   left: 40px;
 }
 
-/**IE Hacks - see http://css3pie.com/
- * for more info on how to use CS3Pie and to download the latest version**/
-
-/*
-
-/* ul.popup-on-hover img, ul.popup-on-hover span { */
-/*   behavior: url(pie/PIE.htc); */
-/* }  */
 
 
