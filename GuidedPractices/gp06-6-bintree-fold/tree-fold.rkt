@@ -1,30 +1,41 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 06-3-tree-fold) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
-;; solution to guided practice 6.3
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname tree-fold) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+
 
 (require rackunit)
 (require "extras.rkt")
 
+;; A Binary Tree is represented as a BinTree, which is either:
+;; (make-leaf datum)
+;; (make-node lson rson)
+
+;; INTERPRETATON:
+;; datum      : Real       some real data
+;; lson, rson : BinTree    the left and right sons of this node
+
+;; IMPLEMENTATION:
 (define-struct leaf (datum))
 (define-struct node (lson rson))
 
-;; A Tree is either
+;; CONSTRUCTOR TEMPLATES:
 ;; -- (make-leaf Number)
-;; -- (make-node Tree Tree) 
+;; -- (make-node BinTree BinTree) 
 
-;; Template:
-;; tree-fn : Tree -> ???
-;; (define (tree-fn t)
-;;   (cond
-;;     [(leaf? t) (... (leaf-datum t))]
-;;     [else (...
-;;             (tree-fn (node-lson t))
-;;             (tree-fn (node-rson t)))]))
+;; OBSERVER TEMPLATE:
+;; tree-fn : BinTree -> ???
+(define (tree-fn t)
+  (cond
+    [(leaf? t) (... (leaf-datum t))]
+    [else (...
+            (tree-fn (node-lson t))
+            (tree-fn (node-rson t)))]))
+
+
 
 ;; tree-fold  
 ;;  : (X X -> X) (Number -> X) Tree -> X
-;; Strategy: Use template for Tree on t
+;; Strategy: Use observer template for Tree on t
 (define (tree-fold combiner base t)
   (cond
     [(leaf? t) (base (leaf-datum t))]

@@ -18,10 +18,10 @@
 
 ;; CONSTRUCTOR TEMPLATES:
 ;; -- (make-leaf Number)
-;; -- (make-node Tree Tree) 
+;; -- (make-node BinTree BinTree) 
 
 ;; OBSERVER TEMPLATE:
-;; tree-fn : Tree -> ???
+;; tree-fn : BinTree -> ???
 (define (tree-fn t)
   (cond
     [(leaf? t) (... (leaf-datum t))]
