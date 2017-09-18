@@ -14,7 +14,7 @@
 
 
 ;; REPRESENTATION:
-;; A Book is represented as a (book-record title on-hand price) with
+;; A Book is represented as a (make-book title on-hand price) with
 ;; the following fields:
 ;; INTERP:
 ;; title   : Title      is the title of the book
