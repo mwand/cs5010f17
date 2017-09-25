@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,9 +28,9 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 30 January 2017
+      <strong>Out:</strong> Monday, 25 September 2017
       <br />
-      <strong>Due:</strong> Monday, 6 February 2017 at 6pm
+      <strong>Due:</strong> Monday, 2 October 2017 at 6pm local time
     </p>
   </div>
   <div>
@@ -44,24 +44,23 @@
     </p>
     <p>
       The main purpose of this problem set is to introduce you to
-      <a href="https://en.wikipedia.org/wiki/Functional_reactive_programming">
-        functional reactive programming
-      </a>
-      in DrRacket's Universe model,
-      and to get you started with the Iterative Design Recipe.
+      <href a="https://en.wikipedia.org/wiki/Functional_reactive_programming"
+      >functional reactive programming</a>
+      in DrRacket's Universe model, and to get you started with the
+      Iterative Design Recipe.
     </p>
     <p>
-      You will also gain experience with the Core Bounce and Jerkless Dragging
-      idioms we'll be using in several subsequent exercises.
+      You will also gain experience with the Elastic Collision
+      and Smooth Dragging idioms we'll be using in several
+      subsequent problem sets.
     </p>
     <p>
-      You must use the HtDP Intermediate Student Language for this problem set.
+      You must use Racket's HtDP Intermediate Student Language (ISL)
+      for this problem set.
     </p>
     <p>
       For these problems, download a copy of
-      <a href="extras.rkt">
-        extras.rkt
-      </a>
+      <a href="extras.rkt">extras.rkt</a>
       and put it in the folder with your solutions.
       Then import this library by including the line
     </p>
@@ -73,36 +72,30 @@
       declarations.  Then, for each problem, put in lines that say
     </p>
     <pre>
-      (provide <var>function</var>)
-    </pre>
+      (provide <var>function</var>)</pre>
     <p>
-      for each deliverable function, as you have done on previous problem sets.
+      for each deliverable function, as you have done on previous
+      problem sets.
       This will allow our testing framework to import your file
       and do automated testing on it.
-      You can use <code>check-location</code> to double-check that your
-      solutions are in the right place.
+      You can use <code>check-location</code> to double-check
+      that your solutions are in the right place.
     </p>
     <p>
       Remember that you must follow the design recipe, which is a
       process, not a list of deliverables.
       Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the artifacts produced by the various steps of the
       design recipe: data definitions (including interpretation and
       templates, contracts, purpose statements, definitions, and tests).
       Be sure to follow our
-      <a href="../Info/style.html">
-        coding conventions.
-      </a>
+      <a href="../Info/style.html">coding conventions</a>.
       Doing so will make codewalks easier for everyone.
     </p>
     <p>
       Be sure to fill out a
-      <a href="../ProblemSets/yourID-log.txt">
-        work session report
-      </a>
+      <a href="yourID-log.txt">work session report</a>
       at the end of each work session.
       Tell <code>git</code> to add it to the files you will commit,
       and then commit and push (sync) that report in addition to
@@ -115,252 +108,329 @@
       <code>q1.rkt</code> and <code>q2.rkt</code> files.
     </p>
     <p>
-      <strong>
-        Note:
-      </strong>
-      For all universe programs, you may assume the mouse is never
-      dragged or moved outside the canvas.  Once the mouse enters
-      the canvas, if the mouse ever leaves the canvas, then the
-      behavior of your system is unspecified.
+      <strong>Note:</strong> For all universe programs,
+      you may assume the mouse is never dragged or moved outside the canvas.
+      Once the mouse enters the canvas, if the mouse ever leaves the canvas,
+      then the behavior of your system is unspecified.
     </p>
     <hr />
     <ol>
       <li>
-        Your job is to build a simple animation, specified as follows:
+        (SquashPractice1)
+        <br />
+        <p>
+          Your job is to build a simple simulation of a
+          <a href="https://en.wikipedia.org/wiki/Squash_(sport)">squash</a>
+          player practicing without an opponent.
+        </p>
         <ul>
           <li>
-            The animation is a universe program that displays
-            two doodads moving around in a rectangular enclosure.
+            The simulation is a universe program that displays
+            the positions and motions of a squash ball and the
+            player's racket moving within a rectangular court.
           </li>
           <li>
-            The enclosure is 601 pixels wide and 449 pixels high.
-            We are using graphics coordinates in which the top leftmost
-            pixel has coordinates (0,0).
+            The court is 425 pixels wide and 649 pixels high.
+            We use graphics coordinates in which the top leftmost pixel
+            has coordinates (0,0).
+            The court walls are displayed as a black outline,
+            but the court's floor is displayed as a white background
+            on which the ball and racket may be drawn.
           </li>
           <li>
-            One doodad is displayed as a <code>radial-star</code>
-            with 8 points, an inner radius of 10 pixels,
-            and an outer radius of 50 pixels.
-            The other doodad is displayed as a <code>square</code>
-            whose sides are 71 pixels long.
+            The ball is displayed as a black circle of radius 3 pixels.
+            The racket is displayed as a green rectangle whose
+            horizontal sides are 47 pixels long and whose
+            vertical sides are 7 pixels long.
           </li>
           <li>
-            Both doodads change color whenever they execute a Core Bounce
-            (described below).
-            The star-like doodad starts out Gold, but changes to Green
-            on its first Core Bounce, then to Blue on its second Core
-            Bounce, and then turns back to Gold on its third Core Bounce,
-            cycling through those three colors endlessly.
-            The square doodad cycles through five colors:
-            Gray, OliveDrab, Khaki, Orange, Crimson.
+            The ball and racket are therefore displayed larger than
+            <a href="https://en.wikipedia.org/wiki/Scale_(ratio)">scale</a>.
+            The simulation approximates the real-world dimensions
+            and compressibility of the ball and racket by treating
+            the ball as a
+            <a href="https://en.wikipedia.org/wiki/Point_particle">point
+            particle</a>
+            and the racket as a horizontal line segment with zero thickness.
+            The ball's position corresponds to the center of its
+            displayed circle, and the racket's position corresponds
+            to the center of its displayed rectangle.
           </li>
           <li>
-            Both doodads have a velocity with two components, vx and vy,
-            which tell how many pixels the doodad moves on each tick in
-            the x and y directions, respectively.  (We are using graphics
-            coordinates, so a positive value for vy means the doodad is
-            moving downward.)
+            The ball and racket each have their own velocity,
+            with each velocity comprising two components vx and vy
+            telling how many pixels the ball or racket moves on each tick
+            in the x and y directions, respectively.
+            (We are using graphics coordinates, so a positive value for vy
+            means the ball or racket is moving downward.)
           </li>
           <li>
-            The star-like doodad starts out with its center at position
-            (125,120) and velocity components vx=10 and vy=12.
-            The square doodad starts out with its center at position
-            (460,350) and (negative) velocity components vx=&minus;13
-            and vy=&minus;9.
+            The simulation starts in a ready-to-serve state, with
+            the ball and racket both at graphics coordinates (330,384),
+            both with zero velocity.
           </li>
           <li>
-            The animation is active (not paused) at first, but can be
-            frozen (paused) by pressing the space bar.
-            Pressing the space bar a second time un-freezes the animation.
-            The animation can be frozen and un-frozen as many times as
-            desired, with the space bar acting as a toggle between the
-            frozen and unfrozen states.
+            When the simulation is in ready-to-serve state, pressing
+            the space bar changes the simulation's overall state to a
+            rally state, and changes the ball's velocity components to
+            (3,-9).
           </li>
           <li>
-            If the animation is frozen (using the space bar), then both
-            doodads remain at their current positions.
+            When the simulation is in a rally state, pressing the space
+            bar pauses the simulation for three seconds of real time
+            (which can be measured in ticks by using the speed of the
+            simulation to calculate the number of ticks per second).
+            During those three seconds, the ball and racket do not move,
+            and the background color of the court changes from white to
+            yellow.
+            At the end of the three seconds, the simulation resets to
+            its ready-to-serve state, and the background color to white,
+            as though the simulation was
+            just starting.
           </li>
           <li>
-            If the animation is not frozen, then their new positions
-            and velocities following a tick are calculated by adding
-            the vx velocity component to the x position to obtain a
-            tentative new x position, and by adding the vy velocity
-            component to the y position to obtain a tentative new y
-            position.  If the tentative x position is greater than
-            or equal to 0 and strictly less than 601, then it becomes
-            the new x position and the vx component of the doodad's
-            velocity does not change.  If the tentative y position is
-            greater than or equal to 0 and strictly less than 449,
-            then it becomes the new y position and the vy component
-            of the doodad's velocity does not change.
+            When the simulation is in a rally state, the velocity of
+            the racket can be changed by pressing the arrow keys:</p>
+            <ul>
+              <li>
+                pressing the left arrow key decreases the vx component by 1
+              </li>
+              <li>
+                pressing the right arrow key increases the vx component by 1
+              </li>
+              <li>
+                pressing the up arrow key decreases the vy component by 1
+              </li>
+              <li>
+                pressing the left arrow key increases the vy component by 1
+              </li>
+            </ul>
           </li>
           <li>
-            If either of the tentative x and y positions lies outside
-            the range specified above, the doodad performs a core bounce.
-            If a tentative x or y position is negative, its absolute
-            value becomes the new x or y position and the doodad's
-            corresponding velocity component (vx or vy) is negated.
-            If a tentative x position tx is greater than or equal to 601
-            then the doodad's new x position becomes 600 - (tx - 600)
-            and its vx velocity component is negated.
-            If a tentative y position ty is greater than or equal to 449
-            then the doodad's new y position becomes 448 - (ty - 448)
-            and its vy velocity component is negated.
+            The racket's vy velocity component can also change when the
+            ball collides with the racket (see below).
+            When the ball collides with the racket, and the racket's vy
+            velocity component is negative, that vy component increases
+            to zero.  Otherwise the vy component remains unchanged.
           </li>
           <li>
-            Note that a core bounce can negate one or both of the
-            velocity components.  Even if both velocity components
-            are negated following a tick, it counts as just one
-            core bounce, so there is only one change of color.
+            The velocity of the ball changes only when the ball collides
+            with a wall of the court or with the racket.
+            When the ball collides with the front (top) wall of the court,
+            the vy component of its velocity is negated.
+            When the ball collides with a side wall of the court,
+            the vx component of its velocity is negated.
+            When the ball collides with the racket (see below),
+            the vx component of the ball's velocity stays the same
+            but its vy component becomes the vx component of the racket's
+            velocity minus the old vy component of the ball's velocity.
+            These adjustments to the ball's velocity are made only following
+            a tick.
+          </li>
+          <li>
+            The ball collides with the racket if and only if
+            the path of the ball during the tick intersects the
+            47-pixel line segment that represents the racket's
+            position at the end of the tick.
+          </li>
+          <li>
+            The ball collides with a wall if and only if
+            the ball does not collide with the racket and
+            the ball's tentative new position, obtained by adding
+            the components of its previous velocity to the
+            corresponding components of its previous position,
+            <unquote>
+              lies outside the court.
+            </unquote>
+            If the tentative y component is less than zero,
+            then the ball has collided with the front wall,
+            and its new y component will be the negation of its
+            tentative y component.
+            If the tentative x component is less than zero,
+            then the ball has collided with the left wall,
+            and its new x component will be the negation of its
+            tentative x component.
+            If the tentative x component is greater than 425,
+            then the ball has collided with the right wall,
+            and its new x component will be 425 minus the
+            difference between tentative x component and 425.
+          </li>
+          <li>
+            Note that it is possible for the ball to collide
+            with more than one wall, so the x and y components
+            computed above must themselves be regarded as tentative
+            and subject to the same adjustments as described for
+            the original tentative values of those components.
+          </li>
+          <li>
+            The racket can also collide with a wall, and is deemed
+            to have collided with a wall whenever its tentative new position,
+            calculated by adding its velocity components to the corresponding
+            components of its previous positions, results in any part
+            of the 47-pixel line segment that represents the racket
+            extending outside the court.
+            If the racket collides with a side wall, its x component
+            is adjusted to keep the racket touching the wall and
+            inside the court.
+            If the racket collides with the front wall,
+            the rally state ends as though the space bar had been
+            pressed.
+          </li>
+          <li>
+            If the ball collides with the back wall, the rally state
+            ends as though the space bar had been pressed.
           </li>
         </ul>
         <p>
-          You are to deliver a file named <code>q1.rkt</code> that
-          defines appropriate data types Doodad and World and
-          provides all twelve of the following functions:
+          You are to deliver a file named <code>q1.rkt</code>
+          that defines appropriate data types Ball, Racket, and
+          World and defines and provides all 15 of the following
+          functions:
         </p>
         <pre>
-          ;;; animation : PosReal -> World
-          ;;; GIVEN: the speed of the animation, in seconds per tick
+          ;;; simulation : PosReal -&gt; World
+          ;;; GIVEN: the speed of the simulation, in seconds per tick
           ;;;     (so larger numbers run slower)
-          ;;; EFFECT: runs the animation, starting with the initial world as
-          ;;;     specified in the problem set
+          ;;; EFFECT: runs the simulation, starting with the initial world
           ;;; RETURNS: the final state of the world
           ;;; EXAMPLES:
-          ;;;     (animation 1) runs the animation at normal speed
-          ;;;     (animation 1/4) runs at a faster than normal speed
+          ;;;     (simulation 1) runs in super slow motion
+          ;;;     (simulation 1/24) runs at a more realistic speed
           
-          ;;; initial-world : Any -> World
-          ;;; GIVEN: any value (ignored)
-          ;;; RETURNS: the initial world specified for the animation
-          ;;; EXAMPLE: (initial-world -174)
+          ;;; initial-world : PosReal -&gt; World
+          ;;; GIVEN: the speed of the simulation, in seconds per tick
+          ;;;     (so larger numbers run slower)
+          ;;; RETURNS: the ready-to-serve state of the world
+          ;;; EXAMPLE: (initial-world 1)
           
-          ;;; world-after-tick : World -> World
-          ;;; GIVEN: any World that's possible for the animation
-          ;;; RETURNS: the World that should follow the given World
+          ;;; world-ready-to-serve? : World -&gt; Boolean
+          ;;; GIVEN: a world
+          ;;; RETURNS: true iff the world is in its ready-to-serve state
+          
+          ;;; world-after-tick : World -&gt; World
+          ;;; GIVEN: any world that's possible for the simulation
+          ;;; RETURNS: the world that should follow the given world
           ;;;     after a tick
           
-          ;;; world-after-key-event : World KeyEvent -> World
-          ;;; GIVEN: a World and a KeyEvent
-          ;;; RETURNS: the World that should follow the given World
-          ;;;     after the given KeyEvent
+          ;;; world-after-key-event : World KeyEvent -&gt; World
+          ;;; GIVEN: a world and a key event
+          ;;; RETURNS: the world that should follow the given world
+          ;;;     after the given key event
           
-          ;;; world-paused? : World -> Boolean
-          ;;; GIVEN: a World
-          ;;; RETURNS: true iff the World is paused
+          ;;; world-ball : World -&gt; Ball
+          ;;; GIVEN: a world
+          ;;; RETURNS: the ball that's present in the world
           
-          ;;; world-doodad-star : World -> Doodad
-          ;;; GIVEN: a World
-          ;;; RETURNS: the star-like Doodad of the World
+          ;;; world-racket : World -&gt; Racket
+          ;;; GIVEN: a world
+          ;;; RETURNS: the racket that's present in the world
           
-          ;;; world-doodad-square : World -> Doodad
-          ;;; GIVEN: a World
-          ;;; RETURNS: the square Doodad of the World
+          ;;; ball-x : Ball -&gt; Integer
+          ;;; ball-y : Ball -&gt; Integer
+          ;;; racket-x : Racket -&gt; Integer
+          ;;; racket-y : Racket -&gt; Integer
+          ;;; GIVEN: a racket or ball
+          ;;; RETURNS: the x or y coordinate of that item's position,
+          ;;;     in graphics coordinates
           
-          ;;; doodad-x : Doodad -> Integer
-          ;;; doodad-y : Doodad -> Integer
-          ;;; GIVEN: a Doodad
-          ;;; RETURNS: the x or y coordinate of the Doodad
-          
-          ;;; doodad-vx : Doodad -> Integer
-          ;;; doodad-vy : Doodad -> Integer
-          ;;; GIVEN: a Doodad
-          ;;; RETURNS: the vx or vy velocity component of the Doodad
-          
-          ;;; doodad-color : Doodad -> Color
-          ;;; GIVEN: a Doodad
-          ;;; RETURNS: the color of the Doodad, in one of the forms recognized
-          ;;;     as a color by DrRacket's image-color? predicate
-        </pre>
+          ;;; ball-vx : Ball -&gt; Integer
+          ;;; ball-vy : Ball -&gt; Integer
+          ;;; racket-vx : Racket -&gt; Integer
+          ;;; racket-vy : Racket -&gt; Integer
+          ;;; GIVEN: a racket or ball
+          ;;; RETURNS: the vx or vy component of that item's velocity,
+          ;;;     in pixels per tick
+</pre>
         <p>
-          We will be doing automated testing of your solution, so
-          be sure your solution is in the right place
+          We will be doing automated testing of your solution,
+          so be sure your solution is in the right place
           (<code>set03/q1.rkt</code> in your private
-          <code>cs5010sp17/pdp-YOURUSERNAME</code> repository),
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
           and that it provides all the functions listed above.
           To see if your file is in the right place, insert the
-          following line somewhere near the top of your file:
+          following line at the top of your file but after your
+          <code>require</code> declarations:
         </p>
         <pre>
           (check-location "03" "q1.rkt")
-        </pre>
+</pre>
       </li>
       <li>
-        For this second problem, your job is to add jerkless dragging
-        and a couple of other new features:
+        (SquashPractice2)
+        <br />
+        <p>
+          For this second problem, your job is to add Smooth Dragging,
+          specified as follows:
+        </p>
         <ul>
           <li>
-            Both doodads are selectable and draggable.
-            Depressing the mouse button when the mouse is positioned
-            within a doodad's outline selects and grabs the doodad.
-            The location within the doodad where it has been grabbed
-            is indicated by a solid black circle of radius 3 pixels.
-            Simply pressing the mouse button, without moving the mouse,
-            should not move the doodad.
+            When the simulation is in a rally state,
+            the racket becomes selectable and draggable.
+            Depressing the mouse button when the mouse is
+            positioned no more than 25 pixels away from the
+            center of the racket selects and grabs the racket.
+            The location of the mouse is indicated by a solid
+            blue circle of radius 4 pixels; note that this circle
+            might well lie completely outside the rectangle
+            displaying the racket's position.
+            Simply pressing the mouse button, without moving
+            the mouse, should select the racket but should not move it.
           </li>
           <li>
-            Once a doodad has been selected, you should be able to drag
-            it around the enclosure using your mouse.
-            As you drag it, the position of the mouse within the doodad
-            (as indicated by the solid black circle) should not change
-            relative to the doodad's center.
+            Once the racket has been selected, you should be able
+            to drag it around the court using your mouse.
+            As you drag the racket, the position of the mouse
+            (as indicated by the solid blue circle) should not
+            change relative to the racket's position.
           </li>
           <li>
-            Note that selecting and dragging should work even if the
-            animation is paused.  Note also that, when the doodads
-            overlap, it is possible to
-            select both doodads at once and to drag both around the
-            enclosure at the same time.
+            When the mouse button is released, the racket
+            becomes unselected, and the blue circle disappears.
           </li>
           <li>
-            When the mouse button is released, all selected doodads
-            become unselected, and the black circle showing where
-            a selected doodad has been grabbed disappears.
-          </li>
-          <li>
-            Pressing the "c" key has no effect unless one or both
-            doodads are selected.  If any doodads are selected,
-            however, pressing the "c" key causes all selected
-            doodads to change to their next color just as though
-            they had executed a core bounce, even though the velocity
-            components of the doodads remain unchanged.
+            When the simulation is in a ready-to-serve state,
+            the racket is not selected and cannot be selected
+            or dragged.
           </li>
         </ul>
         <p>
-          You are to deliver a file named <code>q2.rkt</code> that
-          defines appropriate data types Doodad and World,
-          defines and provides all twelve of the functions specified
-          for the first question of this problem set, and also
-          defines and provides the following three functions:
+          You are to deliver a file named <code>q2.rkt</code>
+          that defines appropriate data types Ball, Racket, and
+          World, defines and provides all fifteen functions
+          specified for the first question of this problem set,
+          and also defines and provides the following three functions:
         </p>
         <pre>
-          ;; world-after-mouse-event
-          ;;     : World Int Int MouseEvent -> World
-          ;; GIVEN: A world, the x- and y-coordinates of a mouse event, and the
-          ;;     mouse event
-          ;; RETURNS: the world that should follow the given world after the
-          ;;     given mouse event
+          ;;; world-after-mouse-event
+          ;;;     : World Int Int MouseEvent -&gt; World
+          ;;; GIVEN: a world, the x and y coordinates of a mouse event,
+          ;;;     and the mouse event
+          ;;; RETURNS: the world that should follow the given world after
+          ;;;     the given mouse event
           
-          ;; doodad-after-mouse-event :  Doodad Int Int MouseEvent -> Doodad
-          ;; GIVEN: A doodad, the x- and y-coordinates of a mouse event, and
-          ;;     the mouse event
-          ;; RETURNS: the doodad as it should be after the given mouse event
+          ;;; racket-after-mouse-event
+          ;;;     : Racket Int Int MouseEvent -&gt; Racket
+          ;;; GIVEN: a racket, the x and y coordinates of a mouse event,
+          ;;;     and the mouse event
+          ;;; RETURNS: the racket as it should be after the given mouse event
           
-          ;; doodad-selected? : Doodad -> Boolean
-          ;; RETURNS: true iff the given doodad is selected
-        </pre>
+          ;;; racket-selected? : Racket-&gt; Boolean
+          ;;; GIVEN: a racket
+          ;;; RETURNS: true iff the racket is selected
+</pre>
         <p>
-          Remember that we will be doing automated testing of your
-          solution, so be sure your solution is in the right place
+          Remember that we will be doing automated testing of your solution,
+          so be sure your solution is in the right place
           (<code>set03/q2.rkt</code> in your private
-          <code>cs5010sp16/pdp-YOURUSERNAME</code> repository),
-          and that it provides all the functions listed above.
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all of the functions listed above.
           To see if your file is in the right place, insert the
-          following line somewhere near the top of your file:
+          following line at the top of your file but after your
+          <code>require</code> declarations:
         </p>
         <pre>
           (check-location "03" "q2.rkt")
-        </pre>
+</pre>
       </li>
     </ol>
   </div>
@@ -368,12 +438,14 @@
 
 <!-- end of specific content -->
 
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
 
+
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sun Sep 24 21:26:17 Eastern Daylight Time 2017 <!-- hhmts end -->
+
+
+    
 </body>
 </html>
