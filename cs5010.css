@@ -490,6 +490,9 @@ ul.popup-on-hover li:hover:nth-child(4) span {
   left: 40px;
 }
 
+/* use: <span class="strike"> C-c C-p l in HTML Helper mode*/
+.new {color:red;}
+.strike {color:gray; text-decoration:line-through;}
 
 
 
