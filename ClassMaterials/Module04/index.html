@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Lecture 04 Data Definitions for Book</title>
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
+<style>
+pre {
+  font-size: 14pt;
+  background-color: rgb(255, 255, 153);
+}
+</style>
+</head>
+
+<body>
+<div id="maincontent">
+<h1>Data Definitions for Book</h1>
+
+<pre>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+REPRESENTATION:
+A Book is represented as a struct
+(make-book isbn title author publisher cost price on-hand thickness)
+with the following fields:
+INTERP:
+isbn      : ISBN       is the international standard book nuber
+title     : String (any string will do)    is the title
+author    : String (any string will do)    is the author
+publisher : String (any string will do)    is the publisher
+cost      : NonNegInt  is the cost to the bookstore (how much the bookstore pays
+                          the publisher for a copy)
+price     : NonNegInt  is the price (how much the bookstore charges a
+                          customer for a copy) 
+on-hand   : NonNegInt  is the number of copies on hand
+thickness : PosReal    is the thickness of the book (how much space it
+                          occupies on the shelf), in cm
+
+IMPLEMENTATION:
+(define-struct book (isbn title author publisher cost price
+                     on-hand thickness))
+
+;;; templates omitted....
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+An Inventory is a BookList
+WHERE:
+  the list is sorted in ascending order by ISBN, and there are no
+  duplicate ISBN's in the list.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+An Order is a LineItemList
+WHERE: there are no duplicate ISBNs in the order
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+A LineItem is represented as a struct
+(make-line-item isbn ncopies)
+with the following fields:
+INTERP:
+isbn    : ISBN       is the isbn of the book being ordered
+ncopies : NonNegInt  is the number of copies being ordered
+
+IMPLEMENTATION:
+(define-struct line-item (isbn ncopies))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ISBN is unspecified, but we assume we are given a function
+
+isbn=? : ISBN ISBN -> Bool
+RETURNS true iff its two arguments represent the same ISBN
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+</pre>
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Thu Sep 28 20:23:20 Eastern Daylight Time 2017 <!-- hhmts end -->
+</body> </html>
