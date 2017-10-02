@@ -18,6 +18,7 @@
 ;; note that a given set of arguments might correspond to different
 ;; values of 'whole-list'.  All we care about whole-list is that the
 ;; sum of its elements before the (list 2 3 4) is exactly 5.
+;; RETURNS: the sum of all the elements of whole-list
 ;; STRATEGY:
 ;; observer pattern for NumberList on 'unsummed'
 (define (sublist-sum so-far unsummed)
