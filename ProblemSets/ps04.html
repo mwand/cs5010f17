@@ -146,6 +146,7 @@
           
           ;;; permutation-of? : IntList IntList -&gt; Boolean
           ;;; GIVEN: two lists of integers
+          ;;; WHERE: neither list contains duplicate elements
           ;;; RETURNS: true if and only if one of the lists
           ;;;     is a permutation of the other
           ;;; EXAMPLES:
@@ -160,7 +161,7 @@
           ;;; RETURNS: true if and only either
           ;;;     the first list is shorter than the second
           ;;;  or both are non-empty, have the same length, and either
-          ;;;         the first element of the first list is equal to
+          ;;;         the first element of the first list is less than
           ;;;             the first element of the second list
           ;;;      or the first elements are equal, and the rest of
           ;;;             the first list is less than the rest of the
@@ -169,25 +170,27 @@
           ;;;     (shortlex-less-than? (list) (list)) =&gt; false
           ;;;     (shortlex-less-than? (list) (list 3)) =&gt; true
           ;;;     (shortlex-less-than? (list 3) (list)) =&gt; false
+          ;;;     (shortlex-less-than? (list 3) (list 3)) =&gt; false
           ;;;     (shortlex-less-than? (list 3) (list 1 2)) =&gt; true
           ;;;     (shortlex-less-than? (list 3 0) (list 1 2)) =&gt; false
           ;;;     (shortlex-less-than? (list 0 3) (list 1 2)) =&gt; true
           
           ;;; permutations : IntList -&gt; IntListList
           ;;; GIVEN: a list of integers
+          ;;; WHERE: the list contains no duplicates
           ;;; RETURNS: a list of all permutations of that list,
           ;;;     in shortlex order
           ;;; EXAMPLES:
           ;;;     (permutations (list))  =&gt;  (list (list))
           ;;;     (permutations (list 9))  =&gt;  (list (list 9))
-          ;;;     (permutations (list 1 2 3))
+          ;;;     (permutations (list 3 1 2))
           ;;;         =&gt;  (list (list 1 2 3)
           ;;;                   (list 1 3 2)
           ;;;                   (list 2 1 3)
           ;;;                   (list 2 3 1)
           ;;;                   (list 3 1 2)
           ;;;                   (list 3 2 1))
-        </pre>
+</pre>
         <p>
           We will be doing automated testing of your solution,
           so be sure your solution is in the right place
@@ -200,16 +203,51 @@
         </p>
         <pre>
           (check-location "04" "q1.rkt")
-        </pre>
+</pre>
       </li>
       <li>
         (SquashPractice3)
         <br />
         <p>
-          For this second problem, your job is to add one new feature
-          to the simulation specified by Problem Set 03.
-          This new feature allows expert squash players to challenge
-          themselves by trying to keep multiple balls in play at once.
+          For this second problem, your job is to improve the
+          simulation specified by Problem Set 03 by changing
+          the definition of ball-racket collisions and by adding
+          a new feature that allows expert squash players to
+          challenge themselves by trying to keep multiple balls
+          in play at once.
+        </p>
+        <p>
+          To make it easier to keep multiple balls in play, the
+          definition of a collision between ball and racket is
+          changed to:
+        </p>
+        <ul>
+          <li>
+            The ball collides with the racket if and only if
+            all of the following are true:
+            <ol>
+              <li>
+                The ball's position in the previous tick
+                does not lie on the 47-pixel line segment of
+                the racket in the previous tick.
+              </li>
+              <li>
+                The vy component of the ball's tentative
+                velocity is either zero or negative.
+              </li>
+              <li>
+                The line that connects the ball's position
+                in the previous tick with the first tentative
+                position calculated for the ball in this tick
+                intersects the 47-pixel line segment that
+                represents the racket's new position for this
+                tick.
+              </li>
+            </ol>
+          </li>
+        </ul>
+        <p>
+          The other changes are:
         </p>
         <ul>
           <li>
@@ -227,7 +265,7 @@
           <li>
             If a ball collides with the back wall, it disappears
             from the simulation.
-            If its disapperance leaves no more balls within the
+            If its disappearance leaves no more balls within the
             simulation, the rally state ends as though the space
             bar had been pressed.
             The rally state does not end until all balls have
@@ -250,7 +288,8 @@
           <code>world-ball</code>,
           defines and provides all three functions specified in
           part 2 of Problem Set 03,
-          and also defines and provides the following function:
+          and also defines and provides the <code>world-balls</code>
+          function specified below:
         </p>
         <pre>
           ;;; world-balls : World -&gt; BallList
@@ -258,7 +297,19 @@
           ;;; RETURNS: a list of the balls that are present in the world
           ;;;     (but does not include any balls that have disappeared
           ;;;     by colliding with the back wall)
-        </pre>
+</pre>
+        <p>
+          We recommend you practice the Iterative Design Recipe
+          by making a copy of your (corrected) <code>q2.rkt</code> file
+          from Problem Set 03 and placing that copy and a copy of
+          <code>extras.rkt</code> in a new <code>set04</code>
+          directory.  Then, before you forget it, delete the
+          <code>provide</code> for <code>world-ball</code> and
+          add a <code>provide</code> for <code>world-balls</code>.
+          Then change <code>set04/q2.rkt</code> as necessary so
+          it implements the simulator as specified for this
+          problem set.
+        </p>
         <p>
           Remember that we will be doing automated testing of your solution,
           so be sure your solution is in the right place
@@ -271,7 +322,7 @@
         </p>
         <pre>
           (check-location "04" "q2.rkt")
-        </pre>
+</pre>
       </li>
     </ol>
   </div>
@@ -279,16 +330,10 @@
 
 <!-- end of specific content -->
 
-<!--
-
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
-
--->
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sun Oct  1 20:37:22 Eastern Daylight Time 2017 <!-- hhmts end -->
 
 </body>
 </html>
