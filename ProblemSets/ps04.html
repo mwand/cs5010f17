@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,12 +28,9 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 6 February 2017
+      <strong>Out:</strong> Monday, 2 October 2017
       <br />
-      <strong>Due:</strong> Monday, 13 February 2017 at 6pm
-      <br />
-      <strong>Corrected:</strong> Wednesday, 8 February,
-      to correct the return type for <code>make-skillet</code>
+      <strong>Due:</strong> Monday, 9 October 2017 at 6pm local time
     </p>
   </div>
   <div>
@@ -46,60 +43,53 @@
       you.
     </p>
     <p>
-      The main purpose of this problem set is to give you some
-      practice programming with lists.
-      It will also give you a little more practice with data design
-      and the Iterative Design Recipe.
+      The main purposes of this problem set are to give you practice
+      designing functions that deal with lists, and to get you started
+      using the System Design Recipe.
     </p>
     <p>
-      You must use the HtDP Intermediate Student Language for this problem set.
+      You must use Racket's Intermediate Student Language (ISL)
+      for this problem set.
     </p>
     <p>
       For these problems, download a copy of
-      <a href="extras.rkt">
-        extras.rkt
-      </a>
+      <a href="extras.rkt">extras.rkt</a>
       and put it in the folder with your solutions.
       Then import this library by including the line
     </p>
     <pre>
       (require "extras.rkt")
-    </pre>
+</pre>
     <p>
       at the top of your file with the other <code>require</code>
       declarations.  Then, for each problem, put in lines that say
     </p>
     <pre>
       (provide <var>function</var>)
-    </pre>
+</pre>
     <p>
-      for each deliverable function, as you have done on previous problem sets.
+      for each deliverable function, as you have done on previous
+      problem sets.
       This will allow our testing framework to import your file
       and do automated testing on it.
-      You can use <code>check-location</code> to double-check that your
-      solutions are in the right place.
+      You can use <code>check-location</code> to double-check
+      that your solutions are in the right place.
     </p>
     <p>
       Remember that you must follow the design recipe, which is a
       process, not a list of deliverables.
       Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the artifacts produced by the various steps of the
       design recipe: data definitions (including interpretation and
       templates, contracts, purpose statements, definitions, and tests).
       Be sure to follow our
-      <a href="../Info/style.html">
-        coding conventions.
-      </a>
+      <a href="../Info/style.html">coding conventions</a>.
       Doing so will make codewalks easier for everyone.
     </p>
     <p>
       Be sure to fill out a
-      <a href="../ProblemSets/yourID-log.txt">
-        work session report
-      </a>
+      <a href="yourID-log.txt">work session report</a>
       at the end of each work session.
       Tell <code>git</code> to add it to the files you will commit,
       and then commit and push (sync) that report in addition to
@@ -111,291 +101,228 @@
       in your <code>set04</code> directory along with your
       <code>q1.rkt</code> and <code>q2.rkt</code> files.
     </p>
+    <p>
+      <strong>Note:</strong> For all universe programs,
+      you may assume the mouse is never dragged or moved outside the canvas.
+      Once the mouse enters the canvas, if the mouse ever leaves the canvas,
+      then the behavior of your system is unspecified.
+    </p>
     <hr />
     <ol>
       <li>
-        You will build upon the simple animation of Problem Set 03
-        by preserving all of its features and by adding these new
-        features that allow doodads to be created and
-        destroyed dynamically:
+        (ListPractice1)
+        <br />
+        <p>
+          For this first part of Problem Set 04, you will not
+          need to do any data design because the <code>List</code>
+          data type, and all specific instances of that data type
+          such as <code>IntList</code> and <code>IntListList</code>,
+          are predefined by the lessons for Module 04.
+        </p>
+        <p>
+          The <em>inner product</em> of two sequences of real numbers
+          <var>x<sub>1</sub></var>, ..., <var>x<sub>n</sub></var>
+          and
+          <var>y<sub>1</sub></var>, ..., <var>y<sub>n</sub></var>
+          is defined as the sum of the pairwise products of
+          corresponding numbers; in standard mathematical notation:
+          &sum;<sub>i</sub>
+          <var>x<sub>i</sub></var> <var>y<sub>i</sub></var>
+        </p>
+        <p>
+          You are to deliver a file named <code>q1.rkt</code>
+          that defines and provides all 4 of the following
+          functions:
+        </p>
+        <pre>
+          ;;; inner-product : RealList RealList -&gt; Real
+          ;;; GIVEN: two lists of real numbers
+          ;;; WHERE: the two lists have the same length
+          ;;; RETURNS: the inner product of those lists
+          ;;; EXAMPLES:
+          ;;;     (inner-product (list 2.5) (list 3.0))  =&gt;  7.5
+          ;;;     (inner-product (list 1 2 3 4) (list 5 6 7 8))  =&gt;  70
+          ;;;     (inner-product (list) (list))  =&gt;  0
+          
+          ;;; permutation-of? : IntList IntList -&gt; Boolean
+          ;;; GIVEN: two lists of integers
+          ;;; WHERE: neither list contains duplicate elements
+          ;;; RETURNS: true if and only if one of the lists
+          ;;;     is a permutation of the other
+          ;;; EXAMPLES:
+          ;;;     (permutation-of? (list 1 2 3) (list 1 2 3)) =&gt; true
+          ;;;     (permutation-of? (list 3 1 2) (list 1 2 3)) =&gt; true
+          ;;;     (permutation-of? (list 3 1 2) (list 1 2 4)) =&gt; false
+          ;;;     (permutation-of? (list 1 2 3) (list 1 2)) =&gt; false
+          ;;;     (permutation-of? (list) (list)) =&gt; true
+          
+          ;;; shortlex-less-than? : IntList IntList -&gt; Boolean
+          ;;; GIVEN: two lists of integers
+          ;;; RETURNS: true if and only either
+          ;;;     the first list is shorter than the second
+          ;;;  or both are non-empty, have the same length, and either
+          ;;;         the first element of the first list is less than
+          ;;;             the first element of the second list
+          ;;;      or the first elements are equal, and the rest of
+          ;;;             the first list is less than the rest of the
+          ;;;             second list according to shortlex-less-than?
+          ;;; EXAMPLES:
+          ;;;     (shortlex-less-than? (list) (list)) =&gt; false
+          ;;;     (shortlex-less-than? (list) (list 3)) =&gt; true
+          ;;;     (shortlex-less-than? (list 3) (list)) =&gt; false
+          ;;;     (shortlex-less-than? (list 3) (list 3)) =&gt; false
+          ;;;     (shortlex-less-than? (list 3) (list 1 2)) =&gt; true
+          ;;;     (shortlex-less-than? (list 3 0) (list 1 2)) =&gt; false
+          ;;;     (shortlex-less-than? (list 0 3) (list 1 2)) =&gt; true
+          
+          ;;; permutations : IntList -&gt; IntListList
+          ;;; GIVEN: a list of integers
+          ;;; WHERE: the list contains no duplicates
+          ;;; RETURNS: a list of all permutations of that list,
+          ;;;     in shortlex order
+          ;;; EXAMPLES:
+          ;;;     (permutations (list))  =&gt;  (list (list))
+          ;;;     (permutations (list 9))  =&gt;  (list (list 9))
+          ;;;     (permutations (list 3 1 2))
+          ;;;         =&gt;  (list (list 1 2 3)
+          ;;;                   (list 1 3 2)
+          ;;;                   (list 2 1 3)
+          ;;;                   (list 2 3 1)
+          ;;;                   (list 3 1 2)
+          ;;;                   (list 3 2 1))
+</pre>
+        <p>
+          We will be doing automated testing of your solution,
+          so be sure your solution is in the right place
+          (<code>set04/q1.rkt</code> in your private
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line at the top of your file but after your
+          <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "04" "q1.rkt")
+</pre>
+      </li>
+      <li>
+        (SquashPractice3)
+        <br />
+        <p>
+          For this second problem, your job is to improve the
+          simulation specified by Problem Set 03 by changing
+          the definition of ball-racket collisions and by adding
+          a new feature that allows expert squash players to
+          challenge themselves by trying to keep multiple balls
+          in play at once.
+        </p>
+        <p>
+          To make it easier to keep multiple balls in play, the
+          definition of a collision between ball and racket is
+          changed to:
+        </p>
         <ul>
           <li>
-            Pressing the <code>"t"</code> key will create a
-            gold star-like doodad with its center at position
-            (125,120) and add that doodad to the world.
-            The star-like doodad created by the
-            first press of the <code>"t"</code> key will have
-            velocity components vx = &minus;12 and vy = 10.
-            The star-like doodad created by the
-            second press of the <code>"t"</code> key will have
-            velocity components vx = &minus;10 and vy = &minus;12.
-            The star-like doodad created by the
-            third press of the <code>"t"</code> key will have
-            velocity components vx = 12 and vy = &minus;10.
-            The star-like doodad created by the
-            fourth press of the <code>"t"</code> key will have
-            velocity components vx = 10 and vy = 12.
-            And so on:  Each newly created star-like doodad
-            has an initial velocity vector that's rotated 90 degrees
-            clockwise from the initial velocity of the previously
-            created star-like doodad.
-          </li>
-          <li>
-            Pressing the <code>"q"</code> key will create a
-            gray square doodad with its center at position
-            (460,350) and add that doodad to the world.
-            The square doodad created by the
-            first press of the <code>"q"</code> key will have
-            velocity components vx = 9 and vy = &minus;13.
-            The square doodad created by the
-            second press of the <code>"q"</code> key will have
-            velocity components vx = 13 and vy = 9.
-            And so on:  Each newly created square doodad
-            has an initial velocity vector that's rotated 90 degrees
-            clockwise from the initial velocity of the previously
-            created square doodad.
-          </li>
-          <li>
-            Doodads that are created by key events behave the
-            same as the two doodads that are present in the
-            initial world.  In particular, they go through the
-            same sequence of colors in response to Core Bounces,
-            and can be selected and dragged jerklessly.
-          </li>
-          <li>
-            The age of a doodad is the number of ticks that have
-            elapsed since the doodad was added to the world.
-            The age of a newly created doodad is zero, and the
-            age of the two doodads that are present in the initial
-            world is also zero until the first tick.
-            Doodads grow older even if the world is paused.
-          </li>
-          <li>
-            Pressing the <code>"."</code> key will remove the
-            oldest star-like doodad and the oldest square doodad
-            from the world.  If there are several oldest star-like
-            doodads, all of those oldest star-like doodads will be
-            removed. If there are several oldest square doodads,
-            all of those oldest square doodads will be removed.
-            If there are no star-like doodads at all, then no
-            star-like doodads will be removed.  If there are no
-            square doodads at all, then no square doodads will be
-            removed.
-          </li>
-          <li>
-            The <code>"t"</code>, <code>"q"</code>, and
-            <code>"."</code> key events behave as specified
-            above even if the world is paused.
+            The ball collides with the racket if and only if
+            all of the following are true:
+            <ol>
+              <li>
+                The ball's position in the previous tick
+                does not lie on the 47-pixel line segment of
+                the racket in the previous tick.
+              </li>
+              <li>
+                The vy component of the ball's tentative
+                velocity is either zero or negative.
+              </li>
+              <li>
+                The line that connects the ball's position
+                in the previous tick with the first tentative
+                position calculated for the ball in this tick
+                intersects the 47-pixel line segment that
+                represents the racket's new position for this
+                tick.
+              </li>
+            </ol>
           </li>
         </ul>
         <p>
-          You are to deliver a file named <code>q1.rkt</code> that
-          defines appropriate data types Doodad and World.
-          That file must provide all of the following functions.
-          Note that the list of the functions to be provided is
-          the same as for question 2 of Problem Set 03 except the
-          <code>world-doodad-star</code> and <code>world-doodad-square</code>
-          functions have been replaced by the
-          <code>world-doodads-star</code> and <code>world-doodads-square</code>
-          functions, the <code>doodad-after-mouse-event</code> function
-          has been dropped, and the <code>doodad-age</code> function
-          has been added.
+          The other changes are:
+        </p>
+        <ul>
+          <li>
+            When the simulation is in a rally state,
+            pressing the <code>b</code> key creates a new ball
+            with position components (330,384) and velocity
+            components (3,-9).
+            This new ball behaves like the original
+            ball, as specified by Problem Set 03.
+          </li>
+          <li>
+            When the simulation is not in a rally state,
+            pressing the <code>b</code> key does nothing.
+          </li>
+          <li>
+            If a ball collides with the back wall, it disappears
+            from the simulation.
+            If its disappearance leaves no more balls within the
+            simulation, the rally state ends as though the space
+            bar had been pressed.
+            The rally state does not end until all balls have
+            disappeared or the space bar is pressed.
+          </li>
+          <li>
+            Balls never collide with each other, even if they
+            have the same position coordinates.
+            (In the three-dimensional real-world, two balls with
+            the same x and y components are likely to be at
+            different altitudes, which your simulation does not
+            model.)
+          </li>
+        </ul>
+        <p>
+          You are to deliver a file named <code>q2.rkt</code>
+          that defines appropriate data types Ball, Racket, and
+          World, defines and provides the fifteen functions
+          specified in part 1 of Problem Set 03 except for
+          <code>world-ball</code>,
+          defines and provides all three functions specified in
+          part 2 of Problem Set 03,
+          and also defines and provides the <code>world-balls</code>
+          function specified below:
         </p>
         <pre>
-          ;;; animation : PosReal -> World
-          ;;; GIVEN: the speed of the animation, in seconds per tick
-          ;;;     (so larger numbers run slower)
-          ;;; EFFECT: runs the animation, starting with the initial world as
-          ;;;     specified in the problem set
-          ;;; RETURNS: the final state of the world
-          ;;; EXAMPLES:
-          ;;;     (animation 1) runs the animation at normal speed
-          ;;;     (animation 1/4) runs at a faster than normal speed
-          
-          ;;; initial-world : Any -> World
-          ;;; GIVEN: any value (ignored)
-          ;;; RETURNS: the initial world specified for the animation
-          ;;; EXAMPLE: (initial-world -174)
-          
-          ;;; world-after-tick : World -> World
-          ;;; GIVEN: any World that's possible for the animation
-          ;;; RETURNS: the World that should follow the given World
-          ;;;     after a tick
-          
-          ;;; world-after-key-event : World KeyEvent -> World
-          ;;; GIVEN: a World and a KeyEvent
-          ;;; RETURNS: the World that should follow the given World
-          ;;;     after the given KeyEvent
-          
-          ;;; world-after-mouse-event
-          ;;;     : World Integer Integer MouseEvent -> World
-          ;;; GIVEN: A world, the x- and y-coordinates of a mouse event, and the
-          ;;;     mouse event
-          ;;; RETURNS: the world that should follow the given world after the
-          ;;;     given mouse event
-          
-          ;;; world-paused? : World -> Boolean
-          ;;; GIVEN: a World
-          ;;; RETURNS: true iff the World is paused
-          
-          ;;; world-doodads-star : World -> ListOfDoodad
+          ;;; world-balls : World -&gt; BallList
           ;;; GIVEN: a world
-          ;;; RETURNS: a list of the star-like doodads of the world
-          
-          ;;; world-doodads-square : World -> ListOfDoodad
-          ;;; GIVEN: a world
-          ;;; RETURNS: a list of the square doodads of the world
-          
-          ;;; doodad-x : Doodad -> Integer
-          ;;; doodad-y : Doodad -> Integer
-          ;;; GIVEN: a Doodad
-          ;;; RETURNS: the x or y coordinate of the Doodad
-          
-          ;;; doodad-vx : Doodad -> Integer
-          ;;; doodad-vy : Doodad -> Integer
-          ;;; GIVEN: a Doodad
-          ;;; RETURNS: the vx or vy velocity component of the Doodad
-          
-          ;;; doodad-color : Doodad -> Color
-          ;;; GIVEN: a Doodad
-          ;;; RETURNS: the color of the Doodad, in one of the forms recognized
-          ;;;     as a color by DrRacket's image-color? predicate
-          
-          ;;; doodad-selected? : Doodad -> Boolean
-          ;;; RETURNS: true iff the given doodad is selected
-          
-          ;;; doodad-age : Doodad -> Integer
-          ;;; RETURNS: the age of the given doodad
-        </pre>
+          ;;; RETURNS: a list of the balls that are present in the world
+          ;;;     (but does not include any balls that have disappeared
+          ;;;     by colliding with the back wall)
+</pre>
         <p>
-          Remember that we will be doing automated testing of your
-          solution, so be sure your solution is in the right place
-          (<code>set04/q1.rkt</code> in your private
-          <code>cs5010sp16/pdp-YOURUSERNAME</code> repository),
-          and that it provides all the functions listed above.
-          To see if your file is in the right place, insert the
-          following line somewhere near the top of your file:
-        </p>
-        <pre>
-          (check-location "04" "q1.rkt")
-        </pre>
-      </li>
-      <li>
-        For this second part of Problem Set 04, you will continue
-        to use graphics coordinates but will not be drawing any
-        pictures or animations.
-        Since the coordinates do not correspond to pixels,
-        they can be arbitrary real numbers.
-        <p>
-          You will design an idealized
-          <a href="https://en.wikipedia.org/wiki/Pancake#United_States_and_Canada">
-            <code>Flapjack</code>
-          </a>
-          data type whose values represent perfectly circular pancakes,
-          and an idealized
-          <a href="https://en.wikipedia.org/wiki/Frying_pan">
-            <code>Skillet</code>
-          </a>
-          data type whose values represent perfectly circular frying pans.
+          We recommend you practice the Iterative Design Recipe
+          by making a copy of your (corrected) <code>q2.rkt</code> file
+          from Problem Set 03 and placing that copy and a copy of
+          <code>extras.rkt</code> in a new <code>set04</code>
+          directory.  Then, before you forget it, delete the
+          <code>provide</code> for <code>world-ball</code> and
+          add a <code>provide</code> for <code>world-balls</code>.
+          Then change <code>set04/q2.rkt</code> as necessary so
+          it implements the simulator as specified for this
+          problem set.
         </p>
         <p>
-          You are to deliver a file named <code>q2.rkt</code> that
-          defines the data types <code>Flapjack</code> and <code>Skillet</code>.
-          That file must provide all of the following functions:
-        </p>
-        <pre>
-          ;;; make-flapjack : Real Real PosReal -> Flapjack
-          ;;; GIVEN: x and y coordinates and a radius r
-          ;;; RETURNS: a flapjack whose center is at the given x and y
-          ;;;     coordinates, with the given radius
-          
-          ;;; flapjack-x      : Flapjack -> Real
-          ;;; flapjack-y      : Flapjack -> Real
-          ;;; flapjack-radius : Flapjack -> PosReal
-          ;;; GIVEN: a flapjack
-          ;;; RETURNS: its x or y coordinate or radius
-          
-          ;;; make-skillet : Real Real PosReal -> Skillet
-          ;;; GIVEN: x and y coordinates and a radius r
-          ;;; RETURNS: a skillet whose center is at the given x and y
-          ;;;     coordinates, with the given radius
-          
-          ;;; skillet-x      : Skillet -> Real
-          ;;; skillet-y      : Skillet -> Real
-          ;;; skillet-radius : Skillet -> PosReal
-          ;;; GIVEN: a skillet
-          ;;; RETURNS: its x or y coordinate or radius
-          
-          ;;; overlapping-flapjacks : ListOfFlapjack -> ListOfListOfFlapjack
-          ;;; GIVEN: a list of flapjacks
-          ;;; RETURNS: a list of the same length whose i-th element
-          ;;;     is a list of the flapjacks in the given list that
-          ;;;     overlap with the i-th flapjack in the given list
-          ;;; EXAMPLES:
-          ;;;   (overlapping-flapjacks empty)  =>  empty
-          ;;;   (overlapping-flapjacks
-          ;;;    (list (make-flapjack -10  2 5)
-          ;;;          (make-flapjack  -3  0 4)
-          ;;;          (make-flapjack   4 -2 4.6)
-          ;;;          (make-flapjack 7.2  6 5)
-          ;;;          (make-flapjack  20  4 4.2)))
-          ;;;   =>
-          ;;;   (list (list (make-flapjack -10  2 5)
-          ;;;               (make-flapjack  -3  0 4))
-          ;;;         (list (make-flapjack -10  2 5)
-          ;;;               (make-flapjack  -3  0 4)
-          ;;;               (make-flapjack   4 -2 4.6))
-          ;;;         (list (make-flapjack  -3  0 4)
-          ;;;               (make-flapjack   4 -2 4.6)
-          ;;;               (make-flapjack 7.2  6 5))
-          ;;;         (list (make-flapjack   4 -2 4.6)
-          ;;;               (make-flapjack 7.2  6 5))
-          ;;;         (list (make-flapjack  20  4 4.2)))
-          
-          ;;; non-overlapping-flapjacks : ListOfFlapjack -> ListOfFlapjack
-          ;;; GIVEN: a list of flapjacks
-          ;;; RETURNS: a list of the flapjacks in the given list that
-          ;;;     do not overlap with any other flapjacks in the list
-          ;;; EXAMPLES:
-          ;;;   (non-overlapping-flapjacks empty)  =>  empty
-          ;;;   (non-overlapping-flapjacks
-          ;;;    (list (make-flapjack -10  2 5)
-          ;;;          (make-flapjack  -3  0 4)
-          ;;;          (make-flapjack   4 -2 4.6)
-          ;;;          (make-flapjack 7.2  6 5)
-          ;;;          (make-flapjack  20  4 4.2)))
-          ;;;   =>
-          ;;;   (list (make-flapjack  20  4 4.2))
-          
-          ;;; flapjacks-in-skillet : ListOfFlapjack Skillet -> ListOfFlapjack
-          ;;; GIVEN: a list of flapjacks and a skillet
-          ;;; RETURNS: a list of the given flapjacks that fit entirely
-          ;;;     within the skillet
-          ;;; EXAMPLE:
-          ;;;   (flapjacks-in-skillet
-          ;;;    (list (make-flapjack -10  2 5)
-          ;;;          (make-flapjack  -3  0 4)
-          ;;;          (make-flapjack   4 -2 4.6)
-          ;;;          (make-flapjack 7.2  6 5)
-          ;;;          (make-flapjack  20  4 4.2))
-          ;;;    (make-skillet 2 3 12))
-          ;;; =>
-          ;;;   (list (make-flapjack  -3  0 4)
-          ;;;         (make-flapjack   4 -2 4.6)
-          ;;;         (make-flapjack 7.2  6 5))
-        </pre>
-        <p>
-          Remember that we will be doing automated testing of your
-          solution, so be sure your solution is in the right place
+          Remember that we will be doing automated testing of your solution,
+          so be sure your solution is in the right place
           (<code>set04/q2.rkt</code> in your private
-          <code>cs5010sp16/pdp-YOURUSERNAME</code> repository),
-          and that it provides all the functions listed above.
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all of the functions listed above.
           To see if your file is in the right place, insert the
-          following line somewhere near the top of your file:
+          following line at the top of your file but after your
+          <code>require</code> declarations:
         </p>
         <pre>
-          (check-location "04" "q1.rkt")
-        </pre>
+          (check-location "04" "q2.rkt")
+</pre>
       </li>
     </ol>
   </div>
@@ -403,12 +330,10 @@
 
 <!-- end of specific content -->
 
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Sun Oct  1 20:37:22 Eastern Daylight Time 2017 <!-- hhmts end -->
 
 </body>
 </html>

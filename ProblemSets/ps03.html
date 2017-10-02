@@ -66,7 +66,7 @@
     </p>
     <pre>
       (require "extras.rkt")
-    </pre>
+</pre>
     <p>
       at the top of your file with the other <code>require</code>
       declarations.  Then, for each problem, put in lines that say
@@ -190,7 +190,7 @@
           </li>
           <li>
             When the simulation is in a rally state, the velocity of
-            the racket can be changed by pressing the arrow keys:
+            the racket can be changed by pressing the arrow keys:</p>
             <ul>
               <li>
                 pressing the left arrow key decreases the vx component by 1
@@ -202,7 +202,9 @@
                 pressing the up arrow key decreases the vy component by 1
               </li>
               <li>
-                pressing the left arrow key increases the vy component by 1
+	      pressing the <span class="strike">left</span>
+	      <span class="new">down</span> arrow key
+	      increases the vy component by 1 
               </li>
             </ul>
           </li>
@@ -222,7 +224,9 @@
             the vx component of its velocity is negated.
             When the ball collides with the racket (see below),
             the vx component of the ball's velocity stays the same
-            but its vy component becomes the vx component of the racket's
+            but its vy component becomes the <span
+	  class="strike">vx</span>
+	   <span class="new">vy</span> component of the racket's
             velocity minus the old vy component of the ball's velocity.
             These adjustments to the ball's velocity are made only following
             a tick.
@@ -288,7 +292,6 @@
           functions:
         </p>
         <pre>
-          
           ;;; simulation : PosReal -&gt; World
           ;;; GIVEN: the speed of the simulation, in seconds per tick
           ;;;     (so larger numbers run slower)
@@ -444,7 +447,7 @@
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Tue Sep 19 19:53:56 Eastern Daylight Time 2017 <!-- hhmts end -->
+Last modified: Thu Sep 28 08:12:44 Eastern Daylight Time 2017 <!-- hhmts end -->
 
 
     
