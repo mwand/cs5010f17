@@ -98,41 +98,52 @@ For this program, program-undefined-variables should return (list 'f2
 ;; representation to this internal representation (or vice versa).
 ;; That will come next week.
 
-;; We will try a simple representation
 
 ;;;;;;;;;;;;;;;;
 
-;; A Program is a ListOfDefinition
+;; A Program is represented as a DefinitionList.
 
 ;;;;;;;;;;;;;;;;
 
-(define-struct def (name args body))
-;; A Definition is a (make-def Variable ListOfVariable Exp)
+
+;; A Definition is a represented as a struct
+;; (make-def name args body)
 ;; INTERPRETATION:
-;; name is the name of the function being defined
-;; args is the list of arguments of the function
-;; body is the body of the function.
+;; name : Variable is the name of the function being defined
+;; args : VariableList is the list of arguments of the function
+;; body : Exp is the body of the function.
+
+;; IMPLEMENTATION:
+(define-struct def (name args body))
+
+;; CONSTRUCTOR TEMPLATE
+;; (make-def Variable VariableList Exp)
 
 ;;;;;;;;;;;;;;;;
 
-(define-struct varexp (name))
-(define-struct appexp (fn args))
-
-;; An Exp is one of
-;; -- (make-varexp Variable)
-;; -- (make-appexp Variable ListOfExp)
-;; INTERPRETATION;
+;; An Exp is represented as one of the following structs:
+;; -- (make-varexp name)
+;; -- (make-appexp fn args)
+;; INTERPRETATION 
 ;; (make-varexp v)                   represents a use of the variable v
 ;; (make-appexp f (list e1 ... en))  represents a call to the function
 ;;                                   named f, with arguments e1,..,en
 
+;; CONSTRUCTOR TEMPLATES
+;; -- (make-varexp Variable)
+;; -- (make-appexp Variable ExpList)
+
+;; IMPLEMENTATION
+(define-struct varexp (name))
+(define-struct appexp (fn args))
+
 ;;;;;;;;;;;;;;;;
 
-;; A Variable is a Symbol
+;; A Variable is represented as a Symbol
 
 ;; We could have represented variables using strings instead of
 ;; symbols, but using symbols makes it a little easier to build
-;; examples.  
+;; examples. 
 
 ;;;;;;;;;;;;;;;;
 
@@ -143,7 +154,7 @@ For this program, program-undefined-variables should return (list 'f2
 ;; pgm-fn : Program -> ??
 #;
 (define (pgm-fn p)
-  (lodef-fn p))
+  (deflist-fn p))
 
 ;; def-fn : Definition -> ??
 #;
@@ -155,7 +166,9 @@ For this program, program-undefined-variables should return (list 'f2
 (define (exp-fn e)
   (cond
     [(varexp? e) (... (varexp-name e))]
-    [(appexp? e) (... (appexp-fn e) (loexp-fn (appexp-args e)))]))
+    [(appexp? e) (... (appexp-fn e) (explist-fn (appexp-args e)))]))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -190,30 +203,30 @@ def f4(x,z):x(z,z)       ; f1, f2, f3, f4, x, and z are available in the body.
 ;; We'll have a family of functions that follow the data definitions;
 
 ;; program-undefined-variables: Program                        -> SetOfVariable
-;; lod-undefined-variables    : ListOfDefinition SetOfVariable -> SetOfVariable
+;; deflist-undefined-variables    : DefinitionList SetOfVariable -> SetOfVariable
 ;; def-undefined-variables    : Definition       SetOfVariable -> SetOfVariable         
 ;; exp-undefined-variables    : Exp              SetOfVariable -> SetOfVariable         
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; lod-undefined-variables : ListOfDefinition SetOfVariable -> SetOfVariable
+;; deflist-undefined-variables : DefinitionList SetOfVariable -> SetOfVariable
 ;; GIVEN: a list of definitions 'defs' from some program p and a set of
 ;; variables 'vars'
 ;; WHERE: vars is the set of variables available at the start of defs in
 ;; p.
 ;; RETURNS: the set of variables that occur undefined at least once in defs.
 ;; EXAMPLES: See example above
-;; STRATEGY: Use template for ListOfDefinition on defs.  The names
+;; STRATEGY: Use template for DefinitionList on defs.  The names
 ;; available in (rest defs) are those in vars, plus the variable
 ;; defined in (first defs).
 
-(define (lod-undefined-variables defs vars)
+(define (deflist-undefined-variables defs vars)
   (cond
     [(null? defs) empty]
     [else
      (set-union
       (def-undefined-variables (first defs) vars)
-      (lod-undefined-variables (rest  defs)
+      (deflist-undefined-variables (rest  defs)
                         (set-cons (def-name (first defs))
                                   vars)))]))
 
@@ -285,10 +298,10 @@ def f4(x,z):x(z,z)       ; f1, f2, f3, f4, x, and z are available in the body.
 ;; GIVEN: A GarterSnake program p
 ;; RETURNS: true iff there every variable occurring in p is defined at
 ;; the place it occurs.
-;; STRATEGY: Initialize the invariant of lod-undefined-variables
+;; STRATEGY: Initialize the invariant of deflist-undefined-variables
 
 (define (program-undefined-variables p)
-  (lod-undefined-variables p empty))
+  (deflist-undefined-variables p empty))
 
 ;;; Let's turn our examples into tests
 
@@ -336,13 +349,16 @@ def f3 (x z) (f1 (f2 z y) z) ; y is undefined
          (list 'f 'y))
 
   (check set-equal?
-         (lod-undefined-variables
+         (deflist-undefined-variables
            (list (make-def 'f3 (list 'x) (make-appexp 'f (list (make-varexp 'x) (make-varexp 'y)))))
            empty)
          (list 'f 'y))
-  ;; this was the first test that failed, so I know the bug was in lod-undefined-variables.
+  ;; this was the first test that failed, so I know the bug was in deflist-undefined-variables.
   ;; it used set-cons, when it should have used set-union.  
-  ;; An automated typechecker or contract checker would have caught this, I'm sorry to say. 
+  ;; An automated typechecker or contract checker would have caught
+  ;; this, I'm sorry to say.
+  ;; This is an Ouef de Paques.  First person to report this on Piazza
+  ;; will get a small bonus in their final average.
  
 
   )

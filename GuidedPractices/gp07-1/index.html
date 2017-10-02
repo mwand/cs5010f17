@@ -1,16 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
 <title>Guided Practice 7.1</title>
-<link type="text/css" rel="stylesheet" href="../../css/course.css">
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
 </head>
 
 <body>
+<div id="maincontent">
 <h1>Guided Practice 7.1</h1>
 
 <p>Design the following function</p>
-
+ 
 <pre>
-;; diff : NonEmptyListOfNumber -> Number
+;; diff : NonEmptyNumberList -> Number
 ;; GIVEN: a nonempty list of numbers
 ;; RETURNS: the result of subtracting the numbers, from left to right.
 ;; EXAMPLE:
@@ -20,13 +21,13 @@
 
 ;; Use the data definition
 
-;; NonEmptyListOfNumber = (cons Number ListOfNumber)
+;; NonEmptyNumberList = (cons Number NumberList)
 
 ;; You will need one function for the whole list, and one for the
-;; ListOfNumber.
+;; NumberList.
 
-;; Your function for the ListOfNumber must follow the template for
-;; ListOfNumber, but you will need a context argument.  Think carefully
+;; Your function for the NumberList must follow the template for
+;; NumberList, but you will need a context argument.  Think carefully
 ;; about what the context argument means.
 </pre>
 
@@ -41,5 +42,5 @@ part is getting the GIVEN/WHERE/RETURNS right.</p>
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Wed Oct  5 12:50:16 Eastern Daylight Time 2016 <!-- hhmts end -->
+Last modified: Mon Oct  2 13:22:15 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body> </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
-<title>Guided Practice 7.2</title>
+<title>Solution toGuided Practice 7.2</title>
 <link type="text/css" rel="stylesheet" href="../../cs5010.css">
 </head>
 
 <body>
 <div id="maincontent">
-<h1>Guided Practice 7.2</h1>
+<h1>Guided Practice 7.2: Solution</h1>
 
 <p>A valid invariant for a function has the following property:</p>
 
@@ -31,12 +31,23 @@ invariant.</blockquote>
 <p>Which of the following possible invariants does this function
 preserve?</p>
 
+
+
 <ol>
-  <li><kbd>n</kbd> is a non-negative integer.</li>
+  <li><kbd>n</kbd> is a non-negative integer.
+  <strong>ANSWER:</strong> No.  If n is 1 or 2, then n-3 is not a
+  non-negative integer.
+</li>
   <li><kbd>n</kbd> is of the form <kbd>3k</kbd> for some non-negative integer
-  <kbd>k</kbd>.</li> 
+  <kbd>k</kbd>.  <strong>ANSWER:</strong> Yes.  If k = 0, then the
+  function does not make any recursive calls.  If k is greater than 0,
+  then 3k-3 is still a non-negative multiple of 3.</li> 
   <li><kbd>n</kbd> is of the form <kbd>3k+1</kbd> for some
-  non-negative integer <kbd>k</kbd>.</li>
+  non-negative integer <kbd>k</kbd>.
+  <strong>ANSWER:</strong> No.  If k is 0, then n = 1, so the function
+  makes the recursive call, and n-3 is not
+  of the form <kbd>3k+1</kbd> for any non-negative k.
+  </li>
 </ol>
 
 
@@ -48,5 +59,5 @@ preserve?</p>
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Mon Oct  2 12:33:29 Eastern Daylight Time 2017 <!-- hhmts end -->
+Last modified: Mon Oct  2 12:26:28 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body> </html>
