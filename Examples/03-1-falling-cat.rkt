@@ -174,6 +174,7 @@
     w))
 
 ;;;; ***** this is as far as I got *****
+;;;; First student who reports this on Piazza gets +1 Easter Egg point
 
 
 ;; world-with-paused-toggled : World -> World
