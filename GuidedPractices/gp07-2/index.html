@@ -1,49 +1,52 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
-<title>Guided Practice 7.1</title>
-<link type="text/css" rel="stylesheet" href="../../css/course.css">
+<title>Guided Practice 7.2</title>
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
 </head>
 
 <body>
+<div id="maincontent">
 <h1>Guided Practice 7.2</h1>
 
-<p>Consider the computation of</p>
+<p>A valid invariant for a function has the following property:</p>
+
+<blockquote>If the function is called with an argument that satisfies
+the invariant, then each recursive call of that function satisfies the
+invariant.</blockquote>
+
+<p>We say that the function <em>preserves</em> the invariant.</p>
+
+<p>Consider the following function definition:</p>
 
 <pre>
-(program-all-defined?
-    (list
-     (make-def 'f1 (list 'x) (make-appexp 'f2 (list (make-varexp 'x))))
-     (make-def 'f2 (list 'x 'y) (make-appexp 'f2
-                                             (list (make-varexp 'z)
-                                                   (make-varexp 'y))))
-     (make-def 'f3 (list 'x 'y 'z)
-               (make-appexp 'f1 (list (make-appexp 'f2
-                                                   (list (make-varexp 'z)
-                                                         (make-varexp 'y)))
-                                   (make-varexp 'x))))))
+;; f : Integer -> Integer
+;; GIVEN/RETURNS: omitted
+;; INVARIANT: to be filled in
+(define (f n)
+  (cond
+    [(zero? n) 1]
+    [else (* 2 (f (- n 3)))]))
 </pre>
 
-<p>Which of the following will appear as calls during
-this computation?  Which of the following satisfy the invariant?
-</p>
+<p>Which of the following possible invariants does this function
+preserve?</p>
 
 <ol>
-  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f1 'x))</kbd></li>
-  
-  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f3 'x 'y 'z 'f2 'f1))</kbd></li>
-
-  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f2 'x 'y 'z 'f1))</kbd></li>
-
-  <li><kbd>(exp-all-defined? (make-varexp 'z) (list 'f3 'x 'y 'f1 'z))</kbd></li>
-
+  <li><kbd>n</kbd> is a non-negative integer.</li>
+  <li><kbd>n</kbd> is of the form <kbd>3k</kbd> for some non-negative integer
+  <kbd>k</kbd>.</li> 
+  <li><kbd>n</kbd> is of the form <kbd>3k+1</kbd> for some
+  non-negative integer <kbd>k</kbd>.</li>
 </ol>
 
-<p><a href="page2.html" >[ANSWER]</a></p>
+
+<p><a href="solution.html" >[Solution]</a></p>
+
 
 <hr>
 <address></address>
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Mon Oct 17 16:39:07 Eastern Daylight Time 2016 <!-- hhmts end -->
+Last modified: Mon Oct  2 12:33:29 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body> </html>
