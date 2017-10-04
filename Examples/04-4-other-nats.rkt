@@ -20,13 +20,13 @@
 
 ;; OBSERVER TEMPLATE:
 
-;; nat-fn : Nat -> ??
-(define (nat-fn n)
+;; nat-fn : LNat -> ??
+(define (nat-fn ln)
  (cond
-  [(empty? n) ...]
+  [(empty? ln) ...]
   [else (...
-         n
-         (nat-fn (rest n)))]))
+         ln
+         (nat-fn (rest ln)))]))
 
 ;; useful help functions
 
@@ -66,7 +66,7 @@
 
 (define (double n)
   (cond
-    [(empty? n) 0]
+    [(empty? n) empty]
     [else (succ (succ (double (pred n))))]))
 
 
