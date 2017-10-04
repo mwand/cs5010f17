@@ -231,7 +231,7 @@ nothing else.
         <ul>
           <li>
             The ball collides with the racket if and only if
-            all of the following are true:
+            all of the following are true:<p/>
             <ol>
               <li>
                 The ball's position in the previous tick
@@ -239,8 +239,9 @@ nothing else.
                 the racket in the previous tick.
               </li>
               <li>
-                The vy component of the ball's tentative
-                velocity is either zero or negative.
+                The vy component of the ball's <span class="strike">tentative</span>
+                velocity is either zero or <span
+          ;;; class="strike">negative</span> <span class="new">positive</span>.
               </li>
               <li>
                 The line that connects the ball's position
@@ -287,11 +288,15 @@ nothing else.
             model.)
           </li>
         </ul>
+        <p>As in Problem Set 03, there is initially one ball, both in the
+          ready-to-serve state and in the rally state.   
+	</p>
+
         <p>
           You are to deliver a file named <code>q2.rkt</code>
           that defines appropriate data types Ball, Racket, and
           World, defines and provides the fifteen functions
-          specified in part 1 of Problem Set 03 except for
+          specified in part 1 of Problem Set 03  except for
           <code>world-ball</code>,
           defines and provides all three functions specified in
           part 2 of Problem Set 03,
@@ -304,7 +309,12 @@ nothing else.
           ;;; RETURNS: a list of the balls that are present in the world
           ;;;     (but does not include any balls that have disappeared
           ;;;     by colliding with the back wall)
-</pre>
+	</pre>
+
+	<p><span class="new">Note that functions defined by <code>define-struct</code>
+	are not automatically <code>provide</code>d; you must include
+	explicit <code>provides</code> for these functions.</span></p>
+
         <p>
           We recommend you practice the Iterative Design Recipe
           by making a copy of your (corrected) <code>q2.rkt</code> file
@@ -340,7 +350,7 @@ nothing else.
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Mon Oct  2 14:30:28 Eastern Daylight Time 2017 <!-- hhmts end -->
+Last modified: Wed Oct  4 16:18:48 Eastern Daylight Time 2017 <!-- hhmts end -->
 
 </body>
 </html>
