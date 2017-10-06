@@ -68,12 +68,27 @@
 ;; GIVEN: the state of a traffic light
 ;; RETURNS: the state of a traffic light after 1 second
 ;; EXAMPLES: (omitted)
-;; DESIGN STRATEGY: Use constructor template for TrafficLight
+;; DESIGN STRATEGY: Use observer template for TrafficLight
 
 (define (light-at-next-second l)
   (make-light
-   (color-at-next-second l)
-   (timer-at-next-second l)))
+   (color-at-next-second (light-color l) (light-time-left l))
+   (timer-at-next-second (light-time-left l))))
+
+;; we should have 6 tests here: for each of the three colors, one test
+;; where the timer is at 1 and another one where the timer is > 1.
+(begin-for-test
+  (check-equal?
+   (light-at-next-second (make-light red-color 1))
+   (make-light green-color COLOR-CHANGE-INTERVAL))
+  (check-equal?
+   (light-at-next-second (make-light red-color 3))
+   (make-light red-color 2)))
+  ;; should repeat this for the other two colors, making 6 tests in
+  ;; all.
+  ;; Note that the first test is phrased in terms of
+  ;; COLOR-CHANGE-INTERVAL, so that we can still use the test, even if
+  ;; this quantity changes.
 
 ;;;;;;;;;;;;;;;;
 
@@ -181,7 +196,7 @@ works out
 ;; and color-at-next-second
 ;; Break up timer-at-next-second the same way--
 
-;; The first student in Fall 2017 who posts the code 346827 to Piazza
+;; The first student who posts the passcode zfTY#6 to Piazza
 ;; gets a prize.
 
 ;; ready-to-change? : TimerState -> Boolean
