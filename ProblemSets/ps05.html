@@ -221,7 +221,7 @@
           The 18 functions you must define and <code>provide</code>
           are specified as follows:
         </p>
-        <pre>
+<pre>
           ;;; lit : Real -&gt; Literal
           ;;; GIVEN: a real number
           ;;; RETURNS: a literal that represents that number
@@ -270,7 +270,7 @@
           ;;;           call-operands, which show the desired combined
           ;;;           behavior of call and those functions)
           
-          ;;; call-operator : Call -&gt; ArithmeticOperation
+          ;;; call-operator : Call -&gt; ArithmeticExpression
           ;;; GIVEN: a call
           ;;; RETURNS: the operator expression of that call
           ;;; EXAMPLE:
@@ -278,7 +278,7 @@
           ;;;                          (list (lit 7) (lit 2.5))))
           ;;;         =&gt; (op "-")
           
-          ;;; call-operands : Call -&gt; ArithmeticOperationList
+          ;;; call-operands : Call -&gt; ArithmeticExpressionList
           ;;; GIVEN: a call
           ;;; RETURNS: the operand expressions of that call
           ;;; EXAMPLE:
@@ -369,7 +369,7 @@
         <ul>
           <li>
             An <em>operation expression</em> is an arithmetic expression
-            that is either <p/>
+            that is either
             <ul>
               <li>
                 an <code>Operation</code>
@@ -381,7 +381,7 @@
           </li>
           <li>
             A <em>constant expression</em> is an arithmetic expression
-            that is either <p/>
+            that is either
             <ul>
               <li>
                 a <code>Literal</code>,
@@ -513,12 +513,7 @@ Click here to validate.
 </a>
 </p>
 
-    -->
-
-    <font size=-1>
-<p align=right>
-<!-- hhmts start -->
-Last modified: Fri Oct  6 11:27:18 Eastern Daylight Time 2017 <!-- hhmts end -->
+-->
 
 </body>
 </html>
