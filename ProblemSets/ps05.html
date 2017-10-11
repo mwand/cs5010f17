@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,9 +28,9 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 13 February 2017
+      <strong>Out:</strong> Monday, 9 October 2017
       <br />
-      <strong>Due:</strong> Monday, 20 February 2017 at 6pm
+      <strong>Due:</strong> Monday, 16 October 2017 at 6pm local time
     </p>
   </div>
   <div>
@@ -43,63 +43,54 @@
       you.
     </p>
     <p>
-      The main purpose of this problem set is to give you
-      practice programming with higher order functions (HOFs).
+      The main purpose of this problem set is to give you practice
+      designing functions that deal with trees.
     </p>
     <p>
-      You must use the HtDP
-      <strong>Intermediate Student Language + Lambda</strong>
+      You must use Racket's Intermediate Student Language (ISL)
       for this problem set.
-      You are to use HOFs wherever appropriate.
-      These HOFs will replace most (and possibly all) of your
-      uses of the <code>ListOfX</code> template.
     </p>
     <p>
       For these problems, download a copy of
-      <a href="extras.rkt">
-        extras.rkt
-      </a>
-      and put it in the folder with your solutions.
-      Then import this library by including the line
+      <a href="extras.rkt">extras.rkt</a>
+      and put it in the directory with your solutions.
+      Then import <code>rackunit</code> and this library
+      by including the lines
     </p>
     <pre>
+      (require rackunit)
       (require "extras.rkt")
-    </pre>
+</pre>
     <p>
-      at the top of your file with the other <code>require</code>
-      declarations.  Then, for each problem, put in lines that say
+      at the top of your file.
+      Then, for each problem, put in lines that say
     </p>
     <pre>
       (provide <var>function</var>)
-    </pre>
+</pre>
     <p>
-      for each deliverable function, as you have done on previous problem sets.
+      for each deliverable function, as you have done on previous
+      problem sets.
       This will allow our testing framework to import your file
       and do automated testing on it.
-      You can use <code>check-location</code> to double-check that your
-      solutions are in the right place.
+      You can use <code>check-location</code> to double-check
+      that your solutions are in the right place.
     </p>
     <p>
       Remember that you must follow the design recipe, which is a
       process, not a list of deliverables.
       Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the artifacts produced by the various steps of the
       design recipe: data definitions (including interpretation and
       templates, contracts, purpose statements, definitions, and tests).
       Be sure to follow our
-      <a href="../Info/style.html">
-        coding conventions.
-      </a>
+      <a href="../Info/style.html">coding conventions</a>.
       Doing so will make codewalks easier for everyone.
     </p>
     <p>
       Be sure to fill out a
-      <a href="../ProblemSets/yourID-log.txt">
-        work session report
-      </a>
+      <a href="yourID-log.txt">work session report</a>
       at the end of each work session.
       Tell <code>git</code> to add it to the files you will commit,
       and then commit and push (sync) that report in addition to
@@ -111,21 +102,401 @@
       in your <code>set05</code> directory along with your
       <code>q1.rkt</code> and <code>q2.rkt</code> files.
     </p>
+    <p>
+      For both parts, you should require <code>rackunit</code> and
+      <code>"extras.rkt"</code> but nothing else.
+    </p>
     <hr />
     <ol>
       <li>
-        Rewrite your <code>q1.rkt</code> from Problem Set 04
-        to use higher-order functions whenever possible instead
-        of using recursions to traverse lists.
-        Provide the same functions as in Problem Set 04.
-        Name your file <code>q1.rkt</code>, as in Problem Set 04.
+        (Arithmetic Expressions)
+        <br />
+        <p>
+          For this first part of Problem Set 05, you will design
+          data types that make it possible to represent arithmetic
+          expressions such as <code>x+(3*y)</code>.
+          This first part of the problem set consists of nothing
+          but routine data definitions and a few simple functions
+          for creating and observing values of the data types you
+          define.  The functions you are asked to define should not
+          have to do any non-trivial computations.
+        </p>
+        <p>
+          The specific data types you must design and implement
+          are:
+        </p>
+        <ul>
+          <li>
+            A <strong><code>Literal</code></strong>
+            represents a real number.
+          </li>
+          <li>
+            A <strong><code>Variable</code></strong>
+            represents a name whose meaning will depend upon
+            the context in which it appears.
+          </li>
+          <li>
+            An <strong><code>Operation</code></strong>
+            represents an arithmetic operation such as addition or
+            division.
+          </li>
+          <li>
+            A <strong><code>Call</code></strong>
+            represents a function call.
+          </li>
+          <li>
+            A <strong><code>Block</code></strong>
+            represents a variable definition and an expression
+            within which that variable may be used.
+          </li>
+          <li>
+            An <strong><code>ArithmeticExpression</code></strong>
+            is one of the following:
+          </li>
+          <ul>
+            <li>
+              <code>Literal</code>
+            </li>
+            <li>
+              <code>Variable</code>
+            </li>
+            <li>
+              <code>Operation</code>
+            </li>
+            <li>
+              <code>Call</code>
+            </li>
+            <li>
+              <code>Block</code>
+            </li>
+          </ul>
+        </ul>
+        <p>
+          You are to deliver a file named <code>q1.rkt</code>
+          that defines all of the data types named above and
+          also defines and provides all 18 of the functions
+          specified below.
+        </p>
+        <p>
+          We are giving you two data definitions,
+          for the itemization types
+          <code>OperationName</code> and <code>ArithmeticExpression</code>.
+          You should copy these data definitions into your
+          <code>q1.rkt</code> file without changing them:
+        </p>
+        <pre>
+          ;;; An OperationName is represented as one of the following strings:
+          ;;;     -- "+"      (indicating addition)
+          ;;;     -- "-"      (indicating subtraction)
+          ;;;     -- "*"      (indicating multiplication)
+          ;;;     -- "/"      (indicating division)
+          ;;;
+          ;;; OBSERVER TEMPLATE:
+          ;;; operation-name-fn : OperationName -&gt; ??
+          #;
+          (define (operation-name-fn op)
+            (cond ((string=? op "+") ...)
+                  ((string=? op "-") ...)
+                  ((string=? op "*") ...)
+                  ((string=? op "/") ...)))
+          
+          ;;; An ArithmeticExpression is one of
+          ;;;     -- a Literal
+          ;;;     -- a Variable
+          ;;;     -- an Operation
+          ;;;     -- a Call
+          ;;;     -- a Block
+          ;;;
+          ;;; OBSERVER TEMPLATE:
+          ;;; arithmetic-expression-fn : ArithmeticExpression -&gt; ??
+          #;
+          (define (arithmetic-expression-fn exp)
+            (cond ((literal? exp) ...)
+                  ((variable? exp) ...)
+                  ((operation? exp) ...)
+                  ((call? exp) ...)
+                  ((block? exp) ...)))
+</pre>
+        <p>
+          The 18 functions you must define and <code>provide</code>
+          are specified as follows:
+        </p>
+<pre>
+          ;;; lit : Real -&gt; Literal
+          ;;; GIVEN: a real number
+          ;;; RETURNS: a literal that represents that number
+          ;;; EXAMPLE: (see the example given for literal-value,
+          ;;;          which shows the desired combined behavior
+          ;;;          of lit and literal-value)
+          
+          ;;; literal-value : Literal -&gt; Real
+          ;;; GIVEN: a literal
+          ;;; RETURNS: the number it represents
+          ;;; EXAMPLE: (literal-value (lit 17.4)) =&gt; 17.4
+          
+          ;;; var : String -&gt; Variable
+          ;;; GIVEN: a string
+          ;;; WHERE: the string begins with a letter and contains
+          ;;;     nothing but letters and digits
+          ;;; RETURNS: a variable whose name is the given string
+          ;;; EXAMPLE: (see the example given for variable-name,
+          ;;;          which shows the desired combined behavior
+          ;;;          of var and variable-name)
+          
+          ;;; variable-name : Variable -&gt; String
+          ;;; GIVEN: a variable
+          ;;; RETURNS: the name of that variable
+          ;;; EXAMPLE: (variable-name (var "x15")) =&gt; "x15"
+          
+          ;;; op : OperationName -&gt; Operation
+          ;;; GIVEN: the name of an operation
+          ;;; RETURNS: the operation with that name
+          ;;; EXAMPLES: (see the examples given for operation-name,
+          ;;;           which show the desired combined behavior
+          ;;;           of op and operation-name)
+          
+          ;;; operation-name : Operation -&gt; OperationName
+          ;;; GIVEN: an operation
+          ;;; RETURNS: the name of that operation
+          ;;; EXAMPLES:
+          ;;;     (operation-name (op "+")) =&gt; "+"
+          ;;;     (operation-name (op "/")) =&gt; "/"
+          
+          ;;; call : ArithmeticExpression ArithmeticExpressionList -&gt; Call
+          ;;; GIVEN: an operator expression and a list of operand expressions
+          ;;; RETURNS: a call expression whose operator and operands are as
+          ;;;     given
+          ;;; EXAMPLES: (see the examples given for call-operator and
+          ;;;           call-operands, which show the desired combined
+          ;;;           behavior of call and those functions)
+          
+          ;;; call-operator : Call -&gt; ArithmeticExpression
+          ;;; GIVEN: a call
+          ;;; RETURNS: the operator expression of that call
+          ;;; EXAMPLE:
+          ;;;     (call-operator (call (op "-")
+          ;;;                          (list (lit 7) (lit 2.5))))
+          ;;;         =&gt; (op "-")
+          
+          ;;; call-operands : Call -&gt; ArithmeticExpressionList
+          ;;; GIVEN: a call
+          ;;; RETURNS: the operand expressions of that call
+          ;;; EXAMPLE:
+          ;;;     (call-operands (call (op "-")
+          ;;;                          (list (lit 7) (lit 2.5))))
+          ;;;         =&gt; (list (lit 7) (lit 2.5))
+          
+          ;;; block : Variable ArithmeticExpression ArithmeticExpression
+          ;;;             -&gt; ArithmeticExpression
+          ;;; GIVEN: a variable, an expression e0, and an expression e1
+          ;;; RETURNS: a block that defines the variable's value as the
+          ;;;     value of e0; the block's value will be the value of e1
+          ;;; EXAMPLES: (see the examples given for block-var, block-rhs,
+          ;;;           and block-body, which show the desired combined
+          ;;;           behavior of block and those functions)
+          
+          ;;; block-var : Block -&gt; Variable
+          ;;; GIVEN: a block
+          ;;; RETURNS: the variable defined by that block
+          ;;; EXAMPLE:
+          ;;;     (block-var (block (var "x5")
+          ;;;                       (lit 5)
+          ;;;                       (call (op "*")
+          ;;;                             (list (var "x6") (var "x7")))))
+          ;;;         =&gt; (var "x5")
+          
+          ;;; block-rhs : Block -&gt; ArithmeticExpression
+          ;;; GIVEN: a block
+          ;;; RETURNS: the expression whose value will become the value of
+          ;;;     the variable defined by that block
+          ;;; EXAMPLE:
+          ;;;     (block-rhs (block (var "x5")
+          ;;;                       (lit 5)
+          ;;;                       (call (op "*")
+          ;;;                             (list (var "x6") (var "x7")))))
+          ;;;         =&gt; (lit 5)
+          
+          ;;; block-body : Block -&gt; ArithmeticExpression
+          ;;; GIVEN: a block
+          ;;; RETURNS: the expression whose value will become the value of
+          ;;;     the block expression
+          ;;; EXAMPLE:
+          ;;;     (block-body (block (var "x5")
+          ;;;                        (lit 5)
+          ;;;                        (call (op "*")
+          ;;;                              (list (var "x6") (var "x7")))))
+          ;;;         =&gt; (call (op "*") (list (var "x6") (var "x7")))
+          
+          ;;; literal?   : ArithmeticExpression -&gt; Boolean
+          ;;; variable?  : ArithmeticExpression -&gt; Boolean
+          ;;; operation? : ArithmeticExpression -&gt; Boolean
+          ;;; call?      : ArithmeticExpression -&gt; Boolean
+          ;;; block?     : ArithmeticExpression -&gt; Boolean
+          ;;; GIVEN: an arithmetic expression
+          ;;; RETURNS: true if and only the expression is (respectively)
+          ;;;     a literal, variable, operation, call, or block
+          ;;; EXAMPLES:
+          ;;;     (variable? (block-body (block (var "y") (lit 3) (var "z"))))
+          ;;;         =&gt; true
+          ;;;     (variable? (block-rhs (block (var "y") (lit 3) (var "z"))))
+          ;;;         =&gt; false
+</pre>
+        <p>
+          We will be doing automated testing of your solution,
+          so be sure your solution is in the right place
+          (<code>set05/q1.rkt</code> in your private
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line at the top of your file but after your
+          <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "05" "q1.rkt")
+</pre>
       </li>
       <li>
-        Rewrite your <code>q2.rkt</code> from Problem Set 04
-        to use higher-order functions whenever possible instead
-        of using recursions to traverse lists.
-        Provide the same functions as in Problem Set 04.
-        Name your file <code>q2.rkt</code>, as in Problem Set 04.
+        (Constant Expressions)
+        <br />
+        <p>
+          For this second problem, your job is to define several
+          functions that classify and extract information from
+          arithmetic expressions.
+        </p>
+        <p>
+          We'll need the following definitions:
+        </p>
+        <ul>
+          <li>
+            An <em>operation expression</em> is an arithmetic expression
+            that is either
+            <ul>
+              <li>
+                an <code>Operation</code>
+              </li>
+              <li>
+                or a <code>Block</code> whose body is an operation expression.
+              </li>
+            </ul>
+          </li>
+          <li>
+            A <em>constant expression</em> is an arithmetic expression
+            that is either
+            <ul>
+              <li>
+                a <code>Literal</code>,
+              </li>
+              <li>
+                a <code>Call</code> whose operator is an operation expression
+                and whose operands are all constant expressions,
+              </li>
+              <li>
+                or a <code>Block</code> whose body is a constant expression.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          You are to deliver a file named <code>q2.rkt</code>
+          that defines all of the data types and functions
+          defined in part 1 above, and also
+          defines and provides the 4 functions specified below:
+        </p>
+        <pre>
+          ;;; variables-defined-by : ArithmeticExpression -&gt; StringList
+          ;;; GIVEN: an arithmetic expression
+          ;;; RETURNS: a list of the names of all variables defined by
+          ;;;     all blocks that occur within the expression, without
+          ;;;     repetitions, in any order
+          ;;; EXAMPLE:
+          ;;;     (variables-defined-by
+          ;;;      (block (var "x")
+          ;;;             (var "y")
+          ;;;             (call (block (var "z")
+          ;;;                          (var "x")
+          ;;;                          (op "+"))
+          ;;;                   (list (block (var "x")
+          ;;;                                (lit 5)
+          ;;;                                (var "x"))
+          ;;;                         (var "x")))))
+          ;;;  =&gt; (list "x" "z") or (list "z" "x")
+          
+          ;;; variables-used-by : ArithmeticExpression -&gt; StringList
+          ;;; GIVEN: an arithmetic expression
+          ;;; RETURNS: a list of the names of all variables used in
+          ;;;     the expression, including variables used in a block
+          ;;;     on the right hand side of its definition or in its body,
+          ;;;     but not including variables defined by a block unless
+          ;;;     they are also used
+          ;;; EXAMPLE:
+          ;;;     (variables-used-by
+          ;;;      (block (var "x")
+          ;;;             (var "y")
+          ;;;             (call (block (var "z")
+          ;;;                          (var "x")
+          ;;;                          (op "+"))
+          ;;;                   (list (block (var "x")
+          ;;;                                (lit 5)
+          ;;;                                (var "x"))
+          ;;;                         (var "x")))))
+          ;;;  =&gt; (list "x" "y") or (list "y" "x")
+          
+          ;;; constant-expression? : ArithmeticExpression -&gt; Boolean
+          ;;; GIVEN: an arithmetic expression
+          ;;; RETURNS: true if and only if the expression is a constant
+          ;;;     expression
+          ;;; EXAMPLES:
+          ;;;     (constant-expression?
+          ;;;      (call (var "f") (list (lit -3) (lit 44))))
+          ;;;         =&gt; false
+          ;;;     (constant-expression?
+          ;;;      (call (op "+") (list (var "x") (lit 44))))
+          ;;;         =&gt; false
+          ;;;     (constant-expression?
+          ;;;      (block (var "x")
+          ;;;             (var "y")
+          ;;;             (call (block (var "z")
+          ;;;                          (call (op "*")
+          ;;;                                (list (var "x") (var "y")))
+          ;;;                          (op "+"))
+          ;;;                   (list (lit 3)
+          ;;;                         (call (op "*")
+          ;;;                               (list (lit 4) (lit 5)))))))
+          ;;;         =&gt; true
+          
+          ;;; constant-expression-value : ArithmeticExpression -&gt; Real
+          ;;; GIVEN: an arithmetic expression
+          ;;; WHERE: the expression is a constant expression
+          ;;; RETURNS: the numerical value of the expression
+          ;;; EXAMPLES:
+          ;;;     (constant-expression-value
+          ;;;      (call (op "/") (list (lit 15) (lit 3))))
+          ;;;         =&gt; 5
+          ;;;     (constant-expression-value
+          ;;;      (block (var "x")
+          ;;;             (var "y")
+          ;;;             (call (block (var "z")
+          ;;;                          (call (op "*")
+          ;;;                                (list (var "x") (var "y")))
+          ;;;                          (op "+"))
+          ;;;                   (list (lit 3)
+          ;;;                         (call (op "*")
+          ;;;                               (list (lit 4) (lit 5)))))))
+          ;;;         =&gt; 23
+</pre>
+        <p>
+          Remember that we will be doing automated testing of your solution,
+          so be sure your solution is in the right place
+          (<code>set05/q2.rkt</code> in your private
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all of the functions listed above.
+          To see if your file is in the right place, insert the
+          following line at the top of your file but after your
+          <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "05" "q2.rkt")
+</pre>
       </li>
     </ol>
   </div>
@@ -133,12 +504,16 @@
 
 <!-- end of specific content -->
 
+<!--
+
 <p class="muchsmaller">
 For debugging: 
 <a href="http://validator.w3.org/check/referer">
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
