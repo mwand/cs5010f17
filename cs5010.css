@@ -26,7 +26,8 @@ body {
     /* font-size: 100%;*/
 /* from Fall 15 edition: */
 background-color: #ffffe0; 
-font-family:  Verdana, Arial, Helvetica, sans-serif;
+/* font-family:  Verdana, Arial, Helvetica, sans-serif; */
+font-family:  Verdana, Helvetica, Arial, sans-serif;
 /* font-size: larger; */
   height: 100%;
   /* margin: 10%; */
@@ -123,7 +124,9 @@ tr .wide   { width: 300px; }
 
 tt,kbd,code {
     /* font-size: 11pt; */
-    font-size: larger
+    font-family: "Monaco", "Courier new", monospace, monospace;
+    font-size: 1em;
+/*  font-size: larger */
 }
 
 pre {
