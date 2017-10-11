@@ -96,8 +96,8 @@
 ;; GIVEN: a PersonList,
 ;; RETURNS: the list of all their descendants
 ;; (descendants fred) = (list chuck eddie alice bob dave)
-;; (all-descendants (list chuck eddie)) = (list alice bob eddie)
-;; STRATEGY: Use template for Person/LoP
+;; (all-descendants (list chuck eddie)) = (list alice bob dave)
+;; STRATEGY: Use template for Person/PersonList
 
 (define (descendants p)
   (append

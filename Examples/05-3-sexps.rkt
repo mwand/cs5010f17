@@ -47,7 +47,7 @@
 
 ;; occurs-in? : Sexp String -> Boolean
 ;; RETURNS: true if the given string occurs somewhere in the given Sexp.
-;; occurs-in-loss? : Loss String -> Boolean
+;; occurs-in-loss? : SexpList String -> Boolean
 ;; RETURNS: true if the given string occurs somewhere in the given
 ;; list of Sexps.
 ;; STRATEGY: Use templates for Sexp and SexpList
