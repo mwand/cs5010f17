@@ -81,33 +81,45 @@ def f3 (x,z):f1(f2(z,y),z) ; y is undefined
 
 ;;;;;;;;;;;;;;;;
 
-;; A Program is a ListOfDefinition
+;; A Program is represented as a DefinitionList.
 
 ;;;;;;;;;;;;;;;;
 
-(define-struct def (name args body))
-;; A Definition is a (make-def Variable ListOfVariable Exp)
+
+;; A Definition is a represented as a struct
+;; (make-def name args body)
 ;; INTERPRETATION:
-;; name is the name of the function being defined
-;; args is the list of arguments of the function
-;; body is the body of the function.
+;; name : Variable is the name of the function being defined
+;; args : VariableList is the list of arguments of the function
+;; body : Exp is the body of the function.
+
+;; IMPLEMENTATION:
+(define-struct def (name args body))
+
+;; CONSTRUCTOR TEMPLATE
+;; (make-def Variable VariableList Exp)
 
 ;;;;;;;;;;;;;;;;
 
-(define-struct varexp (name))
-(define-struct appexp (fn args))
-
-;; An Exp is one of
-;; -- (make-varexp Variable)
-;; -- (make-appexp Variable ListOfExp)
-;; INTERPRETATION;
+;; An Exp is represented as one of the following structs:
+;; -- (make-varexp name)
+;; -- (make-appexp fn args)
+;; INTERPRETATION 
 ;; (make-varexp v)                   represents a use of the variable v
 ;; (make-appexp f (list e1 ... en))  represents a call to the function
 ;;                                   named f, with arguments e1,..,en
 
+;; CONSTRUCTOR TEMPLATES
+;; -- (make-varexp Variable)
+;; -- (make-appexp Variable ExpList)
+
+;; IMPLEMENTATION
+(define-struct varexp (name))
+(define-struct appexp (fn args))
+
 ;;;;;;;;;;;;;;;;
 
-;; A Variable is a Symbol
+;; A Variable is represented as a Symbol
 
 ;; We could have represented variables using strings instead of
 ;; symbols, but using symbols makes it a little easier to build
@@ -122,7 +134,7 @@ def f3 (x,z):f1(f2(z,y),z) ; y is undefined
 ;; pgm-fn : Program -> ??
 #;
 (define (pgm-fn p)
-  (lodef-fn p))
+  (deflist-fn p))
 
 ;; def-fn : Definition -> ??
 #;
@@ -134,7 +146,7 @@ def f3 (x,z):f1(f2(z,y),z) ; y is undefined
 (define (exp-fn e)
   (cond
     [(varexp? e) (... (varexp-name e))]
-    [(appexp? e) (... (appexp-fn e) (loexp-fn (appexp-args e)))]))
+    [(appexp? e) (... (appexp-fn e) (explist-fn (appexp-args e)))]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -168,30 +180,30 @@ def f4(x,z):x(z,z)       ; f1, f2, f3, f4, x, and z are available in the body.
 ;; We'll have a family of functions that follow the data definitions;
 
 ;; program-all-defined : Program                        -> Boolean
-;; lod-all-defined?    : ListOfDefinition SetOfVariable -> Boolean
+;; deflist-all-defined? : DefinitionList SetOfVariable -> Boolean
 ;; def-all-defined?    : Definition       SetOfVariable -> Boolean         
 ;; exp-all-defined?    : Exp              SetOfVariable -> Boolean         
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; lod-all-defined? : ListOfDefinition SetOfVariable -> Boolean
+;; deflist-all-defined? : DefinitionList SetOfVariable -> Boolean
 ;; GIVEN: a list of definitions 'defs' from some program p and a set of
 ;; variables 'vars'
 ;; WHERE: vars is the set of variables available at the start of defs in
 ;; p.
 ;; RETURNS: true iff there are no undefined variables in defs.
 ;; EXAMPLES: See example above
-;; STRATEGY: Use template for ListOfDefinition on defs.  The names
+;; STRATEGY: Use template for DefinitionList on defs.  The names
 ;; available in (rest defs) are those in vars, plus the variable
 ;; defined in (first defs).
 
-(define (lod-all-defined? defs vars)
+(define (deflist-all-defined? defs vars)
   (cond
     [(null? defs) true]
     [else
      (and
       (def-all-defined? (first defs) vars)
-      (lod-all-defined? (rest  defs)
+      (deflist-all-defined? (rest  defs)
                         (set-cons (def-name (first defs))
                                   vars)))]))
 
@@ -236,10 +248,10 @@ def f4(x,z):x(z,z)       ; f1, f2, f3, f4, x, and z are available in the body.
 ;; GIVEN: A GarterSnake program p
 ;; RETURNS: true iff there every variable occurring in p is defined at
 ;; the place it occurs.
-;; STRATEGY: Initialize the invariant of lod-all-defined?
+;; STRATEGY: Initialize the invariant of deflist-all-defined?
 
 (define (program-all-defined? p)
-  (lod-all-defined? p empty))
+  (deflist-all-defined? p empty))
 
 ;;; Let's turn our examples into tests
 
