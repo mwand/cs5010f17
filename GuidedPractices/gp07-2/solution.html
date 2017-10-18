@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Guided Practice 7.2 (Solution)</title>
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
+</head>
+
+<body>
+<div id="maincontent">
+<h1>Guided Practice 7.2 (Solution)</h1>
+
+<p>A valid invariant for a function has the following property:</p>
+
+<blockquote>If the function is called with an argument that satisfies
+the invariant, then each recursive call of that function satisfies the
+invariant.</blockquote>
+
+<p>We say that the function <em>preserves</em> the invariant.</p>
+
+<p>Consider the following function definition:</p>
+
+<pre>
+;; f : Integer -> Integer
+;; GIVEN/RETURNS: omitted
+;; INVARIANT: to be filled in
+(define (f n)
+  (cond
+    [(zero? n) 1]
+    [else (* 2 (f (- n 3)))]))
+</pre>
+
+<p>Which of the following possible invariants does this function
+preserve?</p>
+
+<ol>
+
+  <li><kbd>n</kbd> is a non-negative integer. <strong>ANSWER:
+  </strong> No.  If n=2, then n-3 is not a non-negative integer.</li>
+  
+  <li><kbd>n</kbd> is of the form <kbd>3k</kbd> for some non-negative integer
+  <kbd>k</kbd>  <strong>ANSWER:</strong> Yes.  Consider the
+  possibilities for k.  If k = 0, then n = 0, and the function does
+  not make any calls.  If k &gt; 0, then k-1 is non-negative, and
+  therefore 3k-3 = 3(k-1) is non-negative.</li> 
+
+  <li><kbd>n</kbd> is of the form <kbd>3k+1</kbd> for some integer
+  <kbd>k</kbd>.  <strong>ANSWER:</strong> Yes.  If n = 3k+1, then n-3
+  = (3k+1)-3 = 3(k-1), which is still an integer.  Note than in this
+  invariant, we didn't ask for k to be non-negative.  If we had asked
+  for k to be non-negative, then the invariant does not hold at n = 1.</li> 
+</ol>
+
+
+<p><a href="solution.html" >[Solution]</a></p>
+
+
+<hr>
+<address></address>
+<font size=-1>
+<p align=right>
+<!-- hhmts start -->
+Last modified: Mon Oct  2 12:26:28 Eastern Daylight Time 2017 <!-- hhmts end -->
+</body> </html>
