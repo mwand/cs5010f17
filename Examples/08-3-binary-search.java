@@ -42,8 +42,9 @@ class BinSearch {
         // RETURNS: a number k such that lo <= k < hi and f(k) = tgt if
         //     there is such a k, otherwise -1.
 
-        // HALTING MEASURE: max (hi-lo, 0)
-        // JUSTIFICATION: max (hi - lo, 0) is guaranteed non-negative,
+        // HALTING MEASURE: hi-lo
+        // JUSTIFICATION: hi-lo is guaranteed to be non-negative,
+        // since the invariant tells us that lo <= hi,
         // and it decreases at every recursive call because one of the
         // following happens:
         //     lo increases while hi stays the same
@@ -88,9 +89,10 @@ class BinSearch {
         // AND   (forall j)(hi <= j < A.length ==> A[j] > tgt)
 
         // Note that lo = 0 and hi = A.length makes the invariant
-        // true, since in both cases there is no such j.
+        // true, since in both cases there is no s
+        uch j.
 
-        // HALTING MEASURE: max((hi - lo),0)
+        // HALTING MEASURE: hi-lo
         // JUSTIFICATION: Same as above.
 
         while (lo < hi) {                 // the search area is non-empty
