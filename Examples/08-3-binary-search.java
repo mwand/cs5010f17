@@ -13,6 +13,7 @@
 
 // DEFINITION: A is _nondecreasing_ iff
 //            (0 <= i <= j <= A.length) implies A[i] <= A[j])
+// Note that this allows duplicate elements.
  
 
 class BinSearch {
@@ -23,7 +24,7 @@ class BinSearch {
         // WHERE: A is non-decreasing
         // RETURNS: a number k such that
         //         0 <= k < A.length
-        //     and f(k) = tgt
+        //     and A[k] = tgt
         // if there is such a k,
         //         otherwise returns -1
         // STRATEGY: Call a more general function
@@ -34,10 +35,10 @@ class BinSearch {
     static int recursive_loop (int lo, int hi, int[] A, int tgt) {
 
         // GIVEN: two integers lo and hi, an array of ints A, and a target tgt
-        // WHERE: A is non-decreasing (ie, i <= j implies A[i] <= A[j])
-        //       0 <= lo <= hi <= A.length
-        // AND   (forall j)(0  <= j < lo       ==> A[j] < tgt)
-        // AND   (forall j)(hi <= j < A.length ==> A[j] > tgt)
+        // WHERE: A is non-decreasing
+        // AND    0 <= lo <= hi <= A.length
+        // AND    (forall j)(0  <= j < lo       ==> A[j] < tgt)
+        // AND    (forall j)(hi <= j < A.length ==> A[j] > tgt)
         
         // RETURNS: a number k such that lo <= k < hi and f(k) = tgt if
         //     there is such a k, otherwise -1.
@@ -75,10 +76,13 @@ class BinSearch {
 
     
     static int binsearch_iterative (int[] A, int tgt) {
+
         // GIVEN: An array A of integers and an integer target 'tgt'
-        // WHERE: A is sorted in ascending order (duplicates are possible)
-        // RETURNS: a non-negative value k such that A[k] = tgt
-        //     or -1 if no such k exists
+        // WHERE: A is non-decreasing
+        // RETURNS: a number k such that
+        //         0 <= k < A.length
+        //     and A[k] = tgt
+        // if there is such a k, otherwise returns -1
 
         int lo = 0;        
         int hi = A.length;
@@ -89,13 +93,13 @@ class BinSearch {
         // AND   (forall j)(hi <= j < A.length ==> A[j] > tgt)
 
         // Note that lo = 0 and hi = A.length makes the invariant
-        // true, since in both cases there is no s
-        uch j.
+        // true, since in both cases there is no such j.
 
         // HALTING MEASURE: hi-lo
         // JUSTIFICATION: Same as above.
 
-        while (lo < hi) {                 // the search area is non-empty
+        while (lo < hi) {       // the search area is non-empty
+            // choose an element in [lo,hi) . 
             int mid = (lo + hi) / 2;
             if (A[mid] == tgt) {
                 // we have found the target
