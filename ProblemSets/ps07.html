@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,20 +28,14 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 27 February 2017
+      <strong>Out:</strong> Monday, 23 October 2017
       <br />
-      <strong>Due:</strong> Monday, 13 March 2017 at 6pm
+      <strong>Due:</strong> Monday, 30 October 2017 at 6pm local time
     </p>
   </div>
   <div>
     <p>
-      This is a
-      <a href="http://en.wikipedia.org/wiki/Pair_programming">
-        pair programming
-      </a>
-      assignment.  You are required to
-      complete this problem set in collaboration with your assigned
-      partner, but neither of you are allowed to
+      This is an individual assignment.  You are not allowed to
       discuss this problem set with any other person.  You are also
       not allowed to search for or to view any solutions to similar
       problems that may be available on the World-Wide Web or in
@@ -49,161 +43,371 @@
       you.
     </p>
     <p>
-      As in previous problem sets,
-      you and your partner are required to push your files at
-      the end of every work session.
-      (You <em>may</em> push your files several times during
-      a work session, but we do not require you to do so.)
+      The main purpose of this problem set is to give you practice
+      designing functions with invariants.
+      Another purpose is to give you more practice with the System
+      Design Recipe.
     </p>
     <p>
-      At the end of every work session, you are required to update
-      your log file to record the time you spent in that work session.
-      (Please do not include the time you spent in any previous work
-      sessions, as those times will already have been recorded in
-      previous versions of your log file.)
-      If both of you work together during a work session, both of
-      you must update your log files, recording only the time <em>you</em>
-      spent working.  Do not include your partner's time in
-      your log file, but be sure to push the updated versions of
-      both log files.
-    </p>
-    <hr />
-    <p>
-      This problem set has two purposes.
-      One is to give you some appreciation for abstract data types.
-      Another is to give you some practice with invariants and contexts.
-    </p>
-    <p>
-      You must use the HtDP
+      You must use Racket's
       <strong>Intermediate Student Language + Lambda</strong>
       for this problem set.
-      You should use HOFs wherever appropriate.
     </p>
     <p>
-      As in previous problem sets, you must download a copy of
-      <a href="extras.rkt">
-        <code>extras.rkt</code>
-      </a>
-      and push it to the <code>set07</code> directory with your solutions.
-      Then import that library by including the line
-      <code>(require "extras.rkt")</code>
-      at the top of your files with your other <code>require</code>
-      declarations.  Following those <code>require</code> declarations,
-      write <code>provide</code> declarations that provide all of
-      the functions you are required to provide, without providing any
-      functions you are not required to provide.
-      That will allow our testing framework to import your files
-      and do automated testing on them.
-      You can use <code>check-location</code> to double-check that your
-      files are in the right place.
+      For these problems, download a copy of
+      <a href="extras.rkt">extras.rkt</a>
+      and put it in the directory with your solutions.
+      Then import <code>rackunit</code> and this library
+      by including the lines
     </p>
+    <pre>
+      (require rackunit)
+      (require "extras.rkt")
+</pre>
     <p>
-      For the first question in this problem set,
-      you must also download a copy of
-      <a href="flight.rkt">
-        <code>flight.rkt</code>
-      </a>
-      and use that implementation of <code>flight.rkt</code>
-      instead of the <code>flight.rkt</code> file you wrote
-      for Problem Set 06.
+      at the top of your file.
+      Then, for each problem, put in lines that say
+    </p>
+    <pre>
+      (provide <var>function</var>)
+</pre>
+    <p>
+      for each deliverable function, as you have done on previous
+      problem sets.
+      This will allow our testing framework to import your file
+      and do automated testing on it.
+      You can use <code>check-location</code> to double-check
+      that your solutions are in the right place.
     </p>
     <p>
       Remember that you must follow the design recipe, which is a
       process, not a list of deliverables.
       Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the artifacts produced by the various steps of the
       design recipe: data definitions (including interpretation and
       templates, contracts, purpose statements, definitions, and tests).
       Be sure to follow our
-      <a href="../Info/style.html">
-        coding conventions.
-      </a>
+      <a href="../Info/style.html">coding conventions</a>.
       Doing so will make codewalks easier for everyone.
     </p>
+    <p>
+      Be sure to fill out a
+      <a href="yourID-log.txt">work session report</a>
+      at the end of each work session.
+      <span class="red">Be sure to report only the hours
+      spent in that work session;
+      do <strong><em>not</em></strong> report the cumulative time</span>.
+      Tell <code>git</code> to add your work session report
+      to the files you will commit,
+      and then commit and push (sync) that report in addition to
+      committing and pushing your entire <code>set06</code> directory.
+      <strong><em>Do this at the end of every work session.</em></strong>
+    </p>
+    <p>
+      Remember to include a copy of <code>extras.rkt</code> racket
+      in your <code>set07</code> directory along with your
+      <code>q1.rkt</code> and <code>q2.rkt</code> files.
+    </p>
+    <p>
+      For both parts, you should require <code>rackunit</code> and
+      <code>"extras.rkt"</code> but nothing else.
+    </p>
     <hr />
-  </div>
-  <h3>
-    Problem Specification
-  </h3>
-  <ol>
+    <ol>
+      <li>
+        (Undefined Variables)
+        <br />
+        <p>
+          For this first part of Problem Set 07, you will design
+          a function named <code>undefined-variables</code> that
+          checks an arithmetic expression to see whether all of
+          its variables are defined and are used only within the
+          <em>region</em> in which they are defined.
+        </p>
+        <p>
+          Although the following sentences are taken from the
+          current standard for the Scheme programming language,
+          similar remarks apply to most of the programming languages
+          you have used or will use during your career:
+        </p>
+        <blockquote>
+          To each place where an identifier is bound in a program
+          there corresponds a region of the program text within
+          which the binding is visible.  The region is determined
+          by the particular binding construct that establishes
+          the binding; if the binding is established by a lambda
+          expression, for example, then its region is the entire
+          lambda expression.  Every mention of an identifier refers
+          to the binding of the identifier that established the
+          innermost of the regions containing the use.
+        </blockquote>
+        <p>
+          In the language of arithmetic expressions, as introduced
+          by Problem Set 05, blocks are the only binding constructs.
+          When a variable is defined by a block, its region is the
+          body of the block.
+        </p>
+        <p>
+          Variables with the same name may be defined by more than
+          block, so there may be more than one region corresponding
+          to a variable with that name.
+        </p>
+        <p>
+          If a variable is used within an arithmetic expression but
+          at least one of its uses does not lie within any region
+          established by a definition of the variable, then the
+          variable is said to be <em>undefined</em>.
+        </p>
+        <p>
+          You are to deliver a file named <code>q1.rkt</code>
+          that
+        </p>
+        <ul>
+          <li>
+            defines all of the data types named in part 1 of
+            Problem Set 05,
+          </li>
+          <li>
+            including the <code>OperationName</code> and
+            <code>ArithmeticExpression</code> types whose definitions
+            we gave you,
+          </li>
+          <li>
+            defines and provides all 18 of the functions
+            specified in part 1 of Problem Set 05,
+            with one change to the <code>block</code> function's
+            contract: for Problem Set 07, <code>block</code>
+            returns a <code>Block</code>,
+          </li>
+          <li>
+            and defines and provides the <code>undefined-variables</code>
+            function specified below.
+          </li>
+        </ul>
+        <p>
+          The 19 functions you must define and <code>provide</code>
+          are:
+        </p>
+        <pre>
+          ;;; lit : Real -&gt; Literal
+          ;;; literal-value : Literal -&gt; Real
+          ;;; var : String -&gt; Variable
+          ;;; variable-name : Variable -&gt; String
+          ;;; op : OperationName -&gt; Operation
+          ;;; operation-name : Operation -&gt; OperationName
+          ;;; call : ArithmeticExpression ArithmeticExpressionList -&gt; Call
+          ;;; call-operator : Call -&gt; ArithmeticExpression
+          ;;; call-operands : Call -&gt; ArithmeticExpressionList
+          ;;; block : Variable ArithmeticExpression ArithmeticExpression
+          ;;;             -&gt; Block
+          ;;; block-var : Block -&gt; Variable
+          ;;; block-rhs : Block -&gt; ArithmeticExpression
+          ;;; block-body : Block -&gt; Block
+          ;;; literal?   : ArithmeticExpression -&gt; Boolean
+          ;;; variable?  : ArithmeticExpression -&gt; Boolean
+          ;;; operation? : ArithmeticExpression -&gt; Boolean
+          ;;; call?      : ArithmeticExpression -&gt; Boolean
+          ;;; block?     : ArithmeticExpression -&gt; Boolean
+          ;;;
+          ;;; (Those 18 functions are as specified in Problem Set 07,
+          ;;; except we have changed the return type of the
+          ;;; block function from ArithmeticExpression to Block.)
+          
+          ;;; undefined-variables : ArithmeticExpression -&gt; StringList
+          ;;; GIVEN: an arbitrary arithmetic expression
+          ;;; RETURNS: a list of the names of all undefined variables
+          ;;;     for the expression, without repetitions, in any order
+          ;;; EXAMPLE:
+          ;;;     (undefined-variables
+          ;;;      (call (var "f")
+          ;;;            (list (block (var "x")
+          ;;;                         (var "x")
+          ;;;                         (var "x"))
+          ;;;                  (block (var "y")
+          ;;;                         (lit 7)
+          ;;;                         (var "y"))
+          ;;;                  (var "z"))))
+          ;;;  =&gt; some permutation of (list "f" "x" "z")
+</pre>
+
+
+<p>For both questions in this set, you should review any code that you
+reuse from Problem Sets 05 and 06, repair any defects that were noted
+in your previous submissions, and improve your code where
+possible. </p>
+
+<p>
+          We will be doing automated testing of your solution,
+          so be sure your solution is in the right place
+          (<code>set07/q1.rkt</code> in your private
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line at the top of your file but after your
+          <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "07" "q1.rkt")
+</pre>
+      </li>
+
     <li>
-      Copy your <code>q2.rkt</code> program of Problem Set 06
-      to a file named <code>set07/q1.rkt</code>.
-      Create a plain text file named <code>set07/q1.txt</code> as well.
-      Modify your <code>q1.rkt</code> program as necessary to respect
-      the abstraction barrier associated with the
-      <code>UTC</code> and <code>Flight</code>
-      abstract data types, without changing any of the <code>provide</code>
-      declarations, contracts, or purpose statements from Problem Set 06.
+      (Type Checking)
+      <br />
       <p>
-        Record all of the changes that were necessary in
-        your <code>q1.txt</code> file; when you're done, that file
-        will tell you some of the things you did wrong on Problem Set 06.
-        Test your program using the
-        <a href="flight.rkt">
-          <code>flight.rkt</code>
-        </a>
-        file given to you for this assignment.
-        When your <code>q1.rkt</code> program respects the
-        abstraction barrier of the <code>UTC</code> and <code>Flight</code>
-        ADTs, that program should run with either one of the two
-        <code>flight.rkt</code> files: the one you wrote for Problem Set 06
-        and the one given to you by the course staff for this assignment.
+        For this second problem, your job is to write a type checker
+        for arithmetic expressions.
       </p>
-    </li>
-    <li>
-      After you have modified your <code>set07/q1.rkt</code> program
-      as necessary to respect abstraction barriers, make a copy of it
-      in <code>set07/q2.rkt</code>.
-      Modify that program as necessary to work without the preconditions
-      that say there are no non-trivial round trips.
       <p>
-        In other words:  Define and <code>provide</code> the three functions
-        specified below.
+        We'll need the following definitions:
+      </p>
+      <ul>
+        <li>
+          A type is one of
+          <ul>
+            <li>
+              <code>Int</code>
+            </li>
+            <li>
+              <code>Op0</code>
+            </li>
+            <li>
+              <code>Op1</code>
+            </li>
+            <li>
+              <code>Error</code>
+            </li>
+          </ul>
+        </li>
+        <li>
+          The type of an arithmetic expression is defined as follows:
+          <ul>
+            <li>
+              The type of a <code>Literal</code> is <code>Int</code>
+            </li>
+            <li>
+              If a <code>Variable</code> is used outside of any region
+              for the variable, then the type of that use of the variable is
+              <code>Error</code>;
+              otherwise the type of that use of the variable
+              is the type of the expression on the right hand side of the
+              innermost definition of the variable whose region includes
+              the use.
+            </li>
+            <li>
+              The type of <code>(op "+")</code> is <code>Op0</code>.
+            </li>
+            <li>
+              The type of <code>(op "*")</code> is <code>Op0</code>.
+            </li>
+            <li>
+              The type of <code>(op "-")</code> is <code>Op1</code>.
+            </li>
+            <li>
+              The type of <code>(op "/")</code> is <code>Op1</code>.
+            </li>
+            <li>
+              If the operator of a call has type
+              <code>Op0</code>, and all of its operands have type
+              <code>Int</code>, then the type of the call is
+              <code>Int</code>.
+            </li>
+            <li>
+              If the operator of a call has type
+              <code>Op1</code>, and all of its operands have type
+              <code>Int</code>, and there is at least one operand,
+              then the type of the call is
+              <code>Int</code>.
+            </li>
+            <li>
+              If neither of the two rules above specifies the type
+              of a call, then its type is
+              <code>Error</code>.
+            </li>
+            <li>
+              If the right-hand side of a block's definition has type
+              <code>Error</code>, then the type of that block is
+              <code>Error</code>;
+              otherwise the type of the block is the type of its
+              body.
+            </li>
+          </ul>
+        </li>
+        <li>
+          An arithmetic expression is well-typed if and only if
+          its type is not <code>Error</code>.
+        </li>
+      </ul>
+      <p>
+        You are to deliver a file named <code>q2.rkt</code>
+        that defines all of the data types from part 1,
+        defines and provides all 19 of the functions
+        specified in part 1 above, and also
+        defines and provides the <code>well-typed?</code> function
+        specified below
+        (so you will provide 20 functions in all):
       </p>
       <pre>
-        ;;; can-get-there? : String String ListOfFlight -> Boolean
-        ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
-        ;;;     and a ListOfFlight that describes all of the flights a
-        ;;;     traveller is willing to consider taking
-        ;;; RETURNS: true if and only if it is possible to fly from the
-        ;;;     first airport (ap1) to the second airport (ap2) using
-        ;;;     only the given flights
-        
-        ;;; fastest-itinerary : String String ListOfFlight -> ListOfFlight
-        ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
-        ;;;     and a ListOfFlight that describes all of the flights a
-        ;;;     traveller is willing to consider taking
-        ;;; WHERE: it is possible to fly from the first airport (ap1) to
-        ;;;     the second airport (ap2) using only the given flights
-        ;;; RETURNS: a list of flights that tells how to fly from the
-        ;;;     first airport (ap1) to the second airport (ap2) in the
-        ;;;     least possible time, using only the given flights
-        ;;; NOTE: to simplify the problem, your program should incorporate
-        ;;;     the totally unrealistic simplification that no layover
-        ;;;     time is necessary, so it is possible to arrive at 1500
-        ;;;     and leave immediately on a different flight that departs
-        ;;;     at 1500
-        
-        ;;; travel-time : String String ListOfFlight -> NonNegInt
-        ;;; GIVEN: the names of two airports, ap1 and ap2 (respectively),
-        ;;;     and a ListOfFlight that describes all of the flights a
-        ;;;     traveller is willing to consider taking
-        ;;; WHERE: it is possible to fly from the first airport (ap1) to
-        ;;;     the second airport (ap2) using only the given flights
-        ;;; RETURNS: the number of minutes it takes to fly from the first
-        ;;;     airport (ap1) to the second airport (ap2), including any
-        ;;;     layovers, by the fastest possible route that uses only
-        ;;;     the given flights
-      </pre>
+        ;;; well-typed? : ArithmeticExpression -&gt; Boolean
+        ;;; GIVEN: an arbitrary arithmetic expression
+        ;;; RETURNS: true if and only if the expression is well-typed
+        ;;; EXAMPLES:
+        ;;;     (well-typed? (lit 17))  =&gt;  true
+        ;;;     (well-typed? (var "x"))  =&gt;  false
+        ;;;
+        ;;;     (well-typed?
+        ;;;      (block (var "f")
+        ;;;             (op "+")
+        ;;;             (block (var "x")
+        ;;;                    (call (var "f") (list))
+        ;;;                    (call (op "*")
+        ;;;                          (list (var "x"))))) =&gt; true
+        ;;;
+        ;;;     (well-typed?
+        ;;;      (block (var "f")
+        ;;;             (op "+")
+        ;;;             (block (var "f")
+        ;;;                    (call (var "f") (list))
+        ;;;                    (call (op "*")
+        ;;;                          (list (var "f"))))) =&gt; true
+        ;;;
+        ;;;     (well-typed?
+        ;;;      (block (var "f")
+        ;;;             (op "+")
+        ;;;             (block (var "x")
+        ;;;                    (call (var "f") (list))
+        ;;;                    (call (op "*")
+        ;;;                          (list (var "f"))))) =&gt; false
+</pre>
+      <p>
+        Instead of copying most of your <code>q1.rkt</code> file
+        into <code>q2.rkt</code>, you may choose to have your
+        <code>q2.rkt</code> file <code>require</code> your
+        <code>q1.rkt</code> file.
+        If you do that, however, your <code>q2.rkt</code> file
+        must still <code>provide</code> all 20 functions.
+      </p>
+      <p>
+        Remember that we will be doing automated testing of your solution,
+        so be sure your solution is in the right place
+        (<code>set07/q2.rkt</code> in your private
+        <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+        and that it provides all of the functions listed above.
+        To see if your file is in the right place, insert the
+        following line at the top of your file but after your
+        <code>require</code> declarations:
+      </p>
+      <pre>
+        (check-location "07" "q2.rkt")
+</pre>
     </li>
-  </ol>
+  </div>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -211,6 +415,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
