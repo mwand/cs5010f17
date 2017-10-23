@@ -110,10 +110,11 @@ class BinSearch {
                 // right half. 
                 lo = mid+1;
             }
-            // otherwise the target can't be to the right of mid,
-            // so search left half. 
-            else
+            else {
+                // otherwise the target can't be to the right of mid,
+                // so search left half. 
                 hi = mid;
+            }
         }
 
         // the search area is empty
@@ -129,7 +130,7 @@ class BinSearch {
         int p = binsearch_recursive (A, tgt);
         if (p == -1) { // no occurrences of tgt in the array
             return 0;
-        } else { /* do nothing */}
+        } else { /* do nothing */ }
 
         int lo = p;
         int hi = p;
@@ -141,7 +142,9 @@ class BinSearch {
         // HALTING MEASURE: lo
         // JUSTIFICATION: the invariant says that lo is non-negative,
         // and lo decreases every time through the loop.
-        while (lo > 0 && A[lo-1]==tgt) {lo = lo - 1;};
+        while (lo > 0 && A[lo-1]==tgt) {
+            lo = lo - 1;
+        }
 
         // expand hi upwards -- can we safely increment hi?
         // HALTING MEASURE: (A.length - hi)
@@ -150,7 +153,9 @@ class BinSearch {
         // non-negative.  Furthermore, hi increases every time through
         // the loop, so (A.length - hi) decreases every time through
         // the loop.
-        while (hi < A.length-1 && A[hi+1]==tgt) {hi = hi+1;};
+        while (hi < A.length-1 && A[hi+1]==tgt) {
+            hi = hi+1;
+        }
         return (hi - lo + 1);
     }
         
@@ -181,13 +186,13 @@ class BinSearch {
         // timeout of 10 seconds
         PdpTestSuite tests = new PdpTestSuite(10);
 
-               tests.addTestCase("recursive (A,9) => 3",
+        tests.addTestCase("recursive (A,9) => 3",
                           () -> binsearch_recursive(A,9) == 3,
                           true);
 
-               // should have all the other tests here as well...
+        // should repeat the other tests here as well...
 
-               tests.addTestCase("1 = 2 (should fail)",
+        tests.addTestCase("1 = 2 (should fail)",
                           () -> 1 == 2,
                           true);
 
