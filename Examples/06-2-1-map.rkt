@@ -205,7 +205,7 @@
 ;;; Can define apply-to-each in terms of my-foldr:
 
 ;; ;; STRATEGY: Use HOF my-foldr on xlst
-;; (define (apply-to-each xlst fn)
+;; (define (apply-to-each fn xlst)
 ;;   (local
 ;;     ((define (combiner first-guy result-on-the-rest)
 ;;        (cons (fn first-guy)

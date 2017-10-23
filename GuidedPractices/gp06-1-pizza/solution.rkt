@@ -28,6 +28,7 @@
 ;; RETURNS: a pizza like the given pizza, but with
 ;; anchovies in place of each layer of onions
 ;; STRATEGY: Use observer template for Pizza on p
+
 (define (replace-all-anchovies-with-onions p)
   (cond
     [(empty? p) empty]
@@ -39,22 +40,6 @@
                   (replace-all-anchovies-with-onions 
                    (rest p))))]))
     
-;; replace-all-anchovies-with-onions 
-;;   : Pizza -> Pizza
-;; RETURNS: a pizza like the given pizza, but with
-;; anchovies in place of each layer of onions
-;; STRATEGY: Use template for Pizza on p
-
-(define (replace-all-anchovies-with-onions p)
-  (cond
-    [(empty? p) empty]
-    [else (if (string=? (topped-pizza-topping p) "anchovies")
-            (cons "onions"
-              (replace-all-anchovies-with-onions 
-               (topped-pizza-base p)))
-            (cons (topped-pizza-topping p)
-              (replace-all-anchovies-with-onions 
-               (topped-pizza-base p))))]))
 
 
 ;; replace-all-anchovies : Pizza Topping -> Pizza
@@ -65,14 +50,14 @@
 (define (replace-all-anchovies p replacement)
   (cond
     [(empty? p) empty]
-    [else (if (string=? (topped-pizza-topping p) "anchovies")
+    [else (if (string=? (first p) "anchovies")
             (cons replacement
               (replace-all-anchovies
-                (topped-pizza-base p)
+                (rest p)
                 replacement))
-            (cons (topped-pizza-topping p)
+            (cons (first p)
               (replace-all-anchovies 
-               (topped-pizza-base p)
+               (rest p)
                replacement)))]))
 
 
@@ -85,15 +70,15 @@
 (define (replace-topping p topping replacement)
   (cond
     [(empty? p) empty]
-    [else (if (string=? (topped-pizza-topping p) topping)
+    [else (if (string=? (first p) topping)
             (cons replacement
               (replace-topping 
-               (topped-pizza-base p)
+               (rest p)
                topping
                replacement))
-            (cons (topped-pizza-topping p)
+            (cons (first p)
               (replace-topping 
-               (topped-pizza-base p)
+               (rest p)
                topping
                replacement)))]))
 
@@ -103,11 +88,11 @@
   (cond
     [(empty? p) empty]
     [else (cons
-            (if (string=? (topped-pizza-topping p) topping)
+            (if (string=? (first p) topping)
               replacement
-              (topped-pizza-topping p))
+              (first p))
             (replace-topping 
-               (topped-pizza-base p)
+               (rest p)
                topping
                replacement))]))
 
