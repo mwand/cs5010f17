@@ -1,5 +1,8 @@
-/* CSS for an online lesson in CS 5500 */
+/* CSS for 5010 Fall 17.  Adapted from Will Clinger's cs5010.css from*/
+/* Spring 2017 */  
 
+
+/* MW says: I don't know what this FIXME refers to */
 /****************************************************************
  *
  * FIXME:
@@ -14,19 +17,20 @@
  *
  ****************************************************************/
 
-body {
-/*min-width: 36em;*/
-/*max-width: 60em;*/
-/*height: 30em;*/
-  height: 100%;
-}
+html body{font-size: 13pt;}
 
 body {
-  background-color: #e8e8e8;
-  font-family:  Verdana, Arial, Helvetica, sans-serif;
-  font-size: larger;
-/*font-size: 100%;*/
-/*margin: 10%;*/
+    /* background-color: #e8f2fc; */
+    /* font-family:  "Times New Roman", Times, Georgia, serif; */
+    /* font-size: 13pt; */
+    /* font-size: 100%;*/
+/* from Fall 15 edition: */
+background-color: #ffffe0; 
+/* font-family:  Verdana, Arial, Helvetica, sans-serif; */
+font-family:  Verdana, Helvetica, Arial, sans-serif;
+/* font-size: larger; */
+  height: 100%;
+  /* margin: 10%; */
 }
 
 body #maincontent {
@@ -34,7 +38,7 @@ body #maincontent {
   height: 90%;
   max-width: 1024px;
 /*  padding: 0% 10% 0% 10%; */
-  padding: 0% 15% 0% 10%;
+  padding: 0% 10% 0% 10%;
   overflow: visible;
 }
 
@@ -46,6 +50,12 @@ html > body #footer {
 }
 
 /* FIXME:  For now, this will always be scaffolding for debugging. */
+
+/* body > p { */
+/* /\*font-size: smaller;*\/ */
+/*   color: gray; */
+/*   font-size: 50%; */
+/* } */
 
 /* FIXME:  Compatibility problem here.  */
 /* Safari seems to interpret this as a percentage of the element. */
@@ -72,42 +82,62 @@ audio {
   padding-left: 2em;
 }
 
-em {
-  color: red;
-}
-
 /****************************************************************/
 
 /* FIXME: should use relative measurements throughout */
 
-td {
-  background-color: #d8d8d8;
-  font-family:  "Times New Roman", Times, Georgia, serif; 
+table {
+/*  background-color: #808080;  */
+    /* background-color: #e8f2fc; */
+
+}
+
+th {
+/*  background-color: #d8d8d8;  */
+  /* background-color: #d8e0e8; */
+    background-color: #efefd0;
+
+  /* use same font for th */
+  /* font-family:  "Times New Roman", Times, Georgia, serif;  */
   font-size: 12pt;
   margin: 3%;
   padding: 5px;
 }
 
-table {
-  background-color: #808080;
+td {
+/*  background-color: #d8d8d8;  */
+    /* background-color: #d8e0e8; */
+    background-color: #efefd0;
+  /* font-family:  "Times New Roman", Times, Georgia, serif;  */
+  font-size: 12pt;
+  margin: 3%;
+  padding: 5px;
 }
 
-tr .narrow { width: 80px; }
-tr .wide { width: 360px; }
+tr .narrow { width: 96px; }
+tr .medium { width: 200px; }
+tr .wide   { width: 300px; }
 
 /* alternative fonts */
 /* Verdana, Arial, sans-serif; */
 /* Georgia, "Times New Roman", Times, serif; */
 
 tt,kbd,code {
-  font-size: 11pt;
+    /* font-size: 11pt; */
+    font-family: "Monaco", "Courier new", monospace, monospace;
+    font-size: 1em;
+/*  font-size: larger */
 }
-
-/* code blocks have a slightly darker background */
 
 pre {
   font-size: 11pt;
-  background-color: #d8d8d8;
+  background-color: #d8e0e8;
+}
+
+/* blockquotes have a slightly darker background */
+
+blockquote {
+  background-color: #d8e8f4;
 }
 
 address {
@@ -115,8 +145,7 @@ address {
 }
 
 /* put some padding after each li */
-/* no, let's not */
-/* li {padding-bottom: 10pt} */
+li {padding-bottom: 4pt}
 
 /****************************************************************
  *
@@ -141,7 +170,13 @@ address {
 }
 
 .darker {
-  background-color: #d0d0d8;
+    /* background-color: #d0d0d8; */
+    background-color: #efefd0;
+    color:  #efefd0;
+}
+
+.white {
+  color: #ffffff;
 }
 
 .gray {
@@ -152,12 +187,49 @@ address {
   color: red;
 }
 
+.new {   			/* say <span class="new">*/
+  color: red;
+}
+
+
 .green {
   color: green;
 }
 
+.lightgreen {
+  color: olive;
+}
+
 .blue {
   color: blue;
+}
+
+.lightblue {
+  color: darkturquoise;
+}
+
+.orange {
+  color: orange;
+}
+
+.darkorange {
+  color: darkorange;
+}
+
+.orangered {
+  color: #ff4500;
+}
+
+.fuchsia {
+  color: fuchsia;
+}
+
+.purple {
+  color: purple;
+}
+
+.firebrick {
+  color: firebrick;
 }
 
 .brighter {
@@ -195,6 +267,44 @@ address {
 
 .quarterwidth {
   width: 8em;
+}
+
+.verticalspace {
+  margin-top: 48px;
+}
+
+.clear {
+  clear: both;
+}
+
+.mediumcircle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #d0e0e4;
+}
+
+.smallbox {
+  width: 260px;
+  height: 28px;
+  background: #d0e0ec;
+}
+
+.smallboxInvisible {
+  width: 260px;
+  height: 28px;
+}
+
+.mediumbox {
+  width: 320px;
+  height: 180px;
+  background: #c0d0e0;
+}
+
+.mediumbox2 {
+  width: 320px;
+  height: 120px;
+  background: #c0d0e0;
 }
 
 .button {
@@ -287,10 +397,14 @@ address {
 /* FIXME */
 
 #banner {padding: 0px; text-align: center;}
+
 #menu {
+  padding: 16px;
+  margin-top: -72px;
   float:left;
   width:20%;
 }
+
 #content {
   float:right;
   width:75%
@@ -379,13 +493,9 @@ ul.popup-on-hover li:hover:nth-child(4) span {
   left: 40px;
 }
 
-/**IE Hacks - see http://css3pie.com/
- * for more info on how to use CS3Pie and to download the latest version**/
+/* use: <span class="strike"> C-c C-p l in HTML Helper mode*/
+.new {color:red;}
+.strike {color:gray; text-decoration:line-through;}
 
-/*
 
-ul.popup-on-hover img, ul.popup-on-hover span {
-  behavior: url(pie/PIE.htc);
-} 
 
- */

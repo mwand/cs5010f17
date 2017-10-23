@@ -6,6 +6,10 @@
 (require rackunit)
 (require "extras.rkt")
 
+;; DATA DEFINITION:
+;; A SortedList is a list of Reals, sorted by <.  Duplicates are
+;; allowed. 
+
 ;; merge : SortedList SortedList -> SortedList
 ;; merges its two arguments
 ;; STRATEGY: recur on either (rest lst1) or (rest lst2)
@@ -21,23 +25,24 @@
      (cons (first lst2) (merge lst1 (rest lst2)))]))
 
 
-;; merge-sort : ListOfNumber -> SortedList
+;; merge-sort : RealList -> SortedList
 ;; GIVEN: a list of numbers
 ;; RETURNS: a sorted version of the same list
-;; EXAMPLE:
+;; EXAMPLES:
 ;; empty => empty
 ;; (list 4 2 6 7 6 8) => (list 2 4 6 6 7 8)
 ;; STRATEGY: recur on even elements and odd elements, then merge
 ;; results.
+;; HALTING MEASURE: (length lst)
 
-(define (merge-sort lon)
+(define (merge-sort lst)
   (cond
-    [(empty? lon) lon]
-    [(empty? (rest lon)) lon]
+    [(empty? lst) lst]
+    [(empty? (rest lst)) lst]
     [else
       (local
-       ((define evens (even-elements lon))
-        (define odds  (odd-elements lon)))
+       ((define evens (even-elements lst))
+        (define odds  (odd-elements lst)))
        (merge 
         (merge-sort evens)
         (merge-sort odds)))]))
