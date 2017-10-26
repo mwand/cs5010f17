@@ -1,10 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
 <title>Guided Practice 8.1</title>
-<link type="text/css" rel="stylesheet" href="../../css/course.css">
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
 </head>
 
 <body>
+<div id="maincontent">
 <h1>Guided Practice 8.1</h1>
 
 <ol>
@@ -15,11 +16,29 @@
   <p>There are probably many ways of doing this.  Here's one solution:</p>
 
   <pre>
-A SortedList is one of
+A sorted list of reals is represented as a SortedList, which is one of
 -- empty
--- (cons Number SortedList)
+-- (cons r sl)
    WHERE: the Number is less than or equal to any of the elements in
           the SortedList
+INTERPRETATION:
+r  : Real        is the first element of the list
+sl : SortedList  is the rest of the list
+
+CONSTRUCTOR TEMPLATES:
+(empty)
+(cons Real SortedList)
+
+OBSERVER TEMPLATE:
+;; sl-fn : SortedList -> ??
+(define (sl-fn lst)
+  (cond
+    [(empty? lst) ...]
+    [else (f (first lst)
+             (sl-fn (rest lst)))]))
+WHERE:
+f may rely on the invariant that its first argument is less than any of
+the elements of its second argument.
 </pre>
 
   <p>If you have a different solution, we can discuss it in class or
@@ -42,7 +61,7 @@ A SortedList is one of
   <p>Here are my solutions:</p>
 
   <pre>
-;; odd-elements : ListOfNumber -> ListOfNumber
+;; odd-elements : RealList -> RealList
 ;; Strategy: Recur on (rest (rest lst))
 (define (odd-elements lst)
   (cond
@@ -52,7 +71,7 @@ A SortedList is one of
             (first lst)
             (odd-elements (rest (rest lst))))]))
 
-;; even-elements : ListOfNumber -> ListOfNumber
+;; even-elements : RealList -> RealList
 ;; Strategy: Recur on (rest (rest lst))
 (define (even-elements lst)
   (cond
@@ -66,10 +85,10 @@ A SortedList is one of
 
 ;; Here's a very different solution.  Here we make odd-elements and
 ;; even-elements mutually recursive.  This actually fits into the
-;; destructor template for ListOfX. Here we are recurring on (rest
+;; observer template for RealList. Here we are recurring on (rest
 ;; lst), so this could fairly be called structural recursion.
 
-;; strategy: Use template for ListOfX on lst
+;; strategy: Use template for RealList on lst
 (define (odd-elements lst)
   (cond
     [(empty? lst) empty]
@@ -77,12 +96,11 @@ A SortedList is one of
             (first lst)
             (even-elements (rest lst)))]))
 
-;; strategy: Use template for ListOfX on lst
+;; strategy: Use template for RealList on lst
 (define (even-elements lst)
   (cond
     [(empty? lst) empty]
     [else (odd-elements (rest lst))]))
-
 </pre>
    
 </li>
@@ -95,5 +113,5 @@ A SortedList is one of
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Tue Oct 27 08:29:34 Eastern Daylight Time 2015 <!-- hhmts end -->
+Last modified: Fri Oct 13 11:07:21 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body> </html>

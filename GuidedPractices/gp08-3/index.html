@@ -1,61 +1,45 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
 <title>Guided Practice 8.3</title>
-<link type="text/css" rel="stylesheet" href="../../css/course.css">
+<link type="text/css" rel="stylesheet" href="../../cs5010.css">
 </head>
 
 <body>
+<div id="maincontent">
 <h1>Guided Practice 8.3</h1>
 
-<p>Modify 08-2-binary-search.rkt to design the following function:</p>
+<p>Modify 08-2-binary-search.java to design the following method:</p>
 
 <pre>
-;; binary-search-count : Nat (Nat -> Real) -> Nat
-;; GIVEN: a natural number N, and a function f : Nat -> Real
-;; WHERE: f is monotonic (ie, i<=j implies f(i) <= f(j))
-;; RETURNS: the number of i in [0,N] s.t. f(i) = f(N)
+    static int count_occurrences (int[] A, int tgt) {
 
-;; EXAMPLES/TESTS:
-
-; list-to-fn : ListOfReal -> (Nat -> Real)
-(define (list-to-fn lst)
-  (lambda (n)
-    (list-ref lst n)))
-
-(define fn1 (list-to-fn '(3 4 5 5 5 6 6 6 7 7 7 8)))
-
-(begin-for-test
-  (check-equal?
-    (binary-search-count 11 fn1)
-    1)
-  (check-equal?
-    (binary-search-count 10 fn1)
-    3)
-  (check-equal?
-    (binary-search-count 9 fn1)
-    2)
-  (check-equal?
-    (binary-search-count 2 fn1)
-    1)
-  (check-equal?
-    (binary-search-count 3 fn1)
-    2)
-  (check-equal?
-   (binary-search-count 4 fn1)
-   3)
-  )
+        // GIVEN: A non-decreasing array A of integers and an integer
+        // target 'tgt'
+        // RETURNS: the number of occurrences of tgt in A.
 </pre>
 
-<p>Remember that your invariants,halting measure, and termination
-argument are at least as important as your code.</p>
+<p>Remember that your invariants, halting measure, and your
+ justification of the halting measure
+ are at least as important as your code.</p>
 
 
-<p><a href="solution.rkt" >[ANSWER]</a></p>
+<p><a href="solution.java" >[ANSWER]</a></p>
+
+<p><strong>NOTE:</strong> To solution uses the <kbd>PdpTestSuite</kbd>
+class, which we will use for testing in the Java portion of the
+course.  To run the solution, you will need to have an up-to-date JDK
+installed.  
+Download <a href="solution.java"
+>solution.java</a>  and <a href="PdpTestSuite.java" >PdpTestSuite.java</a> into the
+same directory.   Compile PdpTestSuite by saying <kbd>javac
+PdpTestSuite.java</kbd> .   Then compile and run solution.java
+according to the instructions at the top of that file.
+</p> 
 
 <hr>
 <address></address>
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Thu Nov  5 13:43:20 Eastern Standard Time 2015 <!-- hhmts end -->
+Last modified: Mon Oct 23 17:18:46 Eastern Daylight Time 2017 <!-- hhmts end -->
 </body> </html>
