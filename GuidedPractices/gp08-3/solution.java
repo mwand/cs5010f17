@@ -161,6 +161,17 @@ class BinSearch {
         
 
     public static void main (String[] args) {
+
+        // this file illustrates 2 methods for testing your Java code:
+        // Java assertions and PdpTestSuite.
+
+        // We will be using PdpTestSuite or something like it for
+        // testing your Java code later in the course.
+
+        // Assertions are a Java built-in, but to run them, you need
+        // to say "java -enableassertions <classname>" ; otherwise
+        // they are ignored.
+        
         int[] A = {0,1,4,9,16,25,36,49};
         int[] B = {0,1,2,3,3,8,9,10,10,12};
         int[] C = {};
@@ -182,15 +193,14 @@ class BinSearch {
         assert (binsearch_iterative(B,3) == 3 || binsearch_iterative(B,3) == 4);
         assert binsearch_iterative(C,17) == -1;
 
-        // try using PdpTestSuite
-        // timeout of 10 seconds
+        // Use PdpTestSuite.  The '10' is the timeout, in seconds.
         PdpTestSuite tests = new PdpTestSuite(10);
 
         tests.addTestCase("recursive (A,9) => 3",
                           () -> binsearch_recursive(A,9) == 3,
                           true);
 
-        // should repeat the other tests here as well...
+        // could repeat the other tests here as well...
 
         tests.addTestCase("1 = 2 (should fail)",
                           () -> 1 == 2,
@@ -223,11 +233,7 @@ class BinSearch {
         tests.addTestCase("tgt area is the whole array",
                           () -> count_occurrences(E,7),
                           4);
-
             
-
-            
-
         tests.runTests();
 
     }
