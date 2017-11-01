@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,61 +25,19 @@
 <div id="maincontent">
   <h3>
     Every Object Knows Its Class (5)
-  </h3>
+</h3>
   <div>
-    <div class="indented" style="width: 50%;">
-      <div style="float: left;">
-        <p>
-          <code>obj1</code>:
-        </p>
-        <p class="mediumcircle center">
-          <br />
-          <br />
-          <code>x = 10</code>
-          <br />
-          <code>y = 20</code>
-          <br />
-          <code>r = 14</code>
-        </p>
-      </div>
-      <div style="float: right;">
-        <p>
-          <code>obj2</code>:
-        </p>
-        <p class="mediumcircle center">
-          <br />
-          <br />
-          <code>x = 15</code>
-          <br />
-          <code>y = 35</code>
-          <br />
-          <code>r = 5</code>
-        </p>
-      </div>
-    </div>
-    <pre class="clear">
-      class C1 {
-          int x;
-          int y;
-          int r;
-      
-          public int foo () { return x + y; }
-          public int bar (int n) { return r + n; }
-          public int baz (int n) { return this.foo() + n; }
-          ...
-      }
-    </pre>
     <p>
       Here's another object of a different class <code>C2</code>.
       If we send a message to <code>obj3</code>, then
       <code>obj3</code>'s methods, as defined in class <code>C2</code>,
       will be invoked.
-    </p>
+</p>
     <div class="indented">
       <div style="float: left;">
         <p>
           <code>obj3</code>:
-        </p>
+</p>
         <p class="mediumcircle center">
           <br />
           <br />
@@ -88,11 +46,10 @@
           <code>b = 35</code>
           <br />
           <code>c = 5</code>
-        </p>
-      </div>
+</p>
+</div>
       <div style="float: right;">
         <pre>
-          
           class C2 {
               int a;
               int b;
@@ -103,24 +60,26 @@
               public int baz (int n) { return this.foo() + n; }
               ...
           }
-        </pre>
-      </div>
-    </div>
+</pre>
+</div>
+</div>
     <p class="clear">
-    </p>
-  </div>
+</p>
+</div>
 </div>
 <div id="footer">
   <form action="knowsClass4.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="knowsClass6.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -128,6 +87,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

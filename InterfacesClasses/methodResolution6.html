@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Variables Are Not Objects
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Variables Are Not Objects
+</h2>
+  <div>
+    <p>
+      Variables are expressions, not objects.
+      An object can be the value of a variable,
+      but an object cannot be a variable.
+</p>
+    <p>
+      In languages such as Java,
+      every expression has a type,
+      but objects do not have a type.
+      This fact will become more important when we study inheritance.
+</p>
+    <p>
+      For now, be sure you understand the following example:
+</p>
+    <pre>
+          Interface1 obj1 = new Class1 (15, 35, 5);
+          Interface1 obj2 = new Class2 (15, 35, 5);
+          Interface1 obj3 = new Class3 (15, 35, 5);
+          Interface1 obj4 = obj3;
+</pre>
+    <p>
+      Those four variable declarations declare four different variables,
+      but they create only three objects.
+      All four variables have the same type.
+      The values of the first three variables are distinct,
+      and are objects of three different classes.
+      The fourth variable, <code>obj4</code>,
+      has the same value as <code>obj3</code>.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="methodResolution5right.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="newObjectsSummary.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

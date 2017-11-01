@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,7 +25,7 @@
 <div id="maincontent">
   <h3>
     Coding Standards Illustrated
-  </h3>
+</h3>
   <div>
     <pre class="clear floatleft smaller">
       // A Foo is an object of any class that implements Foo.
@@ -41,24 +41,24 @@
       
           Foo addBar (Bar b);
       }
-    </pre>
+</pre>
     <blockquote class="floatright halfwidth">
       <p>
         Data definitions go with interfaces.
-      </p>
-    </blockquote>
+</p>
+</blockquote>
     <pre class="clear floatleft smaller">
       // Constructor template for Class1:
       //     new Class1 (a, b, c)
       // Interpretation:
       //     an object of Class1 represents a ....
       
-    </pre>
+</pre>
     <blockquote class="floatright halfwidth">
       <p>
         Classes have constructor templates and interpretations.
-      </p>
-    </blockquote>
+</p>
+</blockquote>
     <pre class="clear floatleft smaller">
       class Class1 implements Foo {
           int a;        // interpretation goes here...
@@ -68,26 +68,26 @@
           // interpretation of LOCAL_CONSTANT goes here...
           static final int LOCAL_CONSTANT = ...;
       
-    </pre>
+</pre>
     <blockquote class="floatright halfwidth">
       <p>
         Constants are declared <code>static final</code>.
         Constants need interpretations too.
-      </p>
-    </blockquote>
+</p>
+</blockquote>
     <pre class="clear floatleft smaller">
           // purpose statement goes here...
           public int m1 ();
       
           // purpose statement goes here...
           public Foo addBar (Bar b) { ... }
-    </pre>
+</pre>
     <blockquote class="floatright halfwidth">
       <p>
         No public methods except those listed in the interface.
         Public methods come before non-public methods.
-      </p>
-    </blockquote>
+</p>
+</blockquote>
     <pre class="clear floatleft smaller">
           // purpose statement goes here...
           private int method1 (...) { ... }
@@ -95,30 +95,31 @@
           // purpose statement goes here...
           private int method2 (...) { ... }
       }
-    </pre>
+</pre>
     <blockquote class="floatright halfwidth">
       <p>
         Private methods need purpose statements just like public
-        methods, but you shouldn't use JavaDoc notation for
-        private methods.
-      </p>
-    </blockquote>
+        methods.
+</p>
+</blockquote>
     <p class="clear">
       
-    </p>
-  </div>
+</p>
+</div>
 </div>
 <div id="footer">
   <form action="ooCodingStandards2.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="methodDesign1.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -126,6 +127,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
