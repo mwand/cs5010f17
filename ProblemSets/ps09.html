@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,254 +25,290 @@
 <div id="maincontent">
   <h2>
     CS 5010: Problem Set 09
-  </h2>
+</h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 20 March 2017
+      <strong>Out:</strong> Monday, 6 November 2017
       <br />
-      <strong>Due:</strong> Monday, 27 March 2017 at 6pm
-    </p>
-  </div>
+      <strong>Due:</strong> Monday, 13 November 2017 at 6pm local time
+</p>
+</div>
   <div>
     <p>
-      This is a
-      <a href="http://en.wikipedia.org/wiki/Pair_programming">
-        pair programming
-      </a>
-      assignment.  You are required to
-      complete this problem set in collaboration with your assigned
-      partner, but neither of you are allowed to
+      This is an individual assignment.  You are not allowed to
       discuss this problem set with any other person.  You are also
       not allowed to search for or to view any solutions to similar
       problems that may be available on the World-Wide Web or in
       other resources that might otherwise have been available to
       you.
-    </p>
-    <p>
-      We have created a repository for you and your partner to use
-      in this problem set and for the next two problem sets as well.
-      The name of that repository is of the form
-      <code>pdp-<em>ID1</em>-<em>ID2</em></code>,
-      where <code><em>ID1</em></code> is either your CCIS ID
-      or your partner's CCIS ID, and <code><em>ID2</em></code>
-      is the other CCIS ID for your team.
-    </p>
-    <p>
-      In those repositories, we have created files named
-      <code><em>ID1</em>-log.txt</code> and
-      <code><em>ID2</em>-log.txt</code> for you to use when
-      filing work session reports, as in previous problem sets.
-      You and your partner are required to push your files at
-      the end of every work session.
-      (You <em>may</em> push your files several times during
-      a work session, but we do not require you to do so.)
-    </p>
-    <p>
-      At the end of every work session, you are required to update
-      your log file to record the time you spent in that work session.
-      (Please do not include the time you spent in any previous work
-      sessions, as those times will already have been recorded in
-      previous versions of your log file.)
-      If both of you work together during a work session, both of
-      you must update your log files, recording only the time <em>you</em>
-      spent working.  Do not include your partner's time in
-      your log file, but be sure to push the updated versions of
-      both log files.
-    </p>
-    <hr />
+</p>
     <p>
       The main purpose of this problem set is to give you practice
-      applying what you have learned in previous assignments to
-      object-oriented programming in Java.
-    </p>
+      using interfaces and defining classes in Java.
+</p>
     <p>
-      You must use Java 8 for this assignment.
-      All of your code must reside within the default package.
-      You may use/import anything in the
-      <code>java.lang</code> and <code>java.util</code>
-      packages, but you are not allowed to use any other packages.
-    </p>
+      We will test your program using Java 8,
+      which is the version of Java installed on CCIS Linux machines.
+      You will therefore want to use Java 8 when developing and
+      testing your program.
+</p>
+    <p>
+      For these problems, we are giving you the following files:
+</p>
+    <ul>
+      <li>
+        <code>Outcome.java</code>
+</li>
+      <li>
+        <code>Tie1.java</code>
+        <span class="red">(incomplete!)</red>
+</li>
+      <li>
+        <code>Defeat1.java</code>
+        <span class="red">(incomplete!)</red>
+</li>
+      <li>
+        <code>Competitor.java</code>
+</li>
+      <li>
+        <code>Competitor1.java</code>
+        <span class="red">(incomplete!)</red>
+</li>
+</ul>
+    <p>
+      Three of those files are marked as incomplete.
+      Your job is to complete those three files.   
+</p>
+    <p>
+      As you complete those three files, you should leave them
+      in the default package.
+      In other words, your Java files should not contain any
+      <code>package</code> declarations.
+</p>
+    <p class="strong red">
+      <em>You must not change any of the other files in any way.</em>
+</p>
+
+
+    <p>
+      You should start by downloading the files we are giving you,
+      unpacking them into a <code>set09</code> directory,
+      and pushing that directory to your GitHub repository.
+</p>
+    <p>
+      We are giving you a choice of two formats in which to download
+      the files we are giving you.  Both of these links will unpack
+      to the same <code>set09</code> directory containing exactly
+      the same Java files:
+</p>
+    <ul>
+      <li>
+        <a href="set09.tgz">
+          <code>set09.tgz</code>
+</a>
+</li>
+      <li>
+        <a href="set09.zip">
+          <code>set09.zip</code>
+</a>
+</li>
+</ul>
+    <p>
+      Remember that you must follow the design recipe, which is a
+      process, not a list of deliverables.
+</p>
+    <p>
+      Be sure to fill out a
+      <a href="yourID-log.txt">work session report</a>
+      at the end of each work session.
+      <span class="red">Be sure to report only the hours
+      spent in that work session;
+      do <strong><em>not</em></strong> report the cumulative time</span>.
+      Tell <code>git</code> to add your work session report
+      to the files you will commit,
+      and then commit and push (sync) that report in addition to
+      committing and pushing your entire <code>set09</code> directory.
+      <strong><em>Do this at the end of every work session.</em></strong>
+</p>
     <hr />
-  </div>
-  <h3>
-    Problem Specification
-  </h3>
-  <p>
-    You will translate your polynomial-time solution to the flight
-    scheduling problem from Racket to Java.
-    Your translation will use the data types specified in this
-    problem set, which will allow us to write black-box tests
-    we can use to test all of the solutions submitted by students
-    taking the course.
-  </p>
-  <p>
-    We have divided that problem into two parts.
-    In the first part, you will implement three abstract data types.
-    In the second part, you will use those ADTs in your solution to
-    the scheduling problem.
-  </p>
-  <ol>
-    <li>
-      We are giving you three Java files, which define three
-      abstract data types:
-      <a href="UTC.java"><code>UTC</code></a>,
-      <a href="Flight.java"><code>Flight</code></a>, and
-      <a href="RacketList.java"><code>RacketList&lt;E&gt;</code></a>.
-      You must copy those three files into your team's
-      <code>set09</code> directory without changing them in any way.
-      <p>
-        In a file named <code>UTCs.java</code>, define a public class
-        named <code>UTCs</code> that defines the following
-        public static factory method:
-      </p>
-      <pre>
-        // GIVEN: the hour in [0,23] and the minute in [0,59]
-        // RETURNS: a UTC with that hour and minute
-        
-        public static UTC make (int h, int m) {
-            ...
-        }
-      </pre>
-      <p>
-        In a file named <code>Flights.java</code>, define a public class
-        named <code>Flights</code> that defines the following
-        public static factory method:
-      </p>
-      <pre>
-        // GIVEN: the name of a flight, the name of the airport from
-        //     which the flight departs, the name of the airport at
-        //     which the flight arrives, the time of departure in UTC,
-        //     and the time of arrival in UTC
-        // RETURNS: a flight value that encapsulates the given information
-        
-        public static Flight make (String s, String ap1, String ap2,
-                                   UTC t1, UTC t2) {
-            ...
-        }
-      </pre>
-      <p>
-        In a file named <code>RacketLists.java</code>, define a public class
-        named <code>RacketLists</code> that defines the following
-        public static factory method:
-      </p>
-      <pre>
-        // GIVEN: no arguments
-        // RETURNS: an empty RacketList&lt;E&gt;
-        
-        public static &lt;E&gt; RacketList&lt;E&gt; empty () {
-            ...
-        }
-      </pre>
-      <p>
-        You may add more static methods to those three classes
-        if you wish.
-      </p>
-      <p>
-        Complete your implementation of the three ADTs specified above
-        by defining more classes.  You will probably want to put at
-        least some of those classes in separate files, but all files
-        must be added to your <code>set09</code> directory and pushed
-        to your team's repository.
-      </p>
-    </li>
-    <li>
-      In the second part of this problem set, you will translate your
-      polynomial-time solution to the scheduling problem from Racket
-      to Java.
-      <p>
-        We are giving you a
-        <a href="FlightExamples.java"><code>FlightExamples.java</code></a>
-        file that defines the lists of flights used in the examples below.
-        You will need to define more lists of flights for use in your own
-        testing.  In particular, you will need to write benchmarks that
-        test the performance of the three methods specified below.
-      </p>
-      <p>
-        In a file named <code>Schedules.java</code>, define a public class
-        named <code>Schedules</code> that defines the following
-        public static methods:
-      </p>
-      <pre>
-        // GIVEN: the names of two airports, ap1 and ap2 (respectively),
-        //     and a RacketList&lt;Flight&gt; that describes all of the flights a
-        //     traveller is willing to consider taking
-        // RETURNS: true if and only if it is possible to fly from the
-        //     first airport (ap1) to the second airport (ap2) using
-        //     only the given flights
-        // EXAMPLES:
-        //     canGetThere ("06N", "JFK", FlightExamples.panAmFlights)  =>  false
-        //     canGetThere ("JFK", "JFK", FlightExamples.panAmFlights)  =>  true
-        //     canGetThere ("06N", "LAX", FlightExamples.deltaFlights)  =>  false
-        //     canGetThere ("LAX", "06N", FlightExamples.deltaFlights)  =>  false
-        //     canGetThere ("LGA", "PDX", FlightExamples.deltaFlights)  =>  true
-        
-        public static boolean canGetThere (String ap1,
-                                           String ap2,
-                                           RacketList&lt;Flight&gt; flights) {
-            ...
-        }
-                
-        // GIVEN: the names of two airports, ap1 and ap2 (respectively),
-        //     and a RacketList&lt;Flight&gt; that describes all of the flights a
-        //     traveller is willing to consider taking
-        // WHERE: it is possible to fly from the first airport (ap1) to
-        //     the second airport (ap2) using only the given flights
-        // RETURNS: a list of flights that tells how to fly from the
-        //     first airport (ap1) to the second airport (ap2) in the
-        //     least possible time, using only the given flights
-        // NOTE: to simplify the problem, your program should incorporate
-        //     the totally unrealistic simplification that no layover
-        //     time is necessary, so it is possible to arrive at 1500
-        //     and leave immediately on a different flight that departs
-        //     at 1500
-        // EXAMPLES:
-        //     fastestItinerary ("JFK", "JFK", FlightExamples.panAmFlights)
-        //         =>  RacketLists.empty()
-        //
-        //     fastestItinerary ("LGA", "PDX", FlightExamples.deltaFlights)
-        // =>  RacketLists.empty().cons
-        //         (Flights.make ("Delta 2163",
-        //                        "MSP", "PDX",
-        //                        UTCs.make (15, 0), UTCs.make (19, 2))).cons
-        //             (Flights.make ("Delta 0121",
-        //                            "LGA", "MSP",
-        //                            UTCs.make (11, 0),
-        //                            UTCs.make (14, 9)))
-        //
-        // (Note: The Java syntax for a method call makes those calls
-        // to cons look backwards from what you're used to in Racket.)
-        
-        public static
-            RacketList&lt;Flight&gt; fastestItinerary (String ap1,
-                                                 String ap2,
-                                                 RacketList&lt;Flight&gt; flights) {
-            ...
-        }
-        
-        // GIVEN: the names of two airports, ap1 and ap2 (respectively),
-        //     and a RacketList&lt;Flight&gt; that describes all of the flights a
-        //     traveller is willing to consider taking
-        // WHERE: it is possible to fly from the first airport (ap1) to
-        //     the second airport (ap2) using only the given flights
-        // RETURNS: the number of minutes it takes to fly from the first
-        //     airport (ap1) to the second airport (ap2), including any
-        //     layovers, by the fastest possible route that uses only
-        //     the given flights
-        // EXAMPLES:
-        //     travelTime ("JFK", "JFK", FlightExamples.panAmFlights)  =>  0
-        //     travelTime ("LGA", "PDX", FlightExamples.deltaFlights)  =>  482
-        
-        public static int travelTime (String ap1,
-                                      String ap2,
-                                      RacketList&lt;Flight&gt; flights) {
-            ...
-        }
-      </pre>
-    </li>
-  </ol>
+    <p>
+      This problem set asks you to define three Java classes
+      that implement the Java interfaces we are giving you.
+      The three classes you define will perform essentially
+      the same computations as the program you wrote for
+      Problem Set 08.
+</p>
+    <p>
+      There are some differences, however.
+</p>
+    <p>
+      In Problem Set 08, you defined functions named
+      <code>tie</code> and <code>defeated</code>
+      whose results represent an <code>Outcome</code>.
+      For Problem Set 09, you will define classes named
+      <code>Tie1</code> and <code>Defeat1</code> that
+      implement the interface given in <code>Outcome.java</code>:
+</p>
+    <pre>
+      // An Outcome is an object of any class that implements Outcome
+      //
+      // Interpretation: the two competitors have engaged in a contest
+      //   If this.isTie() is true, the contest ended in a tie.
+      //   Otherwise the contest did not end in a tie, and
+      //       this.winner() defeated this.loser()
+      
+      interface Outcome {
+      
+          // RETURNS: true iff this outcome represents a tie
+      
+          boolean isTie ();
+      
+          // RETURNS: one of the competitors
+      
+          Competitor first ();
+      
+          // RETURNS: the other competitor
+      
+          Competitor second ();
+      
+          // GIVEN: no arguments
+          // WHERE: this.isTie() is false
+          // RETURNS: the winner of this outcome
+      
+          Competitor winner ();
+      
+          // GIVEN: no arguments
+          // WHERE: this.isTie() is false
+          // RETURNS: the loser of this outcome
+      
+          Competitor loser ();
+      }
+</pre>
+    <p>
+      In Problem Set 08, a <code>Competitor</code>
+      was just a <code>String</code>.
+      For Problem Set 09, you will define a class named
+      <code>Competitor1</code>
+      that implements the interface given in
+      <code>Competitor.java</code>:
+</p>
+    <pre>
+      // A Competitor is an object of any class that implements Competitor
+      //
+      // Interpretation: the competitor represents an individual or team
+      //     that may have engaged in one or more contests
+      
+      // Note:  In Java, you cannot assume a List is mutable, because all
+      // of the List operations that change the state of a List are optional.
+      // Mutation of a Java list is allowed only if a precondition or other
+      // invariant says the list is mutable and you are allowed to change it.
+      
+      import java.util.List;
+      
+      interface Competitor {
+      
+          // returns the name of this competitor
+      
+          String name ();
+      
+          // GIVEN: another competitor and a list of outcomes
+          // RETURNS: true iff one or more of the outcomes indicates this
+          //     competitor has defeated or tied the given competitor
+      
+          boolean hasDefeated (Competitor c2, List&lt;Outcome&gt; outcomes);
+      
+          // GIVEN: a list of outcomes
+          // RETURNS: a list of the names of all competitors mentioned by
+          //     the outcomes that are outranked by this competitor,
+          //     without duplicates, in alphabetical order
+      
+          List&lt;String&gt; outranks (List&lt;Outcome&gt; outcomes);
+      
+          // GIVEN: a list of outcomes
+          // RETURNS: a list of the names of all competitors mentioned by
+          //     the outcomes that outrank this competitor,
+          //     without duplicates, in alphabetical order
+      
+          List&lt;String&gt; outrankedBy (List&lt;Outcome&gt; outcomes);
+      
+          // GIVEN: a list of outcomes
+          // RETURNS: a list of the names of all competitors mentioned by
+          //     one or more of the outcomes, without repetitions, with
+          //     the name of competitor A coming before the name of
+          //     competitor B in the list if and only if the power ranking
+          //     of A is higher than the power ranking of B.
+      
+          List&lt;String&gt; powerRanking (List&lt;Outcome&gt; outcomes);
+      }
+</pre>
+    <hr />
+
+<p>To help you plan your work, we have divided this problem into two
+questions.  However, you should submit a <em>single</em>
+<kbd>set09</kbd> directory containing your class definitions and other
+deliverables for both questions 1 and 2. </p>
+
+    <ol>
+      <li>
+        (Outcome)
+        <br />
+        <p>
+          For this first part of Problem Set 09, you will complete
+          the <code>Tie1</code> and <code>Defeat1</code> classes
+          we started to define for you in the
+          <code>Tie1.java</code> and
+          <code>Defeat1.java</code> files.
+</p>
+        <p>
+          You will not be able to test your
+          <code>Tie1</code> and <code>Defeat1</code> classes
+          until you define a class that implements the
+          <code>Competitor</code> interface.
+          For testing, however, you can define a
+          <code>Competitor1</code> class that supports
+          the <code>name</code> method but throws an
+          <code>UnsupportedOperationException</code>
+          whenever the other methods of the
+          <code>Competitor</code> interface are called.
+          The <code>Competitor1.java</code> file we are giving you
+          already throws that exception whenever the
+          <code>hasDefeated</code>,
+          <code>outranks</code>,
+          <code>outrankedBy</code>, or
+          <code>powerRanking</code> methods are called.
+</p>
+</li>
+      <li>
+        (Competitor)
+        <br />
+        <p>
+          For this second part of Problem Set 09,
+          you are to replace the stubs we have given you for the
+          <code>hasDefeated</code>,
+          <code>outranks</code>,
+          <code>outrankedBy</code>, and
+          <code>powerRanking</code> methods
+          by definitions that satisfy the contracts and purpose statements
+          given in the <code>Competitor</code> interface.
+</p>
+        <p>
+          The concepts used in the descriptions of
+          those methods are the same as in Problem Set 08.
+          If your solution for Problem Set 08 was correct,
+          you can just translate your solution into Java.
+          If your solution for Problem Set 08 was incorrect,
+          you will probably want to debug it in Racket's
+          ISL+Lambda language before you try to translate it
+          into Java.
+</p>
+</li>
+</ol>
+</div>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -280,6 +316,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
