@@ -1,7 +1,7 @@
-// An AList is an object of any class that implements
-// the AList interface.
+// An AList<K,V> is an object of any class that implements
+// the AList<K.V> interface.
 
-// interpretation: An Alist represents a finite partial map from K to V.
+// interpretation: An Alist<K,V> represents a finite partial map from K to V.
 
 interface AList<K,V> {
 
