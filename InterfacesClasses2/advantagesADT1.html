@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Advantages of Abstract Data Types
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Advantages of Abstract Data Types
+</h2>
+  <div>
+    <p>
+      Abstract data types offer several advantages
+      over concrete data types:
+</p>
+    <ul>
+      <li>
+        <strong>Representation Independence:</strong>
+        Most of the program becomes independent of
+        the abstract data type's representation,
+        so that representation can be improved
+        without breaking the entire program.
+</li>
+      <li>
+        <strong>Modularity:</strong>
+        With representation independence, the different parts
+        of a program become less dependent on other parts
+        and on how those other parts are implemented.
+</li>
+      <li>
+        <strong>Interchangeability of Parts:</strong>
+        Different implementations of an abstract data type
+        may have different performance characteristics.
+        With abstract data types, it becomes easier
+        for each part of a program to use an implementation
+        of its data types that will be more efficient for
+        that particular part of the program.
+</li>
+</ul>
+    <blockquote class="indented">
+      <p>
+        Example:
+</p>
+      <p>
+        Java's standard libraries supply several different
+        implementations of its <code>Map</code> data type.
+        The <code>TreeMap</code> implementation might be
+        more efficient when a total ordering on the keys
+        can be computed quickly but a good hash value is
+        hard to compute efficiently.
+        The <code>HashMap</code> implementation might be
+        more efficient when hash values can be computed
+        quickly and there is no obvious ordering on keys.
+        The part of a program that creates a <code>Map</code>
+        can decide which implementation to use.
+        The parts of a program that deal with a created
+        <code>Map</code> don't have to know how it was
+        implemented; once created, it's just a <code>Map</code>.
+</p>
+      <p>
+        If it weren't for abstract data types, every part
+        of the program that uses a <code>Map</code> would
+        have to be written twice, with one version to deal with
+        <code>TreeMap</code> implementations
+        and another version to deal with
+        <code>HashMap</code> implementations.
+</p>
+</blockquote>
+    <p>
+      These advantages become more important in larger programs,
+      so they often go under-appreciated by programmers with
+      limited experience.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="concrete2.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="abstractionBarrier1.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

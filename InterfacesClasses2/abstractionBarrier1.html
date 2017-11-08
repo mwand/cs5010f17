@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Abstraction Barrier
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Abstraction Barrier
+</h2>
+  <div>
+    <p>
+      Abstract data types introduce an
+      <em>abstraction barrier</em>
+      between those who implement a data type
+      and those who use it.
+</p>
+    <p>
+      If you are implementing the data type,
+      then you know how its values are represented
+      and are allowed to write code that depends upon
+      that representation.
+</p>
+    <p>
+      If you are a user of an abstract data type,
+      then you do not know how its values are represented
+      and you are not allowed to write code that depends upon
+      the representation.
+</p>
+    <blockquote>
+      That means the distinction between concrete and abstract
+      data types depends on your relationship to the data type.
+</blockquote>
+    <p>
+      If a problem set asks you to implement a data type, then
+      you will know its representation and can rely on that knowledge
+      when you write your tests and define your functions and methods.
+      For you, the data type will be concrete.
+</p>
+    <p>
+      When we write black-box tests of a data type we have asked
+      you to design and to implement, we will not know its
+      representation, and our black-box tests are not allowed to
+      depend on any properties or behavior of the data type beyond
+      the properties and behavior specified in the problem set.
+      For the course staff, the data type will be abstract.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="advantagesADT1.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="abstractionBarrier2.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>
