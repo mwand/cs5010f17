@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Definition of the UTC ADT
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <p>
+      First, we define an interface:
+</p>
+    <pre>
+      // A UTC is an object of any class that implements UTC.
+      //
+      // Interpretation: A UTC represents a Universal Coordinated Time.
+      
+      interface UTC {
+      
+          // Returns the hour, between 0 and 23 inclusive.
+      
+          int hour ();
+      
+          // Returns the minute, between 0 and 59 inclusive.
+      
+          int minute ();
+      
+          // Returns true iff the given UTC is equal to this UTC.
+      
+          boolean isEqual (UTC t2);
+      }
+</pre>
+</div>
+</div>
+<div id="footer">
+  <form action="UTC2.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="UTC4.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>
