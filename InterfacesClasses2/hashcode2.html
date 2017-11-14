@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Example: a hashCode Method for the UTC1 Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Example: a hashCode Method for the UTC1 Class
+</h3>
+    <p>
+      Within the
+      <a href="UTC4.html"><code>UTC1</code></a> class
+      of our example, we can define a suitable <code>hashCode</code>
+      method like this:
+</p>
+    <pre>
+          public int hashCode () {
+              return 100 * h + m;
+          }
+</pre>
+    <p>
+      By itself, that definition does not guarantee that equal
+      <code>UTC</code> values will have equal hash codes,
+      because there might be other classes that implement the
+      <code>UTC</code> interface but define a <code>hashCode</code>
+      method that's incompatible with this one.
+</p>
+    <p>
+      Defining compatible <code>equals</code> and <code>hashCode</code>
+      methods is hard enough within a single class, but it becomes
+      harder still when we have to maintain compatibility across
+      all of the classes that implement an interface.
+      In subsequent lessons, we will see how
+      <em>static methods</em> or <em>inheritance</em> can be used to make
+      that compatibility easier to maintain.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="hashcode1.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="tostring2.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Compiling and Testing the UTC1 Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <p>
+      To compile and run the <code>UTC1</code> class,
+      use the Unix <code>cd</code> command to change
+      to the directory that contains the <code>UTC1.java</code> file.
+      Then say:
+</p>
+    <pre>
+      javac UTC1.java
+      
+      java -enableassertions UTC1
+</pre>
+    <p>
+      The <code>javac</code> command in the first line
+      compiles the <code>UTC1.java</code> file
+      along with any other files it needs.
+      The <code>java</code> command in the second line
+      runs the program by calling the
+      static <code>main</code> method defined within the
+      <code>UTC1</code> class.
+</p>
+    <blockquote class="smaller">
+      <p>
+        The <code>javac</code> command compiles one or more files,
+        so you have to specify a file name.
+</p>
+      <p>
+        The <code>java</code> command runs the <code>main</code>
+        defined by a class, so you have to specify a class name.
+        Note that Java file names end with <code>.java</code>, but
+        Java class names do not.
+</p>
+</blockquote>
+    <p>
+      The <code>-enableassertions</code> option is necessary
+      because Java assertions are disabled by default.
+      If you forget to specify the <code>-enableassertions</code> option,
+      the program will run and tell you all tests have passed,
+      but it won't actually run any of the tests.
+</p>
+    <p>
+      Assertions are not the best way to test a Java program.
+      One disadvantage of using assertions for testing is that
+      you find only bug at a time:  When one assertion fails,
+      none of the tests that follow the failed assertion will run.
+</p>
+    <p>
+      We have shown you how to use assertions for testing because
+      assertions are easy to explain.
+      When we test your programs, we will use a testing framework
+      we have written especially for this course.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="UTC9.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="UTC1summary.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

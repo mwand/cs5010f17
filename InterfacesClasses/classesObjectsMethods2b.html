@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Classes and Objects
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Classes and Objects
+</h3>
+  <div>
+    <ul>
+      <li>
+        A class definition is like a <code>define-struct</code>.
+</li>
+      <li>
+        It specifies the names of the fields of its objects.
+</li>
+      <li>
+        It may also specify some <em>methods</em>.
+        Each method has a name and a definition.
+</li>
+</ul>
+</div>
+  <p>
+    For example:
+</p>
+  <pre>
+    class C2 {
+        int a;
+        int b;
+        int c;
+    
+        public int foo () { return a + b; }
+        public int bar (int n) { return c * n; }
+        public int baz (int n) { return this.foo() + n; }
+        ...
+    }
+</pre>
+  <p>
+    Here is another example of a class:
+</p>
+  <pre>
+    class C {
+        public int foo () { return 17; }
+        public int bar (int n) { return 6 * n; }
+        public int baz (int n) { return this.foo() + n; }
+        ...
+    }
+</pre>
+  <p>
+    The methods of class <code>C</code> are related to those of
+    class <code>C2</code>, but class <code>C</code> doesn't have
+    any fields.
+</p>
+</div>
+<div id="footer">
+  <form action="classesObjectsMethods2a.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="classesObjectsMethods2f.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

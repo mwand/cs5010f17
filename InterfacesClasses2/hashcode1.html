@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The hashCode() Method in Java
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      The hashCode() Method in Java
+</h3>
+    <p>
+      Java's specification of the <code>hashCode()</code> method
+      imposes the following invariant:
+</p>
+    <blockquote>
+      <p>
+        If two objects are equal according to the
+        <code>equals(Object)</code> method, then calling the
+        <code>hashCode</code> method on each of the two objects
+        must produce the same integer result.
+</p>
+</blockquote>
+    <p>
+      That implies we must always always define a
+      <code>hashCode</code> method whenever we define an
+      <code>equals</code> method.
+</p>
+    <p>
+      If the state of a mutable object changes in a way that
+      causes the object's <code>equals</code> method to return
+      false when compared to objects for which the method had
+      previously returned true, then the value returned by the
+      object's <code>hashCode</code> method is allowed to change
+      as well.  Otherwise the value returned by the
+      <code>hashCode</code> method should remain the same for
+      all calls to <code>hashCode</code>.
+</p>
+    <p>
+      The following definition is always a legal definition
+      of the <code>hashCode</code> method:
+</p>
+    <pre>
+      public int hashCode () { return 0; }
+</pre>
+    <p>
+      Although legal, that definition defeats the purpose of the
+      <code>hashCode</code> method, which is to allow hash tables
+      to obtain an index that is likely to be different from the
+      indexes obtained for other objects.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="equality8.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="hashcode2.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

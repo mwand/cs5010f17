@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -34,31 +34,31 @@
       // them out to emphasize the simplicity of Java class
       // definitions.
       //
-      // Java class definitions aren't as simple as they could be,
-      // because you (usually) have to write a Java constructor.
-      // The syntax of a constructor definition resembles
-      // a method definition, but there are two differences:
       //
-      //     a constructor has no return type
-      //     the constructor's name is the name of the class
       //
-      // Constructors take arguments specifying the values of the
-      // class's fields, and the constructor body ordinarily contains
-      // one line initializing each field, as shown below.
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
       
-      class Class1 implements Interface1 {
+      class Class1 <span class="red">implements Interface1</span> {
       
           int x;
           int y;
           int r;
       
-          // This is the constructor definition.
       
-          Class1 (int x, int y, int r) {
-              this.x = x;
-              this.y = y;
-              this.r = r;
-          }
+      
+          // A JAVA CONSTRUCTOR GOES HERE
+      
+      
+      
+      
       
           // These are the method definitions.
       
@@ -66,28 +66,36 @@
               return x + y;
           }
       
-          public int bar (int n);
+          public int bar (int n) {
               return r + n;
           }
       
-          public int baz (int n);
-              return this.foo() + n;
+          public int baz (int n) {
+              return this.bar(n) + n;
           }
       }
-    </pre>
-  </div>
+</pre>
+    <p>
+      Although the class definition shown above will compile
+      without errors,
+      it is incomplete because we have omitted the Java constructor
+      that will initialize the fields of objects of this class.
+</p>
+</div>
 </div>
 <div id="footer">
-  <form action="interfaces3.html" class="inline">
+  <form action="newObjectsInterface.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
-  <form action="classdefinition2.html" class="inline">
+  <form action="classdefinition1b.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -95,6 +103,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

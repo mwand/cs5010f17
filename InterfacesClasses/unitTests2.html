@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,19 +25,27 @@
 <div id="maincontent">
   <h3>
     Step 4: Unit Tests, part 2
-  </h3>
+</h3>
   <div>
     <ul>
       <li>
         We still want 100% test coverage.
-      </li>
+</li>
       <li>
         Test observable behavior, as in the previous lesson.
-      </li>
+</li>
       <li>
         Don't assume the <code>equals</code> method can be used
         to compare objects.
-      </li>
+        <blockquote>
+          <p>
+            The next module will discuss the <code>equals</code>
+            method in more detail.
+            We are talking about it here to help you avoid mistakes
+            we often see in unit tests.
+</p>
+</blockquote>
+</li>
       <li>
         In Java, the <code>equals</code> method might test all and only
         the observable behavior of objects it is comparing.
@@ -45,7 +53,7 @@
         Sometimes, however, the <code>equals</code> method
         defines some notion of equality that does not correspond
         to identity of observable behavior.
-      </li>
+</li>
       <li>
         In Java, all objects have an <code>equals</code> method.
         and <code>x.equals(x)</code> is true,
@@ -59,21 +67,23 @@
         objects being compared are mutable:
         <code>x.equals(y)</code> may be true at one moment and
         false a moment later.
-      </li>
-    </ul>
-  </div>
+</li>
+</ul>
+</div>
 </div>
 <div id="footer">
   <form action="unitTests1.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="designStrategy1.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -81,6 +91,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

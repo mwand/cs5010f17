@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,52 +25,81 @@
 <div id="maincontent">
   <h3>
     Coding Standards, Part 1
-  </h3>
+</h3>
   <div>
     <ul>
       <li>
         A public method is a method whose definition begins
         with <code>public</code>.
-      </li>
+</li>
+      <ul>
+        <li>
+          If a method is listed in an interface, its definition
+          must be public.
+          (The Java compiler enforces this.)
+</li>
+        <li>
+          If a method overrides a method inherited from <code>Object</code>,
+          its definition must be public.
+          (The Java compiler enforces this.)
+</li>
+        <li>
+          A static method (such as <code>main</code>) may be public.
+</li>
+</ul>
       <li>
-        If a method is listed in an interface, its definition
-        must be public.
-        (The Java compiler enforces this.)
-      </li>
-      <li>
-        Every public method of the class
-        <em>MUST</em> be listed in an interface the class
-        implements.
-      </li>
+        Every public method of the class <em>MUST</em>
+        <ul>
+          <li>
+            be listed in an interface the class implements, or
+</li>
+          <li>
+            override a method inherited from <code>Object</code>, or
+</li>
+          <li>
+            be a static method (such as <code>main</code>).
+</li>
+</ul>
+</li>
       <li>
         Your class may also define non-public help methods.
         If a help method is called only from within the class,
         then it should be declared <code>private</code>.
-      </li>
-      <li>
-        You may write non-public help methods to be used only
-        for testing.  Those methods cannot be private, unless
-        the tests that call them are written within the class,
-        but they should not be public.
-      </li>
+</li>
       <li>
         Your non-public methods should come after all of the
         public methods.
-      </li>
-    </ul>
-  </div>
+</li>
+      <li>
+        You must not declare anything to be <code>protected</code>.
+</li>
+      <blockquote class="smaller">
+        <p>
+          In Java, declaring something to be <code>protected</code>
+          makes it <em>less</em> protected,
+          so programmers who are new to Java
+          seldom use that keyword correctly.
+          Java's <code>protected</code> keyword does have a few
+          legitimate uses, but those uses are beyond
+          the scope of this course.
+</p>
+</blockquote>
+</ul>
+</div>
 </div>
 <div id="footer">
   <form action="classDesign3.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="ooCodingStandards2.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -78,6 +107,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

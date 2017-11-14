@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,7 +25,7 @@
 <div id="maincontent">
   <h3>
     Code Outline (OO version), part 4
-  </h3>
+</h3>
   <div>
     <pre>
       // Constructor template for Composite
@@ -56,24 +56,26 @@
           // RETURNS: a scene like the given one, but with this
           //     shape painted on it
       
-          public double addToScene (Scene sc) {
+          public Scene addToScene (Scene sc) {
               return front.addToScene (back.addToScene (sc));
           }
       }
-    </pre>
-  </div>
+</pre>
+</div>
 </div>
 <div id="footer">
   <form action="functionsVsClasses10.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="functionsVsClassesBigPicture1.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -81,6 +83,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

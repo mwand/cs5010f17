@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -28,20 +28,14 @@
   </h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 13 March 2017
+      <strong>Out:</strong> Monday, 30 October 2017
       <br />
-      <strong>Due:</strong> Monday, 20 March 2017 at 6pm
+      <strong>Due:</strong> Monday, 6 November 2017 at 6pm local time
     </p>
   </div>
   <div>
     <p>
-      This is a
-      <a href="http://en.wikipedia.org/wiki/Pair_programming">
-        pair programming
-      </a>
-      assignment.  You are required to
-      complete this problem set in collaboration with your assigned
-      partner, but neither of you are allowed to
+      This is an individual assignment.  You are not allowed to
       discuss this problem set with any other person.  You are also
       not allowed to search for or to view any solutions to similar
       problems that may be available on the World-Wide Web or in
@@ -49,186 +43,362 @@
       you.
     </p>
     <p>
-      As in previous problem sets,
-      you and your partner are required to push your files at
-      the end of every work session.
-      (You <em>may</em> push your files several times during
-      a work session, but we do not require you to do so.)
+      The main purpose of this problem set is to give you practice
+      designing functions with general recursion and halting measures.
     </p>
     <p>
-      At the end of every work session, you are required to update
-      your log file to record the time you spent in that work session.
-      (Please do not include the time you spent in any previous work
-      sessions, as those times will already have been recorded in
-      previous versions of your log file.)
-      If both of you work together during a work session, both of
-      you must update your log files, recording only the time <em>you</em>
-      spent working.  Do not include your partner's time in
-      your log file, but be sure to push the updated versions of
-      both log files.
-    </p>
-    <hr />
-    <p>
-      This problem set is designed to give you a chance to make
-      your scheduling program run faster.
-    </p>
-    <p>
-      You must use the HtDP
+      You must use Racket's
       <strong>Intermediate Student Language + Lambda</strong>
       for this problem set.
     </p>
     <p>
-      As in previous problem sets, you must download a copy of
-      <a href="extras.rkt">
-        <code>extras.rkt</code>
-      </a>
-      and push it to the <code>set08</code> directory with your solutions.
-      Then import that library by including the line
-      <code>(require "extras.rkt")</code>
-      at the top of your files with your other <code>require</code>
-      declarations.  Following those <code>require</code> declarations,
-      write <code>provide</code> declarations that provide all of
-      the functions you are required to provide, without providing any
-      functions you are not required to provide.
-      That will allow our testing framework to import your files
-      and do automated testing on them.
-      You can use <code>check-location</code> to double-check that your
-      files are in the right place.
+      For these problems, download a copy of
+      <a href="extras.rkt">extras.rkt</a>
+      and put it in the directory with your solutions.
+      Then import <code>rackunit</code> and this library
+      by including the lines
+    </p>
+    <pre>
+      (require rackunit)
+      (require "extras.rkt")
+</pre>
+    <p>
+      at the top of your file.
+      Then, for each problem, put in lines that say
+    </p>
+    <pre>
+      (provide <var>function</var>)
+</pre>
+    <p>
+      for each deliverable function, as you have done on previous
+      problem sets.
+      This will allow our testing framework to import your file
+      and do automated testing on it.
+      You can use <code>check-location</code> to double-check
+      that your solutions are in the right place.
     </p>
     <p>
       Remember that you must follow the design recipe, which is a
       process, not a list of deliverables.
       Your
-      <a href="../Info/deliverables.html">
-        deliverables
-      </a>
+      <a href="../Info/deliverables.html">deliverables</a>
       include the artifacts produced by the various steps of the
       design recipe: data definitions (including interpretation and
       templates, contracts, purpose statements, definitions, and tests).
       Be sure to follow our
-      <a href="../Info/style.html">
-        coding conventions.
-      </a>
+      <a href="../Info/style.html">coding conventions</a>.
       Doing so will make codewalks easier for everyone.
     </p>
+    <p>
+      Be sure to fill out a
+      <a href="yourID-log.txt">work session report</a>
+      at the end of each work session.
+      <span class="red">Be sure to report only the hours
+      spent in that work session;
+      do <strong><em>not</em></strong> report the cumulative time</span>.
+      Tell <code>git</code> to add your work session report
+      to the files you will commit,
+      and then commit and push (sync) that report in addition to
+      committing and pushing your entire <code><span class="strike">set06</span><span class="new">set08</span></code> directory.
+      <strong><em>Do this at the end of every work session.</em></strong>
+    </p>
+    <p>
+      Remember to include a copy of <code>extras.rkt</code> racket
+      in your <code>set08</code> directory along with your
+      <code>q1.rkt</code> and <code>q2.rkt</code> files.
+    </p>
+    <p>
+      For both parts, you should require <code>rackunit</code> and
+      <code>"extras.rkt"</code> but nothing else.
+    </p>
     <hr />
+    <p>
+      This problem set deals with the problem of ranking individuals
+      or teams in a sport such as chess whose contests result in a
+      win or tie (draw).
+    </p>
+    <p>
+      Unlike most ranking systems, the ranking system you will
+      implement treats a tie as a win for both competitors and
+      also as a loss for both competitors.  (This problem set may
+      help to explain why most ranking systems don't do that.)
+    </p>
+    <p>
+      We will use strings to name competitors:
+    </p>
+    <pre>
+      ;;; A Competitor is represented as a String (any string will do).
+</pre>
+    <ol>
+      <li>
+        (Outranking)
+        <br />
+        <p>
+          For this first part of Problem Set 08, you will design
+          data types named <code>Tie</code> and <code>Defeat</code>.
+          A <code>Tie</code> represents a tie (draw) between two
+          competitors.  A <code>Defeat</code> represents the outcome
+          of a contest in which one competitor wins and the other
+          loses.  The outcome of a contest is either a <code>Tie</code>
+          or a <code>Defeat</code>:
+        </p>
+        <pre>
+          ;;; An Outcome is one of
+          ;;;     -- a Tie
+          ;;;     -- a Defeat
+          ;;;
+          ;;; OBSERVER TEMPLATE:
+          ;;; outcome-fn : Outcome -&gt; ??
+          #;
+          (define (outcome-fn o)
+            (cond ((tie? o) ...)
+                  ((defeat? o) ...)))
+</pre>
+        <p>
+          The ranking system specified below uses this definition:
+        </p>
+        <blockquote>
+          <p>
+            Given a list of outcomes, a competitor A outranks a
+            competitor B if any of the following are true:
+          </p>
+          <ul>
+            <li>
+              One of the outcomes shows that A has defeated B.
+            </li>
+            <li>
+              One of the outcomes shows that A and B have tied.
+            </li>
+            <li>
+              There is a competitor C that outranks B according to
+              the list of outcomes, and there is an outcome that
+              shows A has defeated or tied C.
+            </li>
+          </ul>
+        </blockquote>
+        <p>
+          You are to deliver a file named <code>q1.rkt</code>
+          that
+        </p>
+        <ul>
+          <li>
+            defines the <code>Competitor</code>,
+            <code>Tie</code>, <code>Defeat</code>, and
+            <code>Outcome</code> types;
+            the <code>Competitor</code> and <code>Outcome</code>
+            types must be defined as shown above
+          </li>
+          <li>
+            defines and provides all 5 of the functions
+            specified below
+          </li>
+          <li>
+            gives halting measures for all functions that may
+            call themselves directly or indirectly
+          </li>
+        </ul>
+        <p>
+          The 5 functions you must define and <code>provide</code>
+          are:
+        </p>
+        <pre>
+          ;;; tie : Competitor Competitor -&gt; Tie
+          ;;; GIVEN: the names of two competitors
+          ;;; RETURNS: an indication that the two competitors have
+          ;;;     engaged in a contest, and the outcome was a tie
+          ;;; EXAMPLE: (see the examples given below for defeated?,
+          ;;;     which shows the desired combined behavior of tie
+          ;;;     and defeated?)
+          ;;;
+          ;;; defeated : Competitor Competitor -&gt; Defeat
+          ;;; GIVEN: the names of two competitors
+          ;;; RETURNS: an indication that the two competitors have
+          ;;;     engaged in a contest, with the first competitor
+          ;;;     defeating the second
+          ;;; EXAMPLE: (see the examples given below for defeated?,
+          ;;;     which shows the desired combined behavior of defeated
+          ;;;     and defeated?)
+          ;;;
+          ;;; defeated? : Competitor Competitor OutcomeList -&gt; Boolean
+          ;;; GIVEN: the names of two competitors and a list of outcomes
+          ;;; RETURNS: true if and only if one or more of the outcomes indicates
+          ;;;     the first competitor has defeated or tied the second
+          ;;; EXAMPLES:
+          ;;;     (defeated? "A" "B" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; true
+          ;;;
+          ;;;     (defeated? "A" "C" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; false
+          ;;;
+          ;;;     (defeated? "B" "A" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; false
+          ;;;
+          ;;;     (defeated? "B" "C" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; true
+          ;;;
+          ;;;     (defeated? "C" "B" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; true
+          ;;;
+          ;;; outranks : Competitor OutcomeList -&gt; CompetitorList
+          ;;; GIVEN: the name of a competitor and a list of outcomes
+          ;;; RETURNS: a list of the competitors outranked by the given
+          ;;;     competitor, in alphabetical order
+          ;;; NOTE: it is possible for a competitor to outrank itself
+          ;;; EXAMPLES:
+          ;;;     (outranks "A" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; (list "B" "C")
+          ;;;
+          ;;;     (outranks "B" (list (defeated "A" "B") (defeated "B" "A")))
+          ;;;  =&gt; (list "A" "B")
+          ;;;
+          ;;;     (outranks "C" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; (list "B" "C")
+          ;;;
+          ;;; outranked-by : Competitor OutcomeList -&gt; CompetitorList
+          ;;; GIVEN: the name of a competitor and a list of outcomes
+          ;;; RETURNS: a list of the competitors that outrank the given
+          ;;;     competitor, in alphabetical order
+          ;;; NOTE: it is possible for a competitor to outrank itself
+          ;;; EXAMPLES:
+          ;;;     (outranked-by "A" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; (list)
+          ;;;
+          ;;;     (outranked-by "B" (list (defeated "A" "B") (defeated "B" "A")))
+          ;;;  =&gt; (list "A" "B")
+          ;;;
+          ;;;     (outranked-by "C" (list (defeated "A" "B") (tie "B" "C")))
+          ;;;  =&gt; (list "A" "B" "C")
+</pre>
+        <p>
+          We will be doing automated testing of your solution,
+          so be sure your solution is in the right place
+          (<code>set08/q1.rkt</code> in your private
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all the functions listed above.
+          To see if your file is in the right place, insert the
+          following line at the top of your file but after your
+          <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "08" "q1.rkt")
+</pre>
+      </li>
+      <li>
+        (Power Ranking)
+        <br />
+        <p>
+          For this second problem, your job is to implement a
+          power-ranking system based on the types and functions
+          you defined in part 1.
+        </p>
+        <p>
+          Given a list of outcomes, the non-losing percentage
+          of a competitor A is the number of outcomes in which
+          A defeats or ties another competitor divided by the
+          number of outcomes that mention A.
+        </p>
+        <p>
+          The power-ranking system you will implement has the
+          following characteristics:
+        </p>
+        <ol>
+          <li>
+            If competitor A is outranked by fewer competitors than
+            competitor B, then the power-ranking of A is higher than
+            the power-ranking of B.
+          </li>
+          <li>
+            If competitor A is outranked by the same number of competitors
+            as competitor B, but competitor A outranks more competitors
+            than competitor B, then the power-ranking of A is higher than
+            the power-ranking of B.
+          </li>
+          <li>
+            If competitor A is outranked by the same number of competitors
+            as competitor B, and competitor A also outranks the same number
+            of competitors as competitor B,
+            and competitor A has a higher non-losing percentage than
+            competitor B,
+            then the power-ranking of A is higher than
+            the power-ranking of B.
+          </li>
+          <li>
+            If competitor A is outranked by the same number of competitors
+            as competitor B, and competitor A also outranks the same number
+            of competitors as competitor B,
+            and competitor A has the same non-losing percentage as
+            competitor B,
+            and Racket's <code>string&lt;?</code> function considers
+            the name of competitor A to be less than
+            the name of competitor B,
+            then the power-ranking of A is higher than
+            the power-ranking of B.
+          </li>
+        </ol>
+        <p>
+          You are to deliver a file named <code>q2.rkt</code>
+          that defines all of the data types from part 1,
+          defines and provides all 5 of the functions
+          specified in part 1 above, and also
+          defines and provides the <code>power-ranking</code> function
+          specified below
+          (so you will provide 6 functions in all).
+          As in part 1, you are to give halting measures
+          for all functions that may
+          call themselves directly or indirectly.
+        </p>
+        <pre>
+          ;;; power-ranking : OutcomeList -> CompetitorList
+          ;;; GIVEN: a list of outcomes
+          ;;; RETURNS: a list of all competitors mentioned by one or more
+          ;;;     of the outcomes, without repetitions, with competitor A
+          ;;;     coming before competitor B in the list if and only if
+          ;;;     the power-ranking of A is higher than the power ranking
+          ;;;     of B.
+          ;;; EXAMPLE:
+          ;;;     (power-ranking
+          ;;;      (list (defeated "A" "D")
+          ;;;            (defeated "A" "E")
+          ;;;            (defeated "C" "B")
+          ;;;            (defeated "C" "F")
+          ;;;            (tie "D" "B")
+          ;;;            (defeated "F" "E")))
+          ;;;  =&gt; (list "C"   ; outranked by 0, outranks 4
+          ;;;           "A"   ; outranked by 0, outranks 3
+          ;;;           "F"   ; outranked by 1
+          ;;;           "E"   ; outranked by 3
+          ;;;           "B"   ; outranked by 4, outranks <span class="strike">1</span><span class="new">2</span>, 50%
+          ;;;           "D")  ; outranked by 4, outranks <span class="strike">1</span><span class="new">2</span>, 50%
+</pre>
+        <p>
+          Instead of copying most of your <code>q1.rkt</code> file
+          into <code>q2.rkt</code>, we suggest you have your
+          <code>q2.rkt</code> file <code>require</code> your
+          <code>q1.rkt</code> file.
+          Remember, however, that <strong>your <code>q2.rkt</code> file
+          must still <code>provide</code> all 6 functions</strong>.
+        </p>
+        <p>
+          Remember that we will be doing automated testing of your solution,
+          so be sure your solution is in the right place
+          (<code>set08/q2.rkt</code> in your private
+          <code>cs5010f17/pdp-<em>YOURUSERNAME</em></code> repository),
+          and that it provides all of the functions listed above.
+          To see if your file is in the right place, insert the
+          following line at the top of your file but after your
+          <code>require</code> declarations:
+        </p>
+        <pre>
+          (check-location "08" "q2.rkt")
+</pre>
+      </li>
+    </ol>
   </div>
-  <h3>
-    Problem Specification
-  </h3>
-  <ol>
-    <li>
-      Copy your <code>q2.rkt</code> program of Problem Set 07
-      to a file named <code>set08/q1.rkt</code>.
-      Modify <code>q1.rkt</code> and <code>flight.rkt</code>
-      as necessary to make your program run in
-      <a href="http://mathworld.wolfram.com/PolynomialTime.html">
-        polynomial time.
-      </a>
-      <p>
-        As in Problem Set 07, your program must respect
-        the abstraction barrier associated with the
-        <code>UTC</code> and <code>Flight</code>
-        abstract data types.
-        As in Problem Set 06, you are allowed to implement those
-        ADTs as you see fit.
-      </p>
-    </li>
-    <li>
-      After you have finished your <code>set07/q1.rkt</code> program,
-      analyze its asymptotic running time.
-      In a plain text file named <code>set08/q2.txt</code>,
-      write a one-sentence summary of its asymptotic running time.
-      <p>
-        Following that sentence, display a table showing how the
-        running time of your optimized program varies with the
-        parameter <code>n</code> for the simple benchmark shown below,
-        using a range of values for <code>n</code> that is adequate
-        to illustrate the asymptotic running time you are claiming
-        for your program.
-      </p>
-    </li>
-  </ol>
-  <pre>
-    ;;; all-airports : ListOfFlight -> ListOfString
-    ;;; RETURNS: A list of all airports served by some flight
-    ;;;     in the given list.
-    
-    (define (all-airports flights)
-      (all-airports-loop (append (map departs flights)
-                                 (map arrives flights))
-                         empty))
-    
-    ;;; all-airports-loop : ListOfString ListOfString -> ListOfString
-    ;;; GIVEN: two lists of strings
-    ;;; WHERE: the second list is a set (no element occurs twice)
-    ;;; RETURNS: the set union of the given lists
-    
-    (define (all-airports-loop names airports)
-      (if (empty? names)
-          airports
-          (all-airports-loop (rest names)
-                             (if (member (first names) airports)
-                                 airports
-                                 (cons (first names) airports)))))
-    
-    ;;; visit-all-pairs-of-airports :
-    ;;;     (String String ListOfFlight -> X) ListOfFlight -> ListOfX
-    ;;; GIVEN: a function whose arguments are suitable for can-get-there?
-    ;;; RETURNS: a list of the results obtained by calling that function
-    ;;;     on all pairs of airports served by the given flights,
-    ;;;     passing the given list of flights as a third argument.
-    
-    (define (visit-all-pairs-of-airports visitor flights)
-      (let ((airports (all-airports flights)))
-        (apply append
-               (map (lambda (ap1)
-                      (map (lambda (ap2)
-                             (visitor ap1 ap2 flights))
-                           airports))
-                    airports))))
-    
-    ;;; make-stress-test0 : NonNegInt -> ListOfFlight
-    ;;; GIVEN: a non-negative integer n
-    ;;; RETURNS: a list of 2n flights connecting n+1 airports
-    
-    (define (make-stress-test0 n)
-      (if (= n 0)
-          empty
-          (let* ((name1 (string-append "NoWays " (number->string (+ n n))))
-                 (name2 (string-append "NoWays " (number->string (+ n n 1))))
-                 (ap1 (string-append "AP" (number->string n)))
-                 (ap2 (string-append "AP" (number->string (+ n 1))))
-                 (t1 (make-UTC (remainder (* 107 n) 24)
-                               (remainder (* 223 n) 60)))
-                 (t2 (make-UTC (remainder (* 151 n) 24)
-                               (remainder (* 197 n) 60)))
-                 (t3 (make-UTC (remainder (* 163 n) 24)
-                               (remainder (* 201 n) 60)))
-                 (t4 (make-UTC (remainder (* 295 n) 24)
-                               (remainder (* 183 n) 60)))
-                 (f1 (make-flight name1 ap1 ap2 t1 t2))
-                 (f2 (make-flight name2 ap1 ap2 t3 t4)))
-            (cons f1 (cons f2 (make-stress-test0 (- n 1)))))))
-    
-    ;;; benchmark0 : NonNegInt -> List
-    ;;; GIVEN: a non-negative integer parameter n
-    ;;; RETURNS: a list of length n^2 showing the travel time for
-    ;;;     every pair of airports in a stress test of size Theta(n)
-    ;;; EFFECT: prints the total running time
-    
-    (define (benchmark0 n)
-      (let ((flights (make-stress-test0 n)))
-        (time (visit-all-pairs-of-airports
-               (lambda (ap1 ap2 flights)
-                 (if (can-get-there? ap1 ap2 flights)
-                     (list ap1 ap2 (travel-time ap1 ap2 flights))
-                     (list ap1 ap2 -1)))
-               flights))))
-  </pre>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -236,6 +406,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,61 +25,62 @@
 <div id="maincontent">
   <h2>
     CS 5010: Module 09
-  </h2>
+</h2>
   <div>
     <h3>
       Module Overview
-    </h3>
+</h3>
     <p>
       In this module, we will see how everything we've learned so
       far can be ported to an object-oriented context. We'll see how:
-    </p>
+</p>
     <ul>
       <li>
         objects correspond to structs
-      </li>
+</li>
       <li>
         classes correspond to define-structs, and
-      </li>
+</li>
       <li>
         interfaces correspond to data definitions.
-      </li>
-    </ul>
+</li>
+</ul>
     <p>
       We'll see how a functional orientation and an object orientation
       are just two ways of looking at the same definitions.
-    </p>
+</p>
     <p>
       Then we'll consider some of the subtleties of testing in an
       object-oriented setting.
-    </p>
+</p>
     <p>
       We'll summarize by rewriting the Design Recipe for an
       object-oriented setting, and see how our deliverables
       should appear in your program.
-    </p>
+</p>
     <h3>
       Course Map
-    </h3>
-    <img src="module09.jpg" width="700" alt="course map">
+</h3>
+    <img src="../CourseMaps/module09.jpg" width="700" alt="course map">
     <h3>
       Readings
-    </h3>
+</h3>
     <p>
       No required readings.
-    </p>
+</p>
     <p>
-      Most of you know Java well enough to have considered using it
-      for Problem Set 00.
-    </p>
+      Most of you have written small programs in Java
+      or in a related language such as C# or C++.
+</p>
     <p>
-      Those of you who don't know Java need to learn it in a hurry.
+      Those of you who haven't done any programming in Java
+      will need to learn the basic concepts and syntax of Java.
       The tutorial resources listed below are designed to teach you
       what you need to know about Java.
-    </p>
+</p>
     <h3>
       Resources
-    </h3>
+</h3>
     <p>
       You have been using DrRacket's editor to create and to edit
       Racket programs.
@@ -87,19 +88,19 @@
       text editor such as
       <a href="https://www.gnu.org/software/emacs/">
         Emacs
-      </a>
+</a>
       or
       <a href="https://eclipse.org/">
         Eclipse.
-      </a>
-    </p>
+</a>
+</p>
     <p>
       We will test your Java programs using JDK 8 on a Linux machine
       or Macintosh.
       That means you may need to
       <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">
         install JDK 8
-      </a>
+</a>
       on the machine you
       use for writing your CS 5010 programs, so you can test your
       programs using the same version of Java we will be using to
@@ -110,106 +111,131 @@
       installed the XCode Command Line Tools.
       If you are using a Windows machine, you will probably have
       to install Java yourself.)
-    </p>
+</p>
     <p>
       If you are unable to install JDK 8 on the machine you have
       been using for writing programs, you can test your programs
       on <code>login.ccs.neu.edu</code>.
-    </p>
+</p>
     <p>
       We recommend the following tutorials, especially if you do
       not feel comfortable programming in Java
       or do not know how to invoke the Java compiler and runtime system
       from a Linux command line.
-    </p>
+</p>
     <ul>
       <li>
         <a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html">
           "Hello World!" for Solaris OS and Linux
-        </a>
-      </li>
+</a>
+</li>
       <li>
         <a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html">
           Lesson: A Closer Look at the "Hello World!" Application
-        </a>
-      </li>
+</a>
+</li>
       <li>
         <a href="https://docs.oracle.com/javase/tutorial/getStarted/QandE/questions.html">
           Questions and Exercises: Getting Started
-        </a>
-      </li>
+</a>
+</li>
       <li>
         <a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html">
           Lesson: Common Problems (and Their Solutions)
-        </a>
-      </li>
+</a>
+</li>
       <li>
         <a href="https://docs.oracle.com/javase/tutorial/java/index.html">
           Trail: Learning the Java Language
-        </a>
+</a>
         <br />
         (You can use this as a reference manual for the Java language.
         The real
         <a href="https://docs.oracle.com/javase/specs/index.html">
           reference manuals for Java
-        </a>
+</a>
         are far more detailed, and tell you more than you need to know
         for this course.)
-      </li>
-    </ul>
+</li>
+</ul>
+    <p>
+      You may also need to consult the documentation for Java's
+      standard libraries:
+</p>
+    <ul>
+      <li>
+        <a href="https://docs.oracle.com/javase/8/docs/api/">
+          Application Programming Interface for Java 8
+</a>
+        <ul>
+          <li>
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/package-summary.html">
+              documentation for the <code>java.util</code> package
+</a>
+            <ul>
+              <li>
+                <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">
+                  documentation for the <code>List</code> interface
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
     <h3>
       Lessons
-    </h3>
+</h3>
     <ul>
       <li>
         <a href="../InterfacesClasses/classesObjectsMethods1.html">
           Lesson 9.1: Classes, Objects, and Methods
-        </a>
-      </li>
+</a>
+</li>
+      <li>
+        <a href="../InterfacesClasses/interfaces1.html">
+          Lesson 9.2: Interfaces
+</a>
+</li>
+      <li>
+        <a href="../InterfacesClasses/newObjects1.html">
+          Lesson 9.3: Creating a New Object
+</a>
+</li>
       <li>
         <a href="../InterfacesClasses/UTC1.html">
-          Lesson 9.2: Case Study: Universal Coordinated Time (UTC)
-        </a>
-      </li>
+          Lesson 9.4: Case Study: Universal Coordinated Time (UTC)
+</a>
+</li>
       <li>
         <a href="../InterfacesClasses/functionsVsClasses1.html">
-          Lesson 9.3: Functions vs Classes
-        </a>
-      </li>
-      <li>
-        <a href="../InterfacesClasses/equality1.html">
-          Lesson 9.4: Equality
-        </a>
-      </li>
-      <li>
-        <a href="../InterfacesClasses/staticMethods1.html">
-          Lesson 9.5: Static Methods
-        </a>
-      </li>
-      <li>
-        <a href="../InterfacesClasses/testingObjects1.html">
-          Lesson 9.6: Testing Simple Objects
-        </a>
-      </li>
+          Lesson 9.5: Functions vs Classes
+</a>
+</li>
       <li>
         <a href="../InterfacesClasses/designRecipeClasses1.html">
-          Lesson 9.7: Design Recipe Using Classes
-        </a>
-      </li>
-    </ul>
+          Lesson 9.6: Design Recipe Using Classes</a>
+
+ <a href="../Slides/Lesson 9.6 The Design Recipe Using Classes.pptx"
+>(ppt)</a>
+<a href="../Pdfs/Lesson 9.6 The Design Recipe Using Classes.pdf" >(pdf)</a>
+</li>
+</ul>
     <h3>
       Problem Set
-    </h3>
+</h3>
     <p>
-      <a href="../ProblemSets/ps09.html">
-        Problem Set 09
-      </a>
-      was assigned on Monday, 20 March.
-    </p>
-  </div>
+     <a href="../ProblemSets/ps09.html">
+        Problem Set 09</a>
+<!-- will be assigned on Monday, 6 November 2017. -->
+is due on Monday, 13 November 2017, at 6pm local time.
+</p>
+</div>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -217,6 +243,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

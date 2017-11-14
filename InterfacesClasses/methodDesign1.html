@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,47 +25,53 @@
 <div id="maincontent">
   <h3>
     Step 3: Method Design
-  </h3>
+</h3>
   <div>
     <ul>
       <li>
         Each method definition should have a contract that is the
         same as the contract in the interface.
         (In Java, the compiler enforces this.)
-      </li>
+</li>
       <li>
-        A method may have a purpose statement that specializes
-        the purpose statement given in the interface.
-      </li>
+        A method should have a purpose statement if that would
+        be helpful to a reader.
+        A public method's purpose statement may specialize
+        the purpose statement given in an interface by adding
+        details that explain how that purpose is achieved in
+        this particular class.
+</li>
       <li>
         Methods should have examples as needed to clarify the
         purpose statement.
-      </li>
+</li>
       <li>
         Each method should have tests associated with it.
-      </li>
+</li>
       <li>
-        Document your method with a strategy if that would help
-        readers to understand the definition.
-      </li>
+        A method should have a design strategy if that would help
+        readers to understand its definition.
+</li>
       <li>
-        Document your method with a halting measure if it is
-        recursive and the halting measure isn't obvious.
-      </li>
-    </ul>
-  </div>
+        A recursive method should have a halting measure if that would help
+        readers to understand why it terminates.
+</li>
+</ul>
+</div>
 </div>
 <div id="footer">
   <form action="ooCodingStandards3.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="methodDesign2.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -73,6 +79,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
