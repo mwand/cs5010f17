@@ -23,11 +23,11 @@ class NonEmptyAList<K,V> implements AList<K,V> {
 
     // Returns true iff the key is found within this AList.
 
-    public boolean contains (K key) {
-	if (key.equals (this.key))
+    public boolean contains (K otherKey) {
+	if (otherKey.equals (this.key))
 	    return true;
 	else
-	    return rest.contains (key);
+	    return rest.contains (otherKey);
     }
     // Returns the value associated with the given key.
     // Throws a NoSuchElementException if the key is not found.
@@ -41,5 +41,14 @@ class NonEmptyAList<K,V> implements AList<K,V> {
 
     // We will not have reason to compare ALists to each other, so we
     // won't stop to override equals, toString, or hashcode.
+
+    public String toString () {
+        return ("["
+                + this.key.toString() +":" + this.val.toString()
+                + "]" + this.rest.toString()
+                );
+    }
+            
+            
 
 }

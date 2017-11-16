@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 
 
 
-class EmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
+class Header<K extends Comparable<K>,V> implements AList<K,V> {
 
     AList<K,V> root = null;
 

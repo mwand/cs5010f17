@@ -12,6 +12,24 @@ class Tests {
         AList<String,Integer> b3 = b2.extend ("x", 33);
         AList<String,Integer> b4 = b3.extend ("y", 44);
 
+        checkTrue (a1.lookup ("x") == 1);
+
+        checkTrue (a2.lookup ("x") == 1);
+        checkTrue (a2.lookup ("y") == 2);
+
+        checkTrue (a3.lookup ("x") == 1);
+        checkTrue (a3.lookup ("y") == 2);
+        checkTrue (a3.lookup ("z") == 3);
+        
+        checkTrue (a4.lookup ("x") == 1);
+        checkTrue (a4.lookup ("y") == 4);
+        checkTrue (a4.lookup ("z") == 3);
+
+        System.out.println(a1.toString());
+        System.out.println(a2.toString());
+        System.out.println(a3.toString());
+        System.out.println(a4.toString());
+
         checkFalse (a0.contains ("x"), "a0 should not contain x");
         checkTrue  (a3.contains ("z"), "a3 should contain z");
         checkTrue  (a4.contains ("x"), "a4 should contain x");
@@ -52,7 +70,7 @@ class Tests {
     static void checkTrue (boolean result, String name) {
         if (result) {
             testsPassed = testsPassed + 1;
-            System.err.print(".");
+            // System.err.print(".");
         }        
         else {
             testsFailed = testsFailed + 1;

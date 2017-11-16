@@ -1,8 +1,6 @@
-// The object constructed by NonEmptyAlst(k,v,rest) represents an
-// association list just like 'rest', except that the key k is mapped
-// to the value v.  Any other key is mapped to the value it had in 'rest'.
-
-// We implement this as a binary search tree.
+// The object constructed by NonEmptyAlist(k,v,left,right) represents an
+// interior node of a binary search tree, mapping k to v with left and
+// right as the subtrees.
 
 class NonEmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
 
@@ -27,7 +25,7 @@ class NonEmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
         if (newKey.equals(this.key))
             return new NonEmptyAList<K,V>
                 (this.key, val, left, right);
-        if (newKey.compareTo(this.key) <= 0)
+        if (newKey.compareTo(this.key) < 0)
             return new NonEmptyAList<K,V>
                 (this.key, this.val,
                  left.extend(newKey,val),
@@ -64,13 +62,23 @@ class NonEmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
     // We will not have reason to compare ALists to each other, so we
     // won't stop to override equals, toString, or hashcode.
 
-    public String toString() {
-        return ("[" +
+    // public String toString() {
+    //     return ("[" +
+    //             left.toString()
+    //             + (this.key.toString())
+    //             + ":" + (this.val.toString())
+    //             + right.toString()
+    //             + "]");
+    // }
+
+        public String toString() {
+        return ("(" + (this.key.toString())  + ":" + (this.val.toString()) + ")"
+                + "[" +
                 left.toString()
-                + (this.key.toString())
-                + ":" + (this.val.toString())
+                + ","
                 + right.toString()
-                + "]");
+                + "]"
+                );
     }
 
 }

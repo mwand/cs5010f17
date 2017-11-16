@@ -28,7 +28,7 @@ class EmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
 	throw new NoSuchElementException ("key not found: " + key);
     }
 
-    
+    public String toString() {return "%";}
 
     // We will not have reason to compare ALists to each other, so we
     // won't stop to override equals, toString, or hashcode.
