@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -24,9 +24,11 @@
 
 <div id="maincontent">
   <div>
+    <p>
+      Here is an abstract base class that can be used by classes
+      that implement the <code>UTC</code> interface.
+</p>
     <pre>
-      // Abstract base class for classes that implement the UTC interface.
-      
       <span class="red">abstract</span> class UTC0 implements UTC {
       
           // this Java constructor has no fields to initialize
@@ -68,20 +70,22 @@
               return ((Integer) (100 * this.hour() + this.minute())).toString();
           }
       }
-    </pre>
-  </div>
+</pre>
+</div>
 </div>
 <div id="footer">
   <form action="inheritanceSharingUTCa.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="inheritanceSharingUTCc.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -89,6 +93,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

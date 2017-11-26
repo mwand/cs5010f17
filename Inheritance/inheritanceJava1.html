@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,7 +25,7 @@
 <div id="maincontent">
   <h3>
     Inheritance in Java
-  </h3>
+</h3>
   <div>
     <ul>
       <li>
@@ -33,11 +33,11 @@
         class <code>C1</code>, write
         <pre>
           class C2 extends C1 ...
-        </pre>
+</pre>
         If no superclass of <code>C2</code> is specified in this way,
         then the superclass of <code>C2</code> is the predefined class
         <code>Object</code>.
-      </li>
+</li>
       <li>
         The Java constructor of a subclass always calls a
         Java constructor of its superclass.
@@ -49,7 +49,7 @@
             If a Java constructor does not call a constructor
             of its superclass, the Java compiler automatically
             inserts a call of the form <code>super()</code>.
-          </li>
+</li>
           <li>
             If the compiler inserts <code>super()</code>, but
             the superclass does not define a constructor that
@@ -57,23 +57,23 @@
             say it can't find the constructor you called, even
             though it is the compiler that's calling the constructor
             it can't find.
-          </li>
+</li>
           <li>
             If you don't define any constructors at all for a
             class, then the Java compiler automatically defines
             a constructor that takes no arguments and does nothing.
-          </li>
-        </ul>
-      </li>
+</li>
+</ul>
+</li>
       <li>
-        A subclass can refer to the <code>h</code> field of its
-        superclass using the <code>super.h</code> syntax.
-      </li>
+        A subclass can refer to the <code>x</code> field of its
+        superclass using the <code>super.x</code> syntax.
+</li>
       <li>
-        A subclass can refer to the <code>m</code> method
-        of its superclass using the <code>super.m</code>
+        A subclass can refer to the <code>f</code> method
+        of its superclass using the <code>super.f</code>
         syntax.
-      </li>
+</li>
       <li>
         Java allows methods to be overridden without any annotation,
         but it is good programming practice to write
@@ -87,23 +87,25 @@
             fails to override a method.
             That's helpful if you misspell the name of the method
             or get one of its argument types wrong.
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="footer">
   <form action="inheritanceExample2.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="inheritanceDefaults1.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -111,6 +113,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

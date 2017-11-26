@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,25 +25,25 @@
 <div id="maincontent">
   <h3>
     Subclass: UTC2
-  </h3>
+</h3>
   <div>
     <p>
       Here is the new definition of <code>UTC2</code>.
-    </p>
+</p>
     <p>
       The <span class="red"><code>extends UTC1</code></span>
       declares <code>UTC1</code>
       to be the superclass, so all of the fields and methods
       defined in <code>UTC1</code> will be inherited by
       <code>UTC2</code>.
-    </p>
+</p>
     <p>
       There might be some methods in <code>UTC1</code> that
       rely on the <code>h</code> field being the UTC hour rather
       than the EST hour.
       We don't want to break those methods, so we define our
       own <code>h</code> field in <code>UTC2</code>.
-    </p>
+</p>
     <p>
       The call to <span class="red"><code>super</code></span>
       inside the Java constructor
@@ -52,7 +52,7 @@
       of the superclass.
       The assignment to <code>this.h</code> then initializes
       the <code>h</code> field of <code>UTC2</code>.
-    </p>
+</p>
     <pre>
       // Constructor template for UTC2:
       //     new UTC2 (h, m)
@@ -98,20 +98,22 @@
               UTC2tests.main(args);
           }
       }
-    </pre>
-  </div>
+</pre>
+</div>
 </div>
 <div id="footer">
   <form action="inheritanceExample2.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="inheritanceJava1.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -119,6 +121,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

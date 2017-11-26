@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,62 +25,59 @@
 <div id="maincontent">
   <h2>
     Case Study: Immutable Finite Functions, Part 1
-  </h2>
+</h2>
   <div>
     <p>
       In this case study, we design and implement
       an immutable abstract data type
       of finite functions.
-    </p>
+</p>
     <p>
-      The <code>IMap&lt;K,V&gt;</code> interface extends
-      the <code>Map&lt;K,V&gt;</code> interface
-      defined in Java's <code>java.util</code> package.
-      That is possible only because all operations of
-      the <code>Map&lt;K,V&gt;</code> interface
-      that have side effects are <em>optional</em>:
-      classes that implement those optional operations
-      are allowed to implement them by defining methods
-      that throw an <code>UnsupportedOperationException</code>
-      if those methods are ever called.
-    </p>
+      Our first implementation of that abstract data type
+      will represent a finite function as a list
+      of objects, each of which represents
+      a key and its associated value.
+      We will refer to these representations as
+      <em>association lists</em>, or
+      <em>alists</em>.
+</p>
     <p>
-      Our first implementation of the <code>IMap&lt;K,V&gt;</code>
-      interface relies on inheritance by extending two
-      abstract base classes defined in Java's <code>java.util</code> package:
-      <code>AbstractMap&lt;K,V&gt;</code> and
-      <code>AbstractSet&lt;K,V&gt;</code>.
-    </p>
+      To reduce duplication of code,
+      we will define an abstract base class for association lists.
+      That base class will define methods
+      that can be shared by all subclasses
+      that represent an alist,
+      and it will declare abstract methods that need to be defined
+      differently within each subclass.
+</p>
     <hr />
     <blockquote class="smaller gray">
       <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
         <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png">
-      </a>
-      &copy; Mitchell Wand, 2012-2015
+</a>
+      &copy; William D Clinger, 2017
       <br />
       This work is licensed under a
       <a href="https://creativecommons.org/licenses/by-nc/4.0/">
         Creative Commons Attribution-NonCommercial 4.0 International
         License.
-      </a>
-      <br />
-      The work has been modified by William D Clinger in these ways
-      and more:
-      conversion from PowerPoint to HTML, and from Racket to Java.
-    </blockquote>
-  </div>
+</a>
+</blockquote>
+</div>
 </div>
 <div id="footer">
-  <form action="inheritanceSharingSummary.html" class="inline">
+  <form action="../Modules/module11.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="caseStudy1Objectives.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -88,6 +85,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
