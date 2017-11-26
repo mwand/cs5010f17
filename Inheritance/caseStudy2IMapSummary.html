@@ -23,43 +23,40 @@
 <!-- start of specific content -->
 
 <div id="maincontent">
-  <div>
-    <h3>
-      Summary
+  <h3>
+    Summary
 </h3>
-    <p>
-      Here is the recipe for using inheritance to generalize
-      similar classes:
-</p>
-    <ol>
+  <div>
+    <ul>
       <li>
-        Move identical methods into a superclass.
+        Our implementation of <code>IMap&lt;K,V&gt;</code>
+        was made easier because we reused our association lists
+        via composition.
 </li>
       <li>
-        Make different methods into abstract methods.
-        <ul>
-          <li>
-            <em>Declare</em> abstract methods in the superclass.
+        Our implementation
+        was made even easier by inheriting 24 methods from a
+        predefined abstract base class.
 </li>
-          <li>
-            <em>Define</em> abstract methods in the subclasses.
+      <li>
+        We didn't even have to understand what those inherited
+        methods are supposed to do.
+</li>
+      <li>
+        The generality of the methods inherited from the abstract
+        base class may create some inefficiencies.
+</li>
+      <li>
+        If we want a more efficient implementation, we will
+        probably have to use a more sophisticated representation
+        and override some of the methods we inherit from the
+        abstract base class.
 </li>
 </ul>
-</li>
-      <li>
-        Generalize similar methods by adding abstract methods
-        for the differences.
-</li>
-</ol>
-    <p>
-      Our <code>UTC</code> example was too simple to illustrate
-      the third part of that recipe.
-      The next several lessons go over a more substantial example.
-</p>
 </div>
 </div>
 <div id="footer">
-  <form action="inheritanceSharingUTCe.html" class="inline">
+  <form action="caseStudy2IMap11.html" class="inline">
     <input type="submit" value="PREV">
 </form>
   <br />

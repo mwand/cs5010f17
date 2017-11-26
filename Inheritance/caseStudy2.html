@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,42 +25,79 @@
 <div id="maincontent">
   <h2>
     Case Study: Immutable Finite Functions, Part 2
-  </h2>
+</h2>
   <div>
     <p>
-      In this case study, we design a second implementation
-      of the <code>IMap&lt;K,V&gt;</code> data type defined in
-      the previous lesson.
-      That second implementation will use binary search trees
-      instead of linear search.
-    </p>
+      In this case study, we design and implement
+      an immutable abstract data type
+      of finite functions
+      that builds on our
+      <code>AListWithKeyIterator&lt;K,V&gt;</code> example
+      to define a class that will implement the entire
+      <code>java.util.Map&lt;K,V&gt;</code> interface.
+</p>
     <p>
-      To reduce duplication of code, we define an abstract base class
-      from which all of our implementations of
-      <code>IMap&lt;K,V&gt;</code> can inherit.
-    </p>
+      The <code>IMap&lt;K,V&gt;</code> interface
+      we define in this lesson extends
+      <code>java.util.Map&lt;K,V&gt;</code>.
+</p>
     <p>
-      To reduce duplication of code in our implementation of
-      binary search trees, we define a second abstract base class
-      from which the classes for empty and non-empty trees can inherit.
-    </p>
-    <p>
-      This case study will also provide many opportunities to
-      discuss Java-specific syntax, semantics, and APIs.
-    </p>
-  </div>
+      Our first implementation of the <code>IMap&lt;K,V&gt;</code>
+      reuses our implementation of
+      <code>AListWithKeyIterator&lt;K,V&gt;</code>
+      from the previous lesson by
+      <a href="https://en.wikipedia.org/wiki/Composition_over_inheritance"
+      target="_blank">composing</a>
+      its association lists with classes
+      that add many new methods, most of them inherited from an
+      abstract base class defined in Java's <code>java.util</code> package:
+      <code>AbstractMap&lt;K,V&gt;</code>.
+</p>
+    <blockquote class="smaller">
+      <p>
+        The <code>Map&lt;K,V&gt;</code> interface
+        includes some operations that have side effects.
+        Luckily for us, all of those side-effecting operations are
+        <em>optional</em>.
+        That means we can implement an ADT of immutable finite maps
+        by arranging for all of the side-effecting methods of the
+        <code>Map&lt;K,V&gt;</code> interface to throw an
+        <code>UnsupportedOperationException</code>
+        if those methods are ever called.
+</p>
+</blockquote>
+    <hr />
+    <blockquote class="smaller gray">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png">
+</a>
+      &copy; Mitchell Wand, 2012-2015
+      <br />
+      This work is licensed under a
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/">
+        Creative Commons Attribution-NonCommercial 4.0 International
+        License.
+</a>
+      <br />
+      The work has been modified by William D Clinger in these ways
+      and more:
+      conversion from PowerPoint to HTML, and from Racket to Java.
+</blockquote>
+</div>
 </div>
 <div id="footer">
-  <form action="caseStudy1IMapSummary.html" class="inline">
+  <form action="caseStudy1summary.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="caseStudy2Objectives.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -68,6 +105,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>
