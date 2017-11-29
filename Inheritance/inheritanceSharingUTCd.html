@@ -47,6 +47,7 @@
           UTC2 (int h, int m) {
               super ();    // calls the constructor for UTC0
               this.h = (h >= 5) ? (h - 5) : h + 19;
+              this.m = m;
           }
       
           // public methods
