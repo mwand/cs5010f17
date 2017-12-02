@@ -8,6 +8,26 @@ class Tests {
         AList<String,Integer> a3 = a2.extend ("z", 3);
         AList<String,Integer> a4 = a3.extend ("y", 4);
 
+        checkTrue (a1.lookup ("x") == 1);
+
+        checkTrue (a2.lookup ("x") == 1);
+        checkTrue (a2.lookup ("y") == 2);
+
+        checkTrue (a3.lookup ("x") == 1);
+        checkTrue (a3.lookup ("y") == 2);
+        checkTrue (a3.lookup ("z") == 3);
+        
+        checkTrue (a4.lookup ("x") == 1);
+        checkTrue (a4.lookup ("y") == 4);
+        checkTrue (a4.lookup ("z") == 3);
+
+        System.out.println(a1.toString());
+        System.out.println(a2.toString());
+        System.out.println(a3.toString());
+        System.out.println(a4.toString());
+
+
+
         AList<String,Integer> b2 = a2.extend ("b", 22);
         AList<String,Integer> b3 = b2.extend ("x", 33);
         AList<String,Integer> b4 = b3.extend ("y", 44);
@@ -22,11 +42,6 @@ class Tests {
         checkTrue  (b2.contains ("y"));
         checkFalse (b2.contains ("z"));
 
-        checkTrue (a1.lookup ("x") == 1);
-        checkTrue (a2.lookup ("y") == 2);
-        checkTrue (a4.lookup ("x") == 1);
-        checkTrue (a4.lookup ("y") == 4);
-        checkTrue (a4.lookup ("z") == 3);
 
         checkTrue (b2.lookup ("x") == 1);
         checkTrue (b2.lookup ("y") == 2);

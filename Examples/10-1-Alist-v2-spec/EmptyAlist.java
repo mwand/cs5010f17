@@ -27,10 +27,10 @@ class EmptyAList<K,V> implements AList<K,V> {
     public V lookup (K key) {
 	throw new NoSuchElementException ("key not found: " + key);
     }
-
     
-
     // We will not have reason to compare ALists to each other, so we
     // won't stop to override equals, toString, or hashcode.
+
+    public String toString() { return "%"; }
 
 }

@@ -41,17 +41,19 @@ class NonEmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
 
     // Returns true iff the key is found within this AList.
 
-    public boolean contains (K key) {
-	if (key.equals (this.key))
+    public boolean contains (K otherKey) {
+	if (otherKey.equals (this.key))
 	    return true;
-	else if (key.compareTo(this.key) < 0) 
-                 return (left != null && left.contains(key));
+	else if (otherKey.compareTo(this.key) < 0) 
+                 return (left != null && left.contains(otherKey));
         else
-            return (right != null && right.contains(key));
+            return (right != null && right.contains(otherKey));
                 
     }
     // Returns the value associated with the given key.
     // Throws a NoSuchElementException if the key is not found.
+
+    // this code is wrong, because it doesn't check for null left or null right. 
 
     public V lookup (K key) {
 	if (key.equals (this.key))

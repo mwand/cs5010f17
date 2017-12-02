@@ -11,7 +11,7 @@
 
 class ALists {
 
-    private static AList theEmptyAList = new EmptyAList();
+    private static AList theEmptyAList = new Header();
 
     // static factory method for creating an empty AList<K,V>
 

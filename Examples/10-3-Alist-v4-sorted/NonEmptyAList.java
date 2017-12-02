@@ -20,25 +20,27 @@ class NonEmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
     // maintains the list in sorted order
     // use <= so to maintain stable sort for duplicate keys :)
 
-    public AList<K,V> extend (K key, V val) {
+    public AList<K,V> extend (K newKey, V newVal) {
         
-        if (key.compareTo(this.key) <= 0)
-            return new NonEmptyAList<K,V> (key, val, this);
+        if (newKey.compareTo(this.key) <= 0)
+            return new NonEmptyAList<K,V> (newKey, newVal, this);
         else
             return new NonEmptyAList<K,V>
                 (this.key,
                  this.val,
-                 this.rest.extend(key,val));
+                 this.rest.extend(newKey,newVal));
     }
 
     // Returns true iff the key is found within this AList.
 
-    public boolean contains (K key) {
-	if (key.equals (this.key))
+    public boolean contains (K otherKey) {
+        if (otherKey.compareTo(this.key) < 0) {return false;}
+        else if (otherKey.equals (this.key))
 	    return true;
 	else
-	    return rest.contains (key);
+	    return rest.contains (otherKey);
     }
+    
     // Returns the value associated with the given key.
     // Throws a NoSuchElementException if the key is not found.
 
@@ -51,5 +53,12 @@ class NonEmptyAList<K extends Comparable<K>,V> implements AList<K,V> {
 
     // We will not have reason to compare ALists to each other, so we
     // won't stop to override equals, toString, or hashcode.
+
+        public String toString () {
+            return ("["
+                    + this.key.toString() +":" + this.val.toString()
+                    + "]" + this.rest.toString()
+                    );
+        }
 
 }

@@ -1,178 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
 <head>
-
-<meta charset="UTF-8">
-<meta name="description" content="Northeastern University CS 5010">
-<meta name="author" content="William D Clinger">
-<!-- meta name="keywords" content="software" -->
-
-<title>
-  CS 5010: Module 12
-</title>
+<title>CS 5010 Module 12</title>
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
+<!-- Be sure to change title and h1 each week. -->
+
 <body>
-
-<!-- start of specific content -->
-
 <div id="maincontent">
-  <h2>
-    CS 5010: Module 12
-  </h2>
-  <div>
-    <h3>
-      Module Overview
-    </h3>
-    <p>
-      In this module, we will examine how efficiency is related
-      to programming style, programming languages, and how
-      programming languages are implemented.
-    </p>
-    <p>
-      These matters are largely unrelated to algorithmic complexity,
-      so they are seldom discussed in courses on algorithms and
-      data structures.
-      Programmers often form opinions based on what they have heard
-      from other programmers or have read on the World-Wide Web,
-      which are not particularly reliable sources.
-      As it turns out, much of the conventional wisdom concerning
-      programming style and efficiency is misleading or,
-      in some cases, quite wrong.
-    </p>
-    <h3>
-      Readings
-    </h3>
-    <p>
-      No required readings.
-    </p>
-    <h3>
-      Resources
-    </h3>
-    <ul>
-      <li>
-        <i>
-          Examples for Module 12
-        </i>
+
+<h1>CS 5010 Module 12</h1>
+
+<h2>Module Overview</h2>
+
+
+<p>Now that you have completed work on your problem sets, this week's
+module is a special bonus module containing material at each
+instructor's discretion.</p>
+
+<p>Finally, we summarize the main points of this course and give you a
+pep talk as you go on to the rest of your Master's program.</p>
+
+<h2>Course Map</h2>
+
+<img src="../CourseMaps/module12.jpg"
+     width="700px"
+     alt="course map, week 12">
+
+<h2>Supplementary Lessons</h2>
+
+<ul>
+     <li>Professor Clinger's Spring 2017 lesson, 
+        <a href="../Efficiency2/myths1.html">
+          Efficiency and Other Myths</a>.
       </li>
+
+     <li>Professor Clinger's Spring 2017 lesson,
+        <a href="../Efficiency2/recursion1.html">
+          Recursion vs Iteration</a>.
+      </li>
+
+
+
+<h3>Readings</h3>
+
+<p>These are readings for the supplementary lessons above.</p>
+
+      <ul>
       <li>
         Brian W Kernighan and Christopher J Van Wyk.
         <a href="http://onlinelibrary.wiley.com/doi/10.1002/(SICI)1097-024X(19980710)28:8%3C819::AID-SPE184%3E3.0.CO;2-O/abstract">
           Timing trials, or the trials of timing:
-          experiments with scripting and user-interface languages.
-        </a>
+          experiments with scripting and user-interface languages</a>.
         <cite>Software&mdash;Practice &amp; Experience</cite>,
         28(8), 10 July 1998, pages 819-843.
       </li>
       <li>
         William D Clinger.
         <a href="http://www.cesura17.net/~will/Professional/Research/Papers/tail.pdf">
-          Proper tail recursion and space efficiency.
-        </a>
+          Proper tail recursion and space efficiency</a>.
         <a href="http://www.cs.virginia.edu/pldi98">
           <cite>Proceedings of the 1998 ACM Conference on
-          Programming Language Design and Implementation</cite>,
-        </a>
+          Programming Language Design and Implementation</cite></a>.
         June 1998, pages 174-185.
       </li>
       <li>
         William D Clinger, Anne H Hartheimer, and Eric M Ost.
         <a href="http://www.springerlink.com/content/h5808n962434j275/fulltext.pdf">
-          Implementation strategies for first-class continuations.
-        </a>
+          Implementation strategies for first-class continuations</a>.
         <a href="http://www.springerlink.com/content/1573-0557/">
-          <cite>Journal of Higher Order and Symbolic Computation<cite>,
-        </a>
+          <cite>Journal of Higher Order and Symbolic Computation<cite></a>,
         12(1), 1999, pages 7-45.
       </li>
       <li>
         Benjamin Zorn.
         <a href="http://dl.acm.org/citation.cfm?id=160986.160993&coll=DL&dl=GUIDE">
-          The measured cost of conservative garbage collection.
-        </a>
+          The measured cost of conservative garbage collection</a>.
         <cite>Software&mdash;Practice &amp; Experience</cite>,
         23(7), July 1993, pages 733-756.
       </li>
       <li>
         Mitchell Wand and William D Clinger.
         <a href="http://www.ccs.neu.edu/home/wand/pubs.html#WandClinger98">
-          Set constraints for destructive array update optimization.
-        </a>
+          Set constraints for destructive array update optimization</a>.
         <cite>Proceedings of the IEEE International Conference on
         Computer Languages</cite>, April 1998, pages 184-193.
-      </li>
-    </ul>
-    <p>
-      Examples will be added soon.
-    </p>
-    <h3>
-      Lessons
-    </h3>
-    <p>
-      The material of this module will be covered by lecture,
-      demonstrations, and a problem set.
-      Online lessons will be added below as time permits.
-    </p>
-    <ul>
-      <li>
-        <a href="../Efficiency2/myths1.html">
-          Lesson 12.1: Efficiency and Other Myths
-        </a>
-      </li>
-      <li>
-        <a href="../Efficiency2/recursion1.html">
-          Lesson 12.2: Recursion vs Iteration
-        </a>
-      </li>
-      <li>
-        <i>
-          Lesson 12.3: Stack Overflow vs Heap Overflow
-          (to appear)
-        </i>
-      </li>
-      <li>
-        <a href="../Efficiency2/gc1.html">
-          Lesson 12.4: Garbage Collection vs Explicit Deallocation
-        </a>
-      </li>
-      <li>
-        <i>
-          Lesson 12.5: Aggregate Update Problem
-          (to appear)
-        </i>
-      </li>
-      <li>
-        <a href="../Efficiency2/optimization1.html">
-          Lesson 12.6: Compiler Optimization and Why It Matters
-        </a>
-      </li>
-    </ul>
-    <h3>
-      Problem Set
-    </h3>
-    <p>
-      <a href="../ProblemSets/ps12.html">
-        Problem Set 12
-      </a>
-      was assigned on Monday, 10 April.
-    </p>
-  </div>
+</ul>
+
+</ul>
+
+<h2>Lessons and Guided Practices</h2>
+
+<ul>
+
+  <li><a
+  href="../Slides/Lesson 12.1 The Last Lecture.pptx"
+  >Lesson 12.1 The Last Lecture</a></li>
+
+
+</ul>
+
+  
+<h2>Problem Set</h2>
+
+<p>Go out in the world and do good work!</p>
+
+<br>
+
+
 </div>
-
-<!-- end of specific content -->
-
-<p class="muchsmaller">
-For debugging: 
-<a href="http://validator.w3.org/check/referer">
-Click here to validate.
-</a>
-</p>
-
-</body>
-</html>
+</div>
+</body> </html>

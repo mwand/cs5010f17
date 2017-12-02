@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Inefficiencies
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Inefficiencies
+</h3>
+  <div>
+    <p>
+      The predefined <code>AbstractMap&lt;K,V&gt;</code> base class
+      made it a lot easier to implement an
+      <code>Imap&lt;K,V&gt;</code> interface that inherits all of the
+      methods listed in
+      <code>Map&lt;K,V&gt;</code>, but we paid a price in efficiency.
+</p>
+    <p>
+      All of the operations we inherit from
+      <code>AbstractMap&lt;K,V&gt;</code> are implemented in that
+      class by calling the abstract
+      <code>entrySet</code> method we defined in our
+      <code>AListIMap&lt;K,V&gt;</code> subclass.
+</p>
+    <p>
+      That means all of the inherited methods have to create and initialize
+      a new object of the <code>HashMap</code> class.
+      That takes &Omega;(n<sup>2</sup>) time,
+      where n is the number of key/value pairs in the <code>IMap</code>.
+</p>
+    <blockquote>
+      <p>
+        We have to create an entry for each of the n key/value pairs,
+        and the average time to look up each value is
+        &Theta;(n)
+        because we're using association lists.
+</p>
+</blockquote>
+    <p>
+      We could make at least some of the inherited methods run
+      faster by overriding them in our <code>AListIMap</code>.
+</p>
+    <p>
+      We could, for example, implement the
+      <code>contains</code> and <code>lookup</code> methods
+      by forwarding to the corresponding methods of the
+      association list found in <code>this.alist</code>.
+      That would make those important methods run a lot faster.
+</p>
+    <p>
+      Implementing all of the other new methods from scratch
+      could be a lot of work.
+      If we're going to do that much work, we might as well try
+      to use a potentially more efficient representation
+      while we're at it.
+</p>
+    <p>
+      We could use binary search trees instead of association lists.
+      Better yet, we could use
+      <a href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree"
+         target="_blank">red-black trees</a>.
+      We'll leave that for a programming assignment,
+      or for your algorithms course.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy2IMap7.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy2IMapSummary.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>
