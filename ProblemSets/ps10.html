@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,553 +25,337 @@
 <div id="maincontent">
   <h2>
     CS 5010: Problem Set 10
-  </h2>
+</h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 27 March 2017
+      <strong>Out:</strong> Monday, 13 November 2017
       <br />
-      <strong>Due:</strong> Monday, 3 April 2017 at 6pm
-      <br />
-      <strong>Corrected:</strong> Tuesday, 28 March 2017
-      (minor corrections and clarifications)
-      <br />
-      <strong>Corrected:</strong> Saturday, 1 April 2017
-      (purpose statement for <code>ConstantExp</code>)
-    </p>
-  </div>
+      <strong>Due:</strong> Monday, 27 November 2017 at 6pm local time
+</p>
+</div>
   <div>
     <p>
-      This is a
-      <a href="http://en.wikipedia.org/wiki/Pair_programming">
-        pair programming
-      </a>
-      assignment.  You are required to
-      complete this problem set in collaboration with your assigned
-      partner, but neither of you are allowed to
+      This is an individual assignment.  You are not allowed to
       discuss this problem set with any other person.  You are also
       not allowed to search for or to view any solutions to similar
       problems that may be available on the World-Wide Web or in
       other resources that might otherwise have been available to
       you.
-    </p>
-    <p>
-      We have created a repository for you and your partner to use.
-    </p>
-    <p>
-      In those repositories, we have created files named
-      <code><em>ID1</em>-log.txt</code> and
-      <code><em>ID2</em>-log.txt</code> for you to use when
-      filing work session reports, as in previous problem sets.
-      You and your partner are required to push your files at
-      the end of every work session.
-      (You <em>may</em> push your files several times during
-      a work session, but we do not require you to do so.)
-    </p>
-    <p>
-      At the end of every work session, you are required to update
-      your log file to record the time you spent in that work session.
-      (Please do not include the time you spent in any previous work
-      sessions, as those times will already have been recorded in
-      previous versions of your log file.)
-      If both of you work together during a work session, both of
-      you must update your log files, recording only the time <em>you</em>
-      spent working.  Do not include your partner's time in
-      your log file, but be sure to push the updated versions of
-      both log files.
-    </p>
-    <hr />
+</p>
     <p>
       The main purpose of this problem set is to give you practice
-      implementing abstract data types and using inheritance in
-      Java.
-      You will also learn something about programming languages
-      and how they are implemented.
-    </p>
+      implementing abstract data types, both mutable and immutable.
+      The problem set will also give you some practice implementing
+      <code>equals(Object)</code>,
+      <code>hashCode()</code>,
+      <code>toString()</code>, and
+      <code>iterator()</code>
+      methods.
+</p>
     <p>
-      You must use Java 8 for this assignment.
-      All of your code must reside within the default package.
-      You may use/import anything in the
-      <code>java.lang</code> and <code>java.util</code>
-      packages, but you are not allowed to use any other packages.
-    </p>
+      We will test your program using Java 8,
+      which is the version of Java installed on CCIS Linux machines.
+      You will therefore want to use Java 8 when developing and
+      testing your program.
+</p>
+    <p>
+      For these problems, we are giving you the following files:
+</p>
+    <ul>
+      <li>
+        <code>Player.java</code>
+</li>
+      <li>
+        <code>Roster.java</code>
+</li>
+</ul>
+    <p class="strong red">
+      <em>You must not change those files in any way.</em>
+</p>
+    <p>
+      Parts 1 and 2 of this problem set ask you to create two
+      more files named
+      <code>Players.java</code> and
+      <code>Rosters.java</code>.
+      Both of those files must be in the default package.
+      In other words, your Java files should not contain any
+      <code>package</code> declarations.
+</p>
+    <p>
+      You are free to create additional files.
+      When we test your submission, we will compile all of the
+      Java files in your <code>set10</code> directory using the
+      following command:
+</p>
+    <pre>
+      javac *.java
+</pre>
+    <p>
+      You should start by downloading the two files we are giving you,
+      unpacking them into a <code>set10</code> directory,
+      and pushing that directory to your GitHub repository.
+</p>
+    <p>
+      We are giving you a choice of two formats in which to download
+      the files we are giving you.  Both of these links will unpack
+      to the same <code>set10</code> directory containing exactly
+      the same Java files:
+</p>
+    <ul>
+      <li>
+        <a href="set10.tgz">
+          <code>set10.tgz</code>
+</a>
+</li>
+      <li>
+        <a href="set10.zip">
+          <code>set10.zip</code>
+</a>
+</li>
+</ul>
+    <p>
+      Remember that you must follow the design recipe, which is a
+      process, not a list of deliverables.
+</p>
+    <p>
+      Be sure to fill out a
+      <a href="yourID-log.txt">work session report</a>
+      at the end of each work session.
+      <span class="red">Be sure to report only the hours
+      spent in that work session;
+      do <strong><em>not</em></strong> report the cumulative time</span>.
+      Tell <code>git</code> to add your work session report
+      to the files you will commit,
+      and then commit and push (sync) that report in addition to
+      committing and pushing your entire <code>set10</code> directory.
+      <strong><em>Do this at the end of every work session.</em></strong>
+</p>
     <hr />
-  </div>
-  <h3>
-    Problem Specification
-  </h3>
-  <p>
-    You will write an interpreter for a simple functional
-    programming language with this concrete syntax:
-  </p>
-  <pre>
-    &lt;pgm&gt;     ::=  &lt;defn&gt; ;
-              ::=  &lt;defn&gt; ; &lt;pgm&gt;
-    &lt;defn&gt;    ::=  &lt;id&gt; = &lt;const&gt;
-              ::=  &lt;id&gt; (&lt;formals&gt;) &lt;expr&gt;
-    &lt;const&gt;   ::=  true 
-              ::=  false
-              ::=  &lt;int&gt;
-    &lt;lambda&gt;  ::=  (λ ( &lt;formals&gt; ) &lt;expr&gt;)
-    &lt;expr&gt;    ::=  &lt;const&gt;
-              ::=  &lt;id&gt;
-              ::=  &lt;lambda&gt;
-              ::=  &lt;arith&gt;
-              ::=  &lt;call&gt;
-              ::=  &lt;if&gt;
-              ::=  ( &lt;expr&gt; )
-    &lt;arith&gt;   ::=  &lt;expr&gt; &lt;op&gt; &lt;expr&gt;
-    &lt;call&gt;    ::=  &lt;expr&gt; (&lt;exprs&gt;)
-    &lt;if&gt;      ::=  if &lt;expr&gt; then &lt;expr&gt; else &lt;expr&gt; fi
-    
-    &lt;op&gt;      ::=  &lt; | = | &gt; | + | - | *
-    
-    &lt;formals&gt;  ::=  &lt;id&gt;
-               ::=  &lt;id&gt; , &lt;formals&gt;
-    &lt;exprs&gt;    ::=  &lt;expr&gt;
-               ::=  &lt;expr&gt; , &lt;exprs&gt;
-    
-    &lt;int&gt; and &lt;id&gt; are described by regular expressions:
-    
-        digit digit*
-    
-        letter (letter | digit)*
-  </pre>
-  <p>
-    That concrete syntax may be easy
-    for humans to read, but it is not a convenient representation
-    for compilers or interpreters.
-    Compilers and interpreters generally use a more convenient
-    internal representation known as
-    <em>abstract syntax trees</em>.
-    (Abstract syntax trees are closely related to the list representation
-    of programs used in Lisp/Scheme/Racket/Clojure, and to the XML
-    notation used to represent more general kinds of data.)
-  </p>
-  <p>
-    For the programming language above, we need abstract syntax trees
-    for programs, definitions, and expressions.
-    There are six different kinds of expressions,
-    so we need six different kinds of abstract syntax trees for
-    expressions.
-    That gives us the following conceptual hierarchy:
-  </p>
-  <pre>
-    Ast
-        Pgm
-        Def
-        Exp
-            ConstantExp
-            IdentifierExp
-            LambdaExp
-            ArithmeticExp
-            CallExp
-            IfExp
-  </pre>
-  <p>
-    We will represent the abstract syntax tree for a program
-    as a <code>List&lt;Def&gt;</code>.
-    All of the other categories within that hierarchy will be
-    represented by the Java interfaces shown below.
-    To save you from having to copy and paste those interfaces,
-    we are giving you the Java source files as a
-    <code>gzip</code>'ed <code>tar</code> file,
-    <a href="set10.tgz"><code>set10.tgz</code></a>.
-    When you unpack that file, it will expand into a
-    <code>set10</code> directory that already contains the
-    following Java source files.
-  </p>
-  <h4>
-    Abstract Syntax Trees
-  </h4>
-  <p>
-    The <code>Ast.java</code> file:
-  </p>
-  <pre>
-    // An Ast is an object of any class that implements the Ast interface.
-    //
-    // Interpretation: An Ast represents the abstract syntax tree
-    // for some part of a source program.
-    //
-    // This abstract data type simplies the parser,
-    // but should not be used by the type checker or interpreter.
-    
-    import java.util.List;
-    
-    interface Ast {
-    
-        // Returns true iff this Ast is for a program, definition,
-        // or expression, respectively
-    
-        boolean isPgm();
-        boolean isDef();
-        boolean isExp();
-    
-        // Precondition: this Ast is for a program.
-        // Returns a representation of that program.
-    
-        List&lt;Def&gt; asPgm();
-    
-        // Precondition: this Ast is for a definition.
-        // Returns a representation of that definition.
-    
-        Def asDef();
-    
-        // Precondition: this Ast is for an expression.
-        // Returns a representation of that expression.
-    
-        Exp asExp();
-    }
-  </pre>
-  <h4>
-    Definitions
-  </h4>
-  <p>
-    The <code>Def.java</code> file:
-  </p>
-  <pre>
-    // A Def is an object of any class that implements the Def interface.
-    //
-    // Interpretation: A Def represents one definition of the source program.
-    
-    interface Def extends Ast {
-    
-        // Returns the left hand side of this definition,
-        // which will be an identifier represented as a String.
-    
-        String lhs();
-    
-        // Returns the right hand side of this definition,
-        // which will be a ConstantExp or a LambdaExp.
-    
-        Exp rhs();
-    }
-  </pre>
-  <h4>
-    Expressions
-  </h4>
-  <p>
-    The <code>Exp.java</code> file:
-  </p>
-  <pre>
-    // An Exp is an object of any class that implements the Exp interface.
-    //
-    // Interpretation: An Exp represents an expression of a source program.
-    
-    import java.util.Map;
-    
-    interface Exp extends Ast {
-    
-        // Returns true iff this Exp is a constant, identifier,
-        // lambda, arithmetic, call, or if expression (respectively).
-    
-        boolean isConstant();
-        boolean isIdentifier();
-        boolean isLambda();
-        boolean isArithmetic();
-        boolean isCall();
-        boolean isIf();
-    
-        // Precondition: the corresponding predicate above is true.
-        // Returns this.
-        // (These methods amount should eliminate most casts.)
-    
-        ConstantExp   asConstant();
-        IdentifierExp asIdentifier();
-        LambdaExp     asLambda();
-        ArithmeticExp asArithmetic();
-        CallExp       asCall();
-        IfExp         asIf();
-    
-        // Returns the value of this expression when its free variables
-        //     have the values associated with them in the given Map.
-        // May run forever if this expression has no value.
-        // May throw a RuntimeException if some free variable of this
-        //     expression is not a key of the given Map or if a type
-        //     error is encountered during computation of the value.
-    
-        ExpVal value (Map&lt;String,ExpVal&gt; env);
-    }
-  </pre>
-  <p>
-    The other <code>*Exp.java</code> files:
-  </p>
-  <pre>
-    // A ConstantExp is an object of any class that implements ConstantExp.
-    //
-    // Interpretation: A ConstantExp represents an <del>identifier (or variable)</del> <ins>integer or boolean constant</ins>.
-    
-    interface ConstantExp extends Exp {
-    
-        // Returns the value of this constant expression.
-    
-        ExpVal value();
-    }
-  </pre>
-  <pre>
-    // An IdentifierExp is an object of any class that implements IdentifierExp.
-    //
-    // Interpretation: A IdentifierExp represents an identifier (or variable).
-    
-    interface IdentifierExp extends Exp {
-    
-        // Returns the name of this identifier.
-    
-        String name();
-    }
-  </pre>
-  <pre>
-    // A LambdaExp is an object of any class that implements LambdaExp.
-    //
-    // Interpretation: A LambdaExp represents a lambda expression.
-    
-    import java.util.List;
-    
-    interface LambdaExp extends Exp {
-    
-        // Returns the formal parameters of this lambda expression.
-    
-        List&lt;String&gt; formals();
-    
-        // Returns the body of this lambda expression.
-    
-        Exp body();
-    }
-  </pre>
-  <pre>
-    // An ArithmeticExp is an object of any class that implements ArithmeticExp.
-    //
-    // Interpretation: An ArithmeticExp represents an expression of the form
-    //
-    //     <expr> <op> <expr>
-    
-    interface ArithmeticExp extends Exp {
-    
-        // Returns the appropriate subexpression.
-    
-        Exp leftOperand();
-        Exp rightOperand();
-    
-        // Returns the binary operation as one of the strings
-        //     "LT"
-        //     "EQ"
-        //     "GT"
-        //     "PLUS"
-        //     "MINUS"
-        //     "TIMES"
-    
-        String operation();
-    }
-  </pre>
-  <pre>
-    // A CallExp is an object of any class that implements CallExp.
-    //
-    // Interpretation: A CallExp represents a function call.
-    
-    import java.util.List;
-    
-    interface CallExp extends Exp {
-    
-        // Returns the expression for the function part of the call.
-    
-        Exp operator();
-    
-        // Returns the list of argument expressions.
-    
-        List&lt;Exp&gt; arguments();
-    }
-  </pre>
-  <pre>
-    // An IfExp is an object of any class that implements IfExp.
-    //
-    // Interpretation: An IfExp represents an if expression.
-    
-    interface IfExp extends Exp {
-    
-        // Returns the appropriate part of this if expression.
-    
-        Exp testPart();
-        Exp thenPart();
-        Exp elsePart();
-    }
-  </pre>
-  <h4>
-    Expression Values
-  </h4>
-  <p>
-    The value of an expression in this language will always be
-    a boolean, integer, or function.
-  </p>
-  <pre>
-    // An ExpVal is an object of any class that implements the ExpVal interface.
-    //
-    // Interpretation: An ExpVal represents the value of an expression.
-    
-    interface ExpVal {
-    
-        // Returns true iff this ExpVal is a boolean, integer, or
-        // function (respectively).
-    
-        boolean isBoolean();
-        boolean isInteger();
-        boolean isFunction();
-    
-        // Precondition: the corresponding predicate above is true.
-        // Returns this.
-        // (These methods amount should eliminate most casts.)
-    
-        boolean asBoolean();
-        long asInteger();
-        FunVal asFunction();
-    }
-  </pre>
-  <pre>
-    // A FunVal is an object of any class that implements the FunVal interface.
-    //
-    // Interpretation: A FunVal represents the value of a lambda expression.
-    
-    import java.util.Map;
-    
-    interface FunVal extends ExpVal {
-    
-        // Returns the lambda expression from which this function was created.
-    
-        LambdaExp code();
-    
-        // Returns the environment that maps the free variables of that
-        // lambda expression to their values.
-    
-        Map&lt;String,ExpVal&gt; environment();
-    }
-  </pre>
-  <hr />
-  <p>
-    We have divided that problem into two parts.
-    In the first part, you will implement the abstract data types
-    for definitions, expressions, and expression values,
-    and define a public class that defines
-    public static factory methods for those types.
-    In the second part, you will define a public class that
-    defines a public static method for running
-    any given program of the language on any given inputs.
-  </p>
-  <ol>
-    <li>
-      Download and unpack the
-      <a href="set10.tgz"><code>set10.tgz</code></a> file
-      we are giving you.
-      <p>
-        Inside that <code>set10</code> directory,
-        define another file named <code>Asts.java</code>
-        that defines a class named <code>Asts</code>
-        that defines the following public static methods:
-      </p>
-      <pre>
-        // Static factory methods for Def
-        
-        // Returns a Def with the given left and right hand sides.
-        
-        public static Def def (String id1, Exp rhs) { ... }
-        
-        // Static factory methods for Exp
-        
-        // Returns an ArithmeticExp representing e1 op e2.
-        
-        public static ArithmeticExp arithmeticExp (Exp e1, String op, Exp e2) { ... }
-        
-        // Returns a CallExp with the given operator and operand expressions.
-        
-        public static CallExp callExp (Exp operator, List&lt;Exp&gt; operands) { ... }
-        
-        // Returns a ConstantExp with the given value.
-        
-        public static ConstantExp constantExp (ExpVal value) { ... }
-        
-        // Returns an IdentifierExp with the given identifier name.
-        
-        public static IdentifierExp identifierExp (String id) { ... }
-        
-        // Returns an IfExp with the given components.
-        
-        public static IfExp ifExp (Exp testPart, Exp thenPart, Exp elsePart) { ... }
-        
-        // Returns a LambdaExp with the given formals and body.
-        
-        public static LambdaExp lambdaExp (List&lt;String&gt; formals, Exp body) { ... }
-        
-        // Static factory methods for ExpVal
-        
-        // Returns a value encapsulating the given boolean.
-        
-        public static ExpVal expVal (boolean b) { ... }
-        
-        // Returns a value encapsulating the given (long) integer.
-        
-        public static ExpVal expVal (long n) { ... }
-        
-        // Returns a value encapsulating the given lambda expression
-        // and environment.
-        
-        public static FunVal expVal (LambdaExp exp, Map&lt;String,ExpVal&gt; env) { ... }
-        
-        // Static methods for creating short lists
-        
-        public static &lt;X&gt; List&lt;X&gt; list (X x1) { ... }
-        
-        public static &lt;X&gt; List&lt;X&gt; list (X x1, X x2) { ... }
-        
-        public static &lt;X&gt; List&lt;X&gt; list (X x1, X x2, X x3) { ... }
-        
-        public static &lt;X&gt; List&lt;X&gt; list (X x1, X x2, X x3, X x4) { ... }
-      </pre>
-    </li>
-    <li>
-      Inside your <code>set10</code> directory,
-      include another file named <code>Programs.java</code>
-      that defines a <code>Programs</code> class
-      that defines the following public static method:
-      <pre>
-        public static ExpVal run (List&lt;Def&gt; pgm, List&lt;ExpVal&gt; inputs) {
-            ...
-        }
-      </pre>
-      <p>
-        Here is an example, which should print 120:
-      </p>
-      <pre>
-        // fact (n) if n = 0 then 1 else n * fact (n - 1) fi
-        
-        Exp exp1
-            = Asts.arithmeticExp (Asts.identifierExp ("n"),
-                                  "MINUS",
-                                  Asts.constantExp (Asts.expVal (1)));
-        Exp call1
-            = Asts.callExp (Asts.identifierExp ("fact"),
-                            Asts.list (exp1));
-        Exp testPart
-            = Asts.arithmeticExp (Asts.identifierExp ("n"),
-                                  "EQ",
-                                  Asts.constantExp (Asts.expVal (0)));
-        Exp thenPart
-            = Asts.constantExp (Asts.expVal (1));
-        Exp elsePart
-            = Asts.arithmeticExp (Asts.identifierExp ("n"),
-                                  "TIMES",
-                                  call1);
-        Def def1
-            = Asts.def ("fact",
-                        Asts.lambdaExp (Asts.list ("n"),
-                                        Asts.ifExp (testPart,
-                                                    thenPart,
-                                                    elsePart)));
-        ExpVal result = Programs.run (Asts.list (def1),
-                                      Asts.list (Asts.expVal (5)));
-        System.out.println (result.asInteger());
-      </pre>
-    </li>
-  </ol>
+    <p>
+      This problem set asks you to implement two abstract data types,
+      <code>Player</code> and <code>Roster</code>.
+      These ADTs would be useful to the coaches of a team sport
+      as they consider different rosters they might use for an
+      upcoming game.
+      In the NFL, for example, a team's roster can contain up to
+      53 players, but some of those players may be unavailable
+      because of suspension or injury.
+      On game day, the head coach must designate a smaller roster
+      with no more than 46 players, and coaches routinely consider
+      several of those smaller rosters before deciding which roster to
+      use in the game.
+</p>
+    <p>
+      To make it easier to consider several similar rosters, the
+      <code>Roster</code> ADT is immutable.
+      The <code>Player</code> ADT is mutable, however, because an
+      injury, trade, or some other change to a player's status should
+      be propagated immediately to all rosters that use the player.
+</p>
+    <pre>
+      // A Player is an object of any class that implements the Player interface.
+      //
+      // A Player object represents a member of a team.
+      // Player objects are mutable because their status can change without
+      // changing the identity of the Player.
+      // 
+      // If p1 and p2 are players, then p1.equals(p2) if and only if
+      // p1 and p2 are the same object (i.e. (p1 == p2), p1 and p2
+      // have the same name and status, and changing the status of p1
+      // necessarily changes the status of p2 in the same way).
+      //
+      // If p is a player, then p.hashCode() always returns the same
+      // value, even after the player's status is changed by calling
+      // one of the last three methods listed below.
+      //
+      // If p1 and p2 are players with distinct names, then
+      // p1.toString() is not the same string as p2.toString().
+      //
+      // Players.make(String name) is a static factory method that returns
+      // a player with the given name who is (initially) available.
+      
+      interface Player {
+      
+          // Returns the name of this player.
+          // Example:
+          //     Players.make("Gordon Wayhard").name()  =&gt;  "Gordon Wayhard"
+      
+          String name ();
+      
+          // Returns true iff this player is
+          //     under contract, and
+          //     not injured, and
+          //     not suspended
+          // Example:
+          //     Player gw = Players.make ("Gordon Wayhard");
+          //     System.out.println (gw.available());  // prints true
+          //     gw.changeInjuryStatus (true);
+          //     System.out.println (gw.available());  // prints false
+      
+          boolean available ();
+      
+          // Returns true iff this player is under contract (employed).
+          // Example:
+          //     Player ih = Players.make ("Isaac Homas");
+          //     System.out.println (ih.underContract());  // prints true
+          //     ih.changeContractStatus (false);
+          //     System.out.println (ih.underContract());  // prints false
+          //     ih.changeContractStatus (true);
+          //     System.out.println (ih.underContract());  // prints true
+      
+          boolean underContract ();
+      
+          // Returns true iff this player is injured.
+      
+          boolean isInjured ();
+      
+          // Returns true iff this player is suspended.
+      
+          boolean isSuspended ();
+      
+          // Changes the underContract() status of this player
+          // to the specified boolean.
+      
+          void changeContractStatus (boolean newStatus);
+      
+          // Changes the isInjured() status of this player
+          // to the specified boolean.
+      
+          void changeInjuryStatus (boolean newStatus);
+      
+          // Changes the isSuspended() status of this player
+          // to the specified boolean.
+      
+          void changeSuspendedStatus (boolean newStatus);
+      }
+</pre>
+    <pre>
+      // A Roster is an object of any class that implements the Roster interface.
+      //
+      // A Roster object represents a set of players.
+      //
+      // Roster objects are immutable, but all players on a roster
+      // have mutable status, which can affect the values returned by
+      // the readyCount() and readyRoster() methods.
+      //
+      // If r1 and r2 are rosters, then r1.equals(r2) if and only if
+      // every player on roster r1 is also on roster r2, and
+      // every player on roster r2 is also on roster r1.
+      //
+      // If r is a roster, then r.hashCode() always returns the same
+      // value, even if r has some players whose status changes.
+      //
+      // If r1 and r2 are rosters of different sizes, then
+      // r1.toString() is not the same string as r2.toString().
+      //
+      // Rosters.empty() is a static factory method that returns an
+      // empty roster.
+      
+      import java.util.Iterator;
+      
+      interface Roster extends Iterable&lt;Player&gt; {
+      
+          // Returns a roster consisting of the given player together
+          // with all players on this roster.
+          // Example:
+          //     r.with(p).with(p)  =&gt;  r.with(p)
+      
+          Roster with (Player p);
+      
+          // Returns a roster consisting of all players on this roster
+          // except for the given player.
+          // Examples:
+          //     Rosters.empty().without(p)  =&gt;  Rosters.empty()
+          //     r.without(p).without(p)     =&gt;  r.without(p)
+      
+          Roster without (Player p);
+      
+          // Returns true iff the given player is on this roster.
+          // Examples:
+          //
+          //     Rosters.empty().has(p)  =&gt;  false
+          //
+          // If r is any roster, then
+          //
+          //     r.with(p).has(p)     =&gt;  true
+          //     r.without(p).has(p)  =&gt;  false
+      
+          boolean has (Player p);
+      
+          // Returns the number of players on this roster.
+          // Examples:
+          //
+          //     Rosters.empty().size()  =&gt;  0
+          //
+          // If r is a roster with r.size() == n, and r.has(p) is false, then
+          //
+          //     r.without(p).size()          =&gt;  n
+          //     r.with(p).size()             =&gt;  n+1
+          //     r.with(p).with(p).size()     =&gt;  n+1
+          //     r.with(p).without(p).size()  =&gt;  n
+      
+          int size ();
+      
+          // Returns the number of players on this roster whose current
+          // status indicates they are available.
+      
+          int readyCount ();
+      
+          // Returns a roster consisting of all players on this roster
+          // whose current status indicates they are available.
+      
+          Roster readyRoster ();
+      
+          // Returns an iterator that generates each player on this
+          // roster exactly once, in alphabetical order by name.
+      
+          Iterator&lt;Player&gt; iterator ();
+      }
+</pre>
+
+You may not change these interfaces in any way, but you may define new
+    interfaces that extend them.
+
+    <hr />
+    <ol>
+      <li>
+        (Player)
+        <br />
+        <p>
+          For this first part of Problem Set 10, you will define
+          a public class named <code>Players</code> in a file named
+          <code>Players.java</code>.
+          That class will define a public static factory method
+          named <code>make</code> that takes a <code>String</code>
+          as its one and only argument and returns a <code>Player</code>
+          whose name is the given string.  
+</p>
+</li>
+      <li>
+        (Roster)
+        <br />
+        <p>
+          For this second part of Problem Set 10, you will define
+          a public class named <code>Rosters</code> in a file named
+          <code>Rosters.java</code>.
+          That class will define a public static factory method
+          named <code>empty</code> that takes no arguments
+          and returns an empty roster.
+</p>
+        <blockquote class="smaller">
+          HINT: <code>iterator()</code> methods are often implemented
+          by creating an object of some predefined class and
+          then creating the desired iterator by
+          calling that object's <code>iterator</code> method.
+</blockquote>
+</li>
+</ol>
+</div>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -579,6 +363,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

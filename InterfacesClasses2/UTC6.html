@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Static Methods
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <p>
+      The <code>main</code> method of a Java program
+      must be declared <code>public</code> and <code>static</code>.
+      The <code>main</code> method won't return anything,
+      so its return type is <code>void</code>.
+      The <code>main</code> method takes one argument,
+      which is an array of strings representing
+      parameters passed on the command line, if any.
+</p>
+    <p>
+      For example:
+</p>
+    <pre>
+          public static void main (String[] args) {
+              UTC1tests.main(args);
+          }
+</pre>
+    <p>
+      The body of that <code>main</code> method calls the static
+      <code>main</code> method defined in the
+      <code>UTC1tests</code> class,
+      which we will define momentarily.
+</p>
+    <p>
+      When calling a static method, there is no receiver object.
+      In place of writing an expression that evaluates to the
+      receiver, we write the name of the class that defines the
+      static method.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="UTC5.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="UTC7.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,246 +25,427 @@
 <div id="maincontent">
   <h2>
     CS 5010: Problem Set 11
-  </h2>
+</h2>
   <div>
     <p>
-      <strong>Out:</strong> Monday, 3 April 2017
+      <strong>Out:</strong> Monday, 27 November 2017
       <br />
-      <strong>Due:</strong> Monday, 10 April 2017 at 6pm
-      <br />
-      <strong>Corrected:</strong> Monday, 3 April 2017
-      <br />
-      <strong>Corrected:</strong> Tuesday, 4 April 2017:
-      <ul>
-        <li>
-          you may use imports seen in Java files we give you
-        </li>
-        <li>
-          corrected concrete syntax
-          (semicolon is separator, not terminator)
-        </li>
-        <li>
-          <code>set11parserV2</code> replaces <code>set11parser</code>
-        </li>
-      </ul>
-    </p>
-  </div>
+      <strong>Due:</strong> Monday, 4 December 2017 at 6pm local time
+</p>
+</div>
   <div>
     <p>
-      This is a
-      <a href="http://en.wikipedia.org/wiki/Pair_programming">
-        pair programming
-      </a>
-      assignment.  You are required to
-      complete this problem set in collaboration with your assigned
-      partner, but neither of you are allowed to
+      This is an individual assignment.  You are not allowed to
       discuss this problem set with any other person.  You are also
       not allowed to search for or to view any solutions to similar
       problems that may be available on the World-Wide Web or in
       other resources that might otherwise have been available to
       you.
-    </p>
+      (As always, however, you are encouraged to consult the
+      official documentation for the programming language you
+      are using, which will be especially relevant to this
+      problem set.)
+</p>
     <p>
-      We have created a repository for you and your partner to use.
-    </p>
+      The main purpose of this problem set is to give you practice
+      with higher-order functions in Java.
+</p>
     <p>
-      In those repositories, we have created files named
-      <code><em>ID1</em>-log.txt</code> and
-      <code><em>ID2</em>-log.txt</code> for you to use when
-      filing work session reports, as in previous problem sets.
-      You and your partner are required to push your files at
-      the end of every work session.
-      (You <em>may</em> push your files several times during
-      a work session, but we do not require you to do so.)
-    </p>
+      We will test your program using Java 8,
+      which is the version of Java installed on CCIS Linux machines.
+      You will therefore want to use Java 8 when developing and
+      testing your program.
+</p>
     <p>
-      At the end of every work session, you are required to update
-      your log file to record the time you spent in that work session.
-      (Please do not include the time you spent in any previous work
-      sessions, as those times will already have been recorded in
-      previous versions of your log file.)
-      If both of you work together during a work session, both of
-      you must update your log files, recording only the time <em>you</em>
-      spent working.  Do not include your partner's time in
-      your log file, but be sure to push the updated versions of
-      both log files.
-    </p>
+      For these problems, we are giving you the following files:
+</p>
+    <ul>
+      <li>
+        <code>Player.java</code>
+</li>
+      <li>
+        <code>RosterWithStream.java</code>
+</li>
+</ul>
+    <p class="strong red">
+      <em>You must not change those files in any way.</em>
+</p>
+    <p>
+      Part 1 of this problem set asks you to create
+      two more files named
+      <code>Players.java</code> and
+      <code>RosterWithStreams.java</code>.
+      Part 2 asks you to create a
+      <code>TestRosterWithStream.java</code> file.
+      All of those files must be in the default package.
+      In other words, your Java files should not contain any
+      <code>package</code> declarations.
+</p>
+    <p>
+      The <code>Player</code> interface we are giving you for
+      this problem set is the same as it was in Problem Set 10.
+      If your <code>Players.java</code> file from Problem Set 10
+      was correct, then you can use it for Problem Set 11.
+      If it was incorrect, you'll have to repair it for Problem Set 11.
+</p>
+    <p>
+      You are free to create additional files.
+      When we test your submission, we will compile all of the
+      Java files in your <code>set11</code> directory using the
+      following command:
+</p>
+    <pre>
+      javac *.java
+</pre>
+    <p>
+      You should start by downloading the two files we are giving you,
+      unpacking them into a <code>set11</code> directory,
+      and pushing that directory to your GitHub repository.
+</p>
+    <p>
+      We are giving you a choice of two formats in which to download
+      the files we are giving you.  Both of these links will unpack
+      to the same <code>set11</code> directory containing exactly
+      the same Java files:
+</p>
+    <ul>
+      <li>
+        <a href="set11.tgz">
+          <code>set11.tgz</code>
+</a>
+</li>
+      <li>
+        <a href="set11.zip">
+          <code>set11.zip</code>
+</a>
+</li>
+</ul>
+    <p>
+      Remember that you must follow the design recipe, which is a
+      process, not a list of deliverables.
+</p>
+    <p>
+      Be sure to fill out a
+      <a href="yourID-log.txt">work session report</a>
+      at the end of each work session.
+      <span class="red">Be sure to report only the hours
+      spent in that work session;
+      do <strong><em>not</em></strong> report the cumulative time</span>.
+      Tell <code>git</code> to add your work session report
+      to the files you will commit,
+      and then commit and push (sync) that report in addition to
+      committing and pushing your entire <code>set11</code> directory.
+      <strong><em>Do this at the end of every work session.</em></strong>
+</p>
     <hr />
     <p>
-      In the first part of this problem set,
-      you will define a <code>Programs.main</code> method
-      that reads a <code>ps11</code> program from a file
-      specified on the command line, parses that program,
-      and runs it on one or more inputs specified on the
-      command line, printing the result computed by the program.
-      That should make it easier for you to finish debugging
-      the interpreter you wrote in Problem Set 10.
-    </p>
+      This problem set asks you to implement two abstract data types,
+      <code>Player</code> and <code>RosterWithStream</code>,
+      and to write a <code>main</code> method that tests those data types.
+      The <code>Player</code> ADT is the same as in Problem Set 10.
+      The <code>RosterWithStream</code> ADT is similar to the
+      <code>Roster</code> ADT of Problem Set 10,
+      but it adds a <code>stream()</code> method and changes
+      the return types of several other methods from
+      <code>Roster</code> to <code>RosterWithStream</code>.
+      (That is why <code>RosterWithStream</code> cannot just
+      extend the <code>Roster</code> interface.)
+</p>
     <p>
-      In the second part of this problem set,
-      you will implement a simple static analysis:
-      given the name of a file containing a <code>ps11</code> program,
-      return a set containing the names of all undefined variables
-      that are referenced anywhere in the program.
-    </p>
-    <p>
-      You must use Java 8 for this assignment.
-      All of your code must reside within the default package.
-      You may use/import anything in the
-      <code>java.lang</code> and <code>java.util</code>
-      packages,
-      <ins>
-        and you may import the specific things imported by
-        the Java files we are giving you as a hint,
-      </ins>
-      but you are not allowed to use any other packages.
-    </p>
+      To make it easier to consider several similar rosters, the
+      <code>RosterWithStream</code> ADT is immutable.
+      The <code>Player</code> ADT is mutable, however, because an
+      injury, trade, or some other change to a player's status should
+      be propagated immediately to all rosters that use the player.
+</p>
+    <pre>
+      // A Player is an object of any class that implements the Player interface.
+      //
+      // A Player object represents a member of a team.
+      // Player objects are mutable because their status can change without
+      // changing the identity of the Player.
+      // 
+      // If p1 and p2 are players, then p1.equals(p2) if and only if
+      // p1 and p2 are the same object (i.e. (p1 == p2), p1 and p2
+      // have the same name and status, and changing the status of p1
+      // necessarily changes the status of p2 in the same way).
+      //
+      // If p is a player, then p.hashCode() always returns the same
+      // value, even after the player's status is changed by calling
+      // one of the last three methods listed below.
+      //
+      // If p1 and p2 are players with distinct names, then
+      // p1.toString() is not the same string as p2.toString().
+      //
+      // Players.make(String name) is a static factory method that returns
+      // a player with the given name who is (initially) available.
+      
+      interface Player {
+      
+          // Returns the name of this player.
+          // Example:
+          //     Players.make("Gordon Wayhard").name()  =&gt;  "Gordon Wayhard"
+      
+          String name ();
+      
+          // Returns true iff this player is
+          //     under contract, and
+          //     not injured, and
+          //     not suspended
+          // Example:
+          //     Player gw = Players.make ("Gordon Wayhard");
+          //     System.out.println (gw.available());  // prints true
+          //     gw.changeInjuryStatus (true);
+          //     System.out.println (gw.available());  // prints false
+      
+          boolean available ();
+      
+          // Returns true iff this player is under contract (employed).
+          // Example:
+          //     Player ih = Players.make ("Isaac Homas");
+          //     System.out.println (ih.underContract());  // prints true
+          //     ih.changeContractStatus (false);
+          //     System.out.println (ih.underContract());  // prints false
+          //     ih.changeContractStatus (true);
+          //     System.out.println (ih.underContract());  // prints true
+      
+          boolean underContract ();
+      
+          // Returns true iff this player is injured.
+      
+          boolean isInjured ();
+      
+          // Returns true iff this player is suspended.
+      
+          boolean isSuspended ();
+      
+          // Changes the underContract() status of this player
+          // to the specified boolean.
+      
+          void changeContractStatus (boolean newStatus);
+      
+          // Changes the isInjured() status of this player
+          // to the specified boolean.
+      
+          void changeInjuryStatus (boolean newStatus);
+      
+          // Changes the isSuspended() status of this player
+          // to the specified boolean.
+      
+          void changeSuspendedStatus (boolean newStatus);
+      }
+</pre>
+    <pre>
+      // A RosterWithStream is an object of any class that implements
+      // the RosterWithStream interface defined below.
+      //
+      // A RosterWithStream object represents a set of players.
+      //
+      // RosterWithStream objects are immutable, but all players on a
+      // RosterWithStream have mutable status, which can affect the
+      // values returned by the readyCount() and readyRoster() methods.
+      //
+      // If r is a RosterWithStream object, then
+      // r.iterator() generates the players of r in alphabetical order
+      //
+      // If r1 and r2 are RosterWithStream objects, then r1.equals(r2)
+      // if and only if
+      // every player on roster r1 is also on roster r2, and
+      // every player on roster r2 is also on roster r1.
+      //
+      // If r is a roster, then r.hashCode() always returns the same
+      // value, even if r has some players whose status changes.
+      //
+      // If r1 and r2 are rosters of different sizes, then
+      // r1.toString() is not the same string as r2.toString().
+      //
+      // RosterWithStreams.empty() is a static factory method that returns a
+      // RosterWithStream with no players.
+      
+      import java.util.stream.Stream;
+      
+      interface RosterWithStream extends Iterable&lt;Player&gt; {
+      
+          // Returns a roster consisting of the given player together
+          // with all players on this roster.
+          // Example:
+          //     r.with(p).with(p)  =&gt;  r.with(p)
+      
+          RosterWithStream with (Player p);
+      
+          // Returns a roster consisting of all players on this roster
+          // except for the given player.
+          // Examples:
+          //     RosterWithStreams.empty().without(p)  =&gt;  RosterWithStreams.empty()
+          //     r.without(p).without(p)     =&gt;  r.without(p)
+      
+          RosterWithStream without (Player p);
+      
+          // Returns true iff the given player is on this roster.
+          // Examples:
+          //
+          //     RosterWithStreams.empty().has(p)  =&gt;  false
+          //
+          // If r is any roster, then
+          //
+          //     r.with(p).has(p)     =&gt;  true
+          //     r.without(p).has(p)  =&gt;  false
+      
+          boolean has (Player p);
+      
+          // Returns the number of players on this roster.
+          // Examples:
+          //
+          //     RosterWithStreams.empty().size()  =&gt;  0
+          //
+          // If r is a roster with r.size() == n, and r.has(p) is false, then
+          //
+          //     r.without(p).size()          =&gt;  n
+          //     r.with(p).size()             =&gt;  n+1
+          //     r.with(p).with(p).size()     =&gt;  n+1
+          //     r.with(p).without(p).size()  =&gt;  n
+      
+          int size ();
+      
+          // Returns the number of players on this roster whose current
+          // status indicates they are available.
+      
+          int readyCount ();
+      
+          // Returns a roster consisting of all players on this roster
+          // whose current status indicates they are available.
+      
+          RosterWithStream readyRoster ();
+      
+          // Returns an iterator that generates each player on this
+          // roster exactly once, in alphabetical order by name.
+      
+          Iterator&lt;Player&gt; iterator ();
+      
+          // Returns a sequential Stream with this RosterWithStream
+          // as its source.
+          // The result of this method generates each player on this
+          // roster exactly once, in alphabetical order by name.
+          // Examples:
+          //
+          //     RosterWithStreams.empty().stream().count()  =&gt;  0
+          //
+          //     RosterWithStreams.empty().stream().findFirst().isPresent()
+          //         =&gt;  false
+          //
+          //     RosterWithStreams.empty().with(p).stream().findFirst().get()
+          //         =&gt;  p
+          //
+          //     this.stream().distinct()  =&gt;  this.stream()
+          //
+          //     this.stream().filter((Player p) -&gt; p.available()).count()
+          //         =&gt;  this.readyCount()
+      
+          Stream&lt;Player&gt; stream ();
+      }
+</pre>
     <hr />
-  </div>
-  <h3>
-    Problem Specification
-  </h3>
-  <p>
-    In Problem Set 10, you wrote an interpreter for
-    a simple functional programming language.
-  </p>
-  <p>
-    For Problem Set 11, we are going to change the concrete syntax
-    <ins>
-      by making semicolon a separator rather than a terminator, and
-    </ins>
-    by eliminating the <code>fi</code> token that terminated
-    <code>if</code> expressions in the concrete syntax given
-    in Problem Set 10.  For Problem Set 11, the concrete syntax is:
-  </p>
-  <pre>
-    &lt;pgm&gt;     ::=  &lt;defn&gt;
-              ::=  &lt;defn&gt; ; &lt;pgm&gt;
-    &lt;defn&gt;    ::=  &lt;id&gt; = &lt;const&gt;
-              ::=  &lt;id&gt; (&lt;formals&gt;) &lt;expr&gt;
-    &lt;const&gt;   ::=  true 
-              ::=  false
-              ::=  &lt;int&gt;
-    &lt;lambda&gt;  ::=  (λ ( &lt;formals&gt; ) &lt;expr&gt;)
-    &lt;expr&gt;    ::=  &lt;const&gt;
-              ::=  &lt;id&gt;
-              ::=  &lt;lambda&gt;
-              ::=  &lt;arith&gt;
-              ::=  &lt;call&gt;
-              ::=  &lt;if&gt;
-              ::=  ( &lt;expr&gt; )
-    &lt;arith&gt;   ::=  &lt;expr&gt; &lt;op&gt; &lt;expr&gt;
-    &lt;call&gt;    ::=  &lt;expr&gt; (&lt;exprs&gt;)
-    &lt;if&gt;      ::=  if &lt;expr&gt; then &lt;expr&gt; else &lt;expr&gt;
-    
-    &lt;op&gt;      ::=  &lt; | = | &gt; | + | - | *
-    
-    &lt;formals&gt;  ::=  &lt;id&gt;
-               ::=  &lt;id&gt; , &lt;formals&gt;
-    &lt;exprs&gt;    ::=  &lt;expr&gt;
-               ::=  &lt;expr&gt; , &lt;exprs&gt;
-    
-    &lt;int&gt; and &lt;id&gt; are described by regular expressions:
-    
-        digit digit*
-    
-        letter (letter | digit)*
-  </pre>
-  <p>
-    That change to the concrete syntax should not affect any code
-    code you wrote for Problem Set 10, because your interpreter
-    used abstract syntax, which remains the same in Problem Set 11.
-  </p>
-  <p>
-    The concrete syntax we use will also allow comments, which
-    start with the <code>#</code> character and extend through
-    the end of the line.
-  </p>
-  <p>
-    The context-free grammar shown above is ambiguous,
-    but it can be converted into an unambiguous grammar
-    that generates the same set of programs.
-    The unambiguous grammar we will use as the official
-    concrete syntax is the
-    <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">
-      LL(1) grammar
-    </a>
-    given in the <code>cfg.pg</code> file within the
-    <a href="set11parser.tgz">
-      <code>set11parser</code> directory
-    </a>
-    we are giving you as a hint for part 1 of this problem set.
-    That directory contains a <code>README</code> file that
-    describes the files in that directory.
-    You should read that README file before you start to work
-    on this problem set.
-  </p>
-  <hr />
-  <p>
-    If you did a good job on Problem Set 10, this problem set
-    will be easy.  If the interpreter you wrote for Problem Set 10
-    had problems, this problem set will give you a chance to fix
-    those problems.
-  </p>
-  <ol>
-    <li>
-      Copy the program you wrote for Problem Set 11 into a
-      directory named <code>set11</code>.
-      Add a definition of the following public static method to
-      the <code>Programs</code> class defined in your
-      <code>Programs.java</code> file:
-      <pre>
-        // Runs the ps11 program found in the file named on the command line
-        // on the integer inputs that follow its name on the command line,
-        // printing the result computed by the program.
-        //
-        // Example:
-        //
-        //     % java Programs sieve.ps11 2 100
-        //     25
-        
-        public static void main (String[] args) { ... }
-      </pre>
-      <p>
-        <strong>Hint:</strong>
-        We are giving you a
-        <a href="set11parser.tgz">
-          directory of Java code
-        </a>
-        that contains a
-        <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">
-          recursive descent parser
-        </a>
-        for <code>ps11</code> programs.
-        The <code>Scanner</code> class defined in <code>Scanner.java</code>
-        defines several public static methods you may find helpful.
-      </p>
-    </li>
-    <li>
-      Add a definition of the following public static method to
-      the <code>Programs</code> class defined in your
-      <code>Programs.java</code> file:
-      <pre>
-        // Reads the ps11 program found in the file named by the given string
-        // and returns the set of all variable names that occur free within
-        // the program.
-        //
-        // Examples:
-        //     Programs.undefined ("church.ps11")    // returns an empty set
-        //     Programs.undefined ("bad.ps11")       // returns { "x", "z" }
-        //
-        //   where bad.ps11 is a file containing:
-        // 
-        //     f (x, y) g (x, y) (y, z);
-        //     g (z, y) if 3 > 4 then x else f
-        
-        public static Set&lt;String&gt undefined (String filename) { ... }
-      </pre>
-    </li>
-  </ol>
+    <ol>
+      <li>
+        (RosterWithStream)
+        <br />
+        <p>
+          For this first part of Problem Set 11, you will define
+          a public class named <code>Players</code> in a file named
+          <code>Players.java</code> and
+          a public class named <code>RosterWithStreams</code> in a file named
+          <code>RosterWithStreams.java</code>
+</p>
+        <p>
+          The <code>Players</code> class
+          will define a public static factory method
+          named <code>make</code> that takes a <code>String</code>
+          as its one and only argument and returns a <code>Player</code>
+          whose name is the given string.
+</p>
+        <p>
+          The <code>RosterWithStreams</code> class
+          will define a public static factory method
+          named <code>empty</code> that takes no arguments
+          and returns an empty <code>RosterWithStream</code>.
+</p>
+        <blockquote class="smaller">
+          HINT: You will probably find it worth your time to read
+          and to understand the
+          <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/StreamSupport.html"
+             target="_blank">official Java documentation</a> for the
+          <code>stream</code> methods of the
+          <code>java.util.stream.StreamSupport</code>
+          class.
+          Those <code>stream</code> methods are static factory methods
+          for creating <code>Stream&lt;T&gt;</code> objects.
+          You might also benefit from knowing that any class
+          that implements the <code>Iterable&lt;T&gt;</code> interface
+          (or any interface that extends <code>Iterable&lt;T&gt;</code>)
+          automatically defines a default <code>spliterator()</code>
+          method that calls the <code>iterator()</code> method
+          of that class and uses the <code>Iterator&lt;T&gt;</code>
+          result of that call to create
+          an analogous <code>Spliterator&lt;T&gt;</code>.
+</blockquote>
+</li>
+      <li>
+        (Testing)
+        <br />
+        <p>
+          For this second part of Problem Set 11, you will define
+          a public class named
+          <code>TestRosterWithStream</code> in a file named
+          <code>TestRosterWithStream.java</code>.
+          That class will define a public static <code>main</code> method
+          that tests the code you wrote in part 1.
+</p>
+        <p>
+          Testing the <code>stream</code> method of the
+          <code>RosterWithStream</code> ADT
+          ought to involve testing all of the methods supported
+          by the <code>Stream&lt;Player&gt;</code> objects
+          that will be returned
+          by that method.  Some of those methods ought to be
+          tested by more than one test.
+          (The <code>allMatch</code> and <code>anyMatch</code>
+          methods, for example, both ought to be tested in a
+          situation for which they return true and in a situation
+          for which they return false.)
+</p>
+        <p>
+          That could turn out to be a lot of testing.
+          If you write beautiful code for part 1,
+          making appropriate use of Java's pre-defined default methods,
+          then some of that testing may be less important because any
+          mistakes in the default methods will probably have the same
+          root causes as mistakes that can be found by testing some of
+          the more basic methods.
+          Course staff will therefore give special attention to
+          the tests you write for the following methods:
+</p>
+        <pre>
+          boolean       allMatch(Predicate&lt;? super T&gt; predicate)
+          boolean       anyMatch(Predicate&lt;? super T&gt; predicate)
+          long          count()
+          Stream&lt;T&gt;     distinct()
+          Stream&lt;T&gt;     filter(Predicate&lt;? super T&gt; predicate)
+          Optional&lt;T&gt;   findAny()
+          Optional&lt;T&gt;   findFirst()
+          void          forEach(Consumer&lt;? super T&gt; action)
+          &lt;R&gt; Stream&lt;R&gt; map(Function&lt;? super T,? extends R&gt; mapper)
+          T             reduce(T identity, BinaryOperator&lt;T&gt; accumulator)
+          Stream&lt;T&gt;     skip(long n)
+          Object[]      toArray()
+</pre>
+</li>
+</ol>
+</div>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -272,6 +453,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

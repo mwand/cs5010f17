@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The UTC1 Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <pre>
+      // Unit tests for UTC1.
+      
+      class UTC1tests {
+      
+          // a main method for testing UTC objects
+      
+          public static void main (String[] args) {
+              UTC t1 = new UTC1 (15, 31);
+              UTC t2 = new UTC1 (14, 31);
+              UTC t3 = new UTC1 (15, 32);
+              UTC t4 = new UTC1 (15, 31);
+      
+              assert t1.hour() == 15 : "wrong hour for t1";
+              assert t1.minute() == 31 : "wrong minute for t1";
+      
+              assert t1.isEqual (t1) : "isEqual says this doesn't equal this";
+              assert t1.isEqual (t4) : "isEqual says this doesn't equal that";
+              assert ! (t1.isEqual (t2)) : "isEqual true but hour different";
+              assert ! (t1.isEqual (t3)) : "isEqual true but minute different";
+      
+              System.out.println ("All unit tests of UTC1 passed.");
+          }
+      }
+</pre>
+    <p>
+      That <code>main</code> method uses <em>assertions</em>
+      for testing.
+      Each assertion consists of:
+</p>
+    <ul>
+      <li>
+        the word <code>assert</code>
+</li>
+      <li>
+        followed by an expression that should evaluate to true
+</li>
+      <li>
+        followed by a colon
+</li>
+      <li>
+        followed by an error message that will be printed
+        if the expression evaluates to false
+</li>
+      <li>
+        followed by the semicolon that terminates the assertion
+</li>
+</ul>
+</div>
+</div>
+<div id="footer">
+  <form action="UTC7.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="UTC10.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

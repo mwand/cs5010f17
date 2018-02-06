@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Data Design
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Data Design
+</h3>
+  <div>
+    <p>
+      There may be many different implementations of the
+      <code>AListWithKeyIterator&lt;K,V&gt;</code>
+      interface.
+</p>
+    <p>
+      The implementation we're describing uses this data design:
+</p>
+    <blockquote>
+      <p>
+        A <code>MyAList&lt;K,V&gt;</code> is either
+</p>
+      <ul>
+        <li>
+          an object of the <code>EmptyAList&lt;K,V&gt;</code> class, or
+</li>
+        <li>
+          an object of the <code>NonEmptyAList&lt;K,V&gt;</code> class
+          that contains the following three fields:
+          <ul>
+            <li>
+              a key
+</li>
+            <li>
+              the value associated with that key
+</li>
+            <li>
+              a <code>MyAList&lt;K,V&gt;</code>
+              that represents the rest of this association list
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+    <p>
+      The coding standards for this course require all variables
+      to be of some interface type.
+      We will define
+      <code>MyAList&lt;K,V&gt;</code>
+      as an interface so it can serve as the type for those variables.
+</p>
+    <p>
+      The <code>MyAList&lt;K,V&gt;</code> interface will extend
+      the AListWithKeyIterator&lt;K,V&gt; interface,
+      so any variable of type
+      <code>MyAList&lt;K,V&gt;</code>
+      can be used as though it were of type
+      <code>AListWithKeyIterator&lt;K,V&gt;</code>.
+      In particular, the value of a variable of type
+      <code>MyAList&lt;K,V&gt;</code>
+      will be an object that responds to all of the messages
+      that can be sent to an object that supports the methods
+      listed in the
+      <code>AListWithKeyIterator&lt;K,V&gt;</code> interface.
+</p>
+    <p>
+      If we discover that we need some additional help methods,
+      we can add those methods to the
+      <code>MyAList&lt;K,V&gt;</code>
+      interface without changing the
+      <code>AListWithKeyIterator&lt;K,V&gt;</code> interface.
+</p>
+    <pre>
+      interface MyAList&lt;K,V&gt; extends AListWithKeyIterator&lt;K,V&gt; {
+      
+          // Any help methods we need will be listed here.
+      }
+</pre>
+    <p>
+      That <code>MyAList&lt;K,V&gt;</code> interface is part of our
+      design, and is not intended to be used by any other code.
+      We will make that interface inaccessible outside of our
+      implementation, so the only classes that implement the
+      <code>MyAList&lt;K,V&gt;</code> interface will be the
+      classes we define ourselves.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy1interface.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy1baseClass1.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

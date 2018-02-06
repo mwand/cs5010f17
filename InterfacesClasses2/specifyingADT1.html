@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Specifications for Abstract Data Types
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h2>
+    Specifications for Abstract Data Types
+</h2>
+  <div>
+    <p>
+      Abstract data types are specified by listing their
+      operations (functions and methods)
+      and by specifying the behaviors of those operations.
+</p>
+    <p>
+      Java interfaces are examples of abstract data types.
+      The specifications of Java interfaces,
+      as found within
+      <a href="https://docs.oracle.com/javase/8/docs/api/java/util/package-summary.html">official documentation for the
+      <code>java.util</code> package</a>,
+      shows how an abstract data type can be specified
+      without revealing its representation.
+</p>
+    <p>
+      In general, an abstract data type is specified by
+      explaining how the operations that create values
+      of the type interact with operations that reveal
+      properties of those values or change the state of
+      those values (if the values are mutable).
+</p>
+    <blockquote>
+      <p>
+        In some of your problem sets, you have seen how
+        abstract data types are specified by explaining
+        the desired combined behavior
+        of functions that create values with functions
+        that observe properties of those values.
+</p>
+      <p>
+        For example:
+</p>
+      <pre>
+        ;;; lit : Real -&gt; Literal
+        ;;; GIVEN: a real number
+        ;;; RETURNS: a literal that represents that number
+        ;;; EXAMPLE: (see the example given for literal-value,
+        ;;;          which shows the desired combined behavior
+        ;;;          of lit and literal-value)
+        
+        ;;; literal-value : Literal -&gt; Real
+        ;;; GIVEN: a literal
+        ;;; RETURNS: the number it represents
+        ;;; EXAMPLE: (literal-value (lit 17.4)) =&gt; 17.4
+</pre>
+</blockquote>
+</div>
+</div>
+<div id="footer">
+  <form action="dontBreakAbstractionBarriers.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="abstractDataTypesSummary.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

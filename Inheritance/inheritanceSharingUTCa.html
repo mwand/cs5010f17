@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -25,16 +25,16 @@
 <div id="maincontent">
   <h3>
     The <code>UTC</code> Example
-  </h3>
+</h3>
   <div>
     <p>
       In the
-      <a href="../InterfacesClasses/staticMethods1.html">
+      <a href="../InterfacesClasses2/staticMethods1.html">
         previous lesson,
-      </a>
+</a>
       we defined a class <code>UTC2</code> that inherits
       several of its methods from another class <code>UTC1</code>.
-    </p>
+</p>
     <p>
       That use of inheritance was inelegant and somewhat fragile.
       Why does <code>UTC2</code> inherit from <code>UTC1</code>
@@ -42,7 +42,7 @@
       What if some future programmer modifies <code>UTC1</code>
       without realizing the modified behavior will be
       inherited by other classes such as <code>UTC2</code>?
-    </p>
+</p>
     <p>
       It would be more symmetrical, more elegant, and less fragile
       to define an <em>abstract base class</em> in which we implement
@@ -53,20 +53,38 @@
       <code>UTC1</code> and <code>UTC2</code>
       would no longer be affected by changes to other concrete subclasses
       of the abstract base class.
-    </p>
-  </div>
+</p>
+    <p>
+      The abstract base class will consist of field and method definitions
+      in which we implement the common behavior.
+      The abstract base class will also contain declarations of
+      <em>abstract methods</em>
+      that are not defined in the base class because they will have
+      differing behavior in the various subclasses.
+</p>
+    <p>
+      Declaring an abstract method in the base class means
+      every (non-abstract) class that inherits from the base class
+      must provide a definition for the method.
+      We say the base class is abstract because some of its methods
+      are abstract (declared but not defined), so we cannot create
+      objects of the base class.
+</p>
+</div>
 </div>
 <div id="footer">
   <form action="inheritanceSharingMainIdeas.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="inheritanceSharingUTCb.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -74,6 +92,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

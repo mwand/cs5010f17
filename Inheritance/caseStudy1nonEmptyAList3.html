@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The NonEmptyAList Class
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    The NonEmptyAList Class
+</h3>
+  <div>
+    <p>
+      Finally, we'll define the
+      help method that's used by the
+      <code>iterator</code> method that's defined in the base class:
+</p>
+    <pre>
+      // The object constructed by new NonEmptyAList(k,v,rest) represents an
+      // association list just like 'rest', except that the key k is mapped
+      // to the value v.  Any other key is mapped to the value it had in 'rest'.
+      
+      private static class NonEmptyAList&lt;K,V&gt;
+          extends AListBase&lt;K,V&gt; 
+          implements MyAList&lt;K,V&gt; {
+      
+          private K key;             // key for the first entry in this AList
+          private V val;             // val for the first entry in this AList
+          private MyAList&lt;K,V&gt; rest; // the other entries in this AList
+      
+          ...
+      
+          // Help method, not to be called from outside this file.
+          // Given a mutable set, adds each key of this association list
+          // to the mutable set, without adding any key twice.
+      
+          public void addKeys (Set&lt;K&gt; keys) {
+              if (! (keys.contains (this.key)))
+                  keys.add (this.key);
+              rest.addKeys (keys);
+          }
+      
+          // All other methods are defined by the base class.
+      }
+</pre>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy1nonEmptyAList2.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy1complete1.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

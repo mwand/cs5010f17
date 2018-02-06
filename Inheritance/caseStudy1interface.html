@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  The AListWithKeyIterator<K> Interface
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    The AListWithKeyIterator<K> Interface
+</h3>
+  <div>
+    <p>
+      Because our association lists will support an
+      <code>iterator</code>
+      method that generates the keys of this association list,
+      we'll use
+      <code>AListWithKeyIterator&lt;K,V&gt;</code>
+      as the name of our abstract data type.
+</p>
+    <p>
+      Instead of adding an <code>iterator()</code> method to
+      the interface's list of methods, we'll accomplish much
+      the same thing by defining the interface below so it
+      extends the pre-defined <code>Iterable&lt;K&gt;</code>
+      interface, which already lists an <code>iterator()</code>
+      method.
+      Extending the pre-defined <code>Iterable&lt;K&gt;</code>
+      interface is better than just listing an <code>iterator()</code>
+      method because it will allow users of our
+      <code>AListWithKeyIterator&lt;K,V&gt;</code>
+      type to write for-each loops that loop over the keys.
+      (<a href="caseStudy1baseClass3.html" target="_blank">We'll rely
+      on such loops when we write an
+      <code>equals(Object)</code> method.</a>)
+</p>
+    <p>
+      The interface for that ADT is:
+</p>
+    <pre>
+      // An AListWithKeyIterator&lt;K,V&gt; is an object of any class that implements
+      // the AListWithKeyIterator&lt;K.V&gt; interface.
+      
+      // Interpretation:
+      // An AlistWithKeyIterator&lt;K,V&gt;
+      //     represents a finite partial map from K to V
+      
+      // Specification of extend, lookup, and contains methods:
+      //
+      //     ...
+      
+      // The AListWithKeyIterator&lt;K,V&gt; interface extends
+      // the Iterable&lt;K&gt; interface, which lists an iterator() method,
+      // so we have to specify the behavior of that method as well:
+      //
+      //     a.iterator() returns an Iterator&lt;K&gt; that generates the keys
+      //     of a, in arbitrary order, without generating any key twice.
+      
+      interface AListWithKeyIterator&lt;K,V&gt; extends Iterable&lt;K&gt; {
+      
+          // Returns an association list like this one
+          // except the given key is associated with the given value.
+      
+          AListWithKeyIterator&lt;K,V&gt; extend (K key, V val);
+      
+          // Returns true iff the key is found within this AList.
+      
+          boolean contains (K key);
+      
+          // Returns the value associated with the given key.
+          // Throws a NoSuchElementException if the key is not found.
+      
+          V lookup (K key);
+      }
+</pre>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy1Specification3.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy1dataDesign1.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Writing an Iterator Method
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Writing an Iterator Method
+</h3>
+  <div>
+    <p>
+      The most interesting of the missing pieces is the
+      <code>iterator</code> method.
+</p>
+    <p>
+      As you may recall, we decided to define
+      an <code>iterator</code> method because
+      Java's standard libraries have such poor support
+      for immutable sets.
+      If not for that, we'd just define a <code>keySet</code>
+      method that returns an immutable set of this alist's keys.
+</p>
+    <p>
+      Java does give us pre-defined classes for creating
+      and modifying mutable sets.
+      Furthermore, Java gives us a way to convert a mutable set
+      into an immutable set whenever we want.
+      So we could go back and reconsider our earlier decision
+      to define an <code>iterator</code> method instead of
+      a <code>keySet</code> method.
+</p>
+    <p>
+      We're going to stick with our decision to define an
+      <code>iterator</code> method.
+      That will give us a chance to write code that creates
+      and manipulates mutable objects.
+      Besides, every Java programmer should know how to write
+      an <code>iterator</code> method,
+      so we need the practice.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy1baseClass1.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy1iteratorMethod2.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

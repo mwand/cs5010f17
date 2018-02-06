@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Determining the Set of Defined Keys
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    Determining the Set of Defined Keys
+</h3>
+  <div>
+    <p>
+      The operations specified so far would be enough for some
+      applications of finite functions,
+      but those operations do not give users any practical way
+      to learn which keys lie within the domain of a
+      particular finite function.
+</p>
+    <p>
+      We could define a <code>keySet</code> operation
+      that returns the set
+      of keys on which a finite function is defined,
+      and we could use an algebraic specification to specify that set:
+</p>
+    <pre>
+      // If empty_alist is a representation of the empty alist, then
+      //     empty_alist.keySet() = { }
+      //
+      // If a is any alist, then
+      //     a.extend(k1,v1).keySet() = { k1 } &cup; a.keySet()
+</pre>
+    <p>
+      That <code>keySet</code> operation would work just fine,
+      and it ought to be perfectly straightforward to implement,
+      but it isn't as easy to implement as it should be because
+      Java's standard libraries offer very little support
+      for immutable sets (and other immutable data structures).
+      We'd have to design and implement an abstract data type
+      of immutable sets before we could return to designing our
+      abstract data type of immutable finite functions.
+</p>
+    <p>
+      To avoid that digression, we'll do something completely different.
+</p>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy1Specification.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy1Specification3.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

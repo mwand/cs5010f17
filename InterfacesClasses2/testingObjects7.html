@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Testing the Usual Triumvirate
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Testing the Usual Triumvirate
+</h3>
+    <p>
+      In Java, we need to test the
+      <code>equals(Object)</code>,
+      <code>hashCode()</code>, and
+      <code>toString()</code> methods.
+</p>
+    <p>
+      These methods should behave consistently across all classes
+      that implement an interface, but that consistency is often
+      hard to achieve.
+      When something is hard to do correctly, it is especially
+      important to write tests for it.
+</p>
+    <pre>
+      // Tests for UTC objects created by the static factory method in UTCs.
+      
+      class UTCsTests {
+      
+          public static void main (String[] args) {
+      
+              // We'll do these tests several times, to increase the
+              // probability that objects of different classes will be created.
+      
+              int NTESTS = 5;    // how many times we'll run each test
+      
+              for (int i = 0; i < NTESTS; i = i + 1) {
+                  ...
+                  // tests of the usual triumvirate
+      
+                  assert t0000.equals(t0000) : "equals says t0000 != t0000";
+                  assert t0059.equals(t0059) : "equals says t0059 != t0059";
+                  ...
+                  assert t0000.equals(UTCs.make(0, 0))   : "t0000 != t0000";
+                  assert t0059.equals(UTCs.make(0, 59))  : "t0059 != t0059";
+                  ...
+                  assert ! (t0000.equals(t0059)) : "equals says t0000 = t0059";
+                  assert ! (t0059.equals(t2359)) : "equals says t0059 = t2359";
+                  ...
+                  assert t0000.hashCode() == (UTCs.make(0, 0).hashCode());
+                  assert t0059.hashCode() == (UTCs.make(0, 59).hashCode());
+                  ...
+                  assert t0000.toString().equals(UTCs.make(0, 0).toString());
+                  assert t0059.toString().equals(UTCs.make(0, 59).toString());
+                  ...
+              }
+      
+              System.out.println ("UTCs tests passed.");
+          }
+      }
+</pre>
+</div>
+</div>
+<div id="footer">
+  <form action="testingObjects6.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="testingObjects11.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>

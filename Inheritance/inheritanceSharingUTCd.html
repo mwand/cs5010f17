@@ -14,7 +14,7 @@
 
 <link type="text/css"
       rel="stylesheet"
-      href="cs5010.css" />
+      href="../cs5010.css" />
 
 </head>
 
@@ -26,7 +26,7 @@
   <div>
     <p>
       The <code>UTC2</code> class becomes simpler as well:
-    </p>
+</p>
     <pre>
       // Constructor template for UTC2:
       //     new UTC2 (h, m)
@@ -47,6 +47,7 @@
           UTC2 (int h, int m) {
               super ();    // calls the constructor for UTC0
               this.h = (h >= 5) ? (h - 5) : h + 19;
+              this.m = m;
           }
       
           // public methods
@@ -73,20 +74,22 @@
               UTC2tests.main(args);
           }
       }
-    </pre>
-  </div>
+</pre>
+</div>
 </div>
 <div id="footer">
   <form action="inheritanceSharingUTCc.html" class="inline">
     <input type="submit" value="PREV">
-  </form>
+</form>
   <br />
   <form action="inheritanceSharingUTCe.html" class="inline">
     <input type="submit" value="NEXT">
-  </form>
+</form>
 </div>
 
 <!-- end of specific content -->
+
+<!--
 
 <p class="muchsmaller">
 For debugging: 
@@ -94,6 +97,8 @@ For debugging:
 Click here to validate.
 </a>
 </p>
+
+-->
 
 </body>
 </html>

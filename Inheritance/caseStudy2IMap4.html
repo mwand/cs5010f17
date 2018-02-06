@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  First Implementation of IMap&lt;K,V&gt;
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <h3>
+    First Implementation of IMap&lt;K,V&gt;
+</h3>
+  <div>
+    <p>
+      We have to do three things:
+</p>
+    <ul>
+      <li>
+        define the fields and Java constructors
+</li>
+      <li>
+        define the <code>extends</code> method of
+        the <code>IMap</code> interface.
+</li>
+      <li>
+        define the <code>entrySet</code> abstract method
+        that's declared in <code>AbstractMap</code>.
+</li>
+</ul>
+    <p>
+      That's all we have to do:
+</p>
+    <pre>
+      class AListIMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements IMap&lt;K,V&gt; {
+      
+          AListWithKeyIterator&lt;K,V&gt; alist;    // association list of key/value pairs
+      
+          // Java constructors
+      
+          AListIMap () {
+              this.alist = ALists.empty();
+          }
+      
+          AListIMap (AListWithKeyIterator&lt;K,V&gt; alist) {
+              this.alist = alist;
+          }
+      
+          // public methods listed by IMap&lt;K,V&gt; interface
+      
+          // Returns an IMap like this one except the given key is associated
+          // with the given value.  The extend operation does not modify this
+          // IMap.
+      
+          public IMap&lt;K,V&gt; <span class="red">extend</span> (K key, V value) {
+              ...
+          }
+      
+          // public methods listed by Map&lt;K,V&gt; interface
+      
+          // Returns a set of the key/value pairs in this Map.
+          // Instead of implementing that set atop AbstractSet,
+          // we use an unmodifiable HashSet.
+      
+          public Set&lt;Map.Entry&lt;K,V&gt;&gt; <span class="red">entrySet</span> () {
+              ...
+          }
+      
+          // all other public methods are defined by AbstractMap&lt;K,V&gt;
+      }
+</pre>
+</div>
+</div>
+<div id="footer">
+  <form action="caseStudy2IMap3.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="caseStudy2IMap5.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>
