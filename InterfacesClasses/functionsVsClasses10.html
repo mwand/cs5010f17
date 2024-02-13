@@ -62,8 +62,8 @@
           // RETURNS: a scene like the given one, but with this
           //     shape painted on it
       
-          public double addToScene (Scene sc) {
-              return Image.placeImage (img, x, y, s);
+          public Scene addToScene (Scene sc) {
+              return Image.placeImage (img, x, y, sc);
           }
       }
 </pre>

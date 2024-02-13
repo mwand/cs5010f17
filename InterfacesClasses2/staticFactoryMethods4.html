@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="description" content="Northeastern University CS 5010">
+<meta name="author" content="William D Clinger">
+<!-- meta name="keywords" content="software" -->
+
+<title>
+  Representation Independence
+</title>
+
+<link type="text/css"
+      rel="stylesheet"
+      href="../cs5010.css" />
+
+</head>
+
+<body>
+
+<!-- start of specific content -->
+
+<div id="maincontent">
+  <div>
+    <h3>
+      Representation Independence
+</h3>
+    <p>
+      Factory methods improve the representation independence
+      of a program.
+</p>
+    <p>
+      Here, for example, is a second representation for the
+      <code>UTC</code> ADT:
+</p>
+    <pre>
+      // Constructor template for UTC2:
+      //     new UTC2 (h, m)
+      // Interpretation:
+      //     h is the UTC hour (between 0 and 23, inclusive)
+      //     m is the UTC minute (between 0 and 59, inclusive)
+      // Representation:
+      //     Internally, the hour is represented in Eastern Standard Time,
+      //     which is five hours behind UTC.
+      
+      class UTC2 implements UTC {
+      
+          int h;    // the hour in EST, limited to [0,23]
+          int m;    // the minute, limited to [0,59]
+      
+          // the Java constructor
+      
+          UTC2 (int h, int m) {
+              this.h = (h >= 5) ? (h - 5) : h + 19;
+              this.m = m;
+          }
+      
+          // public methods
+      
+          // Returns the hour, between 0 and 23 inclusive.
+      
+          public int hour () {
+              if (h < 19)
+      	    return h + 5;
+              else
+                  return h - 19;
+          }
+      
+          // Returns the minute, between 0 and 59 inclusive.
+      
+          public int minute () { return m; }
+      
+          // Returns true iff the given UTC is equal to this UTC.
+      
+          public boolean isEqual (UTC t2) {
+              return UTCs.isEqual (this, t2);
+          }
+      
+          // public methods that override methods inherited from Object
+      
+          public boolean equals (Object x) {
+              if (x instanceof UTC) {
+                  UTC t2 = (UTC) x;
+                  return isEqual (t2);
+              }
+              else return false;
+          }
+      
+          public int hashCode () {
+              return UTCs.hashCode (this);
+          }
+      
+          public String toString () {
+              return UTCs.toString(this);
+          }
+      
+          ...
+      }
+</pre>
+</div>
+</div>
+<div id="footer">
+  <form action="staticFactoryMethods3.html" class="inline">
+    <input type="submit" value="PREV">
+</form>
+  <br />
+  <form action="staticFactoryMethods5.html" class="inline">
+    <input type="submit" value="NEXT">
+</form>
+</div>
+
+<!-- end of specific content -->
+
+<!--
+
+<p class="muchsmaller">
+For debugging: 
+<a href="http://validator.w3.org/check/referer">
+Click here to validate.
+</a>
+</p>
+
+-->
+
+</body>
+</html>
